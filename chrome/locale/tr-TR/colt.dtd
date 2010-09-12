@@ -12,7 +12,7 @@
 <!ENTITY colt.options.group.toplevel "En Üst Seviye Menü Maddeleri">
 <!ENTITY colt.options.displaycopytext "&apos;Bağlantı Metni Kopyala&apos; menü maddesini göster">
 <!ENTITY colt.options.displaycopybothmenu "&apos;Bağlantı Metni ve Konumunu Kopyala&apos; alt-menüsünü göster">
-<!ENTITY colt.options.displaycopypagemenu "Display the &apos;Copy Page Title and Location&apos; menu items">
+<!ENTITY colt.options.displaycopypagemenu "Display the 'Copy Page Title and Location' menu items">
 <!ENTITY colt.options.group.customformats "Custom Format Menu Items">
 <!ENTITY colt.options.header.label "Menü Etiketi">
 <!ENTITY colt.options.header.format "Biçim">
@@ -25,7 +25,7 @@
 <!ENTITY colt.options.button.newseparator "Yeni Ayraç">
 <!ENTITY colt.options.textvariablelabel "Kopyalanan metni belirtmek için kullanılmıştır">
 <!ENTITY colt.options.urlvariablelabel "Kopyalanan URLyi belirtmek için kullanılmıştır">
-<!ENTITY colt.options.linktitlevariablelabel "Used to specify the link&apos;s title attribute">
+<!ENTITY colt.options.linktitlevariablelabel "Used to specify the link's title attribute">
 <!ENTITY colt.options.pagetitlevariablelabel "Used to specify the page title">
 <!ENTITY colt.options.newlinelabel "Yeni bir satır belirlemek için kullanılmıştır">
 <!ENTITY colt.options.variable.description "The following variables may be used in your custom formats:">

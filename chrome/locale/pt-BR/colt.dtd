@@ -12,7 +12,7 @@
 <!ENTITY colt.options.group.toplevel "Itens do Menu principal">
 <!ENTITY colt.options.displaycopytext "Mostrar o item &apos;Copiar texto do link&apos; no menu">
 <!ENTITY colt.options.displaycopybothmenu "Mostrar o sub-menu &apos;Copiar texto do link e localização&apos;">
-<!ENTITY colt.options.displaycopypagemenu "Display the &apos;Copy Page Title and Location&apos; menu items">
+<!ENTITY colt.options.displaycopypagemenu "Display the 'Copy Page Title and Location' menu items">
 <!ENTITY colt.options.group.customformats "Custom Format Menu Items">
 <!ENTITY colt.options.header.label "Opções de Menu">
 <!ENTITY colt.options.header.format "Formato">
@@ -25,7 +25,7 @@
 <!ENTITY colt.options.button.newseparator "Novo Separador">
 <!ENTITY colt.options.textvariablelabel "Usado para especificar o texto copiado">
 <!ENTITY colt.options.urlvariablelabel "Usado para especificar a URL copiada">
-<!ENTITY colt.options.linktitlevariablelabel "Used to specify the link&apos;s title attribute">
+<!ENTITY colt.options.linktitlevariablelabel "Used to specify the link's title attribute">
 <!ENTITY colt.options.pagetitlevariablelabel "Used to specify the page title">
 <!ENTITY colt.options.newlinelabel "Usado para especificar uma nova linha">
 <!ENTITY colt.options.variable.description "The following variables may be used in your custom formats:">

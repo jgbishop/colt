@@ -12,7 +12,7 @@
 <!ENTITY colt.options.group.toplevel "최상위 메뉴 항목">
 <!ENTITY colt.options.displaycopytext "&apos;링크 텍스트 복사&apos; 메뉴 항목 표시">
 <!ENTITY colt.options.displaycopybothmenu "&apos;링크 텍스트와 주소 복사&apos; 하위 메뉴 표시">
-<!ENTITY colt.options.displaycopypagemenu "Display the &apos;Copy Page Title and Location&apos; menu items">
+<!ENTITY colt.options.displaycopypagemenu "Display the 'Copy Page Title and Location' menu items">
 <!ENTITY colt.options.group.customformats "Custom Format Menu Items">
 <!ENTITY colt.options.header.label "메뉴 레이블">
 <!ENTITY colt.options.header.format "형식">
@@ -25,7 +25,7 @@
 <!ENTITY colt.options.button.newseparator "새 분리대">
 <!ENTITY colt.options.textvariablelabel "복사된 텍스트를 지정하는데 쓰임">
 <!ENTITY colt.options.urlvariablelabel "복사된 URL을 지정하는데 쓰임">
-<!ENTITY colt.options.linktitlevariablelabel "Used to specify the link&apos;s title attribute">
+<!ENTITY colt.options.linktitlevariablelabel "Used to specify the link's title attribute">
 <!ENTITY colt.options.pagetitlevariablelabel "Used to specify the page title">
 <!ENTITY colt.options.newlinelabel "새 줄을 지정하는데 쓰임">
 <!ENTITY colt.options.variable.description "The following variables may be used in your custom formats:">

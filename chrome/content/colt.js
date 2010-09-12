@@ -50,7 +50,7 @@ var objCoLT = {
 			titleAttr = "";
 			pageTitle = "";
 			pageURL = "";
-			selection = this.GetCurrentSelection();
+			selection = document.commandDispatcher.focusedWindow.getSelection().toString();
 		}
 		else
 		{
@@ -108,11 +108,6 @@ var objCoLT = {
 			alert("ERROR: The link text was unable to be placed on the clipboard.");
 	},
 
-	GetCurrentSelection: function()
-	{
-		return document.commandDispatcher.focusedWindow.getSelection().toString();
-	},
-	
 	FormatString: function(string, text, url, titleAttr, pageTitle, pageURL, localtime, selection)
 	{
 		string = string.replace(/%[Tt]/g, text);
@@ -268,16 +263,6 @@ var objCoLT = {
 			this.PrefBranch.clearUserPref("submenu.text");
 	},
 	
-//  MigrateTo24: function()
-//  {
-//  	var count = this.PrefBranch.getIntPref(this.PrefName_CustomFormatCount);
-//  	for (var i=1; i <= count; i++)
-//  	{
-//  		var prefName = "custom." + i + ".richtext";
-//  		this.PrefBranch.setBoolPref(prefName, false);
-//  	}
-//  },
-
 	MigrateTo25: function()
 	{
 		var count = this.PrefBranch.getIntPref(this.PrefName_CustomFormatCount);
@@ -430,9 +415,6 @@ var objCoLT = {
 			if(previousVersion < this.ParseVersion("2.3"))
 				this.MigrateTo23();
 	
-//  		if(previousVersion < this.ParseVersion("2.4"))
-//  			this.MigrateTo24();
-
 			if(previousVersion < this.ParseVersion("2.5"))
 				this.MigrateTo25();
 

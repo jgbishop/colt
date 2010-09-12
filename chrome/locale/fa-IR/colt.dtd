@@ -10,9 +10,9 @@
 <!ENTITY colt.ak.copypagemenu "ر">
 <!ENTITY colt.options.title "تنظیمات CoLT">
 <!ENTITY colt.options.group.toplevel "گزینه های اصلی منو">
-<!ENTITY colt.options.displaycopytext "نمایش گزینه &apos;رونوشت متن لینک&apos;">
-<!ENTITY colt.options.displaycopybothmenu "نمایش گزینه &apos;رونوشت متن و آدرس لینک&apos;">
-<!ENTITY colt.options.displaycopypagemenu "نمایش &apos;رونوشت عنوان و لینک صفحه&apos; در منو">
+<!ENTITY colt.options.displaycopytext "نمایش گزینه 'رونوشت متن لینک'">
+<!ENTITY colt.options.displaycopybothmenu "نمایش گزینه 'رونوشت متن و آدرس لینک'">
+<!ENTITY colt.options.displaycopypagemenu "نمایش 'رونوشت عنوان و لینک صفحه' در منو">
 <!ENTITY colt.options.group.customformats "فرمت سفارشی گزینه‌های منو">
 <!ENTITY colt.options.header.label "برچسب">
 <!ENTITY colt.options.header.format "فرمت">

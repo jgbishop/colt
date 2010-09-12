@@ -59,7 +59,7 @@ chdir "$homeDir/chrome" or die "Cannot change to $homeDir/chrome: $!";
 
 # Create the JAR file
 print "Creating JAR file...\n";
-system("zip -r $jarFile -\@ < jarzip.txt");
+system("zip -r $jarFile -\@ < jarzip.txt -x\@exclude.txt");
 
 chdir "$homeDir" or die "Cannot change to $homeDir: $!";
 

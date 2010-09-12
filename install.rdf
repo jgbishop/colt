@@ -5,6 +5,7 @@
 
     <Description about="urn:mozilla:install-manifest">
 	
+	<em:contributor>Philip Durbin and Marbux</em:contributor>
 	<em:contributor>(ar) lord1980</em:contributor>
 	<em:contributor>(cs-CZ) FunTomas</em:contributor>
 	<em:contributor>(da-DK) AlleyKat</em:contributor>
@@ -22,6 +23,7 @@
 	<em:contributor>(pt-PT) Jorge Martins Rosa</em:contributor>
 	<em:contributor>(ru-RU) Modex</em:contributor>
 	<em:contributor>(sk-SK) Wladow</em:contributor>
+	<em:contributor>(sv-SE) Lakrits</em:contributor>
 	<em:contributor>(tr-TR) Randomhero</em:contributor>
 	<em:contributor>(zh-CN) WangKing</em:contributor>
 	<em:contributor>(zh-TW) Unicorn2</em:contributor>

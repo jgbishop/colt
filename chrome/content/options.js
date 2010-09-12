@@ -4,7 +4,15 @@ var objCoLTOptions = {
 	CustomFormatRichText : null,
 	
 	RichTextFormatLabel : "{RT}",
-		
+	
+	_selectItem: function(item)
+	{
+		var listBox = document.getElementById("CLT-Opt-Custom-Format-List");
+		listBox.clearSelection(); // Clear all selected elements
+		listBox.ensureElementIsVisible(item); // Make sure it's visible (first!)
+		listBox.selectItem(item); // Select the incoming item
+	},
+
 	LoadOptions: function()
 	{
 		const branch = objCoLT.PrefBranch;
@@ -19,12 +27,10 @@ var objCoLTOptions = {
 			var labelPref = "custom." + i + ".label";
 			var formatPref = "custom." + i + ".format";
 			var separatorPref = "custom." + i + ".separator";
-//  		var richTextPref = "custom." + i + ".richtext";
 	
 			var label = "";
 			var format = "";
 			var separator = false;
-//  		var richText = false;
 	
 			if(objCoLT.IsPreferenceSet(labelPref))
 				label = branch.getCharPref(labelPref);
@@ -35,9 +41,6 @@ var objCoLTOptions = {
 			if(objCoLT.IsPreferenceSet(separatorPref))
 				separator = branch.getBoolPref(separatorPref);
 	
-//  		if(objCoLT.IsPreferenceSet(richTextPref))
-//  			richText = branch.getBoolPref(richTextPref);
-			
 			var listItem = document.createElement("listitem");
 			var listBox = document.getElementById("CLT-Opt-Custom-Format-List");
 	
@@ -61,10 +64,7 @@ var objCoLTOptions = {
 				listItem.appendChild(listCell);
 	
 				listCell = document.createElement("listcell");
-//  			if(richText)
-//  				listCell.setAttribute("label", this.RichTextFormatLabel);
-//  			else
-					listCell.setAttribute("label", format);
+				listCell.setAttribute("label", format);
 				
 				listItem.appendChild(listCell);
 				listBox.appendChild(listItem);
@@ -94,8 +94,7 @@ var objCoLTOptions = {
 				listCell.setAttribute("label", this.CustomFormatFormat);
 			
 			listItem.appendChild(listCell);
-			listBox.selectItem(listBox.appendChild(listItem));
-			listBox.ensureElementIsVisible(listBox.selectedItem);
+			this._selectItem(listBox.appendChild(listItem));
 		}
 	},
 
@@ -111,9 +110,8 @@ var objCoLTOptions = {
 		separator = document.createElement("separator");
 		separator.setAttribute("class", "groove");
 		listItem.appendChild(separator);
-	
-		listBox.selectItem(listBox.appendChild(listItem));
-		listBox.ensureElementIsVisible(listBox.selectedItem);
+
+		this._selectItem(listBox.appendChild(listItem));
 	},
 
 	OnEditCustomFormat: function()
@@ -146,7 +144,8 @@ var objCoLTOptions = {
 					listCell = document.createElement("listcell");
 					listCell.setAttribute("label", this.CustomFormatFormat);
 					selectedItem.appendChild(listCell);
-					listBox.ensureElementIsVisible(selectedItem);
+
+					this._selectItem(selectedItem);
 				}
 			}
 		}
@@ -197,19 +196,40 @@ var objCoLTOptions = {
 	OnMoveDown: function()
 	{
 		var listBox = document.getElementById("CLT-Opt-Custom-Format-List");
-		var selItem = listBox.selectedItem;
-	
-		if(selItem && listBox.selectedIndex != listBox.getRowCount() - 1)
-			listBox.selectItem(listBox.insertBefore(selItem, listBox.getNextItem(selItem, 2)));
+
+		// Return if the selected item is null for some reason, or we're at the end of the list
+		if (!listBox.selectedItem || listBox.selectedIndex == listBox.getRowCount() - 1)
+			return;
+
+		// Figure out where the item is headed
+		var newIndex = listBox.selectedIndex + 1;
+		
+		// Remove the item
+		var oldItem = listBox.removeItemAt(listBox.selectedIndex);
+		var newItem;
+
+		// If we're at the end of the list, append the item
+		if (newIndex == listBox.getRowCount())
+			newItem = listBox.appendChild(oldItem);
+		else
+			newItem = listBox.insertBefore(oldItem, listBox.getItemAtIndex(newIndex));
+
+		this._selectItem(newItem);
 	},
 	
 	OnMoveUp: function()
 	{
 		var listBox = document.getElementById("CLT-Opt-Custom-Format-List");
-		var selItem = listBox.selectedItem;
-	
-		if(selItem && listBox.selectedIndex != 0)
-			listBox.selectItem(listBox.insertBefore(selItem, listBox.getPreviousItem(selItem, 1)));
+
+		if (!listBox.selectedItem || listBox.selectedIndex == 0)
+			return;
+
+		var newIndex = listBox.selectedIndex - 1;
+
+		var oldItem = listBox.removeItemAt(listBox.selectedIndex);
+		var newItem = listBox.insertBefore(oldItem, listBox.getItemAtIndex(newIndex));
+
+		this._selectItem(newItem);
 	},
 	
 	OnRemoveCustomFormat: function()
@@ -227,10 +247,7 @@ var objCoLTOptions = {
 				index = count - 1; // Adjust the index if we've walked off the end
 
 			var newItem = listBox.getItemAtIndex(index);
-
-			// Select the item at the index
-			listBox.selectItem(newItem);
-			listBox.ensureElementIsVisible(newItem);
+			this._selectItem(newItem);
 		}
 	},
 
@@ -250,7 +267,6 @@ var objCoLTOptions = {
 			var labelPref = "custom." + i + ".label";
 			var formatPref = "custom." + i + ".format";
 			var separatorPref = "custom." + i + ".separator";
-//  		var richTextPref = "custom." + i + ".richtext";
 	
 			if(objCoLT.IsPreferenceSet(labelPref))
 				branch.clearUserPref(labelPref);
@@ -260,9 +276,6 @@ var objCoLTOptions = {
 	
 			if(objCoLT.IsPreferenceSet(separatorPref))
 				branch.clearUserPref(separatorPref);
-	
-//  		if(objCoLT.IsPreferenceSet(richTextPref))
-//  			branch.clearUserPref(richTextPref);
 		}
 	
 		// Now store all the current formats
@@ -283,11 +296,6 @@ var objCoLTOptions = {
 				branch.setCharPref("custom." + i + ".label", listCell.getAttribute("label"));
 				branch.setCharPref("custom." + i + ".format", formatLabel);
 				branch.setBoolPref("custom." + i + ".separator", false);
-	
-//  			if(formatLabel == this.RichTextFormatLabel)
-//  				branch.setBoolPref("custom." + i + ".richtext", true);
-//  			else
-//  				branch.setBoolPref("custom." + i + ".richtext", false);
 			}
 		}
 	

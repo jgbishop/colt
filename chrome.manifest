@@ -2,7 +2,7 @@ content colt chrome/content/
 overlay chrome://browser/content/browser.xul	chrome://colt/content/colt.xul
 
 locale	colt	en-US	chrome/locale/en-US/
-locale	colt	ar		chrome/locale/ar/
+locale	colt	ar	chrome/locale/ar/
 locale	colt	cs-CZ	chrome/locale/cs-CZ/
 locale	colt	da-DK	chrome/locale/da-DK/
 locale	colt	de-DE	chrome/locale/de-DE/
@@ -20,6 +20,7 @@ locale	colt	pt-BR	chrome/locale/pt-BR/
 locale	colt	pt-PT	chrome/locale/pt-PT/
 locale	colt	ru-RU	chrome/locale/ru-RU/
 locale	colt	sk-SK	chrome/locale/sk-SK/
+locale	colt	sv-SE	chrome/locale/sv-SE/
 locale	colt	tr-TR	chrome/locale/tr-TR/
 locale	colt	zh-CN	chrome/locale/zh-CN/
 locale	colt	zh-TW	chrome/locale/zh-TW/

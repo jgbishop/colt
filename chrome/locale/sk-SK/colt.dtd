@@ -10,9 +10,9 @@
 <!ENTITY colt.ak.copypagemenu "u">
 <!ENTITY colt.options.title "Nastavenia rozšírenia CoLT">
 <!ENTITY colt.options.group.toplevel "Položky hlavnej ponuky">
-<!ENTITY colt.options.displaycopytext "Zobraziť položku ponuky &apos;Kopírovať text odkazu&apos;">
-<!ENTITY colt.options.displaycopybothmenu "Zobraziť podponuku &apos;Kopírovať text odkazu a umiestnenie&apos;">
-<!ENTITY colt.options.displaycopypagemenu "Zobraziť podponuku &apos;Kopírovať titulok stránky a umiestnenie&apos;">
+<!ENTITY colt.options.displaycopytext "Zobraziť položku ponuky 'Kopírovať text odkazu'">
+<!ENTITY colt.options.displaycopybothmenu "Zobraziť podponuku 'Kopírovať text odkazu a umiestnenie'">
+<!ENTITY colt.options.displaycopypagemenu "Zobraziť podponuku 'Kopírovať titulok stránky a umiestnenie'">
 <!ENTITY colt.options.group.customformats "Zobraziť položky Vlastný formát">
 <!ENTITY colt.options.header.label "Menovka v ponuke">
 <!ENTITY colt.options.header.format "Formát">

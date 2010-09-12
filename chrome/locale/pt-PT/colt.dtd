@@ -10,9 +10,9 @@
 <!ENTITY colt.ak.copypagemenu "o">
 <!ENTITY colt.options.title "Opções do CoLT">
 <!ENTITY colt.options.group.toplevel "Itens do Menu Principal">
-<!ENTITY colt.options.displaycopytext "Mostrar o item &apos;Copiar Texto da Ligação&apos;">
-<!ENTITY colt.options.displaycopybothmenu "Mostrar o item &apos;Copiar Texto e Destino da Ligação&apos;">
-<!ENTITY colt.options.displaycopypagemenu "Mostrar o item &apos;Copiar Título da Página e Destino da Ligação&apos;">
+<!ENTITY colt.options.displaycopytext "Mostrar o item 'Copiar Texto da Ligação'">
+<!ENTITY colt.options.displaycopybothmenu "Mostrar o item 'Copiar Texto e Destino da Ligação'">
+<!ENTITY colt.options.displaycopypagemenu "Mostrar o item 'Copiar Título da Página e Destino da Ligação'">
 <!ENTITY colt.options.group.customformats "Personalizar os Itens do Menu de Formatação">
 <!ENTITY colt.options.header.label "Etiqueta do Menu">
 <!ENTITY colt.options.header.format "Formato">

@@ -5,11 +5,13 @@
 + Added capability to capture selected text when copying the page's title and location (big thank you to Philip and Paul)
 + Added the local time stamp to the available fields for custom formats (big thank you to Philip and Paul)
 + A rich-text custom format is now one of the default formats for new installs of CoLT
++ Added a new Swedish (sv-SE) localization
 + Cleaned up some now redundant preferences used by CoLT
 + CoLT licensing has been updated and relaxed.
 + Bug Fix: Corrected a problem that caused CoLT to stop working in Firefox 4.0 builds
 + Bug Fix: Copying as rich text now works properly if the rich text option is the only custom format in the custom format list (i.e. it appears as a top-level menu item)
 + Bug Fix: Removing an item from the custom format list no longer causes the selected index to be cleared
++ Bug Fix: Moving items around in the custom format list when the list contains many items no longer causes the selection to disappear
 
 [2.4.7]
 + Bug Fix: Page titles are now copied in a more appropriate fashion, and should no longer result in an undefined value on trunk builds of Firefox

@@ -10,9 +10,9 @@
 <!ENTITY colt.ak.copypagemenu "o">
 <!ENTITY colt.options.title "CoLTオプション">
 <!ENTITY colt.options.group.toplevel "右クリックメニューアイテム">
-<!ENTITY colt.options.displaycopytext "メニューアイテムに &apos;リンクされたテキストをコピー&apos;を表示する">
-<!ENTITY colt.options.displaycopybothmenu "メニューアイテムに &apos;リンクされたテキストとURLをコピー&apos;を表示する">
-<!ENTITY colt.options.displaycopypagemenu "メニューアイテムに&apos;ページタイトルと場所をコピー&apos;を表示する">
+<!ENTITY colt.options.displaycopytext "メニューアイテムに 'リンクされたテキストをコピー'を表示する">
+<!ENTITY colt.options.displaycopybothmenu "メニューアイテムに 'リンクされたテキストとURLをコピー'を表示する">
+<!ENTITY colt.options.displaycopypagemenu "メニューアイテムに'ページタイトルと場所をコピー'を表示する">
 <!ENTITY colt.options.group.customformats "カスタム形式のメニュー項目">
 <!ENTITY colt.options.header.label "メニューラベル">
 <!ENTITY colt.options.header.format "形式">
@@ -38,4 +38,6 @@
 <!ENTITY colt.variable.desc.linkurl "リンクURL">
 <!ENTITY colt.variable.desc.pageurl "ページURL">
 <!ENTITY colt.variable.desc.linktitle "リンクタイトル属性">
+<!ENTITY colt.variable.desc.localtime "現地時間">
+<!ENTITY colt.variable.desc.selection "選択されたテキスト">
 <!ENTITY colt.variable.desc.newline "新しい線">

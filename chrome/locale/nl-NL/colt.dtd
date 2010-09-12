@@ -10,9 +10,9 @@
 <!ENTITY colt.ak.copypagemenu "o">
 <!ENTITY colt.options.title "CoLT Opties">
 <!ENTITY colt.options.group.toplevel "Top Niveau Menu-opties">
-<!ENTITY colt.options.displaycopytext "Toon het &apos;Kopieer Koppelingstekst&apos; menu-regel">
-<!ENTITY colt.options.displaycopybothmenu "Toon het &apos;Kopieer Koppelingstekst en -adres&apos; submenu">
-<!ENTITY colt.options.displaycopypagemenu "Toon het &apos;Kopieer Paginatitel en -adres&apos; submenu">
+<!ENTITY colt.options.displaycopytext "Toon het 'Kopieer Koppelingstekst' menu-regel">
+<!ENTITY colt.options.displaycopybothmenu "Toon het 'Kopieer Koppelingstekst en -adres' submenu">
+<!ENTITY colt.options.displaycopypagemenu "Toon het 'Kopieer Paginatitel en -adres' submenu">
 <!ENTITY colt.options.group.customformats "Aangepaste Menu Items">
 <!ENTITY colt.options.header.label "Menu Label">
 <!ENTITY colt.options.header.format "Formats">

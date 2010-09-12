@@ -10,9 +10,9 @@
 <!ENTITY colt.ak.copypagemenu "o">
 <!ENTITY colt.options.title "الأدوات">
 <!ENTITY colt.options.group.toplevel "أعلى عناصر القائمة">
-<!ENTITY colt.options.displaycopytext "عرض &apos;نسخ النص&apos; ضمن عناصر القائمة">
-<!ENTITY colt.options.displaycopybothmenu "عرض &apos;نسخ النص و الموقع&apos; ضمن عناصر القائمة">
-<!ENTITY colt.options.displaycopypagemenu "عرض &apos;نسخ عنوان الصفحة والرابط&apos; ضمن عناصر القائمة">
+<!ENTITY colt.options.displaycopytext "عرض 'نسخ النص' ضمن عناصر القائمة">
+<!ENTITY colt.options.displaycopybothmenu "عرض 'نسخ النص و الموقع' ضمن عناصر القائمة">
+<!ENTITY colt.options.displaycopypagemenu "عرض 'نسخ عنوان الصفحة والرابط' ضمن عناصر القائمة">
 <!ENTITY colt.options.group.customformats "تخصيص شكل عناصر القائمة">
 <!ENTITY colt.options.header.label "قائمة العلامة">
 <!ENTITY colt.options.header.format "شكل">
@@ -38,4 +38,6 @@
 <!ENTITY colt.variable.desc.linkurl "عنوان الرابط">
 <!ENTITY colt.variable.desc.pageurl "رابط الصفحة">
 <!ENTITY colt.variable.desc.linktitle "رابط عنوان السمة">
+<!ENTITY colt.variable.desc.localtime "التوقيت المحلي">
+<!ENTITY colt.variable.desc.selection "النص المحدد">
 <!ENTITY colt.variable.desc.newline "سطر جديد">

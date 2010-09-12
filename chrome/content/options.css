@@ -1,6 +1,6 @@
 #CLT-Options { width: 40em; }
 #CLT-Custom-Format { width: 30em; }
-#CLT-Variable-List { min-height: 170px; }
+#CLT-Variable-List { height: 170px; }
 
 #CLT-CustomFormat-Link {
 	color: #00F;

@@ -12,7 +12,7 @@
 <!ENTITY colt.options.group.toplevel "最上層選單項目">
 <!ENTITY colt.options.displaycopytext "在快顯功能表中，顯示「複製鏈結名稱」項目">
 <!ENTITY colt.options.displaycopybothmenu "在子功能表中，顯示「複製鏈結名稱與網址」">
-<!ENTITY colt.options.displaycopypagemenu "Display the &apos;Copy Page Title and Location&apos; menu items">
+<!ENTITY colt.options.displaycopypagemenu "Display the 'Copy Page Title and Location' menu items">
 <!ENTITY colt.options.group.customformats "Custom Format Menu Items">
 <!ENTITY colt.options.header.label "選單標籤">
 <!ENTITY colt.options.header.format "格式">
@@ -25,7 +25,7 @@
 <!ENTITY colt.options.button.newseparator "新增分隔線">
 <!ENTITY colt.options.textvariablelabel "是「所複製文字」的標註">
 <!ENTITY colt.options.urlvariablelabel "是「所複製網址」的標註">
-<!ENTITY colt.options.linktitlevariablelabel "Used to specify the link&apos;s title attribute">
+<!ENTITY colt.options.linktitlevariablelabel "Used to specify the link's title attribute">
 <!ENTITY colt.options.pagetitlevariablelabel "Used to specify the page title">
 <!ENTITY colt.options.newlinelabel "用來標明「新的一行」">
 <!ENTITY colt.options.variable.description "The following variables may be used in your custom formats:">
