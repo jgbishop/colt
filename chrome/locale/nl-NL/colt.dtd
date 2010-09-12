@@ -1,0 +1,41 @@
+<!ENTITY colt.copylinktext "Kopieer Koppelingstekst">
+<!ENTITY colt.ak.copylinktext "k">
+<!ENTITY colt.copybothitem "Kopieer Koppelingstekst en -adres">
+<!ENTITY colt.ak.copybothitem "o">
+<!ENTITY colt.copybothmenu "Kopieer Koppelingstekst en -adres als">
+<!ENTITY colt.ak.copybothmenu "o">
+<!ENTITY colt.copypageitem "Kopieer Paginatitel en -adres">
+<!ENTITY colt.ak.copypageitem "o">
+<!ENTITY colt.copypagemenu "Kopieer Paginatitel en -adres als">
+<!ENTITY colt.ak.copypagemenu "o">
+<!ENTITY colt.options.title "CoLT Opties">
+<!ENTITY colt.options.group.toplevel "Top Niveau Menu-opties">
+<!ENTITY colt.options.displaycopytext "Toon het &apos;Kopieer Koppelingstekst&apos; menu-regel">
+<!ENTITY colt.options.displaycopybothmenu "Toon het &apos;Kopieer Koppelingstekst en -adres&apos; submenu">
+<!ENTITY colt.options.displaycopypagemenu "Toon het &apos;Kopieer Paginatitel en -adres&apos; submenu">
+<!ENTITY colt.options.group.customformats "Aangepaste Menu Items">
+<!ENTITY colt.options.header.label "Menu Label">
+<!ENTITY colt.options.header.format "Formats">
+<!ENTITY colt.options.checkbox.userichtext "Gebruik Rich Text HTML-koppelingsformat">
+<!ENTITY colt.options.button.moveup "Omhoog">
+<!ENTITY colt.options.button.movedown "Omlaag">
+<!ENTITY colt.options.button.addformat "Voeg toe...">
+<!ENTITY colt.options.button.editformat "Bewerk...">
+<!ENTITY colt.options.button.removeformat "Verwijder">
+<!ENTITY colt.options.button.newseparator "Nieuw scheidingsteken">
+<!ENTITY colt.options.textvariablelabel "Gebruikt om te gekopieerde tekst aan te geven">
+<!ENTITY colt.options.urlvariablelabel "Gebruikt om te gekopieerde URL aan te geven">
+<!ENTITY colt.options.linktitlevariablelabel "Gebruikt om titeleigenschap van de link te specificeren">
+<!ENTITY colt.options.pagetitlevariablelabel "Gebruikt om de titel van de pagina te specificeren">
+<!ENTITY colt.options.newlinelabel "Gebruikt om een nieuwe regel aan te geven">
+<!ENTITY colt.options.variable.description "De volgende variabelen mogen in uw instellingsaanpassingen gebruikt worden">
+<!ENTITY colt.options.header.variable "Variabele">
+<!ENTITY colt.options.header.linkcontext "Een link kopiëren">
+<!ENTITY colt.options.header.pagecontext "Een pagina kopiëren">
+<!ENTITY colt.link.customformatinfo "Leer meer over het aanpassen van instellingen...">
+<!ENTITY colt.variable.desc.linktext "Link tekst">
+<!ENTITY colt.variable.desc.pagetitle "Pagina titel">
+<!ENTITY colt.variable.desc.linkurl "Link URL">
+<!ENTITY colt.variable.desc.pageurl "Pagina URL">
+<!ENTITY colt.variable.desc.linktitle "Link titeleigenschap">
+<!ENTITY colt.variable.desc.newline "Nieuwe regel">

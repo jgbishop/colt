@@ -1,0 +1,43 @@
+<!ENTITY colt.copylinktext "Copy Link Text">
+<!ENTITY colt.ak.copylinktext "x">
+<!ENTITY colt.copybothitem "Copy Link Text and Location">
+<!ENTITY colt.ak.copybothitem "o">
+<!ENTITY colt.copybothmenu "Copy Link Text and Location As">
+<!ENTITY colt.ak.copybothmenu "o">
+<!ENTITY colt.copypageitem "Copy Page Title and Location">
+<!ENTITY colt.ak.copypageitem "o">
+<!ENTITY colt.copypagemenu "Copy Page Title and Location As">
+<!ENTITY colt.ak.copypagemenu "o">
+<!ENTITY colt.options.title "CoLT Options">
+<!ENTITY colt.options.group.toplevel "Top Level Menu Items">
+<!ENTITY colt.options.displaycopytext "Display the &apos;Copy Link Text&apos; menu item">
+<!ENTITY colt.options.displaycopybothmenu "Display the &apos;Copy Link Text and Location&apos; menu items">
+<!ENTITY colt.options.displaycopypagemenu "Display the &apos;Copy Page Title and Location&apos; menu items">
+<!ENTITY colt.options.group.customformats "Custom Format Menu Items">
+<!ENTITY colt.options.header.label "Menu Label">
+<!ENTITY colt.options.header.format "Format">
+<!ENTITY colt.options.checkbox.userichtext "Use Rich Text HTML Link Format">
+<!ENTITY colt.options.button.moveup "Move Up">
+<!ENTITY colt.options.button.movedown "Move Down">
+<!ENTITY colt.options.button.addformat "Add...">
+<!ENTITY colt.options.button.editformat "Edit...">
+<!ENTITY colt.options.button.removeformat "Remove">
+<!ENTITY colt.options.button.newseparator "New Separator">
+<!ENTITY colt.options.textvariablelabel "Used to specify the copied text">
+<!ENTITY colt.options.urlvariablelabel "Used to specify the copied URL">
+<!ENTITY colt.options.linktitlevariablelabel "Used to specify the link&apos;s title attribute">
+<!ENTITY colt.options.pagetitlevariablelabel "Used to specify the page title">
+<!ENTITY colt.options.newlinelabel "Used to specify a new line">
+<!ENTITY colt.options.variable.description "The following variables may be used in your custom formats:">
+<!ENTITY colt.options.header.variable "Variable">
+<!ENTITY colt.options.header.linkcontext "Copying a Link">
+<!ENTITY colt.options.header.pagecontext "Copying a Page">
+<!ENTITY colt.link.customformatinfo "Learn more about custom formats...">
+<!ENTITY colt.variable.desc.linktext "Link Text">
+<!ENTITY colt.variable.desc.pagetitle "Page Title">
+<!ENTITY colt.variable.desc.linkurl "Link URL">
+<!ENTITY colt.variable.desc.pageurl "Page URL">
+<!ENTITY colt.variable.desc.linktitle "Link Title Attribute">
+<!ENTITY colt.variable.desc.localtime "Local Time">
+<!ENTITY colt.variable.desc.selection "Selected Text">
+<!ENTITY colt.variable.desc.newline "New Line">

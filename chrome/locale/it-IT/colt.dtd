@@ -1,0 +1,41 @@
+<!ENTITY colt.copylinktext "Copia testo del link">
+<!ENTITY colt.ak.copylinktext "k">
+<!ENTITY colt.copybothitem "Copia testo ed indirizzo del link">
+<!ENTITY colt.ak.copybothitem "o">
+<!ENTITY colt.copybothmenu "Copia testo ed indirizzo del link come">
+<!ENTITY colt.ak.copybothmenu "o">
+<!ENTITY colt.copypageitem "Copia titolo della pagina ed indirizzo del link">
+<!ENTITY colt.ak.copypageitem "o">
+<!ENTITY colt.copypagemenu "Copia titolo della pagina ed indirizzo del link come">
+<!ENTITY colt.ak.copypagemenu "o">
+<!ENTITY colt.options.title "Opzioni di CoLT">
+<!ENTITY colt.options.group.toplevel "Da visualizzare nel menu contestuale">
+<!ENTITY colt.options.displaycopytext "Copia testo del link">
+<!ENTITY colt.options.displaycopybothmenu "Copia testo ed indirizzo del link">
+<!ENTITY colt.options.displaycopypagemenu "Copia titolo della pagina ed indirizzo del link">
+<!ENTITY colt.options.group.customformats "Sottomenu di &apos;Copia testo ed indirizzo del link&apos;">
+<!ENTITY colt.options.header.label "Etichetta">
+<!ENTITY colt.options.header.format "Formato">
+<!ENTITY colt.options.checkbox.userichtext "Utilizza il formato RTF">
+<!ENTITY colt.options.button.moveup "Sposta su">
+<!ENTITY colt.options.button.movedown "Sposta giù">
+<!ENTITY colt.options.button.addformat "Aggiungi…">
+<!ENTITY colt.options.button.editformat "Modifica…">
+<!ENTITY colt.options.button.removeformat "Elimina">
+<!ENTITY colt.options.button.newseparator "Nuovo separatore">
+<!ENTITY colt.options.textvariablelabel "Utilizzato per specificare il testo copiato">
+<!ENTITY colt.options.urlvariablelabel "Utilizzato per specificare l&apos;URL copiato">
+<!ENTITY colt.options.linktitlevariablelabel "Utilizzato per specificare l&apos;attributo del titolo">
+<!ENTITY colt.options.pagetitlevariablelabel "Utilizzato per specificare il titolo della pagina">
+<!ENTITY colt.options.newlinelabel "Utilizzato per specificare una nuova riga">
+<!ENTITY colt.options.variable.description "È possibile utilizzare le variabili qui sotto per il formato personalizzato">
+<!ENTITY colt.options.header.variable "Variabile">
+<!ENTITY colt.options.header.linkcontext "Copia indirizzo link">
+<!ENTITY colt.options.header.pagecontext "Copia indirizzo pagina">
+<!ENTITY colt.link.customformatinfo "Ulteriori informazioni sul formato personalizzato…">
+<!ENTITY colt.variable.desc.linktext "Testo del link">
+<!ENTITY colt.variable.desc.pagetitle "Titolo della pagina">
+<!ENTITY colt.variable.desc.linkurl "Indirizzo del link">
+<!ENTITY colt.variable.desc.pageurl "Indirizzo della pagina">
+<!ENTITY colt.variable.desc.linktitle "Attributo del titolo">
+<!ENTITY colt.variable.desc.newline "Nuova riga">

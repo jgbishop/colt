@@ -1,0 +1,41 @@
+<!ENTITY colt.copylinktext "Kopijuoti saito tekstą">
+<!ENTITY colt.ak.copylinktext "e">
+<!ENTITY colt.copybothitem "Kopijuoti saito tekstą ir adresą">
+<!ENTITY colt.ak.copybothitem "r">
+<!ENTITY colt.copybothmenu "Kopijuoti saito tekstą ir adresą kaip...">
+<!ENTITY colt.ak.copybothmenu "r">
+<!ENTITY colt.copypageitem "Kopijuoti puslapio antraštę ir adresą">
+<!ENTITY colt.ak.copypageitem "d">
+<!ENTITY colt.copypagemenu "Kopijuoti puslapio antraštę ir adresą kaip...">
+<!ENTITY colt.ak.copypagemenu "d">
+<!ENTITY colt.options.title "CoLT nuostatos">
+<!ENTITY colt.options.group.toplevel "Kontekstinio meniu įrašai">
+<!ENTITY colt.options.displaycopytext "Rodyti &quot;Kopijuoti saito tekstą&quot;">
+<!ENTITY colt.options.displaycopybothmenu "Rodyti &quot;Kopijuoti saito tekstą ir adresą&quot;">
+<!ENTITY colt.options.displaycopypagemenu "Rodyti &quot;Kopijuoti puslapio antraštę ir adresą&quot;">
+<!ENTITY colt.options.group.customformats "Individualaus formato meniu įrašai">
+<!ENTITY colt.options.header.label "Meniu pavadinimas">
+<!ENTITY colt.options.header.format "Formatas">
+<!ENTITY colt.options.checkbox.userichtext "Naudoti raiškiojo teksto HTML saito formatą">
+<!ENTITY colt.options.button.moveup "Aukštyn">
+<!ENTITY colt.options.button.movedown "Žemyn">
+<!ENTITY colt.options.button.addformat "Pridėti...">
+<!ENTITY colt.options.button.editformat "Taisyti...">
+<!ENTITY colt.options.button.removeformat "Pašalinti">
+<!ENTITY colt.options.button.newseparator "Naujas skirtukas">
+<!ENTITY colt.options.textvariablelabel "Simbolizuoja kopijuojamą tekstą">
+<!ENTITY colt.options.urlvariablelabel "Simbolizuoja kopijuojamą adresą">
+<!ENTITY colt.options.linktitlevariablelabel "Simbolizuoja saito antraštę">
+<!ENTITY colt.options.pagetitlevariablelabel "Simbolizuoja puslapio antraštę">
+<!ENTITY colt.options.newlinelabel "Simbolizuoja naują eilutę">
+<!ENTITY colt.options.variable.description "Individualiajam formatui galima naudoti šiuos kintamuosius:">
+<!ENTITY colt.options.header.variable "Kintamasis">
+<!ENTITY colt.options.header.linkcontext "Kopijuojant saitą">
+<!ENTITY colt.options.header.pagecontext "Kopijuojant puslapį">
+<!ENTITY colt.link.customformatinfo "Sužinokite daugiau apie individualųjį formatą...">
+<!ENTITY colt.variable.desc.linktext "Saito tekstas">
+<!ENTITY colt.variable.desc.pagetitle "Puslapio antraštė">
+<!ENTITY colt.variable.desc.linkurl "Saito adresas">
+<!ENTITY colt.variable.desc.pageurl "Puslapio adresas">
+<!ENTITY colt.variable.desc.linktitle "Saito antraštė">
+<!ENTITY colt.variable.desc.newline "Nauja eilutė">

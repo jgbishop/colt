@@ -1,0 +1,41 @@
+<!ENTITY colt.copylinktext "نسخ النص">
+<!ENTITY colt.ak.copylinktext "x">
+<!ENTITY colt.copybothitem "نسخ النص والربط">
+<!ENTITY colt.ak.copybothitem "o">
+<!ENTITY colt.copybothmenu "نسخ النص والربط كـ">
+<!ENTITY colt.ak.copybothmenu "o">
+<!ENTITY colt.copypageitem "نسخ عنوان الصفحة والرابط">
+<!ENTITY colt.ak.copypageitem "o">
+<!ENTITY colt.copypagemenu "نسخ عنوان الصفحة والرابط كـ">
+<!ENTITY colt.ak.copypagemenu "o">
+<!ENTITY colt.options.title "الأدوات">
+<!ENTITY colt.options.group.toplevel "أعلى عناصر القائمة">
+<!ENTITY colt.options.displaycopytext "عرض &apos;نسخ النص&apos; ضمن عناصر القائمة">
+<!ENTITY colt.options.displaycopybothmenu "عرض &apos;نسخ النص و الموقع&apos; ضمن عناصر القائمة">
+<!ENTITY colt.options.displaycopypagemenu "عرض &apos;نسخ عنوان الصفحة والرابط&apos; ضمن عناصر القائمة">
+<!ENTITY colt.options.group.customformats "تخصيص شكل عناصر القائمة">
+<!ENTITY colt.options.header.label "قائمة العلامة">
+<!ENTITY colt.options.header.format "شكل">
+<!ENTITY colt.options.checkbox.userichtext "Use Rich Text HTML Link Format">
+<!ENTITY colt.options.button.moveup "تحريك للأعلى">
+<!ENTITY colt.options.button.movedown "تحريك للاسفل">
+<!ENTITY colt.options.button.addformat "اضافة...">
+<!ENTITY colt.options.button.editformat "تحرير...">
+<!ENTITY colt.options.button.removeformat "حذف">
+<!ENTITY colt.options.button.newseparator "فاصل جديد">
+<!ENTITY colt.options.textvariablelabel "تستخدم لتحديد نسخ النص">
+<!ENTITY colt.options.urlvariablelabel "تستخدم لتحديد نسخ رابط">
+<!ENTITY colt.options.linktitlevariablelabel "تستخدم لتحديد رابط عنوان سمة">
+<!ENTITY colt.options.pagetitlevariablelabel "تستخدم لتحديد عنوان الصفحة">
+<!ENTITY colt.options.newlinelabel "تستخدم لتحديد سطر جديد">
+<!ENTITY colt.options.variable.description "المتغيرات التالية يمكن أن تستخدم في تخصيص الصيغ :">
+<!ENTITY colt.options.header.variable "المتغير">
+<!ENTITY colt.options.header.linkcontext "نسخ رابط">
+<!ENTITY colt.options.header.pagecontext "نسخ صفحة">
+<!ENTITY colt.link.customformatinfo "تعلم المزيد حول تخصيص الأشكال">
+<!ENTITY colt.variable.desc.linktext "نص الرابط">
+<!ENTITY colt.variable.desc.pagetitle "عنوان الصفحة">
+<!ENTITY colt.variable.desc.linkurl "عنوان الرابط">
+<!ENTITY colt.variable.desc.pageurl "رابط الصفحة">
+<!ENTITY colt.variable.desc.linktitle "رابط عنوان السمة">
+<!ENTITY colt.variable.desc.newline "سطر جديد">

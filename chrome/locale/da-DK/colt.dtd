@@ -1,0 +1,41 @@
+<!ENTITY colt.copylinktext "Kopier linktekst">
+<!ENTITY colt.ak.copylinktext "k">
+<!ENTITY colt.copybothitem "Kopier Link tekst og placering">
+<!ENTITY colt.ak.copybothitem "o">
+<!ENTITY colt.copybothmenu "Kopier Link tekst og placering">
+<!ENTITY colt.ak.copybothmenu "o">
+<!ENTITY colt.copypageitem "Kopiér sidetitel og adresse">
+<!ENTITY colt.ak.copypageitem "t">
+<!ENTITY colt.copypagemenu "Kopiér sidetitel og adresse som">
+<!ENTITY colt.ak.copypagemenu "s">
+<!ENTITY colt.options.title "CoLT opsætning">
+<!ENTITY colt.options.group.toplevel "Topniveau menupunkter">
+<!ENTITY colt.options.displaycopytext "Vis &apos;Kopiér linktekst&apos; menupunkt">
+<!ENTITY colt.options.displaycopybothmenu "Vis &apos;Kopiér linktekst og placering&apos; undermenu">
+<!ENTITY colt.options.displaycopypagemenu "Vis &apos;Kopiér sidetitel og adresse&apos; menuelementer">
+<!ENTITY colt.options.group.customformats "Brugertilpassede menuelementer">
+<!ENTITY colt.options.header.label "Menulabel">
+<!ENTITY colt.options.header.format "Format">
+<!ENTITY colt.options.checkbox.userichtext "Brug Rich Text HTML Link Format">
+<!ENTITY colt.options.button.moveup "Flyt op">
+<!ENTITY colt.options.button.movedown "Flyt ned">
+<!ENTITY colt.options.button.addformat "Tilføj...">
+<!ENTITY colt.options.button.editformat "Rediger...">
+<!ENTITY colt.options.button.removeformat "Fjern">
+<!ENTITY colt.options.button.newseparator "Ny adskiller">
+<!ENTITY colt.options.textvariablelabel "Bruges til at angive kopieret tekst">
+<!ENTITY colt.options.urlvariablelabel "Bruges til at angive kopieret URL">
+<!ENTITY colt.options.linktitlevariablelabel "Bruges til at angive linkets titel-attribut">
+<!ENTITY colt.options.pagetitlevariablelabel "Bruges til at angive sidens titel">
+<!ENTITY colt.options.newlinelabel "Bruges til at angive en ny linje">
+<!ENTITY colt.options.variable.description "De følgende variabler kan bruges i dine brugerdefinerede formater:">
+<!ENTITY colt.options.header.variable "Variabel">
+<!ENTITY colt.options.header.linkcontext "Kopiering af et link">
+<!ENTITY colt.options.header.pagecontext "Kopiering af en side">
+<!ENTITY colt.link.customformatinfo "Lær mere om brugerdefinerede formater...">
+<!ENTITY colt.variable.desc.linktext "Link tekst">
+<!ENTITY colt.variable.desc.pagetitle "Sidetitel">
+<!ENTITY colt.variable.desc.linkurl "Link URL">
+<!ENTITY colt.variable.desc.pageurl "Side URL">
+<!ENTITY colt.variable.desc.linktitle "Link titel-attribut">
+<!ENTITY colt.variable.desc.newline "Ny linje">

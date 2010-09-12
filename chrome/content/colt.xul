@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<!DOCTYPE overlay SYSTEM "chrome://colt/locale/colt.dtd" >
+
+<overlay id="CLT-Overlay" xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
+
+<script type="application/x-javascript" src="chrome://colt/content/colt.js"/>
+
+<stringbundleset id="stringbundleset">
+	<stringbundle id="CLT-String-Bundle" src="chrome://colt/locale/colt.properties"/>
+</stringbundleset>
+
+<popup id="contentAreaContextMenu">
+	<menu id="CLT-Context-CopyPageMenu" label="&colt.copypagemenu;" accesskey="&colt.ak.copypagemenu;" insertafter="context-sendpage">
+		<menupopup id="CLT-Context-CopyPageMenuPopup" onpopupshowing="objCoLT.UpdateContextSubMenu('CLT-Context-CopyPageMenuPopup', 'page')">
+		</menupopup>
+	</menu>
+
+	<menuitem id="CLT-Context-CopyPage" label="&colt.copypageitem;" accesskey="&colt.ak.copypageitem;" insertafter="context-sendpage"
+			  oncommand="objCoLT._DoCopyBoth('1', 'page');" />
+
+	<menu id="CLT-Context-CopyBothMenu" label="&colt.copybothmenu;" accesskey="&colt.ak.copybothmenu;" insertafter="context-copylink">
+		<menupopup id="CLT-Context-CopyBothMenuPopup" onpopupshowing="objCoLT.UpdateContextSubMenu('CLT-Context-CopyBothMenuPopup', 'link')">
+		</menupopup>
+	</menu>
+	
+	<menuitem id="CLT-Context-CopyBoth" label="&colt.copybothitem;" accesskey="&colt.ak.copybothitem;" insertafter="context-copylink"
+			  oncommand="objCoLT._DoCopyBoth('1', 'link');" />
+	
+	<menuitem id="CLT-Context-CopyLinkText" label="&colt.copylinktext;" accesskey="&colt.ak.copylinktext;"
+			  insertafter="context-copylink" oncommand="objCoLT.CopyLinkText()" />
+</popup>
+
+</overlay>

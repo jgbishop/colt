@@ -1,0 +1,113 @@
+<?xml version="1.0"?>
+
+<?xml-stylesheet href="chrome://global/skin/" type="text/css"?>
+<?xml-stylesheet href="chrome://mozapps/skin/pref/pref.css" type="text/css"?>
+<?xml-stylesheet href="chrome://colt/content/options.css" type="text/css"?>
+
+<!DOCTYPE dialog SYSTEM "chrome://colt/locale/colt.dtd" >
+
+<dialog id="CLT-Custom-Format"
+		xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
+		buttons="accept, cancel"
+		orient="vertical"
+		ondialogaccept="return objCoLTCustomFormat.SaveCustomFormat()"
+		ondialogcancel="objCoLTCustomFormat.ClearCustomFormat()"
+		onload="objCoLTCustomFormat.InitCustomFormat()">
+
+	<script type="application/x-javascript" src="chrome://colt/content/colt.js" />
+	<script type="application/x-javascript" src="chrome://colt/content/options.js" />
+	<script type="application/x-javascript" src="chrome://colt/content/custom_format.js" />
+	
+	<stringbundleset id="stringbundleset">
+		<stringbundle id="CLT-String-Bundle" src="chrome://colt/locale/colt.properties"/>
+	</stringbundleset>
+
+	<grid>
+		<columns>
+			<column />
+			<column flex="1" />
+		</columns>
+		
+		<rows>
+			<row align="center">
+				<label value="&colt.options.header.label;" />
+				<textbox id="CLT-Custom-Format-Label" />
+			</row>
+			<row align="center">
+				<label value="&colt.options.header.format;" />
+				<textbox id="CLT-Custom-Format-Format" />
+			</row>
+			<checkbox id="CLT-Custom-Format-RichText" label="&colt.options.checkbox.userichtext;" oncommand="objCoLTCustomFormat.UpdateCustomFormatControls()" />
+		</rows>
+	</grid>
+
+	<separator class="groove" />
+	
+	<description>
+	&colt.options.variable.description;
+	</description>
+	
+	<listbox id="CLT-Variable-List">
+		<listhead>
+			<listheader label="&colt.options.header.variable;" />
+			<listheader label="&colt.options.header.linkcontext;" />
+			<listheader label="&colt.options.header.pagecontext;" />
+		</listhead>
+		
+		<listcols>
+			<listcol />
+			<listcol flex="1" />
+			<listcol flex="1" />
+		</listcols>
+		
+		<listitem>
+			<listcell label="%T" />
+			<listcell label="&colt.variable.desc.linktext;" />
+			<listcell label="&colt.variable.desc.pagetitle;" />
+		</listitem>
+		
+		<listitem>
+			<listcell label="%U" />
+			<listcell label="&colt.variable.desc.linkurl;" />
+			<listcell label="&colt.variable.desc.pageurl;" />
+		</listitem>
+		
+		<listitem>
+			<listcell label="%I" />
+			<listcell label="&colt.variable.desc.linktitle;" />
+			<listcell label="---" />
+		</listitem>
+		
+		<listitem>
+			<listcell label="%P" />
+			<listcell label="&colt.variable.desc.pagetitle;" />
+			<listcell label="---" />
+		</listitem>
+		
+		<listitem>
+			<listcell label="%R" />
+			<listcell label="&colt.variable.desc.pageurl;" />
+			<listcell label="---" />
+		</listitem>
+		
+		<listitem>
+			<listcell label="%S" />
+			<listcell label="---" />
+			<listcell label="&colt.variable.desc.selection;" />
+		</listitem>
+		
+		<listitem>
+			<listcell label="%L" />
+			<listcell label="&colt.variable.desc.localtime;" />
+			<listcell label="&colt.variable.desc.localtime;" />
+		</listitem>
+		
+		<listitem>
+			<listcell label="%N" />
+			<listcell label="&colt.variable.desc.newline;" />
+			<listcell label="&colt.variable.desc.newline;" />
+		</listitem>
+	</listbox>
+	
+	<label id="CLT-CustomFormat-Link" value="&colt.link.customformatinfo;" onclick="objCoLTCustomFormat.OnCustomFormatLink();" />
+</dialog>

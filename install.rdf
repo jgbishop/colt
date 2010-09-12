@@ -1,0 +1,55 @@
+<?xml version="1.0"?>
+
+<RDF xmlns="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+     xmlns:em="http://www.mozilla.org/2004/em-rdf#">
+
+    <Description about="urn:mozilla:install-manifest">
+	
+	<em:contributor>(ar) lord1980</em:contributor>
+	<em:contributor>(cs-CZ) FunTomas</em:contributor>
+	<em:contributor>(da-DK) AlleyKat</em:contributor>
+	<em:contributor>(de-DE) Florian Kaase</em:contributor>
+	<em:contributor>(es-AR, es-ES) ZuGro</em:contributor>
+	<em:contributor>(fa-IR) Pedram Veisi</em:contributor>
+	<em:contributor>(fr-FR) Jojaba</em:contributor>
+	<em:contributor>(it-IT) MatrixIsAllOver</em:contributor>
+	<em:contributor>(ja-JP) Haebaru</em:contributor>
+	<em:contributor>(ko-KR) Netaras</em:contributor>
+	<em:contributor>(lt-LT) Minj</em:contributor>
+	<em:contributor>(nl-NL) Stadt</em:contributor>
+	<em:contributor>(pl-PL) Gronostaj</em:contributor>
+	<em:contributor>(pt-BR) Carlos Pires</em:contributor>
+	<em:contributor>(pt-PT) Jorge Martins Rosa</em:contributor>
+	<em:contributor>(ru-RU) Modex</em:contributor>
+	<em:contributor>(sk-SK) Wladow</em:contributor>
+	<em:contributor>(tr-TR) Randomhero</em:contributor>
+	<em:contributor>(zh-CN) WangKing</em:contributor>
+	<em:contributor>(zh-TW) Unicorn2</em:contributor>
+	
+	<em:creator>Jonah Bishop</em:creator>
+	<em:homepageURL>http://www.borngeek.com/firefox/colt/</em:homepageURL>
+	<em:iconURL>chrome://colt/content/logo.png</em:iconURL>
+	<em:id>{e6c4c3ef-3d4d-42d6-8283-8da73c53a283}</em:id>
+	<em:name>CoLT</em:name>
+	<em:optionsURL>chrome://colt/content/options.xul</em:optionsURL>
+	<em:version>2.5.0</em:version>
+	
+	<em:updateURL>http://www.borngeek.com/downloads/update.rdf</em:updateURL>
+
+	<em:updateKey>MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDGkg9sX+Kp21vK9HrG0us
+	DFKpnQW0RIiMYK7Dzjdn6rcTCZYOH2ZbL2YPtjf5fW/GkAgH2BhxftMsG/RoAI7/IF5oIUMeB
+	zEM+dv7Lh9blMYTU2UNGR6zJQrzWFnYWUwxPCPEFn1bWer0sHofoSVGh11ExAe/AZcV/j8qFW
+	YO+AQIDAQAB</em:updateKey>
+
+	<em:targetApplication>
+		<Description>
+			<em:id>{ec8030f7-c20a-464f-9b0e-13a3a9e97384}</em:id>
+			<em:minVersion>1.5</em:minVersion>
+			<em:maxVersion>3.6.*</em:maxVersion>
+		</Description>
+	</em:targetApplication>
+	
+	</Description>
+	
+</RDF>
+

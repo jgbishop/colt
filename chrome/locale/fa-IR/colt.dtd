@@ -1,0 +1,41 @@
+<!ENTITY colt.copylinktext "رونوشت متن لینک">
+<!ENTITY colt.ak.copylinktext "ر">
+<!ENTITY colt.copybothitem "رونوشت متن و نشانی لینک">
+<!ENTITY colt.ak.copybothitem "و">
+<!ENTITY colt.copybothmenu "رونوشت متن و نشانی لینک به عنوان">
+<!ENTITY colt.ak.copybothmenu "ن">
+<!ENTITY colt.copypageitem "رونوشت عنوان و لینک صفحه">
+<!ENTITY colt.ak.copypageitem "ر">
+<!ENTITY colt.copypagemenu "رونوشت عنوان و لینک صفحه به عنوان">
+<!ENTITY colt.ak.copypagemenu "ر">
+<!ENTITY colt.options.title "تنظیمات CoLT">
+<!ENTITY colt.options.group.toplevel "گزینه های اصلی منو">
+<!ENTITY colt.options.displaycopytext "نمایش گزینه &apos;رونوشت متن لینک&apos;">
+<!ENTITY colt.options.displaycopybothmenu "نمایش گزینه &apos;رونوشت متن و آدرس لینک&apos;">
+<!ENTITY colt.options.displaycopypagemenu "نمایش &apos;رونوشت عنوان و لینک صفحه&apos; در منو">
+<!ENTITY colt.options.group.customformats "فرمت سفارشی گزینه‌های منو">
+<!ENTITY colt.options.header.label "برچسب">
+<!ENTITY colt.options.header.format "فرمت">
+<!ENTITY colt.options.checkbox.userichtext "استفاده از Rich Text HTML Link">
+<!ENTITY colt.options.button.moveup "حرکت به بالا">
+<!ENTITY colt.options.button.movedown "حرکت به پایین">
+<!ENTITY colt.options.button.addformat "افزودن...">
+<!ENTITY colt.options.button.editformat "ویرایش...">
+<!ENTITY colt.options.button.removeformat "پاک کردن...">
+<!ENTITY colt.options.button.newseparator "جداکننده">
+<!ENTITY colt.options.textvariablelabel "برای مشخص کردن متن کپی شده به کار می رود">
+<!ENTITY colt.options.urlvariablelabel "برای مشخص کردن نشانی کپی شده به کار می رود">
+<!ENTITY colt.options.linktitlevariablelabel "مورد استفاده برای مشخص کردن عنوان لینک">
+<!ENTITY colt.options.pagetitlevariablelabel "مورد استفاده برای مشخص کردن عنوان صفحه">
+<!ENTITY colt.options.newlinelabel "برای مشخص کردن خط جدید به کار می رود">
+<!ENTITY colt.options.variable.description "متغیرهای قابل استفاده در فرمت سفارشی:">
+<!ENTITY colt.options.header.variable "متغیر">
+<!ENTITY colt.options.header.linkcontext "رونوشت لینک">
+<!ENTITY colt.options.header.pagecontext "رونوشت صفحه">
+<!ENTITY colt.link.customformatinfo "درباره فرمت سفارشی بیشتر بیاموزید...">
+<!ENTITY colt.variable.desc.linktext "متن لینک">
+<!ENTITY colt.variable.desc.pagetitle "عنوان صفحه">
+<!ENTITY colt.variable.desc.linkurl "آدرس لینک">
+<!ENTITY colt.variable.desc.pageurl "آدرس صفحه">
+<!ENTITY colt.variable.desc.linktitle "عنوان لینک">
+<!ENTITY colt.variable.desc.newline "خط جدید">

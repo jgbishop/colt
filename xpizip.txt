@@ -1,0 +1,5 @@
+chrome.manifest
+install.rdf
+LICENSE.txt
+chrome\colt.jar
+defaults\preferences\colt.js

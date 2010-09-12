@@ -1,0 +1,41 @@
+<!ENTITY colt.copylinktext "Kopiuj treść odnośnika">
+<!ENTITY colt.ak.copylinktext "x">
+<!ENTITY colt.copybothitem "Kopiuj treść i adres odnośnika">
+<!ENTITY colt.ak.copybothitem "o">
+<!ENTITY colt.copybothmenu "Kopiuj treść i adres odnośnika jako">
+<!ENTITY colt.ak.copybothmenu "o">
+<!ENTITY colt.copypageitem "Kopiuj tytuł i adres strony">
+<!ENTITY colt.ak.copypageitem "o">
+<!ENTITY colt.copypagemenu "Kopiuj tytuł i adres strony jako">
+<!ENTITY colt.ak.copypagemenu "o">
+<!ENTITY colt.options.title "CoLT - Ustawienia">
+<!ENTITY colt.options.group.toplevel "Elementy menu najwyższego poziomu">
+<!ENTITY colt.options.displaycopytext "Wyświetlaj w menu kontekstowym element &quot;Kopiuj treść odnośnika&quot;">
+<!ENTITY colt.options.displaycopybothmenu "Wyświetlaj w menu kontekstowym element &quot;Kopiuj treść i adres odnośnika&quot;">
+<!ENTITY colt.options.displaycopypagemenu "Wyświetlaj w menu kontekstowym element &quot;Kopiuj tytuł i adres strony&quot;">
+<!ENTITY colt.options.group.customformats "Własne formaty elementów menu">
+<!ENTITY colt.options.header.label "Etykieta menu">
+<!ENTITY colt.options.header.format "Format">
+<!ENTITY colt.options.checkbox.userichtext "Używaj formatu RTF dla odnośników HTML">
+<!ENTITY colt.options.button.moveup "Przenieś w górę">
+<!ENTITY colt.options.button.movedown "Przenieś w dół">
+<!ENTITY colt.options.button.addformat "Dodaj...">
+<!ENTITY colt.options.button.editformat "Edytuj...">
+<!ENTITY colt.options.button.removeformat "Usuń">
+<!ENTITY colt.options.button.newseparator "Nowy separator">
+<!ENTITY colt.options.textvariablelabel "Używane do określenia kopiowanego tekstu">
+<!ENTITY colt.options.urlvariablelabel "Używane do określenia kopiowanego adresu URL">
+<!ENTITY colt.options.linktitlevariablelabel "Używane do określenia atrybutu z tytułem odnośnika">
+<!ENTITY colt.options.pagetitlevariablelabel "Używane do określenia tytułu strony">
+<!ENTITY colt.options.newlinelabel "Używane do określenia nowego wiersza">
+<!ENTITY colt.options.variable.description "Następujące zmienne mogą być użyte w twoich własnych formatach:">
+<!ENTITY colt.options.header.variable "Zmienna">
+<!ENTITY colt.options.header.linkcontext "Kopiowanie odnośnika">
+<!ENTITY colt.options.header.pagecontext "Kopiowanie strony">
+<!ENTITY colt.link.customformatinfo "Więcej informacji na temat własnych formatów...">
+<!ENTITY colt.variable.desc.linktext "Treść odnośnika">
+<!ENTITY colt.variable.desc.pagetitle "Tytuł strony">
+<!ENTITY colt.variable.desc.linkurl "URL odnośnika">
+<!ENTITY colt.variable.desc.pageurl "URL strony">
+<!ENTITY colt.variable.desc.linktitle "Atrybut tytułu odnośnika">
+<!ENTITY colt.variable.desc.newline "Nowy wiersz">

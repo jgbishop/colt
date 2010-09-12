@@ -1,0 +1,41 @@
+<!ENTITY colt.copylinktext "Копировать название ссылки">
+<!ENTITY colt.ak.copylinktext "и">
+<!ENTITY colt.copybothitem "Копировать название и URL ссылки">
+<!ENTITY colt.ak.copybothitem "о">
+<!ENTITY colt.copybothmenu "Копировать название и URL ссылки как...">
+<!ENTITY colt.ak.copybothmenu "а">
+<!ENTITY colt.copypageitem "Копировать заголовок страницы и адрес">
+<!ENTITY colt.ak.copypageitem "в">
+<!ENTITY colt.copypagemenu "Копировать заголовок страницы и адрес как...">
+<!ENTITY colt.ak.copypagemenu "т">
+<!ENTITY colt.options.title "Настройки CoLT">
+<!ENTITY colt.options.group.toplevel "Элементы контекстного меню">
+<!ENTITY colt.options.displaycopytext "Пункт меню «Копировать название ссылки»">
+<!ENTITY colt.options.displaycopybothmenu "Подменю «Копировать название и URL ссылки»">
+<!ENTITY colt.options.displaycopypagemenu "Подменю «Копировать заголовок и адрес»">
+<!ENTITY colt.options.group.customformats "Свой формат элементов меню">
+<!ENTITY colt.options.header.label "Название">
+<!ENTITY colt.options.header.format "Формат">
+<!ENTITY colt.options.checkbox.userichtext "Использовать полное HTML-форматирование ссылок">
+<!ENTITY colt.options.button.moveup "Вверх">
+<!ENTITY colt.options.button.movedown "Вниз">
+<!ENTITY colt.options.button.addformat "Добавить">
+<!ENTITY colt.options.button.editformat "Изменить">
+<!ENTITY colt.options.button.removeformat "Удалить">
+<!ENTITY colt.options.button.newseparator "Добавить разделитель">
+<!ENTITY colt.options.textvariablelabel "Используйте для определения копируемого текста">
+<!ENTITY colt.options.urlvariablelabel "Используйте для определения копируемого URL">
+<!ENTITY colt.options.linktitlevariablelabel "Используйте для определения заголовка ссылки">
+<!ENTITY colt.options.pagetitlevariablelabel "Используйте для определения заголовка страницы">
+<!ENTITY colt.options.newlinelabel "Используйте для определения перехода на новую строку">
+<!ENTITY colt.options.variable.description "Указанные переменные можно использовать в своём произвольном формате:">
+<!ENTITY colt.options.header.variable "Переменные">
+<!ENTITY colt.options.header.linkcontext "Копирование ссылки">
+<!ENTITY colt.options.header.pagecontext "Копирование страницы">
+<!ENTITY colt.link.customformatinfo "Узнать больше о произвольных форматах...">
+<!ENTITY colt.variable.desc.linktext "Текст ссылки">
+<!ENTITY colt.variable.desc.pagetitle "Заголовок страницы">
+<!ENTITY colt.variable.desc.linkurl "Адрес ссылки">
+<!ENTITY colt.variable.desc.pageurl "Адрес страницы">
+<!ENTITY colt.variable.desc.linktitle "Заголовок ссылки">
+<!ENTITY colt.variable.desc.newline "Новая строка">

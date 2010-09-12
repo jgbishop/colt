@@ -1,0 +1,41 @@
+<!ENTITY colt.copylinktext "Bağlantı Metni Kopyala">
+<!ENTITY colt.ak.copylinktext "x">
+<!ENTITY colt.copybothitem "Bağlantı Adını ve Konumunu Kopyala">
+<!ENTITY colt.ak.copybothitem "0">
+<!ENTITY colt.copybothmenu "Bağlantı Adını ve Konumunu Farklı Kopyala">
+<!ENTITY colt.ak.copybothmenu "0">
+<!ENTITY colt.copypageitem "Copy Page Title and Location">
+<!ENTITY colt.ak.copypageitem "o">
+<!ENTITY colt.copypagemenu "Copy Page Title and Location As">
+<!ENTITY colt.ak.copypagemenu "o">
+<!ENTITY colt.options.title "CoLT Seçenekleri">
+<!ENTITY colt.options.group.toplevel "En Üst Seviye Menü Maddeleri">
+<!ENTITY colt.options.displaycopytext "&apos;Bağlantı Metni Kopyala&apos; menü maddesini göster">
+<!ENTITY colt.options.displaycopybothmenu "&apos;Bağlantı Metni ve Konumunu Kopyala&apos; alt-menüsünü göster">
+<!ENTITY colt.options.displaycopypagemenu "Display the &apos;Copy Page Title and Location&apos; menu items">
+<!ENTITY colt.options.group.customformats "Custom Format Menu Items">
+<!ENTITY colt.options.header.label "Menü Etiketi">
+<!ENTITY colt.options.header.format "Biçim">
+<!ENTITY colt.options.checkbox.userichtext "Zengin Text HTML Bağlantı Formatını Kullan">
+<!ENTITY colt.options.button.moveup "Yukarı Götür">
+<!ENTITY colt.options.button.movedown "Aşağı İndir">
+<!ENTITY colt.options.button.addformat "Ekle...">
+<!ENTITY colt.options.button.editformat "Değiştir...">
+<!ENTITY colt.options.button.removeformat "Kaldır">
+<!ENTITY colt.options.button.newseparator "Yeni Ayraç">
+<!ENTITY colt.options.textvariablelabel "Kopyalanan metni belirtmek için kullanılmıştır">
+<!ENTITY colt.options.urlvariablelabel "Kopyalanan URLyi belirtmek için kullanılmıştır">
+<!ENTITY colt.options.linktitlevariablelabel "Used to specify the link&apos;s title attribute">
+<!ENTITY colt.options.pagetitlevariablelabel "Used to specify the page title">
+<!ENTITY colt.options.newlinelabel "Yeni bir satır belirlemek için kullanılmıştır">
+<!ENTITY colt.options.variable.description "The following variables may be used in your custom formats:">
+<!ENTITY colt.options.header.variable "Variable">
+<!ENTITY colt.options.header.linkcontext "Copying a Link">
+<!ENTITY colt.options.header.pagecontext "Copying a Page">
+<!ENTITY colt.link.customformatinfo "Learn more about custom formats...">
+<!ENTITY colt.variable.desc.linktext "Link Text">
+<!ENTITY colt.variable.desc.pagetitle "Page Title">
+<!ENTITY colt.variable.desc.linkurl "Link URL">
+<!ENTITY colt.variable.desc.pageurl "Page URL">
+<!ENTITY colt.variable.desc.linktitle "Link Title Attribute">
+<!ENTITY colt.variable.desc.newline "New Line">

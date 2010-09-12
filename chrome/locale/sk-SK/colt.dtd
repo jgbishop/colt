@@ -1,0 +1,41 @@
+<!ENTITY colt.copylinktext "Kopírovať text odkazu">
+<!ENTITY colt.ak.copylinktext "x">
+<!ENTITY colt.copybothitem "Kopírovať text odkazu a umiestnenie">
+<!ENTITY colt.ak.copybothitem "o">
+<!ENTITY colt.copybothmenu "Kopírovať text odkazu a umiestnenie ako">
+<!ENTITY colt.ak.copybothmenu "o">
+<!ENTITY colt.copypageitem "Kopírovať titulok stránky a umiestnenie">
+<!ENTITY colt.ak.copypageitem "t">
+<!ENTITY colt.copypagemenu "Kopírovať titulok stránky a umiestnenie ako">
+<!ENTITY colt.ak.copypagemenu "u">
+<!ENTITY colt.options.title "Nastavenia rozšírenia CoLT">
+<!ENTITY colt.options.group.toplevel "Položky hlavnej ponuky">
+<!ENTITY colt.options.displaycopytext "Zobraziť položku ponuky &apos;Kopírovať text odkazu&apos;">
+<!ENTITY colt.options.displaycopybothmenu "Zobraziť podponuku &apos;Kopírovať text odkazu a umiestnenie&apos;">
+<!ENTITY colt.options.displaycopypagemenu "Zobraziť podponuku &apos;Kopírovať titulok stránky a umiestnenie&apos;">
+<!ENTITY colt.options.group.customformats "Zobraziť položky Vlastný formát">
+<!ENTITY colt.options.header.label "Menovka v ponuke">
+<!ENTITY colt.options.header.format "Formát">
+<!ENTITY colt.options.checkbox.userichtext "Použiť HMTL formát odkazu">
+<!ENTITY colt.options.button.moveup "Posunúť nahor">
+<!ENTITY colt.options.button.movedown "Posunúť nadol">
+<!ENTITY colt.options.button.addformat "Pridať...">
+<!ENTITY colt.options.button.editformat "Upraviť...">
+<!ENTITY colt.options.button.removeformat "Odstrániť">
+<!ENTITY colt.options.button.newseparator "Nový oddeľovač">
+<!ENTITY colt.options.textvariablelabel "Používa sa pre kopírovaný text">
+<!ENTITY colt.options.urlvariablelabel "Používa sa pre kopírovanú URL">
+<!ENTITY colt.options.linktitlevariablelabel "Používa sa pre atribút title daného odkazu">
+<!ENTITY colt.options.pagetitlevariablelabel "Používa sa pre titulok stránky">
+<!ENTITY colt.options.newlinelabel "Nový riadok">
+<!ENTITY colt.options.variable.description "Vo vlastných formátoch môžu byť použité nasledujúce premenné:">
+<!ENTITY colt.options.header.variable "Premenná">
+<!ENTITY colt.options.header.linkcontext "Kopíruje sa odkaz">
+<!ENTITY colt.options.header.pagecontext "Kopíruje sa stránka">
+<!ENTITY colt.link.customformatinfo "Ďalšie informácie o vlastných formátoch...">
+<!ENTITY colt.variable.desc.linktext "Text odkazu">
+<!ENTITY colt.variable.desc.pagetitle "Titulok stárnky">
+<!ENTITY colt.variable.desc.linkurl "URL odkazu">
+<!ENTITY colt.variable.desc.pageurl "URL stránky">
+<!ENTITY colt.variable.desc.linktitle "Atribút title odkazu">
+<!ENTITY colt.variable.desc.newline "Nový riadok">
