@@ -38,4 +38,6 @@
 <!ENTITY colt.variable.desc.linkurl "Indirizzo del link">
 <!ENTITY colt.variable.desc.pageurl "Indirizzo della pagina">
 <!ENTITY colt.variable.desc.linktitle "Attributo del titolo">
+<!ENTITY colt.variable.desc.localtime "Data/ora locali">
+<!ENTITY colt.variable.desc.selection "Testo selezionato">
 <!ENTITY colt.variable.desc.newline "Nuova riga">

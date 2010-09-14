@@ -30,7 +30,7 @@
 <!ENTITY colt.options.newlinelabel "Usado para especificar uma nova linha">
 <!ENTITY colt.options.variable.description "As variáveis seguintes podem ser usadas nos formatos personalizados">
 <!ENTITY colt.options.header.variable "Variável">
-<!ENTITY colt.options.header.linkcontext "Copiar uma ligação">
+<!ENTITY colt.options.header.linkcontext "Copiar uma Ligação">
 <!ENTITY colt.options.header.pagecontext "Copiar uma Página">
 <!ENTITY colt.link.customformatinfo "Saber mais acerca dos formatos personalizados...">
 <!ENTITY colt.variable.desc.linktext "Texto da Ligação">
@@ -38,4 +38,6 @@
 <!ENTITY colt.variable.desc.linkurl "URL da Ligação">
 <!ENTITY colt.variable.desc.pageurl "URL da Página">
 <!ENTITY colt.variable.desc.linktitle "Título da Ligação">
+<!ENTITY colt.variable.desc.localtime "Hora Local">
+<!ENTITY colt.variable.desc.selection "Texto Seleccionado">
 <!ENTITY colt.variable.desc.newline "Nova Linha">

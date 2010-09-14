@@ -16,7 +16,7 @@
 <!ENTITY colt.options.group.customformats "Formatage personnalisé des éléments de menu">
 <!ENTITY colt.options.header.label "Libellé">
 <!ENTITY colt.options.header.format "Format">
-<!ENTITY colt.options.checkbox.userichtext "Utiliser le format Rich Text du lien HTML">
+<!ENTITY colt.options.checkbox.userichtext "Utiliser le format Rich Text pour un lien HTML">
 <!ENTITY colt.options.button.moveup "Monter">
 <!ENTITY colt.options.button.movedown "Descendre">
 <!ENTITY colt.options.button.addformat "Ajouter…">
@@ -38,4 +38,6 @@
 <!ENTITY colt.variable.desc.linkurl "URL du lien">
 <!ENTITY colt.variable.desc.pageurl "URL de la page">
 <!ENTITY colt.variable.desc.linktitle "Attribut « title » du lien">
+<!ENTITY colt.variable.desc.localtime "Horaire local">
+<!ENTITY colt.variable.desc.selection "Texte sélectionné">
 <!ENTITY colt.variable.desc.newline "Retour à la ligne">

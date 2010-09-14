@@ -38,4 +38,6 @@
 <!ENTITY colt.variable.desc.linkurl "Link URL">
 <!ENTITY colt.variable.desc.pageurl "Pagina URL">
 <!ENTITY colt.variable.desc.linktitle "Link titeleigenschap">
+<!ENTITY colt.variable.desc.localtime "Lokale tijd">
+<!ENTITY colt.variable.desc.selection "Geselecteerde tekst">
 <!ENTITY colt.variable.desc.newline "Nieuwe regel">
