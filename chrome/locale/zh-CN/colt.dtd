@@ -38,4 +38,6 @@
 <!ENTITY colt.variable.desc.linkurl "链接网址">
 <!ENTITY colt.variable.desc.pageurl "页面网址">
 <!ENTITY colt.variable.desc.linktitle "链接的标题属性">
+<!ENTITY colt.variable.desc.localtime "Local Time">
+<!ENTITY colt.variable.desc.selection "Selected Text">
 <!ENTITY colt.variable.desc.newline "换行">

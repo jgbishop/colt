@@ -38,4 +38,6 @@
 <!ENTITY colt.variable.desc.linkurl "آدرس لینک">
 <!ENTITY colt.variable.desc.pageurl "آدرس صفحه">
 <!ENTITY colt.variable.desc.linktitle "عنوان لینک">
+<!ENTITY colt.variable.desc.localtime "Local Time">
+<!ENTITY colt.variable.desc.selection "Selected Text">
 <!ENTITY colt.variable.desc.newline "خط جدید">

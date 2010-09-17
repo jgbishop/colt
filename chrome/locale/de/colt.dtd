@@ -38,4 +38,6 @@
 <!ENTITY colt.variable.desc.linkurl "Link-Adresse">
 <!ENTITY colt.variable.desc.pageurl "Seitenadresse">
 <!ENTITY colt.variable.desc.linktitle "Title-Attribut des Links">
+<!ENTITY colt.variable.desc.localtime "Aktuelle Zeit">
+<!ENTITY colt.variable.desc.selection "Ausgewählter Text">
 <!ENTITY colt.variable.desc.newline "Neue Zeile">

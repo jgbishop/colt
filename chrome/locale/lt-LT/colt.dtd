@@ -38,4 +38,6 @@
 <!ENTITY colt.variable.desc.linkurl "Saito adresas">
 <!ENTITY colt.variable.desc.pageurl "Puslapio adresas">
 <!ENTITY colt.variable.desc.linktitle "Saito antraštė">
+<!ENTITY colt.variable.desc.localtime "Local Time">
+<!ENTITY colt.variable.desc.selection "Selected Text">
 <!ENTITY colt.variable.desc.newline "Nauja eilutė">
