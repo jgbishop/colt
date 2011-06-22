@@ -1,8 +1,8 @@
 <!ENTITY colt.copylinktext "Kopier linktekst">
 <!ENTITY colt.ak.copylinktext "k">
-<!ENTITY colt.copybothitem "Kopier Link tekst og placering">
+<!ENTITY colt.copybothitem "Kopier linktekst og adresse">
 <!ENTITY colt.ak.copybothitem "o">
-<!ENTITY colt.copybothmenu "Kopier Link tekst og placering">
+<!ENTITY colt.copybothmenu "Kopier linktekst og adresse som">
 <!ENTITY colt.ak.copybothmenu "o">
 <!ENTITY colt.copypageitem "Kopiér sidetitel og adresse">
 <!ENTITY colt.ak.copypageitem "t">
@@ -11,8 +11,8 @@
 <!ENTITY colt.options.title "CoLT opsætning">
 <!ENTITY colt.options.group.toplevel "Topniveau menupunkter">
 <!ENTITY colt.options.displaycopytext "Vis 'Kopiér linktekst' menupunkt">
-<!ENTITY colt.options.displaycopybothmenu "Vis 'Kopiér linktekst og placering' undermenu">
-<!ENTITY colt.options.displaycopypagemenu "Vis 'Kopiér sidetitel og adresse' menuelementer">
+<!ENTITY colt.options.displaycopybothmenu "Vis 'Kopiér linktekst og adresse' undermenu">
+<!ENTITY colt.options.displaycopypagemenu "Vis &apos;Kopiér sidetitel og adresse&apos; menuelementer">
 <!ENTITY colt.options.group.customformats "Brugertilpassede menuelementer">
 <!ENTITY colt.options.header.label "Menulabel">
 <!ENTITY colt.options.header.format "Format">
@@ -38,6 +38,6 @@
 <!ENTITY colt.variable.desc.linkurl "Link URL">
 <!ENTITY colt.variable.desc.pageurl "Side URL">
 <!ENTITY colt.variable.desc.linktitle "Link titel-attribut">
-<!ENTITY colt.variable.desc.localtime "Local Time">
-<!ENTITY colt.variable.desc.selection "Selected Text">
+<!ENTITY colt.variable.desc.localtime "Lokal tid">
+<!ENTITY colt.variable.desc.selection "Valgt tekst">
 <!ENTITY colt.variable.desc.newline "Ny linje">

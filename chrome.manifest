@@ -4,7 +4,7 @@ overlay chrome://browser/content/browser.xul	chrome://colt/content/colt.xul
 locale	colt	en-US	chrome/locale/en-US/
 locale	colt	ar	chrome/locale/ar/
 locale	colt	cs-CZ	chrome/locale/cs-CZ/
-locale	colt	da-DK	chrome/locale/da-DK/
+locale	colt	da	chrome/locale/da/
 locale	colt	de	chrome/locale/de/
 locale	colt	es-AR	chrome/locale/es-AR/
 locale	colt	es-ES	chrome/locale/es-ES/

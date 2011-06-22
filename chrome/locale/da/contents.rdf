@@ -4,13 +4,13 @@
          xmlns:RDF="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
 
     <RDF:Seq about="urn:mozilla:locale:root">
-        <RDF:li resource="urn:mozilla:locale:da-DK"/>
+        <RDF:li resource="urn:mozilla:locale:da"/>
     </RDF:Seq>
 
-    <RDF:Description about="urn:mozilla:locale:da-DK" chrome:name="da-DK">
+    <RDF:Description about="urn:mozilla:locale:da" chrome:name="da">
         <chrome:packages>
-            <RDF:Seq about="urn:mozilla:locale:da-DK:packages">
-                <RDF:li resource="urn:mozilla:locale:da-DK:colt"/>
+            <RDF:Seq about="urn:mozilla:locale:da:packages">
+                <RDF:li resource="urn:mozilla:locale:da:colt"/>
             </RDF:Seq>
         </chrome:packages>
     </RDF:Description>

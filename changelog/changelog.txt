@@ -1,6 +1,13 @@
 //***************
 //Version History
 //***************
+[2.5.2]
++ Added support for Firefox 5 and 6
++ Minor locale updates
+
+[2.5.1]
++ Bumped the maxVersion to 4.0.* to allow CoLT to work in all future Firefox 4 builds.
+
 [2.5.0]
 + Added capability to capture selected text when copying the page's title and location (big thank you to Philip and Paul)
 + Added the local time stamp to the available fields for custom formats (big thank you to Philip and Paul)
