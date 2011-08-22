@@ -1,6 +1,10 @@
 //***************
 //Version History
 //***************
+[2.5.3]
++ Bumped the maxVersion to 12.* to work around Mozilla’s annoying new release schedule
++ Various locale  updates
+
 [2.5.2]
 + Added support for Firefox 5 and 6
 + Minor locale updates

@@ -4,19 +4,19 @@
 <!ENTITY colt.ak.copybothitem "d">
 <!ENTITY colt.copybothmenu "Copiar texto y dirección del enlace como">
 <!ENTITY colt.ak.copybothmenu "d">
-<!ENTITY colt.copypageitem "Copy Page Title and Location">
+<!ENTITY colt.copypageitem "Copiar título y dirección de la página">
 <!ENTITY colt.ak.copypageitem "o">
-<!ENTITY colt.copypagemenu "Copy Page Title and Location As">
+<!ENTITY colt.copypagemenu "Copiar título y dirección de la página como">
 <!ENTITY colt.ak.copypagemenu "o">
-<!ENTITY colt.options.title "Opciones CoLT">
+<!ENTITY colt.options.title "Opciones de CoLT">
 <!ENTITY colt.options.group.toplevel "Nivel de elementos en el menú contextual">
 <!ENTITY colt.options.displaycopytext "Mostrar el elemento de menú &apos;Copiar texto del enlace&apos;">
-<!ENTITY colt.options.displaycopybothmenu "Mostrar el Sub-Menú &apos;Copiar texto y dirección del enlace&apos;">
-<!ENTITY colt.options.displaycopypagemenu "Display the 'Copy Page Title and Location' menu items">
-<!ENTITY colt.options.group.customformats "Custom Format Menu Items">
+<!ENTITY colt.options.displaycopybothmenu "Mostrar el sub-Menú &apos;Copiar texto y dirección del enlace&apos;">
+<!ENTITY colt.options.displaycopypagemenu "Mostrar el elemento de menú &apos;Copiar título y dirección de la página&apos;">
+<!ENTITY colt.options.group.customformats "Elementos de menú con formato personalizado">
 <!ENTITY colt.options.header.label "Etiqueta del menú">
 <!ENTITY colt.options.header.format "Formato">
-<!ENTITY colt.options.checkbox.userichtext "Use Rich Text HTML Link Format">
+<!ENTITY colt.options.checkbox.userichtext "Usar formato enlace HTML de texto enriquecido">
 <!ENTITY colt.options.button.moveup "Mover arriba">
 <!ENTITY colt.options.button.movedown "Mover abajo">
 <!ENTITY colt.options.button.addformat "Añadir...">
@@ -25,19 +25,19 @@
 <!ENTITY colt.options.button.newseparator "Nuevo separador">
 <!ENTITY colt.options.textvariablelabel "Usar para especificar el texto copiado">
 <!ENTITY colt.options.urlvariablelabel "Usar para especificar la URL copiada">
-<!ENTITY colt.options.linktitlevariablelabel "Used to specify the link's title attribute">
-<!ENTITY colt.options.pagetitlevariablelabel "Used to specify the page title">
+<!ENTITY colt.options.linktitlevariablelabel "Usar para especificar el atributo Título del enlace">
+<!ENTITY colt.options.pagetitlevariablelabel "Usar para especificar el título de la página">
 <!ENTITY colt.options.newlinelabel "Usar para especificar una nueva línea">
-<!ENTITY colt.options.variable.description "The following variables may be used in your custom formats:">
+<!ENTITY colt.options.variable.description "Puede usar las variables siguientes en sus formatos personalizados:">
 <!ENTITY colt.options.header.variable "Variable">
-<!ENTITY colt.options.header.linkcontext "Copying a Link">
-<!ENTITY colt.options.header.pagecontext "Copying a Page">
-<!ENTITY colt.link.customformatinfo "Learn more about custom formats...">
-<!ENTITY colt.variable.desc.linktext "Link Text">
-<!ENTITY colt.variable.desc.pagetitle "Page Title">
-<!ENTITY colt.variable.desc.linkurl "Link URL">
-<!ENTITY colt.variable.desc.pageurl "Page URL">
-<!ENTITY colt.variable.desc.linktitle "Link Title Attribute">
-<!ENTITY colt.variable.desc.localtime "Local Time">
-<!ENTITY colt.variable.desc.selection "Selected Text">
-<!ENTITY colt.variable.desc.newline "New Line">
+<!ENTITY colt.options.header.linkcontext "Copiando un enlace">
+<!ENTITY colt.options.header.pagecontext "Copiando una página">
+<!ENTITY colt.link.customformatinfo "Información sobre los formatos personalizados...">
+<!ENTITY colt.variable.desc.linktext "Texto del enlace">
+<!ENTITY colt.variable.desc.pagetitle "Título de la página">
+<!ENTITY colt.variable.desc.linkurl "URL del enlace">
+<!ENTITY colt.variable.desc.pageurl "URL de la página">
+<!ENTITY colt.variable.desc.linktitle "Atributo Título del enlace">
+<!ENTITY colt.variable.desc.localtime "Tiempo local">
+<!ENTITY colt.variable.desc.selection "Texto seleccionado">
+<!ENTITY colt.variable.desc.newline "Nueva línea">
