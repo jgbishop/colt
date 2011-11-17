@@ -16,7 +16,7 @@
 	</menu>
 
 	<menuitem id="CLT-Context-CopyPage" label="&colt.copypageitem;" accesskey="&colt.ak.copypageitem;" insertafter="context-sendpage"
-			  oncommand="objCoLT._DoCopyBoth('1', 'page');" />
+			  oncommand="objCoLT.CopyBoth('1', 'page');" />
 
 	<menu id="CLT-Context-CopyBothMenu" label="&colt.copybothmenu;" accesskey="&colt.ak.copybothmenu;" insertafter="context-copylink">
 		<menupopup id="CLT-Context-CopyBothMenuPopup" onpopupshowing="objCoLT.UpdateContextSubMenu('CLT-Context-CopyBothMenuPopup', 'link')">
@@ -24,7 +24,7 @@
 	</menu>
 	
 	<menuitem id="CLT-Context-CopyBoth" label="&colt.copybothitem;" accesskey="&colt.ak.copybothitem;" insertafter="context-copylink"
-			  oncommand="objCoLT._DoCopyBoth('1', 'link');" />
+			  oncommand="objCoLT.CopyBoth('1', 'link');" />
 	
 	<menuitem id="CLT-Context-CopyLinkText" label="&colt.copylinktext;" accesskey="&colt.ak.copylinktext;"
 			  insertafter="context-copylink" oncommand="objCoLT.CopyLinkText()" />

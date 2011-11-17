@@ -1,37 +1,22 @@
 var objCoLT = {
-	ConsoleService : Components.classes['@mozilla.org/consoleservice;1'].getService(Components.interfaces.nsIConsoleService),
-	PrefBranch : Components.classes["@mozilla.org/preferences-service;1"].getService(Components.interfaces.nsIPrefService).getBranch("colt."),
+	PrefBranch : Components.classes["@mozilla.org/preferences-service;1"].getService(Components.interfaces.nsIPrefService).getBranch("extensions.colt."),
 	
-	// Preference names
-	PrefName_ShowCopyText		: "showcopytext",
-	PrefName_ShowCopyBoth		: "showcopyboth",
-	PrefName_ShowCopyPage		: "showcopypage",
-	PrefName_CustomFormatCount 	: "custom.count",
-	PrefName_Version			: "version",
-
-	// Option variables
-	ShowCopyText : false,
-	ShowCopyBoth : false,
-	ShowCopyPage : false,
+	Prefs : {
+		ShowCopyText: { name: "showcopytext", value: false },
+		ShowCopyBoth: { name: "showcopyboth", value: false },
+		ShowCopyPage: { name: "showcopypage", value: false },
+		CustomFormatCount: { name: "custom.count", value: 0, type: "int" },
+	},
 	
 	// Miscellaneous variables
-	RunOnce : false,
-	Version : "2.5", // Must be of the form "X.Y" or "X.YZ" (only 1 decimal)
+	Initialized : false,
 
 	Log: function(aMessage)
 	{
-		this.ConsoleService.logStringMessage('CoLT: ' + aMessage);
+		var consoleService = Components.classes['@mozilla.org/consoleservice;1'].getService(Components.interfaces.nsIConsoleService);
+		consoleService.logStringMessage('CoLT: ' + aMessage);
 	},
 
-	_DoCopyBoth: function(formatIndex, type)
-	{
-		var format = this.PrefBranch.getCharPref("custom." + formatIndex + ".format");
-		if(format == "{RT}")
-			this.CopyBothAsRichText(type);
-		else
-			this.CopyBoth(formatIndex, type);
-	},
-	
 	CopyBoth: function(formatIndex, type)
 	{
 		var url;
@@ -58,7 +43,8 @@ var objCoLT = {
 
 			url = gContextMenu.linkURL;
 			text = gContextMenu.linkText();
-			if ("triggerNode" in cMenu) {
+			if ("triggerNode" in cMenu)
+			{
 				// The triggerNode property was added in FF 4.0
 				titleAttr = cMenu.triggerNode.title;
 			}
@@ -72,32 +58,30 @@ var objCoLT = {
 			selection = "";
 		}
 		
-		var format = this.PrefBranch.getCharPref("custom." + formatIndex + ".format");
-		var myString = objCoLT.FormatString(format, text, url, titleAttr, pageTitle, pageURL, localtime, selection);
-	
-		var result = objCoLT.PlaceOnClipboard(myString);
-		if(!result)
-			alert("ERROR: The link text and location were unable to be placed on the clipboard.");
-	},
-	
-	CopyBothAsRichText: function(type)
-	{
-		var richText = "<a href=\"";
-	
-		if(type == "page")
-			richText += content.document.location.href + "\">" + content.document.title + "</a>";
-		else
-			richText += gContextMenu.linkURL + "\">" + gContextMenu.linkText() + "</a>";
+		var format = this.GetComplexPref("custom." + formatIndex + ".format");
 		
-		var xfer = Components.classes["@mozilla.org/widget/transferable;1"].createInstance(Components.interfaces.nsITransferable);
-		xfer.addDataFlavor("text/html");
-	
-		var htmlString = Components.classes["@mozilla.org/supports-string;1"].createInstance(Components.interfaces.nsISupportsString);
-		htmlString.data = richText;
-		xfer.setTransferData("text/html", htmlString, richText.length * 2);
-	
-		var clipboard = Components.classes["@mozilla.org/widget/clipboard;1"].getService(Components.interfaces.nsIClipboard);
-		clipboard.setData(xfer, null, Components.interfaces.nsIClipboard.kGlobalClipboard);
+		if(format == "{RT}")
+		{
+			var richText = "<a href=\"" + url + "\">" + text + "</a>";
+
+			var xfer = Components.classes["@mozilla.org/widget/transferable;1"].createInstance(Components.interfaces.nsITransferable);
+			xfer.addDataFlavor("text/html");
+
+			var htmlString = Components.classes["@mozilla.org/supports-string;1"].createInstance(Components.interfaces.nsISupportsString);
+			htmlString.data = richText;
+			xfer.setTransferData("text/html", htmlString, richText.length * 2);
+
+			var clipboard = Components.classes["@mozilla.org/widget/clipboard;1"].getService(Components.interfaces.nsIClipboard);
+			clipboard.setData(xfer, null, Components.interfaces.nsIClipboard.kGlobalClipboard);
+		}
+		else
+		{
+			var myString = objCoLT.FormatString(format, text, url, titleAttr, pageTitle, pageURL, localtime, selection);
+
+			var result = objCoLT.PlaceOnClipboard(myString);
+			if(!result)
+				alert("ERROR: The link text and location were unable to be placed on the clipboard.");
+		}
 	},
 	
 	CopyLinkText: function()
@@ -110,15 +94,23 @@ var objCoLT = {
 
 	FormatString: function(string, text, url, titleAttr, pageTitle, pageURL, localtime, selection)
 	{
+		var urlesc = url;
+		
 		string = string.replace(/%[Tt]/g, text);
 		string = string.replace(/%[Uu]/g, url);
 		string = string.replace(/%[Nn]/g, this.GetNewLine());
+		string = string.replace(/%[Bb]/g, "\t");
 		string = string.replace(/%[Ii]/g, titleAttr);
 		string = string.replace(/%[Pp]/g, pageTitle);
 		string = string.replace(/%[Rr]/g, pageURL);
 		string = string.replace(/%[Ll]/g, localtime);
 		string = string.replace(/%[Ss]/g, selection);
 		return string;
+	},
+	
+	GetComplexPref: function(name)
+	{
+		return this.PrefBranch.getComplexValue(name, Components.interfaces.nsISupportsString).data;
 	},
 
 	GetNewLine: function()
@@ -127,199 +119,96 @@ var objCoLT = {
 	
 		if(platform.indexOf('win') != -1) // Windows
 			return "\r\n";
-	
 		else if(platform.indexOf('mac') != -1) // Mac
 			return "\r";
-	
 		else // *nix
 			return "\n";
 	},
 	
-	Init: function()
-	{
-		if(objCoLT.RunOnce == false)
-		{
-			objCoLT.RunOnce = true;
-	
-			objCoLT.Upgrade();
-			objCoLT.LoadPrefs();
-			objCoLT.UpdateContextMenu();
-	
-			var menu = document.getElementById("contentAreaContextMenu");
-			menu.addEventListener('popupshowing', objCoLT.UpdateContextMenu, false);
-		}
-	},
-
-	IsPreferenceSet: function(pref)
-	{
-		if(pref)
-			return this.PrefBranch.prefHasUserValue(pref);
-	
-		return false;
-	},
-
 	LoadPrefs: function()
 	{
 		var b = this.PrefBranch;
-		var initDefaults = false;
 	
-		this.ShowCopyText = b.getBoolPref(this.PrefName_ShowCopyText);
-		this.ShowCopyBoth = b.getBoolPref(this.PrefName_ShowCopyBoth);
-		this.ShowCopyPage = b.getBoolPref(this.PrefName_ShowCopyPage);
-		this.CustomFormatCount = b.getIntPref(this.PrefName_CustomFormatCount);
+		this.Prefs.ShowCopyText.value = b.getBoolPref(this.Prefs.ShowCopyText.name);
+		this.Prefs.ShowCopyBoth.value = b.getBoolPref(this.Prefs.ShowCopyBoth.name);
+		this.Prefs.ShowCopyPage.value = b.getBoolPref(this.Prefs.ShowCopyPage.name);
+		this.Prefs.CustomFormatCount.value = b.getIntPref(this.Prefs.CustomFormatCount.name);
 	},
 
-	MigrateTo23: function()
+	MigratePrefs: function()
 	{
-		var stringBundle = document.getElementById("CLT-String-Bundle");
-	
-		// Create all the new preferences, migrating old settings as necessary
-		this.PrefBranch.setIntPref(this.PrefName_CustomFormatCount, 6);
-	
-		this.PrefBranch.setCharPref("custom.1.label", stringBundle.getString("CLT_DefaultLabelHTMLLink"));
-		this.PrefBranch.setCharPref("custom.1.format", "<a href=\"%U\">%T</a>");
-		this.PrefBranch.setBoolPref("custom.1.separator", false);
+		this.Log("Migrating Preferences");
+		var oldBranch = Components.classes["@mozilla.org/preferences-service;1"].getService(Components.interfaces.nsIPrefService).getBranch("colt.");
+				
+		for(var pid in this.Prefs)
+		{
+			var p = this.Prefs[pid];
+			if(oldBranch.prefHasUserValue(p.name))
+			{
+				if(p.hasOwnProperty("type"))
+				{
+					if(p.type == "int")
+					{
+						var temp = oldBranch.getIntPref(p.name);
+						this.PrefBranch.setIntPref(p.name, temp);
+						try {
+							oldBranch.clearUserPref(p.name); // Clean up the old preference
+						} catch(e) {}
+					}
+				}
+				else
+				{
+					var temp = oldBranch.getBoolPref(p.name); // Get the old preference
+					this.PrefBranch.setBoolPref(p.name, temp); // Move it to the new location
+					try {
+						oldBranch.clearUserPref(p.name); // Clean up the old preference
+					} catch (e) {}
+				}
+			}
+		}
 		
-		this.PrefBranch.setCharPref("custom.2.label", stringBundle.getString("CLT_DefaultLabelPlainText"));
-		this.PrefBranch.setCharPref("custom.2.format", "%T - %U");
-		this.PrefBranch.setBoolPref("custom.2.separator", false);
-	
-		this.PrefBranch.setBoolPref("custom.3.separator", true);
-	
-		if(this.IsPreferenceSet("customlabel1") && this.IsPreferenceSet("customformat1"))
+		var customCount = this.PrefBranch.getIntPref(this.Prefs.CustomFormatCount.name);
+		for(var i=1; i <= customCount; i++)
 		{
-			this.PrefBranch.setCharPref("custom.4.label", this.PrefBranch.getCharPref("customlabel1"));
-			this.PrefBranch.setCharPref("custom.4.format", this.PrefBranch.getCharPref("customformat1"));
-			this.PrefBranch.setBoolPref("custom.4.separator", false);
-	
-			if(this.PrefBranch.prefHasUserValue("customlabel1"))
-				this.PrefBranch.clearUserPref("customlabel1");
-	
-			if(this.PrefBranch.prefHasUserValue("customformat1"))
-				this.PrefBranch.clearUserPref("customformat1");
-		}
-		else
-		{
-			// If we can't migrate, set a default custom format
-			this.PrefBranch.setCharPref("custom.4.label", "BB Code");
-			this.PrefBranch.setCharPref("custom.4.format", "[url=%U]%T[/url]");
-			this.PrefBranch.setBoolPref("custom.4.separator", false);
-		}
-	
-		if(this.IsPreferenceSet("customformat2") && this.IsPreferenceSet("customlabel2"))
-		{
-			this.PrefBranch.setCharPref("custom.5.label", this.PrefBranch.getCharPref("customlabel2"));
-			this.PrefBranch.setCharPref("custom.5.format", this.PrefBranch.getCharPref("customformat2"));
-			this.PrefBranch.setBoolPref("custom.5.separator", false);
-	
-			if(this.PrefBranch.prefHasUserValue("customlabel2"))
-				this.PrefBranch.clearUserPref("customlabel2");
-	
-			if(this.PrefBranch.prefHasUserValue("customformat2"))
-				this.PrefBranch.clearUserPref("customformat2");
-		}
-		else
-		{
-			// If we can't migrate, set a default custom format
-			this.PrefBranch.setCharPref("custom.5.label", "FuseTalk");
-			this.PrefBranch.setCharPref("custom.5.format", "[L=%T]%U[/L]");
-			this.PrefBranch.setBoolPref("custom.5.separator", false);
-		}
-	
-		if(this.IsPreferenceSet("customformat3") && this.IsPreferenceSet("customlabel3"))
-		{
-			this.PrefBranch.setCharPref("custom.6.label", this.PrefBranch.getCharPref("customlabel3"));
-			this.PrefBranch.setCharPref("custom.6.format", this.PrefBranch.getCharPref("customformat3"));
-			this.PrefBranch.setBoolPref("custom.6.separator", false);
-	
-			if(this.PrefBranch.prefHasUserValue("customlabel3"))
-				this.PrefBranch.clearUserPref("customlabel3");
-	
-			if(this.PrefBranch.prefHasUserValue("customformat3"))
-				this.PrefBranch.clearUserPref("customformat3");
-		}
-		else
-		{
-			// If we can't migrate, set a default custom format
-			this.PrefBranch.setCharPref("custom.6.label", "Wikipedia");
-			this.PrefBranch.setCharPref("custom.6.format", "[%U %T]");
-			this.PrefBranch.setBoolPref("custom.6.separator", false);
-		}
-
-		// Delete all other old preferences that we no longer use
-		if(this.IsPreferenceSet("submenu.custom1"))
-			this.PrefBranch.clearUserPref("submenu.custom1");
-	
-		if(this.IsPreferenceSet("submenu.custom2") && this.PrefBranch.prefHasUserValue("submenu.custom2"))
-			this.PrefBranch.clearUserPref("submenu.custom2");
-	
-		if(this.IsPreferenceSet("submenu.custom3") && this.PrefBranch.prefHasUserValue("submenu.custom3"))
-			this.PrefBranch.clearUserPref("submenu.custom3");
-	
-		if(this.IsPreferenceSet("submenu.html") && this.PrefBranch.prefHasUserValue("submenu.html"))
-			this.PrefBranch.clearUserPref("submenu.html");
-	
-		if(this.IsPreferenceSet("submenu.text") && this.PrefBranch.prefHasUserValue("submenu.text"))
-			this.PrefBranch.clearUserPref("submenu.text");
-	},
-	
-	MigrateTo25: function()
-	{
-		var count = this.PrefBranch.getIntPref(this.PrefName_CustomFormatCount);
-		var hasRichText = false;
-		for(var i=1; i<=count; i++)
-		{
-			// Clear all rich-text prefs since we no longer need them
-			var rtPrefName = "custom." + i + ".richtext";
-			if(this.IsPreferenceSet(rtPrefName) && this.PrefBranch.prefHasUserValue(rtPrefName))
-				this.PrefBranch.clearUserPref(rtPrefName);
-
-			// Is there a rich-text option set?
-			var fPrefName = "custom." + i + ".format";
-			if(this.IsPreferenceSet(fPrefName) && this.PrefBranch.getCharPref(fPrefName) == "{RT}")
-				hasRichText = true;
-		}
-
-		// Insert a default rich text item if there isn't one. Note that this only happens
-		// on first-time installs. Also, don't insert it if there's only 1 custom format
-		// (the user clearly wanted to only use the top-level menu item, not a sub-menu).
-		if (count > 1 && hasRichText == false)
-		{
-			count++;
-			this.PrefBranch.setBoolPref("custom." + count + ".separator", true);
-
-			count++;
-			this.PrefBranch.setCharPref("custom." + count + ".label", "Rich Text HTML");
-			this.PrefBranch.setCharPref("custom." + count + ".format", "{RT}");
-			this.PrefBranch.setBoolPref("custom." + count + ".separator", false);
-
-			// Bump the count
-			this.PrefBranch.setIntPref(this.PrefName_CustomFormatCount, count);
+			var name = "custom." + i + ".separator";
+			var value = false;
+			if(oldBranch.prefHasUserValue(name))
+				value = oldBranch.getBoolPref(name);
+			else
+				continue;
+			
+			// Is this pref a separator?
+			if(value)
+			{
+				this.PrefBranch.setBoolPref(name, value); // Move the separator pref
+				try {
+					oldBranch.clearUserPref(name); // Clear the old one
+				} catch(e) {}
+			}
+			else
+			{
+				// Migrate the label
+				name = "custom." + i + ".label";
+				value = oldBranch.getCharPref(name);
+				this.SetComplexPref(name, value);
+				try {
+					oldBranch.clearUserPref(name);
+				} catch(e) {}
+				
+				// Migrate the format
+				name = "custom." + i + ".format";
+				value = oldBranch.getCharPref(name);
+				this.SetComplexPref(name, value);
+				try {
+					oldBranch.clearUserPref(name);
+				} catch(e) {}
+			}
 		}
 	},
-
+	
 	OptionsHaveUpdated: function()
 	{
 		this.LoadPrefs();
-		this.UpdateContextMenu();
-	},
-
-	ParseVersion: function(version)
-	{
-		if(version)
-		{
-			var splitVersion = version.split(".");
-			var parsedVersion = splitVersion[0] + ".";
-	
-			for(var i=1; i<splitVersion.length; i++)
-			{
-				parsedVersion += splitVersion[i];
-			}
-	
-			return parseFloat(parsedVersion);
-		}
-		else
-			return 0;
 	},
 
 	PlaceOnClipboard: function(string)
@@ -336,6 +225,82 @@ var objCoLT = {
 		while(popupmenu.firstChild)
 			popupmenu.removeChild(popupmenu.firstChild);
 	},
+	
+	SetComplexPref: function(name, value)
+	{
+		try {
+			var complex = Components.classes["@mozilla.org/supports-string;1"].createInstance(Components.interfaces.nsISupportsString);
+			complex.data = value;
+			this.PrefBranch.setComplexValue(name, Components.interfaces.nsISupportsString, complex);
+		} catch(e) { this.Log("ERROR: Caught exception trying to set complex preference (" + e.message + ")"); }
+	},
+	
+	SetupDefaults: function()
+	{
+		var stringBundle = document.getElementById("CLT-String-Bundle");
+		
+		var defaults = {
+			HTML: {label: stringBundle.getString("CLT_DefaultLabelHTMLLink"), format: "<a href=\"%U\">%T</a>"},
+			PlainText: {label: stringBundle.getString("CLT_DefaultLabelPlainText"), format: "%T - %U"},
+			Sep1: {label: "---"},
+			BBCode: {label: "BB Code", format: "[url=%U]%T[/url]"},
+			FuseTalk: {label: "FuseTalk", format: "[L=%T]%U[/L]"},
+			Wikipedia: {label: "Wikipedia", format: "[%U %T]"},
+			Sep2: {label: "---"},
+			RichText: {label: "Rich Text HTML", format: "{RT}"},
+		};
+		
+		var counter = 0;
+		for(var d in defaults)
+		{
+			counter++;
+			
+			var item = defaults[d];
+			if(item.label == "---")
+			{
+				this.PrefBranch.setBoolPref("custom." + counter + ".separator", true);
+			}
+			else
+			{
+				this.SetComplexPref("custom." + counter + ".label", item.label);
+				this.SetComplexPref("custom." + counter + ".format", item.format);
+			}
+		}
+		
+		this.PrefBranch.setIntPref(this.Prefs.CustomFormatCount.name, counter);
+	},
+
+	Shutdown: function()
+	{
+		var contextMenu = document.getElementById("contentAreaContextMenu");
+		contextMenu.removeEventListener('popupshowing', objCoLT.UpdateContextMenu, false);
+		
+		window.removeEventListener('load', objCoLT.Startup, false);
+		window.removeEventListener('unload', objCoLT.Shutdown, false);
+	},
+	
+	Startup: function()
+	{
+		if(objCoLT.Initialized == false)
+		{
+			objCoLT.Initialized = true;
+	
+			if(objCoLT.PrefBranch.prefHasUserValue("prefs_version") == false)
+			{
+				if(objCoLT.PrefBranch.prefHasUserValue(objCoLT.Prefs.CustomFormatCount.name))
+					objCoLT.MigratePrefs(); // Migrate old preferences
+				else
+					objCoLT.SetupDefaults(); // Create the defaults (new install)
+				
+				objCoLT.PrefBranch.setIntPref("prefs_version", 2);
+			}
+			
+			objCoLT.LoadPrefs();
+	
+			var menu = document.getElementById("contentAreaContextMenu");
+			menu.addEventListener('popupshowing', objCoLT.UpdateContextMenu, false);
+		}
+	},
 
 	UpdateContextMenu: function()
 	{
@@ -350,17 +315,17 @@ var objCoLT = {
 		var copyPageItem = document.getElementById("CLT-Context-CopyPage");
 		var copyPageMenu = document.getElementById("CLT-Context-CopyPageMenu");
 	
-		copyText.hidden = (objCoLT.ShowCopyText) ? hiddenFlag : true;
-		copyBothItem.hidden = (objCoLT.ShowCopyBoth && (objCoLT.CustomFormatCount == 1)) ? hiddenFlag : true;
-		copyBothMenu.hidden = (objCoLT.ShowCopyBoth && (objCoLT.CustomFormatCount > 1)) ? hiddenFlag : true;
+		copyText.hidden = (objCoLT.Prefs.ShowCopyText.value) ? hiddenFlag : true;
+		copyBothItem.hidden = (objCoLT.Prefs.ShowCopyBoth.value && (objCoLT.Prefs.CustomFormatCount.value == 1)) ? hiddenFlag : true;
+		copyBothMenu.hidden = (objCoLT.Prefs.ShowCopyBoth.value && (objCoLT.Prefs.CustomFormatCount.value > 1)) ? hiddenFlag : true;
 	
 		// This time we default to false (we want to show the items more often than we want to hide them)
 		hiddenFlag = false;
 		if(gContextMenu && (gContextMenu.onLink || gContextMenu.onTextInput))
 			hiddenFlag = true;
 		
-		copyPageItem.hidden = (objCoLT.ShowCopyPage && (objCoLT.CustomFormatCount == 1)) ? hiddenFlag : true;
-		copyPageMenu.hidden = (objCoLT.ShowCopyPage && (objCoLT.CustomFormatCount > 1)) ? hiddenFlag : true;
+		copyPageItem.hidden = (objCoLT.Prefs.ShowCopyPage.value && (objCoLT.Prefs.CustomFormatCount.value == 1)) ? hiddenFlag : true;
+		copyPageMenu.hidden = (objCoLT.Prefs.ShowCopyPage.value && (objCoLT.Prefs.CustomFormatCount.value > 1)) ? hiddenFlag : true;
 	},
 
 	UpdateContextSubMenu: function(nodeID, type)
@@ -369,15 +334,11 @@ var objCoLT = {
 	
 		var popupmenu = document.getElementById(nodeID);
 		
-		for(var i=1; i <= this.CustomFormatCount; i++)
+		for(var i=1; i <= this.Prefs.CustomFormatCount.value; i++)
 		{
 			var separatorPref = "custom." + i + ".separator";
 	
-			var isSeparator = false;
-			if(this.IsPreferenceSet(separatorPref))
-				isSeparator = this.PrefBranch.getBoolPref(separatorPref);
-			
-			if(isSeparator)
+			if(this.PrefBranch.prefHasUserValue(separatorPref))
 			{
 				var menuseparator = document.createElement("menuseparator");
 				popupmenu.appendChild(menuseparator);
@@ -385,42 +346,20 @@ var objCoLT = {
 			else
 			{
 				var labelPref = "custom." + i + ".label";
-				var label = "";
-				if(this.IsPreferenceSet(labelPref))
-					label = this.PrefBranch.getCharPref(labelPref);
-	
+				var label = this.GetComplexPref(labelPref);
+				
 				// Skip any weird occurances that don't have a label (shouldn't happen, but you never know)
 				if(label && label != "")
 				{
 					var menuitem = document.createElement("menuitem");
 					menuitem.setAttribute("label", label);
-					menuitem.setAttribute("oncommand", "objCoLT._DoCopyBoth('" + i + "', '" + type + "');");
+					menuitem.setAttribute("oncommand", "objCoLT.CopyBoth('" + i + "', '" + type + "');");
 					popupmenu.appendChild(menuitem);
 				}
 			}
 		}
-	},
-
-	Upgrade: function()
-	{
-		var previousVersion = 0;
-		
-		if(this.IsPreferenceSet(this.PrefName_Version))
-			previousVersion = this.ParseVersion(this.PrefBranch.getCharPref(this.PrefName_Version));
-	
-		var currentVersion = this.ParseVersion(this.Version);
-	
-		if(previousVersion != currentVersion)
-		{
-			if(previousVersion < this.ParseVersion("2.3"))
-				this.MigrateTo23();
-	
-			if(previousVersion < this.ParseVersion("2.5"))
-				this.MigrateTo25();
-
-			this.PrefBranch.setCharPref(this.PrefName_Version, this.Version);
-		}
 	}
 };
 
-window.addEventListener('load', objCoLT.Init, false);
+window.addEventListener('load', objCoLT.Startup, false);
+window.addEventListener('unload', objCoLT.Shutdown, false);

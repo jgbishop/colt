@@ -1,9 +1,18 @@
 //***************
 //Version History
 //***************
+[2.5.4]
++ Added Unicode support (custom formats can now include extended characters)
++ Added a new custom format variable for inserting tab characters (%B)
++ Options are now stored under the more appropriate "extensions." branch
++ Removed a few extraneous menu update during initialization
++ Changed the minVersion to from 1.5 to 3.6
++ Changed the maxVersion to 15.*
++ Bug Fix: Several registered event listeners were not being removed on shutdown
+
 [2.5.3]
 + Bumped the maxVersion to 12.* to work around Mozilla’s annoying new release schedule
-+ Various locale  updates
++ Various locale updates
 
 [2.5.2]
 + Added support for Firefox 5 and 6

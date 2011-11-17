@@ -34,7 +34,7 @@
 	<em:id>{e6c4c3ef-3d4d-42d6-8283-8da73c53a283}</em:id>
 	<em:name>CoLT</em:name>
 	<em:optionsURL>chrome://colt/content/options.xul</em:optionsURL>
-	<em:version>2.5.3</em:version>
+	<em:version>2.5.4</em:version>
 	
 	<em:updateURL>http://www.borngeek.com/downloads/update.rdf</em:updateURL>
 
@@ -46,8 +46,8 @@
 	<em:targetApplication>
 		<Description>
 			<em:id>{ec8030f7-c20a-464f-9b0e-13a3a9e97384}</em:id>
-			<em:minVersion>1.5</em:minVersion>
-			<em:maxVersion>12.*</em:maxVersion>
+			<em:minVersion>3.6</em:minVersion>
+			<em:maxVersion>15.*</em:maxVersion>
 		</Description>
 	</em:targetApplication>
 	

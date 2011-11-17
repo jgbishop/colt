@@ -17,34 +17,21 @@ var objCoLTOptions = {
 	{
 		const branch = objCoLT.PrefBranch;
 	
-		document.getElementById("CLT-Opt-DisplayCopyText").checked = branch.getBoolPref(objCoLT.PrefName_ShowCopyText);
-		document.getElementById("CLT-Opt-DisplayCopyBoth").checked	= branch.getBoolPref(objCoLT.PrefName_ShowCopyBoth);
-		document.getElementById("CLT-Opt-DisplayCopyPage").checked	= branch.getBoolPref(objCoLT.PrefName_ShowCopyPage);
+		document.getElementById("CLT-Opt-DisplayCopyText").checked = branch.getBoolPref(objCoLT.Prefs.ShowCopyText.name);
+		document.getElementById("CLT-Opt-DisplayCopyBoth").checked	= branch.getBoolPref(objCoLT.Prefs.ShowCopyBoth.name);
+		document.getElementById("CLT-Opt-DisplayCopyPage").checked	= branch.getBoolPref(objCoLT.Prefs.ShowCopyPage.name);
 	
-		var count = branch.getIntPref(objCoLT.PrefName_CustomFormatCount);
+		var count = branch.getIntPref(objCoLT.Prefs.CustomFormatCount.name);
 		for(var i=1; i <= count; i++)
 		{
 			var labelPref = "custom." + i + ".label";
 			var formatPref = "custom." + i + ".format";
 			var separatorPref = "custom." + i + ".separator";
-	
-			var label = "";
-			var format = "";
-			var separator = false;
-	
-			if(objCoLT.IsPreferenceSet(labelPref))
-				label = branch.getCharPref(labelPref);
-	
-			if(objCoLT.IsPreferenceSet(formatPref))
-				format = branch.getCharPref(formatPref);
-	
-			if(objCoLT.IsPreferenceSet(separatorPref))
-				separator = branch.getBoolPref(separatorPref);
-	
+			
 			var listItem = document.createElement("listitem");
 			var listBox = document.getElementById("CLT-Opt-Custom-Format-List");
-	
-			if(separator)
+			
+			if(branch.prefHasUserValue(separatorPref))
 			{
 				var separatorElement = document.createElement("separator");
 				separatorElement.setAttribute("class", "groove");
@@ -58,6 +45,9 @@ var objCoLTOptions = {
 			}
 			else
 			{
+				var label = objCoLT.GetComplexPref(labelPref);
+				var format = objCoLT.GetComplexPref(formatPref);
+				
 				var listCell = document.createElement("listcell");
 	
 				listCell.setAttribute("label", label);
@@ -255,12 +245,12 @@ var objCoLTOptions = {
 	{
 		const branch = objCoLT.PrefBranch;
 
-		branch.setBoolPref(objCoLT.PrefName_ShowCopyText, document.getElementById("CLT-Opt-DisplayCopyText").checked);
-		branch.setBoolPref(objCoLT.PrefName_ShowCopyBoth, document.getElementById("CLT-Opt-DisplayCopyBoth").checked);
-		branch.setBoolPref(objCoLT.PrefName_ShowCopyPage, document.getElementById("CLT-Opt-DisplayCopyPage").checked);
+		branch.setBoolPref(objCoLT.Prefs.ShowCopyText.name, document.getElementById("CLT-Opt-DisplayCopyText").checked);
+		branch.setBoolPref(objCoLT.Prefs.ShowCopyBoth.name, document.getElementById("CLT-Opt-DisplayCopyBoth").checked);
+		branch.setBoolPref(objCoLT.Prefs.ShowCopyPage.name, document.getElementById("CLT-Opt-DisplayCopyPage").checked);
 	
 		// Clean up all the existing custom formats
-		var count = branch.getIntPref(objCoLT.PrefName_CustomFormatCount);
+		var count = branch.getIntPref(objCoLT.Prefs.CustomFormatCount.name);
 		
 		for(var i=1; i <= count; i++)
 		{
@@ -268,14 +258,13 @@ var objCoLTOptions = {
 			var formatPref = "custom." + i + ".format";
 			var separatorPref = "custom." + i + ".separator";
 	
-			if(objCoLT.IsPreferenceSet(labelPref))
-				branch.clearUserPref(labelPref);
-	
-			if(objCoLT.IsPreferenceSet(formatPref))
-				branch.clearUserPref(formatPref);
-	
-			if(objCoLT.IsPreferenceSet(separatorPref))
+			if(branch.prefHasUserValue(separatorPref))
 				branch.clearUserPref(separatorPref);
+			else
+			{
+				branch.clearUserPref(labelPref);
+				branch.clearUserPref(formatPref);
+			}
 		}
 	
 		// Now store all the current formats
@@ -291,15 +280,12 @@ var objCoLTOptions = {
 			}
 			else
 			{
-				var formatLabel = listItem.childNodes[1].getAttribute("label");
-				
-				branch.setCharPref("custom." + i + ".label", listCell.getAttribute("label"));
-				branch.setCharPref("custom." + i + ".format", formatLabel);
-				branch.setBoolPref("custom." + i + ".separator", false);
+				objCoLT.SetComplexPref("custom." + i + ".label", listCell.getAttribute("label"));
+				objCoLT.SetComplexPref("custom." + i + ".format", listItem.childNodes[1].getAttribute("label"));
 			}
 		}
 	
-		branch.setIntPref(objCoLT.PrefName_CustomFormatCount, listBox.getRowCount());
+		branch.setIntPref(objCoLT.Prefs.CustomFormatCount.name, listBox.getRowCount());
 		
 		try
 		{

@@ -107,6 +107,12 @@
 			<listcell label="&colt.variable.desc.newline;" />
 			<listcell label="&colt.variable.desc.newline;" />
 		</listitem>
+		
+		<listitem>
+			<listcell label="%B" />
+			<listcell label="&colt.variable.desc.tab;" />
+			<listcell label="&colt.variable.desc.tab;" />
+		</listitem>
 	</listbox>
 	
 	<label id="CLT-CustomFormat-Link" value="&colt.link.customformatinfo;" onclick="objCoLTCustomFormat.OnCustomFormatLink();" />
