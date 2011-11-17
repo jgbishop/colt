@@ -10,18 +10,18 @@ locale	colt	es-AR	chrome/locale/es-AR/
 locale	colt	es-ES	chrome/locale/es-ES/
 locale	colt	fa-IR	chrome/locale/fa-IR/
 locale	colt	fr	chrome/locale/fr/
-locale	colt	it-IT	chrome/locale/it-IT/
+locale	colt	it	chrome/locale/it/
 locale	colt	ja-JP	chrome/locale/ja-JP/
 locale	colt	ko-KR	chrome/locale/ko-KR/
 locale	colt	lt-LT	chrome/locale/lt-LT/
 locale	colt	nl	chrome/locale/nl/
-locale	colt	pl-PL	chrome/locale/pl-PL/
+locale	colt	pl	chrome/locale/pl/
 locale	colt	pt-BR	chrome/locale/pt-BR/
 locale	colt	pt-PT	chrome/locale/pt-PT/
 locale	colt	ru-RU	chrome/locale/ru-RU/
 locale	colt	sk-SK	chrome/locale/sk-SK/
 locale	colt	sv-SE	chrome/locale/sv-SE/
-locale	colt	tr-TR	chrome/locale/tr-TR/
+locale	colt	tr	chrome/locale/tr/
 locale	colt	zh-CN	chrome/locale/zh-CN/
 locale	colt	zh-TW	chrome/locale/zh-TW/
 
