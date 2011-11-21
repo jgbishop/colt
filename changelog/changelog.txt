@@ -5,7 +5,7 @@
 + Added Unicode support (custom formats can now include extended characters)
 + Added a new custom format variable for inserting tab characters (%B)
 + Options are now stored under the more appropriate "extensions." branch
-+ Removed a few extraneous menu update during initialization
++ Removed a few extraneous menu updates during initialization
 + Changed the minVersion to from 1.5 to 3.6
 + Changed the maxVersion to 15.*
 + Bug Fix: Several registered event listeners were not being removed on shutdown
