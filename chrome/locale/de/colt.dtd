@@ -41,3 +41,4 @@
 <!ENTITY colt.variable.desc.localtime "Aktuelle Zeit">
 <!ENTITY colt.variable.desc.selection "Ausgewählter Text">
 <!ENTITY colt.variable.desc.newline "Neue Zeile">
+<!ENTITY colt.variable.desc.tab "Tabulatorzeichen">

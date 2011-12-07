@@ -41,3 +41,4 @@
 <!ENTITY colt.variable.desc.localtime "Tiempo local">
 <!ENTITY colt.variable.desc.selection "Texto seleccionado">
 <!ENTITY colt.variable.desc.newline "Nueva línea">
+<!ENTITY colt.variable.desc.tab "Tab">

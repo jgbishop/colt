@@ -41,3 +41,4 @@
 <!ENTITY colt.variable.desc.localtime "本机时间">
 <!ENTITY colt.variable.desc.selection "所选文字">
 <!ENTITY colt.variable.desc.newline "换行">
+<!ENTITY colt.variable.desc.tab "标签">

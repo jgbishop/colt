@@ -2,42 +2,43 @@
 <!ENTITY colt.ak.copylinktext "x">
 <!ENTITY colt.copybothitem "Kopiera länktext och webbadress">
 <!ENTITY colt.ak.copybothitem "o">
-<!ENTITY colt.copybothmenu "Kopiera länktext och webbadress som...">
+<!ENTITY colt.copybothmenu "Kopiera länktext och webbadress som…">
 <!ENTITY colt.ak.copybothmenu "o">
-<!ENTITY colt.copypageitem "Kopiera sidtitel och webbadress">
+<!ENTITY colt.copypageitem "Kopiera sidrubrik och webbadress">
 <!ENTITY colt.ak.copypageitem "o">
-<!ENTITY colt.copypagemenu "Kopiera sidtitel och webbadress som...">
+<!ENTITY colt.copypagemenu "Kopiera sidrubrik och webbadress som…">
 <!ENTITY colt.ak.copypagemenu "o">
 <!ENTITY colt.options.title "Inställningar för CoLT">
 <!ENTITY colt.options.group.toplevel "Menyobjekt på översta nivån">
-<!ENTITY colt.options.displaycopytext "Visa menyobjektet &apos;Kopiera länktext&apos;">
-<!ENTITY colt.options.displaycopybothmenu "Visa menyobjektet &apos;Kopiera länktext och webbadress&apos;">
-<!ENTITY colt.options.displaycopypagemenu "Visa menyobjektet &apos;Kopiera sidtitel och webbadress&apos;">
+<!ENTITY colt.options.displaycopytext "Visa menyobjektet &quot;Kopiera länktext&quot;">
+<!ENTITY colt.options.displaycopybothmenu "Visa menyobjektet &quot;Kopiera länktext och webbadress&quot;">
+<!ENTITY colt.options.displaycopypagemenu "Visa menyobjektet &quot;Kopiera sidrubrik och webbadress&quot;">
 <!ENTITY colt.options.group.customformats "Anpassningsbara menyobjekt">
 <!ENTITY colt.options.header.label "Menyetikett">
 <!ENTITY colt.options.header.format "Format">
 <!ENTITY colt.options.checkbox.userichtext "Använd RTF-format för HTML-länkar">
 <!ENTITY colt.options.button.moveup "Flytta uppåt">
 <!ENTITY colt.options.button.movedown "Flytta nedåt">
-<!ENTITY colt.options.button.addformat "Lägg till...">
-<!ENTITY colt.options.button.editformat "Redigera...">
+<!ENTITY colt.options.button.addformat "Lägg till…">
+<!ENTITY colt.options.button.editformat "Redigera…">
 <!ENTITY colt.options.button.removeformat "Ta bort">
-<!ENTITY colt.options.button.newseparator "Ny avskiljare">
+<!ENTITY colt.options.button.newseparator "Ny avgränsare">
 <!ENTITY colt.options.textvariablelabel "Används för att ange den kopierade texten">
 <!ENTITY colt.options.urlvariablelabel "Används för att ange den kopierade webbadressen">
 <!ENTITY colt.options.linktitlevariablelabel "Används för att ange länkens titelattribut">
-<!ENTITY colt.options.pagetitlevariablelabel "Används för att ange sidtiteln">
+<!ENTITY colt.options.pagetitlevariablelabel "Används för att ange sidrubriken">
 <!ENTITY colt.options.newlinelabel "Används för att ange en ny rad">
 <!ENTITY colt.options.variable.description "Följande variabler kan användas i dina egna format:">
 <!ENTITY colt.options.header.variable "Variabel">
 <!ENTITY colt.options.header.linkcontext "När länk kopieras">
 <!ENTITY colt.options.header.pagecontext "När sida kopieras">
-<!ENTITY colt.link.customformatinfo "Lär dig mer om egna format...">
+<!ENTITY colt.link.customformatinfo "Lär dig mer om egna format…">
 <!ENTITY colt.variable.desc.linktext "Länktext">
-<!ENTITY colt.variable.desc.pagetitle "Sidtitel">
+<!ENTITY colt.variable.desc.pagetitle "Sidrubrik">
 <!ENTITY colt.variable.desc.linkurl "Länkens URL">
 <!ENTITY colt.variable.desc.pageurl "Sidans URL">
 <!ENTITY colt.variable.desc.linktitle "Länkens titelattribut">
 <!ENTITY colt.variable.desc.localtime "Lokal tid">
 <!ENTITY colt.variable.desc.selection "Markerad text">
 <!ENTITY colt.variable.desc.newline "Ny rad">
+<!ENTITY colt.variable.desc.tab "Tabulator">

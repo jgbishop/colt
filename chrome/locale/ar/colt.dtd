@@ -41,3 +41,4 @@
 <!ENTITY colt.variable.desc.localtime "التوقيت المحلي">
 <!ENTITY colt.variable.desc.selection "النص المحدد">
 <!ENTITY colt.variable.desc.newline "سطر جديد">
+<!ENTITY colt.variable.desc.tab "Tab">

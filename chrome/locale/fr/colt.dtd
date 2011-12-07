@@ -8,7 +8,7 @@
 <!ENTITY colt.ak.copypageitem "o">
 <!ENTITY colt.copypagemenu "Copier le titre et l'adresse de la page comme">
 <!ENTITY colt.ak.copypagemenu "o">
-<!ENTITY colt.options.title "Otions de CoLT">
+<!ENTITY colt.options.title "Options de CoLT">
 <!ENTITY colt.options.group.toplevel "Éléments principaux du menu contextuel">
 <!ENTITY colt.options.displaycopytext "Afficher l'élément « Copier le texte du lien »">
 <!ENTITY colt.options.displaycopybothmenu "Afficher l'élément « Copier le texte et l'adresse du lien »">
@@ -41,3 +41,4 @@
 <!ENTITY colt.variable.desc.localtime "Horaire local">
 <!ENTITY colt.variable.desc.selection "Texte sélectionné">
 <!ENTITY colt.variable.desc.newline "Retour à la ligne">
+<!ENTITY colt.variable.desc.tab "Tabulation">

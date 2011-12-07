@@ -41,3 +41,4 @@
 <!ENTITY colt.variable.desc.localtime "Miestny čas">
 <!ENTITY colt.variable.desc.selection "Označený text">
 <!ENTITY colt.variable.desc.newline "Nový riadok">
+<!ENTITY colt.variable.desc.tab "Tab">
