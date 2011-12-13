@@ -7,7 +7,7 @@
 + Options are now stored under the more appropriate "extensions." branch
 + Removed a few extraneous menu updates during initialization
 + Removed the obsolete contents.rdf files from each localization folder, reducing overall file size
-+ Changed the minVersion to from 1.5 to 3.6
++ Changed the minVersion from 1.5 to 3.6
 + Changed the maxVersion to 15.*
 + Bug Fix: Several registered event listeners were not being removed on shutdown
 
