@@ -135,11 +135,8 @@ var objCoLT = {
 		this.Prefs.CustomFormatCount.value = b.getIntPref(this.Prefs.CustomFormatCount.name);
 	},
 
-	MigratePrefs: function()
+	MigratePrefs: function(oldBranch)
 	{
-		this.Log("Migrating Preferences");
-		var oldBranch = Components.classes["@mozilla.org/preferences-service;1"].getService(Components.interfaces.nsIPrefService).getBranch("colt.");
-				
 		for(var pid in this.Prefs)
 		{
 			var p = this.Prefs[pid];
@@ -202,7 +199,20 @@ var objCoLT = {
 				try {
 					oldBranch.clearUserPref(name);
 				} catch(e) {}
+				
+				// Remove the extraneous separator
+				try {
+					oldBranch.clearUserPref("custom." + i + ".separator");
+				} catch(e) {}
 			}
+		}
+		
+		// Clean up the final obsolete pref
+		if(oldBranch.prefHasUserValue("version"))
+		{
+			try {
+				oldBranch.clearUserPref("version");
+			} catch(e) {}
 		}
 	},
 	
@@ -287,8 +297,9 @@ var objCoLT = {
 	
 			if(objCoLT.PrefBranch.prefHasUserValue("prefs_version") == false)
 			{
-				if(objCoLT.PrefBranch.prefHasUserValue(objCoLT.Prefs.CustomFormatCount.name))
-					objCoLT.MigratePrefs(); // Migrate old preferences
+				var oldBranch = Components.classes["@mozilla.org/preferences-service;1"].getService(Components.interfaces.nsIPrefService).getBranch("colt.");
+				if(oldBranch.prefHasUserValue(objCoLT.Prefs.CustomFormatCount.name))
+					objCoLT.MigratePrefs(oldBranch); // Migrate old preferences
 				else
 					objCoLT.SetupDefaults(); // Create the defaults (new install)
 				

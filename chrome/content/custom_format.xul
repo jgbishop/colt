@@ -47,7 +47,7 @@
 	&colt.options.variable.description;
 	</description>
 	
-	<listbox id="CLT-Variable-List">
+	<listbox id="CLT-Variable-List" rows="9">
 		<listhead>
 			<listheader label="&colt.options.header.variable;" />
 			<listheader label="&colt.options.header.linkcontext;" />
