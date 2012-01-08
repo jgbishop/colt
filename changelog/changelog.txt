@@ -1,6 +1,9 @@
 //***************
 //Version History
 //***************
+[2.5.5]
++ Bug Fix: Rewrote the routine that handles doing the substitution for custom formats. This will prevent the mistaken translation of encoded characters within substituted text (URLs, for example).
+
 [2.5.4]
 + Added Unicode support (custom formats can now include extended characters)
 + Added a new custom format variable for inserting tab characters (%B)

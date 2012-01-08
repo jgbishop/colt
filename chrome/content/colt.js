@@ -24,8 +24,6 @@ var objCoLT = {
 		var titleAttr;
 		var pageTitle;
 		var pageURL;
-		var _ts = new Date();
-		var localtime = _ts.toLocaleString();
 		var selection;
 	
 		if(type == "page")
@@ -76,7 +74,7 @@ var objCoLT = {
 		}
 		else
 		{
-			var myString = objCoLT.FormatString(format, text, url, titleAttr, pageTitle, pageURL, localtime, selection);
+			var myString = objCoLT.FormatString(format, text, url, titleAttr, pageTitle, pageURL, selection);
 
 			var result = objCoLT.PlaceOnClipboard(myString);
 			if(!result)
@@ -92,20 +90,57 @@ var objCoLT = {
 			alert("ERROR: The link text was unable to be placed on the clipboard.");
 	},
 
-	FormatString: function(string, text, url, titleAttr, pageTitle, pageURL, localtime, selection)
+	FormatString: function(string, text, url, titleAttr, pageTitle, pageURL, selection)
 	{
-		var urlesc = url;
+		var result = "";
+		var buffer = "";
 		
-		string = string.replace(/%[Tt]/g, text);
-		string = string.replace(/%[Uu]/g, url);
-		string = string.replace(/%[Nn]/g, this.GetNewLine());
-		string = string.replace(/%[Bb]/g, "\t");
-		string = string.replace(/%[Ii]/g, titleAttr);
-		string = string.replace(/%[Pp]/g, pageTitle);
-		string = string.replace(/%[Rr]/g, pageURL);
-		string = string.replace(/%[Ll]/g, localtime);
-		string = string.replace(/%[Ss]/g, selection);
-		return string;
+		for(var i=0; i<string.length; i++)
+		{
+			if(string.charAt(i) == "%")
+			{
+				buffer = string.charAt(i);
+				
+				if(i+1 == string.length) // Make sure we don't walk off the end of the string
+				{
+					result += buffer;
+					break;
+				}
+				else
+				{
+					if(string.charAt(i+1) == "?") // We found '??' for some reason
+					{
+						result += buffer; // Don't bump 'i' in this case
+					}
+					else
+					{
+						buffer += string.charAt(i+1); // Pull in the next character
+						i++; // Bump 'i' so we skip the next character next time around the loop
+						
+						if(/%[Tt]/.test(buffer)) result += text;
+						else if(/%[Uu]/.test(buffer)) result += url;
+						else if(/%[Nn]/.test(buffer)) result += this.GetNewLine();
+						else if(/%[Bb]/.test(buffer)) result += "\t";
+						else if(/%[Ii]/.test(buffer)) result += titleAttr;
+						else if(/%[Pp]/.test(buffer)) result += pageTitle;
+						else if(/%[Rr]/.test(buffer)) result += pageURL;
+						else if(/%[Ll]/.test(buffer))
+						{
+							var _ts = new Date();
+							result += _ts.toLocaleString();
+						}
+						else if(/%[Ss]/.test(buffer)) result += selection;
+						else result += buffer;
+					}
+				}
+
+				buffer = ""; // Clear the buffer
+			}
+			else
+				result += string.charAt(i);
+		}
+		
+		return result;
 	},
 	
 	GetComplexPref: function(name)
