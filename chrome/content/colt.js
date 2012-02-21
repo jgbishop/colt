@@ -289,7 +289,7 @@ var objCoLT = {
 			PlainText: {label: stringBundle.getString("CLT_DefaultLabelPlainText"), format: "%T - %U"},
 			Sep1: {label: "---"},
 			BBCode: {label: "BB Code", format: "[url=%U]%T[/url]"},
-			FuseTalk: {label: "FuseTalk", format: "[L=%T]%U[/L]"},
+			Markdown: {label: "Markdown", format: "[%T](%U)"},
 			Wikipedia: {label: "Wikipedia", format: "[%U %T]"},
 			Sep2: {label: "---"},
 			RichText: {label: "Rich Text HTML", format: "{RT}"},

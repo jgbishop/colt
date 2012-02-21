@@ -1,6 +1,9 @@
 //***************
 //Version History
 //***************
+[2.5.6]
++ Replace the default FuseTalk custom format with a Markdown custom format.
+
 [2.5.5]
 + Bug Fix: Rewrote the routine that handles doing the substitution for custom formats. This will prevent the mistaken translation of encoded characters within substituted text (URLs, for example).
 
