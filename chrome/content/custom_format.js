@@ -4,6 +4,7 @@ var objCoLTCustomFormat = {
 	ClearCustomFormat: function()
 	{
 		window.opener.objCoLTOptions.CustomFormatLabel = null;
+		window.opener.objCoLTOptions.CustomFormatAccessKey = null;
 		window.opener.objCoLTOptions.CustomFormatFormat = null;
 		window.opener.objCoLTOptions.CustomFormatRichText = null;
 	},
@@ -19,9 +20,10 @@ var objCoLTCustomFormat = {
 			document.title = stringBundle.getString("CLT_EditCustomFormat");
 	
 			document.getElementById("CLT-Custom-Format-Label").value = window.arguments[1];
-			document.getElementById("CLT-Custom-Format-Format").value = window.arguments[2];
+			document.getElementById("CLT-Custom-Format-AccessKey").value = window.arguments[2];
+			document.getElementById("CLT-Custom-Format-Format").value = window.arguments[3];
 	
-			if(window.arguments[2] == objCoLTOptions.RichTextFormatLabel)
+			if(window.arguments[3] == objCoLTOptions.RichTextFormatLabel)
 				document.getElementById("CLT-Custom-Format-RichText").checked = true;
 		}
 	
@@ -61,6 +63,7 @@ var objCoLTCustomFormat = {
 		var stringBundle = document.getElementById("CLT-String-Bundle");
 		
 		var label = objCoLTOptions.Trim(document.getElementById("CLT-Custom-Format-Label").value);
+		var key = document.getElementById("CLT-Custom-Format-AccessKey").value;
 		var format = objCoLTOptions.Trim(document.getElementById("CLT-Custom-Format-Format").value);
 		var richText = document.getElementById("CLT-Custom-Format-RichText").checked;
 		var errors = "";
@@ -79,6 +82,7 @@ var objCoLTCustomFormat = {
 		else
 		{
 			window.opener.objCoLTOptions.CustomFormatLabel = label;
+			window.opener.objCoLTOptions.CustomFormatAccessKey = key;
 			window.opener.objCoLTOptions.CustomFormatFormat = format;
 			window.opener.objCoLTOptions.CustomFormatRichText = richText;
 			return true;

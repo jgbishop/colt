@@ -1,9 +1,10 @@
 var objCoLTOptions = {
-	CustomFormatLabel : null,
-	CustomFormatFormat : null,
-	CustomFormatRichText : null,
+	CustomFormatLabel: null,
+	CustomFormatAccessKey: null,
+	CustomFormatFormat: null,
+	CustomFormatRichText: null,
 	
-	RichTextFormatLabel : "{RT}",
+	RichTextFormatLabel: "{RT}",
 	
 	_selectItem: function(item)
 	{
@@ -25,6 +26,7 @@ var objCoLTOptions = {
 		for(var i=1; i <= count; i++)
 		{
 			var labelPref = "custom." + i + ".label";
+			var accessKeyPref = "custom." + i + ".accesskey";
 			var formatPref = "custom." + i + ".format";
 			var separatorPref = "custom." + i + ".separator";
 			
@@ -41,21 +43,28 @@ var objCoLTOptions = {
 				separatorElement.setAttribute("class", "groove");
 				listItem.appendChild(separatorElement);
 	
+				separatorElement = document.createElement("separator");
+				separatorElement.setAttribute("class", "groove");
+				listItem.appendChild(separatorElement);
+				
 				listBox.appendChild(listItem);
 			}
 			else
 			{
 				var label = objCoLT.GetComplexPref(labelPref);
+				var key = objCoLT.GetComplexPref(accessKeyPref);
 				var format = objCoLT.GetComplexPref(formatPref);
 				
 				var listCell = document.createElement("listcell");
-	
 				listCell.setAttribute("label", label);
+				listItem.appendChild(listCell);
+				
+				listCell = document.createElement("listcell");
+				listCell.setAttribute("label", key);
 				listItem.appendChild(listCell);
 	
 				listCell = document.createElement("listcell");
 				listCell.setAttribute("label", format);
-				
 				listItem.appendChild(listCell);
 				listBox.appendChild(listItem);
 			}
@@ -75,6 +84,10 @@ var objCoLTOptions = {
 			var listBox = document.getElementById("CLT-Opt-Custom-Format-List");
 	
 			listCell.setAttribute("label", this.CustomFormatLabel);
+			listItem.appendChild(listCell);
+			
+			listCell = document.createElement("listcell");
+			listCell.setAttribute("label", this.CustomFormatAccessKey);
 			listItem.appendChild(listCell);
 	
 			listCell = document.createElement("listcell");
@@ -116,7 +129,8 @@ var objCoLTOptions = {
 			{
 				window.openDialog("chrome://colt/content/custom_format.xul", "colt-custom-format-dialog",
 								  "centerscreen,chrome,modal", "edit", selectedCell.getAttribute("label"),
-								  selectedItem.childNodes[1].getAttribute("label"));
+								  selectedItem.childNodes[1].getAttribute("label"),
+								  selectedItem.childNodes[2].getAttribute("label"));
 	
 				if(this.CustomFormatLabel && this.CustomFormatFormat)
 				{
@@ -129,6 +143,10 @@ var objCoLTOptions = {
 					var listCell = document.createElement("listcell");
 	
 					listCell.setAttribute("label", this.CustomFormatLabel);
+					selectedItem.appendChild(listCell);
+					
+					listCell = document.createElement("listcell");
+					listCell.setAttribute("label", this.CustomFormatAccessKey);
 					selectedItem.appendChild(listCell);
 	
 					listCell = document.createElement("listcell");
@@ -255,6 +273,7 @@ var objCoLTOptions = {
 		for(var i=1; i <= count; i++)
 		{
 			var labelPref = "custom." + i + ".label";
+			var keyPref = "custom." + i + ".accesskey";
 			var formatPref = "custom." + i + ".format";
 			var separatorPref = "custom." + i + ".separator";
 	
@@ -263,6 +282,7 @@ var objCoLTOptions = {
 			else
 			{
 				branch.clearUserPref(labelPref);
+				branch.clearUserPref(keyPref);
 				branch.clearUserPref(formatPref);
 			}
 		}
@@ -272,16 +292,16 @@ var objCoLTOptions = {
 		for(var i=1; i <= listBox.getRowCount(); i++)
 		{
 			var listItem = listBox.getItemAtIndex(i - 1);
-			var listCell = listItem.childNodes[0];
 	
-			if(listCell.tagName == "separator")
+			if(listItem.childNodes[0].tagName == "separator")
 			{
 				branch.setBoolPref("custom." + i + ".separator", true);
 			}
 			else
 			{
-				objCoLT.SetComplexPref("custom." + i + ".label", listCell.getAttribute("label"));
-				objCoLT.SetComplexPref("custom." + i + ".format", listItem.childNodes[1].getAttribute("label"));
+				objCoLT.SetComplexPref("custom." + i + ".label", listItem.childNodes[0].getAttribute("label"));
+				objCoLT.SetComplexPref("custom." + i + ".accesskey", listItem.childNodes[1].getAttribute("label"));
+				objCoLT.SetComplexPref("custom." + i + ".format", listItem.childNodes[2].getAttribute("label"));
 			}
 		}
 	

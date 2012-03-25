@@ -34,10 +34,17 @@
 				<textbox id="CLT-Custom-Format-Label" />
 			</row>
 			<row align="center">
+				<label value="&colt.options.label.accesskey;" />
+				<textbox id="CLT-Custom-Format-AccessKey" maxlength="1" />
+			</row>
+			<row align="center">
 				<label value="&colt.options.header.format;" />
 				<textbox id="CLT-Custom-Format-Format" />
 			</row>
-			<checkbox id="CLT-Custom-Format-RichText" label="&colt.options.checkbox.userichtext;" oncommand="objCoLTCustomFormat.UpdateCustomFormatControls()" />
+			<row align="center">
+				<spacer flex="1" />
+				<checkbox id="CLT-Custom-Format-RichText" label="&colt.options.checkbox.userichtext;" oncommand="objCoLTCustomFormat.UpdateCustomFormatControls()" />
+			</row>
 		</rows>
 	</grid>
 

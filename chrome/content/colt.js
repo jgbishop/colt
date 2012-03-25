@@ -1,7 +1,8 @@
 var objCoLT = {
-	PrefBranch : Components.classes["@mozilla.org/preferences-service;1"].getService(Components.interfaces.nsIPrefService).getBranch("extensions.colt."),
+	PrefBranch: Components.classes["@mozilla.org/preferences-service;1"].getService(Components.interfaces.nsIPrefService).getBranch("extensions.colt."),
+	PrefVersion: 3,
 	
-	Prefs : {
+	Prefs: {
 		ShowCopyText: { name: "showcopytext", value: false },
 		ShowCopyBoth: { name: "showcopyboth", value: false },
 		ShowCopyPage: { name: "showcopypage", value: false },
@@ -9,7 +10,7 @@ var objCoLT = {
 	},
 	
 	// Miscellaneous variables
-	Initialized : false,
+	Initialized: false,
 
 	Log: function(aMessage)
 	{
@@ -285,14 +286,14 @@ var objCoLT = {
 		var stringBundle = document.getElementById("CLT-String-Bundle");
 		
 		var defaults = {
-			HTML: {label: stringBundle.getString("CLT_DefaultLabelHTMLLink"), format: "<a href=\"%U\">%T</a>"},
-			PlainText: {label: stringBundle.getString("CLT_DefaultLabelPlainText"), format: "%T - %U"},
+			HTML: {label: stringBundle.getString("CLT_DefaultLabelHTMLLink"), key: 'H', format: "<a href=\"%U\">%T</a>"},
+			PlainText: {label: stringBundle.getString("CLT_DefaultLabelPlainText"), key: 'P', format: "%T - %U"},
 			Sep1: {label: "---"},
-			BBCode: {label: "BB Code", format: "[url=%U]%T[/url]"},
-			Markdown: {label: "Markdown", format: "[%T](%U)"},
-			Wikipedia: {label: "Wikipedia", format: "[%U %T]"},
+			BBCode: {label: "BB Code", key: 'B', format: "[url=%U]%T[/url]"},
+			Markdown: {label: "Markdown", key: 'M', format: "[%T](%U)"},
+			Wikipedia: {label: "Wikipedia", key: 'W', format: "[%U %T]"},
 			Sep2: {label: "---"},
-			RichText: {label: "Rich Text HTML", format: "{RT}"},
+			RichText: {label: "Rich Text HTML", key: 'R', format: "{RT}"},
 		};
 		
 		var counter = 0;
@@ -308,6 +309,7 @@ var objCoLT = {
 			else
 			{
 				this.SetComplexPref("custom." + counter + ".label", item.label);
+				this.SetComplexPref("custom." + counter + ".accesskey", item.key);
 				this.SetComplexPref("custom." + counter + ".format", item.format);
 			}
 		}
@@ -338,11 +340,16 @@ var objCoLT = {
 				else
 					objCoLT.SetupDefaults(); // Create the defaults (new install)
 				
-				objCoLT.PrefBranch.setIntPref("prefs_version", 2);
+				objCoLT.PrefBranch.setIntPref("prefs_version", objCoLT.PrefVersion);
 			}
 			
 			objCoLT.LoadPrefs();
 	
+			// Update our preferences if necessary
+			var pv = objCoLT.PrefBranch.getIntPref("prefs_version");
+			if(pv < objCoLT.PrefVersion)
+				objCoLT.UpdatePrefs(pv);
+				
 			var menu = document.getElementById("contentAreaContextMenu");
 			menu.addEventListener('popupshowing', objCoLT.UpdateContextMenu, false);
 		}
@@ -391,19 +398,39 @@ var objCoLT = {
 			}
 			else
 			{
-				var labelPref = "custom." + i + ".label";
-				var label = this.GetComplexPref(labelPref);
+				var label = this.GetComplexPref("custom." + i + ".label");
+				var key = this.GetComplexPref("custom." + i + ".accesskey");
 				
 				// Skip any weird occurances that don't have a label (shouldn't happen, but you never know)
 				if(label && label != "")
 				{
 					var menuitem = document.createElement("menuitem");
 					menuitem.setAttribute("label", label);
+					if(key && key != "")
+						menuitem.setAttribute("accesskey", key);
 					menuitem.setAttribute("oncommand", "objCoLT.CopyBoth('" + i + "', '" + type + "');");
 					popupmenu.appendChild(menuitem);
 				}
 			}
 		}
+	},
+	
+	UpdatePrefs: function(currentVersion)
+	{
+		for(var i=1; i <= this.Prefs.CustomFormatCount.value; i++)
+		{
+			var sepPref = "custom." + i + ".separator";
+			var isSep = this.PrefBranch.prefHasUserValue(sepPref);
+			
+			var keyPref = "custom." + i + ".accesskey";
+			if(isSep == false && this.PrefBranch.prefHasUserValue(keyPref) == false)
+			{
+				this.SetComplexPref(keyPref, ""); // Set them to blank if we're upgrading
+			}
+		}
+		
+		// Finally, update the stored preference version
+		this.PrefBranch.setIntPref("prefs_version", this.PrefVersion);
 	}
 };
 

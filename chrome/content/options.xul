@@ -30,9 +30,11 @@
 			<listbox id="CLT-Opt-Custom-Format-List" flex="1" rows="10" onselect="objCoLTOptions.OnListBoxSelected()">
 				<listhead>
 					<listheader label="&colt.options.header.label;" />
+					<listheader label="&colt.options.header.accesskey;" />
 					<listheader label="&colt.options.header.format;" />
 				</listhead>
 				<listcols>
+					<listcol flex="1"/>
 					<listcol flex="1"/>
 					<listcol flex="2"/>
 				</listcols>
@@ -46,8 +48,8 @@
 			<button id="CLT-Opt-Add-Format" label="&colt.options.button.addformat;" oncommand="objCoLTOptions.OnAddCustomFormat()" />
 			<button id="CLT-Opt-Edit-Format" label="&colt.options.button.editformat;" oncommand="objCoLTOptions.OnEditCustomFormat()" />
 			<button id="CLT-Opt-Remove-Format" label="&colt.options.button.removeformat;" oncommand="objCoLTOptions.OnRemoveCustomFormat()" />
-            <separator flex="1" />
-            <button id="CLT-Opt-Add-Separator" label="&colt.options.button.newseparator;" oncommand="objCoLTOptions.OnAddSeparator()"/>
+			<separator flex="1" />
+			<button id="CLT-Opt-Add-Separator" label="&colt.options.button.newseparator;" oncommand="objCoLTOptions.OnAddSeparator()"/>
 		</hbox>
 	</groupbox>
 </dialog>
