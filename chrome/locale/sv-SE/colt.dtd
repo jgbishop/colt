@@ -16,6 +16,8 @@
 <!ENTITY colt.options.group.customformats "Anpassningsbara menyobjekt">
 <!ENTITY colt.options.header.label "Menyetikett">
 <!ENTITY colt.options.header.format "Format">
+<!ENTITY colt.options.header.accesskey "Tangent">
+<!ENTITY colt.options.label.accesskey "Snabbtangent">
 <!ENTITY colt.options.checkbox.userichtext "Använd RTF-format för HTML-länkar">
 <!ENTITY colt.options.button.moveup "Flytta uppåt">
 <!ENTITY colt.options.button.movedown "Flytta nedåt">

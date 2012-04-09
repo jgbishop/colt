@@ -16,6 +16,8 @@
 <!ENTITY colt.options.group.customformats "Individualaus formato meniu įrašai">
 <!ENTITY colt.options.header.label "Meniu pavadinimas">
 <!ENTITY colt.options.header.format "Formatas">
+<!ENTITY colt.options.header.accesskey "Key">
+<!ENTITY colt.options.label.accesskey "Access Key">
 <!ENTITY colt.options.checkbox.userichtext "Naudoti raiškiojo teksto HTML saito formatą">
 <!ENTITY colt.options.button.moveup "Aukštyn">
 <!ENTITY colt.options.button.movedown "Žemyn">

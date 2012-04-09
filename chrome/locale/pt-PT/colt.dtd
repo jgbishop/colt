@@ -16,6 +16,8 @@
 <!ENTITY colt.options.group.customformats "Personalizar os Itens do Menu de Formatação">
 <!ENTITY colt.options.header.label "Etiqueta do Menu">
 <!ENTITY colt.options.header.format "Formato">
+<!ENTITY colt.options.header.accesskey "Chave">
+<!ENTITY colt.options.label.accesskey "Chave de Acesso">
 <!ENTITY colt.options.checkbox.userichtext "Usar Formato de Ligação Rich Text HTML">
 <!ENTITY colt.options.button.moveup "Mover para Cima">
 <!ENTITY colt.options.button.movedown "Mover para Baixo">

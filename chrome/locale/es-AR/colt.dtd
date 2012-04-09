@@ -5,40 +5,42 @@
 <!ENTITY colt.copybothmenu "Copiar texto y dirección del enlace como">
 <!ENTITY colt.ak.copybothmenu "d">
 <!ENTITY colt.copypageitem "Copiar título y dirección de página">
-<!ENTITY colt.ak.copypageitem "o">
+<!ENTITY colt.ak.copypageitem "C">
 <!ENTITY colt.copypagemenu "Copiar título y dirección de página como">
-<!ENTITY colt.ak.copypagemenu "o">
+<!ENTITY colt.ak.copypagemenu "C">
 <!ENTITY colt.options.title "Opciones de CoLT">
 <!ENTITY colt.options.group.toplevel "Nivel de elementos en el menú contextual">
 <!ENTITY colt.options.displaycopytext "Mostrar el elemento de menú &apos;Copiar texto del enlace&apos;">
 <!ENTITY colt.options.displaycopybothmenu "Mostrar sub-menú &apos;Copiar texto y dirección del enlace&apos;">
-<!ENTITY colt.options.displaycopypagemenu "Mostrar el elemento de menú &apos;Copiar título y dirección de página&apos;">
+<!ENTITY colt.options.displaycopypagemenu "Mostrar sub-menú &apos;Copiar título y dirección de página&apos;">
 <!ENTITY colt.options.group.customformats "Elementos de menú con formato personalizado">
 <!ENTITY colt.options.header.label "Etiqueta del menú">
 <!ENTITY colt.options.header.format "Formato">
+<!ENTITY colt.options.header.accesskey "Tecla">
+<!ENTITY colt.options.label.accesskey "Tecla de acceso rápido">
 <!ENTITY colt.options.checkbox.userichtext "Usar texto enriquecido para enlaces HTML">
-<!ENTITY colt.options.button.moveup "Mover arriba">
-<!ENTITY colt.options.button.movedown "Move abajo">
+<!ENTITY colt.options.button.moveup "Subir">
+<!ENTITY colt.options.button.movedown "Bajar">
 <!ENTITY colt.options.button.addformat "Agregar...">
 <!ENTITY colt.options.button.editformat "Editar...">
 <!ENTITY colt.options.button.removeformat "Remover">
 <!ENTITY colt.options.button.newseparator "Nuevo separador">
-<!ENTITY colt.options.textvariablelabel "Usar para especificar el texto copiado">
-<!ENTITY colt.options.urlvariablelabel "Usar para especificar la URL copiada">
-<!ENTITY colt.options.linktitlevariablelabel "Usar para especificar el atributo Título del enlace">
-<!ENTITY colt.options.pagetitlevariablelabel "Usar para especificar el título de página">
-<!ENTITY colt.options.newlinelabel "Usar para especificar una nueva línea">
+<!ENTITY colt.options.textvariablelabel "Usado para definir el texto copiado">
+<!ENTITY colt.options.urlvariablelabel "Usado para definir la URL copiada">
+<!ENTITY colt.options.linktitlevariablelabel "Usado para definir el atributo Título del enlace">
+<!ENTITY colt.options.pagetitlevariablelabel "Usado para definir el Título de página">
+<!ENTITY colt.options.newlinelabel "Usado para definir una nueva línea">
 <!ENTITY colt.options.variable.description "Puede usar las siguientes variables en sus formatos personalizados:">
 <!ENTITY colt.options.header.variable "Variable">
 <!ENTITY colt.options.header.linkcontext "Copiando un enlace">
 <!ENTITY colt.options.header.pagecontext "Copiando una página">
-<!ENTITY colt.link.customformatinfo "Información sobre los formatos personalizados…">
+<!ENTITY colt.link.customformatinfo "Información sobre formatos personalizados…">
 <!ENTITY colt.variable.desc.linktext "Texto del enlace">
 <!ENTITY colt.variable.desc.pagetitle "Título de página">
 <!ENTITY colt.variable.desc.linkurl "URL del enlace">
 <!ENTITY colt.variable.desc.pageurl "URL de la página">
 <!ENTITY colt.variable.desc.linktitle "Atributo Título del enlace">
-<!ENTITY colt.variable.desc.localtime "Tiempo local">
+<!ENTITY colt.variable.desc.localtime "Hora local">
 <!ENTITY colt.variable.desc.selection "Texto seleccionado">
 <!ENTITY colt.variable.desc.newline "Nueva línea">
-<!ENTITY colt.variable.desc.tab "Tab">
+<!ENTITY colt.variable.desc.tab "Tabulación">

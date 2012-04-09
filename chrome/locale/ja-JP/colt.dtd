@@ -16,6 +16,8 @@
 <!ENTITY colt.options.group.customformats "カスタム書式のメニューアイテム">
 <!ENTITY colt.options.header.label "メニューラベル">
 <!ENTITY colt.options.header.format "書式">
+<!ENTITY colt.options.header.accesskey "キー">
+<!ENTITY colt.options.label.accesskey "アクセスキー">
 <!ENTITY colt.options.checkbox.userichtext "リッチテキストHTMLリンク書式を使用する">
 <!ENTITY colt.options.button.moveup "上へ移動">
 <!ENTITY colt.options.button.movedown "下へ移動">

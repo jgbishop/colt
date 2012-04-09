@@ -16,6 +16,8 @@
 <!ENTITY colt.options.group.customformats "Brugertilpassede menuelementer">
 <!ENTITY colt.options.header.label "Menulabel">
 <!ENTITY colt.options.header.format "Format">
+<!ENTITY colt.options.header.accesskey "Key">
+<!ENTITY colt.options.label.accesskey "Access Key">
 <!ENTITY colt.options.checkbox.userichtext "Brug Rich Text HTML Link Format">
 <!ENTITY colt.options.button.moveup "Flyt op">
 <!ENTITY colt.options.button.movedown "Flyt ned">

@@ -16,6 +16,8 @@
 <!ENTITY colt.options.group.customformats "Custom Format Menu Items">
 <!ENTITY colt.options.header.label "選單標籤">
 <!ENTITY colt.options.header.format "格式">
+<!ENTITY colt.options.header.accesskey "Key">
+<!ENTITY colt.options.label.accesskey "Access Key">
 <!ENTITY colt.options.checkbox.userichtext "使用純文字與HTML鏈結模式">
 <!ENTITY colt.options.button.moveup "向上移">
 <!ENTITY colt.options.button.movedown "向下移">

@@ -16,6 +16,8 @@
 <!ENTITY colt.options.group.customformats "Custom Format Menu Items">
 <!ENTITY colt.options.header.label "Štítky nabídky">
 <!ENTITY colt.options.header.format "Formát">
+<!ENTITY colt.options.header.accesskey "Key">
+<!ENTITY colt.options.label.accesskey "Access Key">
 <!ENTITY colt.options.checkbox.userichtext "Použít formátovaný text odkazu">
 <!ENTITY colt.options.button.moveup "Posunout nahoru">
 <!ENTITY colt.options.button.movedown "Posunout dolů">

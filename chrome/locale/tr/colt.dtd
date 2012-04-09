@@ -16,6 +16,8 @@
 <!ENTITY colt.options.group.customformats "Custom Format Menu Items">
 <!ENTITY colt.options.header.label "Menü Etiketi">
 <!ENTITY colt.options.header.format "Biçim">
+<!ENTITY colt.options.header.accesskey "Key">
+<!ENTITY colt.options.label.accesskey "Access Key">
 <!ENTITY colt.options.checkbox.userichtext "Zengin Text HTML Bağlantı Formatını Kullan">
 <!ENTITY colt.options.button.moveup "Yukarı Götür">
 <!ENTITY colt.options.button.movedown "Aşağı İndir">

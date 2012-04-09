@@ -16,6 +16,8 @@
 <!ENTITY colt.options.group.customformats "Formatage personnalisé des éléments de menu">
 <!ENTITY colt.options.header.label "Libellé">
 <!ENTITY colt.options.header.format "Format">
+<!ENTITY colt.options.header.accesskey "Touche">
+<!ENTITY colt.options.label.accesskey "Touche de raccourci">
 <!ENTITY colt.options.checkbox.userichtext "Utiliser le format Rich Text pour un lien HTML">
 <!ENTITY colt.options.button.moveup "Monter">
 <!ENTITY colt.options.button.movedown "Descendre">

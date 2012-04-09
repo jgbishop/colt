@@ -16,6 +16,8 @@
 <!ENTITY colt.options.group.customformats "Свой формат элементов меню">
 <!ENTITY colt.options.header.label "Название">
 <!ENTITY colt.options.header.format "Формат">
+<!ENTITY colt.options.header.accesskey "Key">
+<!ENTITY colt.options.label.accesskey "Сочетание клавиш">
 <!ENTITY colt.options.checkbox.userichtext "Использовать полное HTML-форматирование ссылок">
 <!ENTITY colt.options.button.moveup "Вверх">
 <!ENTITY colt.options.button.movedown "Вниз">

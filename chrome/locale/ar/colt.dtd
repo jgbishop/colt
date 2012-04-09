@@ -16,6 +16,8 @@
 <!ENTITY colt.options.group.customformats "تخصيص شكل عناصر القائمة">
 <!ENTITY colt.options.header.label "قائمة العلامة">
 <!ENTITY colt.options.header.format "شكل">
+<!ENTITY colt.options.header.accesskey "Key">
+<!ENTITY colt.options.label.accesskey "Access Key">
 <!ENTITY colt.options.checkbox.userichtext "Use Rich Text HTML Link Format">
 <!ENTITY colt.options.button.moveup "تحريك للأعلى">
 <!ENTITY colt.options.button.movedown "تحريك للاسفل">

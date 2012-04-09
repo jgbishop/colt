@@ -16,6 +16,8 @@
 <!ENTITY colt.options.group.customformats "Itens de formatos personalizados">
 <!ENTITY colt.options.header.label "Opção no menu">
 <!ENTITY colt.options.header.format "Formato">
+<!ENTITY colt.options.header.accesskey "Tecla">
+<!ENTITY colt.options.label.accesskey "Tecla de atalho">
 <!ENTITY colt.options.checkbox.userichtext "Usar formato Rich Text HTML para links">
 <!ENTITY colt.options.button.moveup "Mover para cima">
 <!ENTITY colt.options.button.movedown "Mover para baixo">
