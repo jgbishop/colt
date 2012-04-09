@@ -137,6 +137,24 @@ var objCoLT = {
 
 				buffer = ""; // Clear the buffer
 			}
+			else if(string.charAt(i) == "\\")
+			{
+				if(i+1 == string.length) // Make sure we don't walk off the end of the string
+				{
+					result += string.charAt(i);
+					break;
+				}
+				else
+				{
+					if(string.charAt(i+1) == "%")
+					{
+						result += "%"; // Only add a percent sign
+						i++; // Bump 'i' so we skip the next character next time around the loop
+					}
+					else
+						result += string.charAt(i);
+				}
+			}
 			else
 				result += string.charAt(i);
 		}
