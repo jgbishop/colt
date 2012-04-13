@@ -34,7 +34,7 @@
 	<em:id>{e6c4c3ef-3d4d-42d6-8283-8da73c53a283}</em:id>
 	<em:name>CoLT</em:name>
 	<em:optionsURL>chrome://colt/content/options.xul</em:optionsURL>
-	<em:version>2.5.6</em:version>
+	<em:version>2.5.7</em:version>
 	
 	<em:updateURL>http://www.borngeek.com/downloads/update.rdf</em:updateURL>
 
