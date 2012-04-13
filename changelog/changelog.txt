@@ -1,6 +1,10 @@
 //***************
 //Version History
 //***************
+[2.5.7]
++ Improved the way percent signs can be escaped. You can now specify either '%%' or '\%' to get a literal percent character.
++ Added logic to clear all custom formats if the "extensions.colt.prefs_version" setting gets cleared in about:config. Clearing this value is a handy way to reset to the default custom formats.
+
 [2.5.6]
 + Added the capability to specify access-key accelerators for custom format context menu items. Existing custom formats will have no key assigned; you must manually set them if upgrading from a previous version.
 + Added the capability to insert a percent sign into a given custom format (simply escape the percent sign with a backslash character).

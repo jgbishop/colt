@@ -90,6 +90,13 @@ var objCoLT = {
 		if(!result)
 			alert("ERROR: The link text was unable to be placed on the clipboard.");
 	},
+	
+	DeletePref: function(branch, prefname)
+	{
+		try {
+			branch.clearUserPref(prefname); // Clean up the old preference
+		} catch(e) {}
+	},
 
 	FormatString: function(string, text, url, titleAttr, pageTitle, pageURL, selection)
 	{
@@ -98,62 +105,47 @@ var objCoLT = {
 		
 		for(var i=0; i<string.length; i++)
 		{
-			if(string.charAt(i) == "%")
+			if(string.charAt(i) == "%" && (i+1 < string.length))
 			{
 				buffer = string.charAt(i);
 				
-				if(i+1 == string.length) // Make sure we don't walk off the end of the string
+				if(string.charAt(i+1) == "%")
 				{
-					result += buffer;
-					break;
+					result += "%"; // Only add a percent sign
+					i++; // Bump 'i' so we skip the next character next time around the loop
 				}
 				else
 				{
-					if(string.charAt(i+1) == "?") // We found '??' for some reason
-					{
-						result += buffer; // Don't bump 'i' in this case
-					}
-					else
-					{
-						buffer += string.charAt(i+1); // Pull in the next character
-						i++; // Bump 'i' so we skip the next character next time around the loop
-						
-						if(/%[Tt]/.test(buffer)) result += text;
-						else if(/%[Uu]/.test(buffer)) result += url;
-						else if(/%[Nn]/.test(buffer)) result += this.GetNewLine();
-						else if(/%[Bb]/.test(buffer)) result += "\t";
-						else if(/%[Ii]/.test(buffer)) result += titleAttr;
-						else if(/%[Pp]/.test(buffer)) result += pageTitle;
-						else if(/%[Rr]/.test(buffer)) result += pageURL;
-						else if(/%[Ll]/.test(buffer))
-						{
-							var _ts = new Date();
-							result += _ts.toLocaleString();
-						}
-						else if(/%[Ss]/.test(buffer)) result += selection;
-						else result += buffer;
-					}
-				}
+					buffer += string.charAt(i+1); // Pull in the next character
+					i++; // Bump 'i' so we skip the next character next time around the loop
 
+					if(/%[Tt]/.test(buffer)) result += text;
+					else if(/%[Uu]/.test(buffer)) result += url;
+					else if(/%[Nn]/.test(buffer)) result += this.GetNewLine();
+					else if(/%[Bb]/.test(buffer)) result += "\t";
+					else if(/%[Ii]/.test(buffer)) result += titleAttr;
+					else if(/%[Pp]/.test(buffer)) result += pageTitle;
+					else if(/%[Rr]/.test(buffer)) result += pageURL;
+					else if(/%[Ll]/.test(buffer))
+					{
+						var _ts = new Date();
+						result += _ts.toLocaleString();
+					}
+					else if(/%[Ss]/.test(buffer)) result += selection;
+					else result += buffer;
+				}
+				
 				buffer = ""; // Clear the buffer
 			}
-			else if(string.charAt(i) == "\\")
+			else if(string.charAt(i) == "\\" && (i+1 < string.length))
 			{
-				if(i+1 == string.length) // Make sure we don't walk off the end of the string
+				if(string.charAt(i+1) == "%")
 				{
-					result += string.charAt(i);
-					break;
+					result += "%"; // Only add a percent sign
+					i++; // Bump 'i' so we skip the next character next time around the loop
 				}
 				else
-				{
-					if(string.charAt(i+1) == "%")
-					{
-						result += "%"; // Only add a percent sign
-						i++; // Bump 'i' so we skip the next character next time around the loop
-					}
-					else
-						result += string.charAt(i);
-				}
+					result += string.charAt(i);
 			}
 			else
 				result += string.charAt(i);
@@ -202,18 +194,14 @@ var objCoLT = {
 					{
 						var temp = oldBranch.getIntPref(p.name);
 						this.PrefBranch.setIntPref(p.name, temp);
-						try {
-							oldBranch.clearUserPref(p.name); // Clean up the old preference
-						} catch(e) {}
+						this.DeletePref(oldBranch, p.name); // Clean up the old preference
 					}
 				}
 				else
 				{
 					var temp = oldBranch.getBoolPref(p.name); // Get the old preference
 					this.PrefBranch.setBoolPref(p.name, temp); // Move it to the new location
-					try {
-						oldBranch.clearUserPref(p.name); // Clean up the old preference
-					} catch (e) {}
+					this.DeletePref(oldBranch, p.name); // Clean up the old preference
 				}
 			}
 		}
@@ -232,9 +220,7 @@ var objCoLT = {
 			if(value)
 			{
 				this.PrefBranch.setBoolPref(name, value); // Move the separator pref
-				try {
-					oldBranch.clearUserPref(name); // Clear the old one
-				} catch(e) {}
+				this.DeletePref(oldBranch, name);
 			}
 			else
 			{
@@ -242,31 +228,51 @@ var objCoLT = {
 				name = "custom." + i + ".label";
 				value = oldBranch.getCharPref(name);
 				this.SetComplexPref(name, value);
-				try {
-					oldBranch.clearUserPref(name);
-				} catch(e) {}
+				this.DeletePref(oldBranch, name);
 				
 				// Migrate the format
 				name = "custom." + i + ".format";
 				value = oldBranch.getCharPref(name);
 				this.SetComplexPref(name, value);
-				try {
-					oldBranch.clearUserPref(name);
-				} catch(e) {}
+				this.DeletePref(oldBranch, name);
 				
 				// Remove the extraneous separator
-				try {
-					oldBranch.clearUserPref("custom." + i + ".separator");
-				} catch(e) {}
+				this.DeletePref(oldBranch, "custom." + i + ".separator");
 			}
 		}
 		
 		// Clean up the final obsolete pref
 		if(oldBranch.prefHasUserValue("version"))
+			this.DeletePref(oldBranch, "version");
+	},
+	
+	NukePreviousPrefs: function()
+	{
+		if(this.PrefBranch.prefHasUserValue(objCoLT.Prefs.CustomFormatCount.name))
 		{
-			try {
-				oldBranch.clearUserPref("version");
-			} catch(e) {}
+			var c = this.PrefBranch.getIntPref(this.Prefs.CustomFormatCount.name);
+			for(var i=1; i<=c; i++)
+			{
+				var separatorPref = "custom." + i + ".separator";
+
+				if(this.PrefBranch.prefHasUserValue(separatorPref))
+				{
+					this.DeletePref(this.PrefBranch, separatorPref);
+				}
+				else
+				{
+					if(this.PrefBranch.prefHasUserValue("custom." + i + ".label"))
+						this.DeletePref(this.PrefBranch, "custom." + i + ".label");
+					
+					if(this.PrefBranch.prefHasUserValue("custom." + i + ".format"))
+						this.DeletePref(this.PrefBranch, "custom." + i + ".format");
+
+					if(this.PrefBranch.prefHasUserValue("custom." + i + ".accesskey"))
+						this.DeletePref(this.PrefBranch, "custom." + i + ".accesskey");
+				}
+			}
+			
+			this.DeletePref(this.PrefBranch, this.Prefs.CustomFormatCount.name);
 		}
 	},
 	
@@ -356,7 +362,10 @@ var objCoLT = {
 				if(oldBranch.prefHasUserValue(objCoLT.Prefs.CustomFormatCount.name))
 					objCoLT.MigratePrefs(oldBranch); // Migrate old preferences
 				else
+				{
+					objCoLT.NukePreviousPrefs();
 					objCoLT.SetupDefaults(); // Create the defaults (new install)
+				}
 				
 				objCoLT.PrefBranch.setIntPref("prefs_version", objCoLT.PrefVersion);
 			}
