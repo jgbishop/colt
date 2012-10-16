@@ -1,6 +1,11 @@
 //***************
 //Version History
 //***************
+[2.5.8]
++ Improved the use of the nsITransferable interface in preparation for upcoming private browsing changes
++ Changed the maxVersion to 25.*
++ Bug Fix: Changed the "insertafter" attribute for the "Copy Page Title and Location" menu items, to move them higher in the context menu for Firefox 16
+
 [2.5.7]
 + Improved the way percent signs can be escaped. You can now specify either '%%' or '\%' to get a literal percent character.
 + Added logic to clear all custom formats if the "extensions.colt.prefs_version" setting gets cleared in about:config. Clearing this value is a handy way to reset to the default custom formats.

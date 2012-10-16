@@ -64,6 +64,7 @@ var objCoLT = {
 			var richText = "<a href=\"" + url + "\">" + text + "</a>";
 
 			var xfer = Components.classes["@mozilla.org/widget/transferable;1"].createInstance(Components.interfaces.nsITransferable);
+			xfer.init(null); // Play nice with the new private browsing model
 			xfer.addDataFlavor("text/html");
 
 			var htmlString = Components.classes["@mozilla.org/supports-string;1"].createInstance(Components.interfaces.nsISupportsString);
