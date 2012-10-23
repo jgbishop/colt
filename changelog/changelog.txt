@@ -1,6 +1,10 @@
 //***************
 //Version History
 //***************
+[2.5.9]
++ Bug Fix: Altered the "insertafter" attribute of the "Copy Page Title and Location" menu again. It should now appear just below the "Copy" menu item when text is selected, instead of above it.
++ Bug Fix: Corrected the changes to the nsITransferable interface made in the previous version (the initial recommendation from Mozilla was incorrect)
+
 [2.5.8]
 + Improved the use of the nsITransferable interface in preparation for upcoming private browsing changes
 + Changed the maxVersion to 25.*

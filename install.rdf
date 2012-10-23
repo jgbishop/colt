@@ -5,7 +5,8 @@
 
     <Description about="urn:mozilla:install-manifest">
 	
-	<em:contributor>Philip Durbin and Marbux</em:contributor>
+	<em:contributor>Marbux</em:contributor>
+	<em:contributor>Philip Durbin</em:contributor>
 	<em:contributor>(ar) lord1980</em:contributor>
 	<em:contributor>(cs-CZ) FunTomas</em:contributor>
 	<em:contributor>(da) AlleyKat</em:contributor>
@@ -34,7 +35,7 @@
 	<em:id>{e6c4c3ef-3d4d-42d6-8283-8da73c53a283}</em:id>
 	<em:name>CoLT</em:name>
 	<em:optionsURL>chrome://colt/content/options.xul</em:optionsURL>
-	<em:version>2.5.8</em:version>
+	<em:version>2.5.9</em:version>
 	
 	<em:updateURL>http://www.borngeek.com/downloads/update.rdf</em:updateURL>
 

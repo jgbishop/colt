@@ -62,17 +62,28 @@ var objCoLT = {
 		if(format == "{RT}")
 		{
 			var richText = "<a href=\"" + url + "\">" + text + "</a>";
-
-			var xfer = Components.classes["@mozilla.org/widget/transferable;1"].createInstance(Components.interfaces.nsITransferable);
-			xfer.init(null); // Play nice with the new private browsing model
-			xfer.addDataFlavor("text/html");
-
+			
+			var trans = Components.classes["@mozilla.org/widget/transferable;1"].
+				createInstance(Components.interfaces.nsITransferable);
+			
+			// The init() function was added to FF 16 for upcoming changes to private browsing mode
+			// See https://bugzilla.mozilla.org/show_bug.cgi?id=722872 for more information
+			if('init' in trans)
+			{
+				var privacyContext = document.commandDispatcher.focusedWindow.
+					QueryInterface(Components.interfaces.nsIInterfaceRequestor).
+					getInterface(Components.interfaces.nsIWebNavigation).
+					QueryInterface(Components.interfaces.nsILoadContext);
+				trans.init(privacyContext);
+			}
+			trans.addDataFlavor("text/html");
+			
 			var htmlString = Components.classes["@mozilla.org/supports-string;1"].createInstance(Components.interfaces.nsISupportsString);
 			htmlString.data = richText;
-			xfer.setTransferData("text/html", htmlString, richText.length * 2);
+			trans.setTransferData("text/html", htmlString, richText.length * 2);
 
 			var clipboard = Components.classes["@mozilla.org/widget/clipboard;1"].getService(Components.interfaces.nsIClipboard);
-			clipboard.setData(xfer, null, Components.interfaces.nsIClipboard.kGlobalClipboard);
+			clipboard.setData(trans, null, Components.interfaces.nsIClipboard.kGlobalClipboard);
 		}
 		else
 		{

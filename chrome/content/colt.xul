@@ -10,12 +10,12 @@
 </stringbundleset>
 
 <popup id="contentAreaContextMenu">
-	<menu id="CLT-Context-CopyPageMenu" label="&colt.copypagemenu;" accesskey="&colt.ak.copypagemenu;" insertafter="context-savepage">
+	<menu id="CLT-Context-CopyPageMenu" label="&colt.copypagemenu;" accesskey="&colt.ak.copypagemenu;" insertafter="context-copy">
 		<menupopup id="CLT-Context-CopyPageMenuPopup" onpopupshowing="objCoLT.UpdateContextSubMenu('CLT-Context-CopyPageMenuPopup', 'page')">
 		</menupopup>
 	</menu>
 
-	<menuitem id="CLT-Context-CopyPage" label="&colt.copypageitem;" accesskey="&colt.ak.copypageitem;" insertafter="context-savepage"
+	<menuitem id="CLT-Context-CopyPage" label="&colt.copypageitem;" accesskey="&colt.ak.copypageitem;" insertafter="context-copy"
 			  oncommand="objCoLT.CopyBoth('1', 'page');" />
 
 	<menu id="CLT-Context-CopyBothMenu" label="&colt.copybothmenu;" accesskey="&colt.ak.copybothmenu;" insertafter="context-copylink">
