@@ -1,0 +1,46 @@
+<!ENTITY colt.copylinktext "Copia el text de l'enllaç">
+<!ENTITY colt.ak.copylinktext "x">
+<!ENTITY colt.copybothitem "Copia el text de l'enllaç i la localització">
+<!ENTITY colt.ak.copybothitem "o">
+<!ENTITY colt.copybothmenu "Copia el text de l'enllaç i la localització com">
+<!ENTITY colt.ak.copybothmenu "o">
+<!ENTITY colt.copypageitem "Copia el títol de la pàgina i la localització">
+<!ENTITY colt.ak.copypageitem "o">
+<!ENTITY colt.copypagemenu "Copia el títol de la pàgina i la localització com a">
+<!ENTITY colt.ak.copypagemenu "o">
+<!ENTITY colt.options.title "Opcions del CoLT">
+<!ENTITY colt.options.group.toplevel "Elements del menú del nivell superior">
+<!ENTITY colt.options.displaycopytext "Mostra l'element del menú 'Copia el text de l'enllaç'">
+<!ENTITY colt.options.displaycopybothmenu "Mostra els elements del menú 'Copia el text de l'enllaç i la localització'">
+<!ENTITY colt.options.displaycopypagemenu "Mostra els elements del menú 'Copia el títol de la pàgina i la localització'">
+<!ENTITY colt.options.group.customformats "Elements del menú  de format personalitzat">
+<!ENTITY colt.options.header.label "Etiqueta del menú">
+<!ENTITY colt.options.header.format "Format">
+<!ENTITY colt.options.header.accesskey "Tecla">
+<!ENTITY colt.options.label.accesskey "Tecla d'accés">
+<!ENTITY colt.options.checkbox.userichtext "Usa el format d'enllaç HTML de text enriquit">
+<!ENTITY colt.options.button.moveup "Mou amunt">
+<!ENTITY colt.options.button.movedown "Mou avall">
+<!ENTITY colt.options.button.addformat "Afegeix...">
+<!ENTITY colt.options.button.editformat "Edita...">
+<!ENTITY colt.options.button.removeformat "Suprimeix">
+<!ENTITY colt.options.button.newseparator "Separador nou">
+<!ENTITY colt.options.textvariablelabel "S'usa per especificar el text copia">
+<!ENTITY colt.options.urlvariablelabel "S'usa per especificar l'URL copiat">
+<!ENTITY colt.options.linktitlevariablelabel "S'usa per especificar l'atribut del títol de l'enllaç">
+<!ENTITY colt.options.pagetitlevariablelabel "S'usa per especificar el títol de la pàgina">
+<!ENTITY colt.options.newlinelabel "S'usa per especificar un final de línia">
+<!ENTITY colt.options.variable.description "Podeu usar les següents variables als formats personalitzats:">
+<!ENTITY colt.options.header.variable "Variable">
+<!ENTITY colt.options.header.linkcontext "Còpia d'un enllaç">
+<!ENTITY colt.options.header.pagecontext "Còpia d'una pàgina">
+<!ENTITY colt.link.customformatinfo "Apreneu més sobre els formats personalitzats...">
+<!ENTITY colt.variable.desc.linktext "Text de l'enllaç">
+<!ENTITY colt.variable.desc.pagetitle "Títol de la pàgina">
+<!ENTITY colt.variable.desc.linkurl "Enllaç URL">
+<!ENTITY colt.variable.desc.pageurl "URL de la pàgina">
+<!ENTITY colt.variable.desc.linktitle "Atribut del títol de l'enllaç">
+<!ENTITY colt.variable.desc.localtime "Hora local">
+<!ENTITY colt.variable.desc.selection "Text seleccionat">
+<!ENTITY colt.variable.desc.newline "Final de línia">
+<!ENTITY colt.variable.desc.tab "Barra vertical">

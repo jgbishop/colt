@@ -2,7 +2,9 @@
 //Version History
 //***************
 [2.5.9]
-+ Bug Fix: Altered the "insertafter" attribute of the "Copy Page Title and Location" menu again. It should now appear just below the "Copy" menu item when text is selected, instead of above it.
++ Added a Catalan (ca) localization
++ Updated the Arabic (ar) localization
++ Bug Fix: Once again altered the "insertafter" attribute of the "Copy Page Title and Location" menu. It should no longer appear above the "Copy" menu item when text is selected.
 + Bug Fix: Corrected the changes to the nsITransferable interface made in the previous version (the initial recommendation from Mozilla was incorrect)
 
 [2.5.8]
