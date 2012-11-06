@@ -1,8 +1,8 @@
-#!/usr/bin/perl -w
+#!/usr/bin/perl
 use strict;
+use warnings;
 use Cwd;
 use File::Basename;
-use File::Copy;
 use Getopt::Long;
 
 # An array of relative file paths in which a version number should be updated
@@ -32,47 +32,9 @@ else
 	updateVersion();
 }
 
-# We need to modify the chrome manifest for distribution, since we now use that exclusively
-# Temporarily rename the chrome manifest that we use for dynamic development purposes
-print "Modifying chrome manifest...\n";
-print "  + Backing up development chrome manifest\n";
-rename("chrome.manifest", "chrome.manifest.dev") or die "Could not rename chrome manifest: $!";
-
-print "  + Updating chrome manifest for distribution\n";
-open INPUT, "< chrome.manifest.dev" or die "Could not open chrome.manifest.dev: $!";
-my @cmLines = <INPUT>;
-close INPUT;
-
-open OUT, "> chrome.manifest" or die "Cannot open chrome.manifest: $!";
-foreach (@cmLines)
-{
-	chomp;
-	if (m/^content/ || m/^skin/ || m/^locale/)
-	{
-		s#chrome/#jar:chrome/${jarFile}!/#;
-	}
-	print OUT "$_\n";
-}
-close OUT;
-
-chdir "$homeDir/chrome" or die "Cannot change to $homeDir/chrome: $!";
-
-# Create the JAR file
-print "Creating JAR file...\n";
-system("zip -r $jarFile -\@ < jarzip.txt -x\@exclude.txt");
-
-chdir "$homeDir" or die "Cannot change to $homeDir: $!";
-
-# Now create the XPI file
+# Create the XPI file
 print "\nCreating XPI file...\n";
 system("zip -r $outputFilename -\@ < xpizip.txt");
-
-# Remove the chrome manifest that we hacked for distribution
-print "\nRestoring the development chrome manifest...\n";
-unlink "chrome.manifest";
-
-# Restore the development copy of the chrome manifest
-rename("chrome.manifest.dev", "chrome.manifest") or die "Could not rename chrome.manifest.dev: $!";
 
 # ======================================================================
 # End Main Script --- Begin Subroutines
@@ -82,11 +44,11 @@ sub parseVersionFile
 {
 	my $filename = shift;
 
-	open INPUT, "< $filename" or die "Cannot open input ($filename): $!";
-	my @lines = <INPUT>;
-	close INPUT;
+	open my $in, '<', "$filename" or die "Cannot open input ($filename): $!";
+	my @lines = <$in>;
+	close $in;
 	
-	open OUTPUT, "> new_$filename" or die "Cannot open output (new_$filename): $!";
+	open my $out, '>', "new_$filename" or die "Cannot open output (new_$filename): $!";
 	
 	foreach my $statement (@lines)
 	{
@@ -94,20 +56,20 @@ sub parseVersionFile
 		if ($statement =~ m/^(\s*?)<em:version>/)
 		{
 			my $whitespace = $1;
-			print OUTPUT "$whitespace<em:version>$version</em:version>\n";
+			print $out "$whitespace<em:version>$version</em:version>\n";
 		}
 		elsif($statement =~ m/value="Version [0-9\.]+?"/)
 		{
 			$statement =~ s/value="[^"]+?"/value="Version $version"/;
-			print OUTPUT "$statement\n";
+			print $out "$statement\n";
 		}
 		else
 		{
-			print OUTPUT "$statement\n";
+			print $out "$statement\n";
 		}
 	}
 	
-	close OUTPUT;
+	close $out;
 }
 
 sub updateVersion

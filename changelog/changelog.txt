@@ -1,6 +1,10 @@
 //***************
 //Version History
 //***************
+[2.5.10]
++ Removed the embedded JAR file from within the extension's XPI file.
++ Made a few minor improvements to the installer manifest.
+
 [2.5.9]
 + Added a Catalan (ca) localization
 + Updated the Arabic (ar) localization

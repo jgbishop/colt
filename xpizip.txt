@@ -1,5 +1,5 @@
 chrome.manifest
 install.rdf
 LICENSE.txt
-chrome/colt.jar
+chrome
 defaults/preferences/colt.js
