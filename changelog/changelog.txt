@@ -4,6 +4,7 @@
 [2.5.10]
 + Removed the embedded JAR file from within the extension's XPI file.
 + Made a few minor improvements to the installer manifest.
++ Bug Fix: Newly added separators now properly extend across the custom format dialog
 
 [2.5.9]
 + Added a Catalan (ca) localization

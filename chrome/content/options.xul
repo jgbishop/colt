@@ -45,11 +45,23 @@
 			</vbox>
 		</hbox>
 		<hbox>
-			<button id="CLT-Opt-Add-Format" label="&colt.options.button.addformat;" oncommand="objCoLTOptions.OnAddCustomFormat()" />
+			<button id="CLT-Opt-New-Button" type="menu" label="New">
+				<menupopup>
+					<menuitem label="Custom Format..." oncommand="objCoLTOptions.OnAddCustomFormat()" />
+					<menuitem label="Separator" oncommand="objCoLTOptions.OnAddSeparator()" />
+				</menupopup>
+			</button>
+			<!-- <button id="CLT-Opt-Add-Format" label="&colt.options.button.addformat;" oncommand="objCoLTOptions.OnAddCustomFormat()" /> -->
 			<button id="CLT-Opt-Edit-Format" label="&colt.options.button.editformat;" oncommand="objCoLTOptions.OnEditCustomFormat()" />
 			<button id="CLT-Opt-Remove-Format" label="&colt.options.button.removeformat;" oncommand="objCoLTOptions.OnRemoveCustomFormat()" />
 			<separator flex="1" />
-			<button id="CLT-Opt-Add-Separator" label="&colt.options.button.newseparator;" oncommand="objCoLTOptions.OnAddSeparator()"/>
+			<!-- <button id="CLT-Opt-Add-Separator" label="&colt.options.button.newseparator;" oncommand="objCoLTOptions.OnAddSeparator()"/> -->
+			<button id="CLT-Opt-Export-Import-Button" type="menu" label="Export / Import">
+				<menupopup>
+					<menuitem label="Export Custom Formats..." oncommand="objCoLTOptions.OnExportCustom()" />
+					<menuitem label="Import Custom Formats..." oncommand="objCoLTOptions.OnImportCustom()" />
+				</menupopup>
+			</button>
 		</hbox>
 	</groupbox>
 </dialog>

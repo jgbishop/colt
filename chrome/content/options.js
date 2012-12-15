@@ -105,11 +105,15 @@ var objCoLTOptions = {
 	{
 		var listBox = document.getElementById("CLT-Opt-Custom-Format-List");
 		var listItem = document.createElement("listitem");
+
 		var separator = document.createElement("separator");
-	
 		separator.setAttribute("class", "groove");
 		listItem.appendChild(separator);
 	
+		separator = document.createElement("separator");
+		separator.setAttribute("class", "groove");
+		listItem.appendChild(separator);
+
 		separator = document.createElement("separator");
 		separator.setAttribute("class", "groove");
 		listItem.appendChild(separator);
@@ -156,6 +160,100 @@ var objCoLTOptions = {
 					this._selectItem(selectedItem);
 				}
 			}
+		}
+	},
+	
+	OnExportCustom: function()
+	{
+		const nsIFilePicker = Components.interfaces.nsIFilePicker;
+		
+		var fp = Components.classes["@mozilla.org/filepicker;1"].createInstance(nsIFilePicker);
+		fp.init(window, "Export Custom Formats", nsIFilePicker.modeSave);
+		fp.appendFilters(nsIFilePicker.filterText | nsIFilePicker.filterAll);
+		
+		var retval = fp.show();
+		if(retval == nsIFilePicker.returnOK || retval == nsIFilePicker.returnReplace)
+		{
+			var file = fp.file;
+			var path = fp.file.path;
+			objCoLT.Log("Export File Path: " + path); // TODO: Remove me
+			
+			var foStream = Components.classes["@mozilla.org/network/file-output-stream;1"].
+				createInstance(Components.interfaces.nsIFileOutputStream);
+			// Open the file for writing (0x02), create if necessary (0x08), and truncate if it exists (0x20)
+			foStream.init(fp.file, 0x02 | 0x08 | 0x20, -1, 0);
+			
+			var converter = Components.classes["@mozilla.org/intl/converter-output-stream;1"].
+				createInstance(Components.interfaces.nsIConverterOutputStream);
+			converter.init(foStream, "UTF-8", 0, 0);
+			
+			// Write the data from the list box
+			var listBox = document.getElementById("CLT-Opt-Custom-Format-List");
+			for(var i=1; i <= listBox.getRowCount(); i++)
+			{
+				var listItem = listBox.getItemAtIndex(i - 1);
+				var string = "";
+				if(listItem.childNodes[0].tagName == "separator")
+				{
+					string = i + ":s:---\n";
+				}
+				else
+				{
+					string = i + ":f:" + listItem.childNodes[2].getAttribute("label") + "\n"; // Format
+					string += i + ":l:" + listItem.childNodes[0].getAttribute("label") + "\n"; // Label
+					string += i + ":a:" + listItem.childNodes[1].getAttribute("label") + "\n"; // Access Key
+				}
+				converter.writeString(string);
+			}
+			
+			converter.close(); // Closes foStream
+		}
+	},
+	
+	OnImportCustom: function()
+	{
+		// TODO: Use nsIPromptService to ask user if they want to overwrite existing or not
+		// See http://forums.mozillazine.org/viewtopic.php?f=19&t=236678 for more details
+		const nsIFilePicker = Components.interfaces.nsIFilePicker;
+		
+		var fp = Components.classes["@mozilla.org/filepicker;1"].createInstance(nsIFilePicker);
+		fp.init(window, "Import Custom Formats", nsIFilePicker.modeOpen);
+		fp.appendFilters(nsIFilePicker.filterText | nsIFilePicker.filterAll);
+		
+		var retval = fp.show();
+		if(retval == nsIFilePicker.returnOK)
+		{
+			var file = fp.file;
+			var path = fp.file.path;
+			objCoLT.Log("Import File Path: " + path); // TODO: Remove me
+			
+			var fiStream = Components.classes["@mozilla.org/network/file-input-stream;1"].
+				createInstance(Components.interfaces.nsIFileInputStream);
+			// Open the file for reading (0x01)
+			fiStream.init(fp.file, 0x01, -1, 0);
+			
+			var is = Components.classes["@mozilla.org/intl/converter-input-stream;1"].
+				createInstance(Components.interfaces.nsIConverterInputStream);
+			is.init(fiStream, "UTF-8", 0, 0);
+			is.QueryInterface(Components.interfaces.nsIUnicharLineInputStream);
+			
+			if(is instanceof Components.interfaces.nsIUnicharLineInputStream)
+			{
+				var line = {};
+				var c;
+				do {
+					c = is.readLine(line);
+					
+					objCoLT.Log("Read: " + line.value); // TODO: Remove me
+				} while(c);
+			}
+			else
+			{
+				objCoLT.Log("ERROR: Failed to import file due to invalid nsIConverterInputStream");
+			}
+			
+			is.close();
+			fiStream.close();
 		}
 	},
 	
@@ -344,10 +442,12 @@ var objCoLTOptions = {
 		document.getElementById("CLT-Opt-Custom-Format-List").disabled = disabled;
 		document.getElementById("CLT-Opt-Move-Format-Up").disabled = disabled;
 		document.getElementById("CLT-Opt-Move-Format-Down").disabled = disabled;
-		document.getElementById("CLT-Opt-Add-Format").disabled = disabled;
+//  	document.getElementById("CLT-Opt-Add-Format").disabled = disabled;
+		document.getElementById("CLT-Opt-New-Button").disabled = disabled;
 		document.getElementById("CLT-Opt-Edit-Format").disabled = disabled;
 		document.getElementById("CLT-Opt-Remove-Format").disabled = disabled;
-		document.getElementById("CLT-Opt-Add-Separator").disabled = disabled;
+		document.getElementById("CLT-Opt-Export-Import-Button").disabled = disabled;
+//  	document.getElementById("CLT-Opt-Add-Separator").disabled = disabled;
 	
 		this.OnListBoxSelected();
 	}
