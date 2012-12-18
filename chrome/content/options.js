@@ -13,6 +13,52 @@ var objCoLTOptions = {
 		listBox.ensureElementIsVisible(item); // Make sure it's visible (first!)
 		listBox.selectItem(item); // Select the incoming item
 	},
+	
+	AppendFormat: function(label, accesskey, format, autoSelect)
+	{
+		var listBox = document.getElementById("CLT-Opt-Custom-Format-List");
+		var listItem = document.createElement("listitem");
+		
+		var listCell = document.createElement("listcell");
+		listCell.setAttribute("label", label);
+		listItem.appendChild(listCell);
+
+		listCell = document.createElement("listcell");
+		listCell.setAttribute("label", accesskey);
+		listItem.appendChild(listCell);
+
+		listCell = document.createElement("listcell");
+		listCell.setAttribute("label", format);
+		listItem.appendChild(listCell);
+		
+		var oref = listBox.appendChild(listItem);
+		
+		if(autoSelect)
+			this._selectItem(oref);
+	},
+	
+	AppendSeparator: function(autoSelect)
+	{
+		var listBox = document.getElementById("CLT-Opt-Custom-Format-List");
+		var listItem = document.createElement("listitem");
+		
+		var separatorElement = document.createElement("separator");
+		separatorElement.setAttribute("class", "groove");
+		listItem.appendChild(separatorElement);
+
+		separatorElement = document.createElement("separator");
+		separatorElement.setAttribute("class", "groove");
+		listItem.appendChild(separatorElement);
+
+		separatorElement = document.createElement("separator");
+		separatorElement.setAttribute("class", "groove");
+		listItem.appendChild(separatorElement);
+
+		var oref = listBox.appendChild(listItem);
+
+		if(autoSelect)
+			this._selectItem(oref);
+	},
 
 	LoadOptions: function()
 	{
@@ -35,19 +81,7 @@ var objCoLTOptions = {
 			
 			if(branch.prefHasUserValue(separatorPref))
 			{
-				var separatorElement = document.createElement("separator");
-				separatorElement.setAttribute("class", "groove");
-				listItem.appendChild(separatorElement);
-	
-				separatorElement = document.createElement("separator");
-				separatorElement.setAttribute("class", "groove");
-				listItem.appendChild(separatorElement);
-	
-				separatorElement = document.createElement("separator");
-				separatorElement.setAttribute("class", "groove");
-				listItem.appendChild(separatorElement);
-				
-				listBox.appendChild(listItem);
+				this.AppendSeparator(false);
 			}
 			else
 			{
@@ -55,18 +89,7 @@ var objCoLTOptions = {
 				var key = objCoLT.GetComplexPref(accessKeyPref);
 				var format = objCoLT.GetComplexPref(formatPref);
 				
-				var listCell = document.createElement("listcell");
-				listCell.setAttribute("label", label);
-				listItem.appendChild(listCell);
-				
-				listCell = document.createElement("listcell");
-				listCell.setAttribute("label", key);
-				listItem.appendChild(listCell);
-	
-				listCell = document.createElement("listcell");
-				listCell.setAttribute("label", format);
-				listItem.appendChild(listCell);
-				listBox.appendChild(listItem);
+				this.AppendFormat(label, key, format, false);
 			}
 		}
 		
@@ -79,46 +102,14 @@ var objCoLTOptions = {
 	
 		if(this.CustomFormatLabel && (this.CustomFormatFormat || this.CustomFormatRichText))
 		{
-			var listCell = document.createElement("listcell");
-			var listItem = document.createElement("listitem");
-			var listBox = document.getElementById("CLT-Opt-Custom-Format-List");
-	
-			listCell.setAttribute("label", this.CustomFormatLabel);
-			listItem.appendChild(listCell);
-			
-			listCell = document.createElement("listcell");
-			listCell.setAttribute("label", this.CustomFormatAccessKey);
-			listItem.appendChild(listCell);
-	
-			listCell = document.createElement("listcell");
-			if(this.CustomFormatRichText)
-				listCell.setAttribute("label", this.RichTextFormatLabel);
-			else
-				listCell.setAttribute("label", this.CustomFormatFormat);
-			
-			listItem.appendChild(listCell);
-			this._selectItem(listBox.appendChild(listItem));
+			this.AppendFormat(this.CustomFormatLabel, this.CustomFormatAccessKey, 
+							  (this.CustomFormatRichText ? this.RichTextFormatLabel : this.CustomFormatFormat), true);
 		}
 	},
 
 	OnAddSeparator: function()
 	{
-		var listBox = document.getElementById("CLT-Opt-Custom-Format-List");
-		var listItem = document.createElement("listitem");
-
-		var separator = document.createElement("separator");
-		separator.setAttribute("class", "groove");
-		listItem.appendChild(separator);
-	
-		separator = document.createElement("separator");
-		separator.setAttribute("class", "groove");
-		listItem.appendChild(separator);
-
-		separator = document.createElement("separator");
-		separator.setAttribute("class", "groove");
-		listItem.appendChild(separator);
-
-		this._selectItem(listBox.appendChild(listItem));
+		this.AppendSeparator(true);
 	},
 
 	OnEditCustomFormat: function()
@@ -176,7 +167,6 @@ var objCoLTOptions = {
 		{
 			var file = fp.file;
 			var path = fp.file.path;
-			objCoLT.Log("Export File Path: " + path); // TODO: Remove me
 			
 			var foStream = Components.classes["@mozilla.org/network/file-output-stream;1"].
 				createInstance(Components.interfaces.nsIFileOutputStream);
@@ -186,22 +176,23 @@ var objCoLTOptions = {
 			var converter = Components.classes["@mozilla.org/intl/converter-output-stream;1"].
 				createInstance(Components.interfaces.nsIConverterOutputStream);
 			converter.init(foStream, "UTF-8", 0, 0);
+//  		converter.writeString("\xEF\xBB\xBF"); // Write the BOM
 			
 			// Write the data from the list box
 			var listBox = document.getElementById("CLT-Opt-Custom-Format-List");
 			for(var i=1; i <= listBox.getRowCount(); i++)
 			{
 				var listItem = listBox.getItemAtIndex(i - 1);
-				var string = "";
+				var string = "---ITEM---\n";
 				if(listItem.childNodes[0].tagName == "separator")
 				{
-					string = i + ":s:---\n";
+					string += "s:separator\n";
 				}
 				else
 				{
-					string = i + ":f:" + listItem.childNodes[2].getAttribute("label") + "\n"; // Format
-					string += i + ":l:" + listItem.childNodes[0].getAttribute("label") + "\n"; // Label
-					string += i + ":a:" + listItem.childNodes[1].getAttribute("label") + "\n"; // Access Key
+					string += "f:" + listItem.childNodes[2].getAttribute("label") + "\n"; // Format
+					string += "l:" + listItem.childNodes[0].getAttribute("label") + "\n"; // Label
+					string += "a:" + listItem.childNodes[1].getAttribute("label") + "\n"; // Access Key
 				}
 				converter.writeString(string);
 			}
@@ -212,8 +203,6 @@ var objCoLTOptions = {
 	
 	OnImportCustom: function()
 	{
-		// TODO: Use nsIPromptService to ask user if they want to overwrite existing or not
-		// See http://forums.mozillazine.org/viewtopic.php?f=19&t=236678 for more details
 		const nsIFilePicker = Components.interfaces.nsIFilePicker;
 		
 		var fp = Components.classes["@mozilla.org/filepicker;1"].createInstance(nsIFilePicker);
@@ -225,35 +214,103 @@ var objCoLTOptions = {
 		{
 			var file = fp.file;
 			var path = fp.file.path;
-			objCoLT.Log("Import File Path: " + path); // TODO: Remove me
 			
 			var fiStream = Components.classes["@mozilla.org/network/file-input-stream;1"].
 				createInstance(Components.interfaces.nsIFileInputStream);
-			// Open the file for reading (0x01)
-			fiStream.init(fp.file, 0x01, -1, 0);
+			fiStream.init(fp.file, 0x01, -1, 0); // Open the file for reading (0x01)
 			
 			var is = Components.classes["@mozilla.org/intl/converter-input-stream;1"].
 				createInstance(Components.interfaces.nsIConverterInputStream);
 			is.init(fiStream, "UTF-8", 0, 0);
 			is.QueryInterface(Components.interfaces.nsIUnicharLineInputStream);
 			
+			var importData = new Array();
+			
 			if(is instanceof Components.interfaces.nsIUnicharLineInputStream)
 			{
 				var line = {};
 				var c;
+				var num = 0;
+				var buf = {};
 				do {
 					c = is.readLine(line);
+					var str = line.value;
+					str.trim();
 					
-					objCoLT.Log("Read: " + line.value); // TODO: Remove me
+					if(str == "---ITEM---")
+					{
+						if(num > 0)
+						{
+							importData.push(buf);
+							buf = {};
+						}
+						
+						num++;
+						continue;
+					}
+					
+					var prefix = str.substr(0, 2);
+					var data = str.slice(2);
+					if(prefix.charAt(1) == ':')
+					{
+						switch(prefix.charAt(0))
+						{
+						case 'a':
+							buf['access'] = data;
+							break;
+						case 'f':
+							buf['format'] = data;
+							break;
+						case 'l':
+							buf['label'] = data;
+							break;
+						case 's':
+							buf['separator'] = true;
+							break;
+						default:
+							break; // TODO: Should we report an error in this case and exit?
+						}
+					}
 				} while(c);
+				
+				importData.push(buf); // Push the last object onto the array
 			}
 			else
 			{
 				objCoLT.Log("ERROR: Failed to import file due to invalid nsIConverterInputStream");
+				return;
 			}
 			
 			is.close();
 			fiStream.close();
+			
+			// Prompt the user to see if they want to append to the current list or overwrite it
+			var ps = Components.classes["@mozilla.org/embedcomp/prompt-service;1"].getService(Components.interfaces.nsIPromptService);
+			var rv = ps.confirmEx(window, "Overwrite Custom Formats", "Do you wish to overwrite your custom formats or append to them?",
+								  ps.BUTTON_TITLE_IS_STRING * ps.BUTTON_POS_0 +
+								  ps.BUTTON_TITLE_IS_STRING * ps.BUTTON_POS_1,
+								  "Overwrite", "Append", null, null, {});
+			
+			var listBox = document.getElementById("CLT-Opt-Custom-Format-List");
+			
+			// If the user chose to overwrite their items, blow away everything in the current list
+			if(rv == 0)
+			{
+				// Overwrite current items
+				while(listBox.hasChildNodes() && listBox.lastChild.nodeName == "listitem")
+				{
+					listBox.removeChild(listBox.lastChild);
+				}
+			}
+			
+			// Now append all the incoming items
+			for(var i=0; i<importData.length; i++)
+			{
+				if(importData[i].hasOwnProperty('separator'))
+					this.AppendSeparator(false);
+				else
+					this.AppendFormat(importData[i]['label'], importData[i]['access'], importData[i]['format'], false);
+			}
 		}
 	},
 	
