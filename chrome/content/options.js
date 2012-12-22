@@ -160,7 +160,9 @@ var objCoLTOptions = {
 		
 		var fp = Components.classes["@mozilla.org/filepicker;1"].createInstance(nsIFilePicker);
 		fp.init(window, "Export Custom Formats", nsIFilePicker.modeSave);
-		fp.appendFilters(nsIFilePicker.filterText | nsIFilePicker.filterAll);
+		fp.appendFilters(nsIFilePicker.filterText);
+		fp.appendFilters(nsIFilePicker.filterAll);
+		fp.defaultExtension = "txt";
 		
 		var retval = fp.show();
 		if(retval == nsIFilePicker.returnOK || retval == nsIFilePicker.returnReplace)
@@ -204,10 +206,13 @@ var objCoLTOptions = {
 	OnImportCustom: function()
 	{
 		const nsIFilePicker = Components.interfaces.nsIFilePicker;
+		var stringBundle = document.getElementById("CLT-String-Bundle");
 		
 		var fp = Components.classes["@mozilla.org/filepicker;1"].createInstance(nsIFilePicker);
-		fp.init(window, "Import Custom Formats", nsIFilePicker.modeOpen);
-		fp.appendFilters(nsIFilePicker.filterText | nsIFilePicker.filterAll);
+		fp.init(window, stringBundle.getString("CLT_ImportTitle"), nsIFilePicker.modeOpen);
+		fp.appendFilters(nsIFilePicker.filterText);
+		fp.appendFilters(nsIFilePicker.filterAll);
+		fp.defaultExtension = "txt";
 		
 		var retval = fp.show();
 		if(retval == nsIFilePicker.returnOK)
@@ -268,28 +273,31 @@ var objCoLTOptions = {
 							buf['separator'] = true;
 							break;
 						default:
-							break; // TODO: Should we report an error in this case and exit?
+							break;
 						}
 					}
 				} while(c);
 				
 				importData.push(buf); // Push the last object onto the array
+				is.close();
+				fiStream.close();
 			}
 			else
 			{
 				objCoLT.Log("ERROR: Failed to import file due to invalid nsIConverterInputStream");
+				is.close();
+				fiStream.close();
 				return;
 			}
 			
-			is.close();
-			fiStream.close();
-			
 			// Prompt the user to see if they want to append to the current list or overwrite it
 			var ps = Components.classes["@mozilla.org/embedcomp/prompt-service;1"].getService(Components.interfaces.nsIPromptService);
-			var rv = ps.confirmEx(window, "Overwrite Custom Formats", "Do you wish to overwrite your custom formats or append to them?",
+			var rv = ps.confirmEx(window, stringBundle.getString("CLT_OverwriteTitle"),
+								  stringBundle.getString("CLT_OverwritePrompt"),
 								  ps.BUTTON_TITLE_IS_STRING * ps.BUTTON_POS_0 +
 								  ps.BUTTON_TITLE_IS_STRING * ps.BUTTON_POS_1,
-								  "Overwrite", "Append", null, null, {});
+								  stringBundle.getString("CLT_OverwriteButton"),
+								  stringBundle.getString("CLT_AppendButton"), null, null, {});
 			
 			var listBox = document.getElementById("CLT-Opt-Custom-Format-List");
 			
