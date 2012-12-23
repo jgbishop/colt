@@ -21,10 +21,8 @@
 <!ENTITY colt.options.checkbox.userichtext "Usar texto enriquecido para enlaces HTML">
 <!ENTITY colt.options.button.moveup "Subir">
 <!ENTITY colt.options.button.movedown "Bajar">
-<!ENTITY colt.options.button.addformat "Agregar...">
 <!ENTITY colt.options.button.editformat "Editar...">
 <!ENTITY colt.options.button.removeformat "Remover">
-<!ENTITY colt.options.button.newseparator "Nuevo separador">
 <!ENTITY colt.options.textvariablelabel "Usado para definir el texto copiado">
 <!ENTITY colt.options.urlvariablelabel "Usado para definir la URL copiada">
 <!ENTITY colt.options.linktitlevariablelabel "Usado para definir el atributo Título del enlace">

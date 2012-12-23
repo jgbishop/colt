@@ -21,10 +21,8 @@
 <!ENTITY colt.options.checkbox.userichtext "استفاده از Rich Text HTML Link">
 <!ENTITY colt.options.button.moveup "حرکت به بالا">
 <!ENTITY colt.options.button.movedown "حرکت به پایین">
-<!ENTITY colt.options.button.addformat "افزودن...">
 <!ENTITY colt.options.button.editformat "ویرایش...">
 <!ENTITY colt.options.button.removeformat "پاک کردن...">
-<!ENTITY colt.options.button.newseparator "جداکننده">
 <!ENTITY colt.options.textvariablelabel "برای مشخص کردن متن کپی شده به کار می رود">
 <!ENTITY colt.options.urlvariablelabel "برای مشخص کردن نشانی کپی شده به کار می رود">
 <!ENTITY colt.options.linktitlevariablelabel "مورد استفاده برای مشخص کردن عنوان لینک">

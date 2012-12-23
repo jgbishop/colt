@@ -21,10 +21,8 @@
 <!ENTITY colt.options.checkbox.userichtext "Gebruik Rich Text HTML-koppelingsformat">
 <!ENTITY colt.options.button.moveup "Omhoog">
 <!ENTITY colt.options.button.movedown "Omlaag">
-<!ENTITY colt.options.button.addformat "Voeg toe...">
 <!ENTITY colt.options.button.editformat "Bewerk...">
 <!ENTITY colt.options.button.removeformat "Verwijder">
-<!ENTITY colt.options.button.newseparator "Nieuw scheidingsteken">
 <!ENTITY colt.options.textvariablelabel "Gebruikt om te gekopieerde tekst aan te geven">
 <!ENTITY colt.options.urlvariablelabel "Gebruikt om te gekopieerde URL aan te geven">
 <!ENTITY colt.options.linktitlevariablelabel "Gebruikt om titeleigenschap van de link te specificeren">

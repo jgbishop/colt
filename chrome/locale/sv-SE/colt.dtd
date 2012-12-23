@@ -21,10 +21,8 @@
 <!ENTITY colt.options.checkbox.userichtext "Använd RTF-format för HTML-länkar">
 <!ENTITY colt.options.button.moveup "Flytta uppåt">
 <!ENTITY colt.options.button.movedown "Flytta nedåt">
-<!ENTITY colt.options.button.addformat "Lägg till…">
 <!ENTITY colt.options.button.editformat "Redigera…">
 <!ENTITY colt.options.button.removeformat "Ta bort">
-<!ENTITY colt.options.button.newseparator "Ny avgränsare">
 <!ENTITY colt.options.textvariablelabel "Används för att ange den kopierade texten">
 <!ENTITY colt.options.urlvariablelabel "Används för att ange den kopierade webbadressen">
 <!ENTITY colt.options.linktitlevariablelabel "Används för att ange länkens titelattribut">

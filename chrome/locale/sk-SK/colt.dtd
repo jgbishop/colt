@@ -21,10 +21,8 @@
 <!ENTITY colt.options.checkbox.userichtext "Použiť HMTL formát odkazu">
 <!ENTITY colt.options.button.moveup "Posunúť nahor">
 <!ENTITY colt.options.button.movedown "Posunúť nadol">
-<!ENTITY colt.options.button.addformat "Pridať...">
 <!ENTITY colt.options.button.editformat "Upraviť...">
 <!ENTITY colt.options.button.removeformat "Odstrániť">
-<!ENTITY colt.options.button.newseparator "Nový oddeľovač">
 <!ENTITY colt.options.textvariablelabel "Používa sa pre kopírovaný text">
 <!ENTITY colt.options.urlvariablelabel "Používa sa pre kopírovanú URL">
 <!ENTITY colt.options.linktitlevariablelabel "Používa sa pre atribút title daného odkazu">

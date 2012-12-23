@@ -21,10 +21,8 @@
 <!ENTITY colt.options.checkbox.userichtext "Utiliser le format Rich Text pour un lien HTML">
 <!ENTITY colt.options.button.moveup "Monter">
 <!ENTITY colt.options.button.movedown "Descendre">
-<!ENTITY colt.options.button.addformat "Ajouter…">
 <!ENTITY colt.options.button.editformat "Éditer…">
 <!ENTITY colt.options.button.removeformat "Supprimer">
-<!ENTITY colt.options.button.newseparator "Nouveau séparateur">
 <!ENTITY colt.options.textvariablelabel "Utilisé pour spécifier le texte copié">
 <!ENTITY colt.options.urlvariablelabel "Utilisé pour spécifier l'URL copiée">
 <!ENTITY colt.options.linktitlevariablelabel "Utilisé pour spécifier l'attribut « title » du lien">

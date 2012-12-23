@@ -21,10 +21,8 @@
 <!ENTITY colt.options.checkbox.userichtext "Brug Rich Text HTML Link Format">
 <!ENTITY colt.options.button.moveup "Flyt op">
 <!ENTITY colt.options.button.movedown "Flyt ned">
-<!ENTITY colt.options.button.addformat "Tilføj...">
 <!ENTITY colt.options.button.editformat "Rediger...">
 <!ENTITY colt.options.button.removeformat "Fjern">
-<!ENTITY colt.options.button.newseparator "Ny adskiller">
 <!ENTITY colt.options.textvariablelabel "Bruges til at angive kopieret tekst">
 <!ENTITY colt.options.urlvariablelabel "Bruges til at angive kopieret URL">
 <!ENTITY colt.options.linktitlevariablelabel "Bruges til at angive linkets titel-attribut">

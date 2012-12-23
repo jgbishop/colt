@@ -1,32 +1,30 @@
 <!ENTITY colt.copylinktext "リンクのテキストをコピー">
 <!ENTITY colt.ak.copylinktext "x">
-<!ENTITY colt.copybothitem "リンクのテキストとURLをコピー">
+<!ENTITY colt.copybothitem "リンクのテキストと URL をコピー">
 <!ENTITY colt.ak.copybothitem "o">
-<!ENTITY colt.copybothmenu "リンクのテキストとURLをコピー">
+<!ENTITY colt.copybothmenu "リンクのテキストと URL をコピー">
 <!ENTITY colt.ak.copybothmenu "o">
-<!ENTITY colt.copypageitem "ページタイトルと場所をコピー">
+<!ENTITY colt.copypageitem "ページタイトルと URL をコピー">
 <!ENTITY colt.ak.copypageitem "o">
-<!ENTITY colt.copypagemenu "ページタイトルと場所をコピー">
+<!ENTITY colt.copypagemenu "ページタイトルと URL をコピー">
 <!ENTITY colt.ak.copypagemenu "o">
-<!ENTITY colt.options.title "CoLTオプション">
-<!ENTITY colt.options.group.toplevel "右クリックメニューアイテム">
-<!ENTITY colt.options.displaycopytext "メニューアイテムに 'リンクのテキストをコピー'を表示する">
-<!ENTITY colt.options.displaycopybothmenu "メニューアイテムに 'リンクのテキストとURLをコピー'を表示する">
-<!ENTITY colt.options.displaycopypagemenu "メニューアイテムに'ページタイトルと場所をコピー'を表示する">
-<!ENTITY colt.options.group.customformats "カスタム書式のメニューアイテム">
+<!ENTITY colt.options.title "CoLT オプション">
+<!ENTITY colt.options.group.toplevel "右クリックメニュー項目">
+<!ENTITY colt.options.displaycopytext "'リンクのテキストをコピー'を表示">
+<!ENTITY colt.options.displaycopybothmenu "'リンクのテキストと URL をコピー'を表示">
+<!ENTITY colt.options.displaycopypagemenu "'ページタイトルと URL をコピー'を表示">
+<!ENTITY colt.options.group.customformats "カスタム書式のメニュー項目">
 <!ENTITY colt.options.header.label "メニューラベル">
 <!ENTITY colt.options.header.format "書式">
 <!ENTITY colt.options.header.accesskey "キー">
 <!ENTITY colt.options.label.accesskey "アクセスキー">
-<!ENTITY colt.options.checkbox.userichtext "リッチテキストHTMLリンク書式を使用する">
+<!ENTITY colt.options.checkbox.userichtext "リッチテキスト HTML リンク書式を使用">
 <!ENTITY colt.options.button.moveup "上へ移動">
 <!ENTITY colt.options.button.movedown "下へ移動">
-<!ENTITY colt.options.button.addformat "追加...">
-<!ENTITY colt.options.button.editformat "編集...">
+<!ENTITY colt.options.button.editformat "編集">
 <!ENTITY colt.options.button.removeformat "削除">
-<!ENTITY colt.options.button.newseparator "新しい区切り">
 <!ENTITY colt.options.textvariablelabel "コピーされたテキストを指定するのに使用">
-<!ENTITY colt.options.urlvariablelabel "コピーされたURLを指定するのに使用">
+<!ENTITY colt.options.urlvariablelabel "コピーされた URL を指定するのに使用">
 <!ENTITY colt.options.linktitlevariablelabel "リンクのタイトル属性を指定するのに使用">
 <!ENTITY colt.options.pagetitlevariablelabel "ページタイトルを指定するのに使用">
 <!ENTITY colt.options.newlinelabel "新しい線を指定するのに使用">
@@ -34,11 +32,11 @@
 <!ENTITY colt.options.header.variable "変数">
 <!ENTITY colt.options.header.linkcontext "リンクをコピー">
 <!ENTITY colt.options.header.pagecontext "ページをコピー">
-<!ENTITY colt.link.customformatinfo "カスタム書式について詳しく知る...">
+<!ENTITY colt.link.customformatinfo "カスタム書式について詳しく知る">
 <!ENTITY colt.variable.desc.linktext "リンクテキスト">
 <!ENTITY colt.variable.desc.pagetitle "ページタイトル">
-<!ENTITY colt.variable.desc.linkurl "リンクURL">
-<!ENTITY colt.variable.desc.pageurl "ページURL">
+<!ENTITY colt.variable.desc.linkurl "リンク URL">
+<!ENTITY colt.variable.desc.pageurl "ページ URL">
 <!ENTITY colt.variable.desc.linktitle "リンクタイトル属性">
 <!ENTITY colt.variable.desc.localtime "現地時間">
 <!ENTITY colt.variable.desc.selection "選択されたテキスト">

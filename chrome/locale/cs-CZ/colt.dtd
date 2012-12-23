@@ -21,10 +21,8 @@
 <!ENTITY colt.options.checkbox.userichtext "Použít formátovaný text odkazu">
 <!ENTITY colt.options.button.moveup "Posunout nahoru">
 <!ENTITY colt.options.button.movedown "Posunout dolů">
-<!ENTITY colt.options.button.addformat "Přidat...">
 <!ENTITY colt.options.button.editformat "Upravit...">
 <!ENTITY colt.options.button.removeformat "Odstranit">
-<!ENTITY colt.options.button.newseparator "Nový oddělovač">
 <!ENTITY colt.options.textvariablelabel "Zastupuje kopírovaný text">
 <!ENTITY colt.options.urlvariablelabel "Zastupuje kopírované URL">
 <!ENTITY colt.options.linktitlevariablelabel "Used to specify the link's title attribute">

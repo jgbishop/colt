@@ -21,10 +21,8 @@
 <!ENTITY colt.options.checkbox.userichtext "Używaj formatu RTF dla odnośników HTML">
 <!ENTITY colt.options.button.moveup "Przenieś w górę">
 <!ENTITY colt.options.button.movedown "Przenieś w dół">
-<!ENTITY colt.options.button.addformat "Dodaj...">
 <!ENTITY colt.options.button.editformat "Edytuj...">
 <!ENTITY colt.options.button.removeformat "Usuń">
-<!ENTITY colt.options.button.newseparator "Nowy separator">
 <!ENTITY colt.options.textvariablelabel "Używane do określenia kopiowanego tekstu">
 <!ENTITY colt.options.urlvariablelabel "Używane do określenia kopiowanego adresu URL">
 <!ENTITY colt.options.linktitlevariablelabel "Używane do określenia atrybutu z tytułem odnośnika">

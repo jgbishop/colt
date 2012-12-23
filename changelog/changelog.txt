@@ -3,6 +3,7 @@
 //***************
 [2.5.10]
 + Added support for importing and exporting custom formats (useful for moving them between systems)
++ Improved the way custom format events are handled
 + Removed the embedded JAR file from within the extension's XPI file
 + Made a few minor improvements to the installer manifest
 + Changed the minimum supported Firefox version to 10.0

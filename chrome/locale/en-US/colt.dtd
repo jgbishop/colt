@@ -21,10 +21,14 @@
 <!ENTITY colt.options.checkbox.userichtext "Use Rich Text HTML Link Format">
 <!ENTITY colt.options.button.moveup "Move Up">
 <!ENTITY colt.options.button.movedown "Move Down">
-<!ENTITY colt.options.button.addformat "Add...">
 <!ENTITY colt.options.button.editformat "Edit...">
 <!ENTITY colt.options.button.removeformat "Remove">
-<!ENTITY colt.options.button.newseparator "New Separator">
+<!ENTITY colt.options.button.new "New">
+<!ENTITY colt.options.button.exportimport "Export / Import">
+<!ENTITY colt.options.menulabel.customformat "Custom Format...">
+<!ENTITY colt.options.menulabel.separator "Separator">
+<!ENTITY colt.options.menulabel.export "Export Custom Formats...">
+<!ENTITY colt.options.menulabel.import "Import Custom Formats...">
 <!ENTITY colt.options.textvariablelabel "Used to specify the copied text">
 <!ENTITY colt.options.urlvariablelabel "Used to specify the copied URL">
 <!ENTITY colt.options.linktitlevariablelabel "Used to specify the link&apos;s title attribute">

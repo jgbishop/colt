@@ -21,10 +21,8 @@
 <!ENTITY colt.options.checkbox.userichtext "Использовать полное HTML-форматирование ссылок">
 <!ENTITY colt.options.button.moveup "Вверх">
 <!ENTITY colt.options.button.movedown "Вниз">
-<!ENTITY colt.options.button.addformat "Добавить">
 <!ENTITY colt.options.button.editformat "Изменить">
 <!ENTITY colt.options.button.removeformat "Удалить">
-<!ENTITY colt.options.button.newseparator "Добавить разделитель">
 <!ENTITY colt.options.textvariablelabel "Используйте для определения копируемого текста">
 <!ENTITY colt.options.urlvariablelabel "Используйте для определения копируемого URL">
 <!ENTITY colt.options.linktitlevariablelabel "Используйте для определения заголовка ссылки">

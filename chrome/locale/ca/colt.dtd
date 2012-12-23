@@ -21,10 +21,8 @@
 <!ENTITY colt.options.checkbox.userichtext "Usa el format d'enllaç HTML de text enriquit">
 <!ENTITY colt.options.button.moveup "Mou amunt">
 <!ENTITY colt.options.button.movedown "Mou avall">
-<!ENTITY colt.options.button.addformat "Afegeix...">
 <!ENTITY colt.options.button.editformat "Edita...">
 <!ENTITY colt.options.button.removeformat "Suprimeix">
-<!ENTITY colt.options.button.newseparator "Separador nou">
 <!ENTITY colt.options.textvariablelabel "S'usa per especificar el text copia">
 <!ENTITY colt.options.urlvariablelabel "S'usa per especificar l'URL copiat">
 <!ENTITY colt.options.linktitlevariablelabel "S'usa per especificar l'atribut del títol de l'enllaç">

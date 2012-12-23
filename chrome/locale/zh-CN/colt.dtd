@@ -21,10 +21,8 @@
 <!ENTITY colt.options.checkbox.userichtext "使用 HTML 链接格式">
 <!ENTITY colt.options.button.moveup "上移">
 <!ENTITY colt.options.button.movedown "下移">
-<!ENTITY colt.options.button.addformat "添加...">
 <!ENTITY colt.options.button.editformat "编辑...">
 <!ENTITY colt.options.button.removeformat "删除">
-<!ENTITY colt.options.button.newseparator "添加分隔线">
 <!ENTITY colt.options.textvariablelabel "用来表示复制的文字">
 <!ENTITY colt.options.urlvariablelabel "用来表示复制的网址">
 <!ENTITY colt.options.linktitlevariablelabel "用来表示链接的标题属性">

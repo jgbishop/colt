@@ -300,12 +300,11 @@ var objCoLT = {
 		return true;
 	},
 
-	PurgeContextSubMenu: function(nodeID)
+	PurgeContextSubMenu: function(node)
 	{
 		// Remove all the menu items from the sub menu (since we will recreate them)
-		var popupmenu = document.getElementById(nodeID);
-		while(popupmenu.firstChild)
-			popupmenu.removeChild(popupmenu.firstChild);
+		while(node.firstChild)
+			node.removeChild(node.firstChild);
 	},
 	
 	SetComplexPref: function(name, value)
@@ -420,12 +419,10 @@ var objCoLT = {
 		copyPageMenu.hidden = (objCoLT.Prefs.ShowCopyPage.value && (objCoLT.Prefs.CustomFormatCount.value > 1)) ? hiddenFlag : true;
 	},
 
-	UpdateContextSubMenu: function(nodeID, type)
+	UpdateContextSubMenu: function(node, type)
 	{
-		this.PurgeContextSubMenu(nodeID);
+		this.PurgeContextSubMenu(node);
 	
-		var popupmenu = document.getElementById(nodeID);
-		
 		for(var i=1; i <= this.Prefs.CustomFormatCount.value; i++)
 		{
 			var separatorPref = "custom." + i + ".separator";
@@ -433,7 +430,7 @@ var objCoLT = {
 			if(this.PrefBranch.prefHasUserValue(separatorPref))
 			{
 				var menuseparator = document.createElement("menuseparator");
-				popupmenu.appendChild(menuseparator);
+				node.appendChild(menuseparator);
 			}
 			else
 			{
@@ -447,8 +444,8 @@ var objCoLT = {
 					menuitem.setAttribute("label", label);
 					if(key && key != "")
 						menuitem.setAttribute("accesskey", key);
-					menuitem.setAttribute("oncommand", "objCoLT.CopyBoth('" + i + "', '" + type + "');");
-					popupmenu.appendChild(menuitem);
+					menuitem.setAttribute("formatindex", i);
+					node.appendChild(menuitem);
 				}
 			}
 		}
