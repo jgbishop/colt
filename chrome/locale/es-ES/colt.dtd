@@ -10,9 +10,9 @@
 <!ENTITY colt.ak.copypagemenu "P">
 <!ENTITY colt.options.title "Opciones de CoLT">
 <!ENTITY colt.options.group.toplevel "Nivel de elementos en el menú contextual">
-<!ENTITY colt.options.displaycopytext "Mostrar el elemento de menú &apos;Copiar texto del enlace&apos;">
-<!ENTITY colt.options.displaycopybothmenu "Mostrar el sub-menú &apos;Copiar texto y dirección del enlace&apos;">
-<!ENTITY colt.options.displaycopypagemenu "Mostrar el sub-menú &apos;Copiar título y dirección de la página&apos;">
+<!ENTITY colt.options.displaycopytext "Mostrar el elemento de menú 'Copiar texto del enlace'">
+<!ENTITY colt.options.displaycopybothmenu "Mostrar el sub-menú 'Copiar texto y dirección del enlace'">
+<!ENTITY colt.options.displaycopypagemenu "Mostrar el sub-menú 'Copiar título y dirección de la página'">
 <!ENTITY colt.options.group.customformats "Elementos de menú con formato personalizado">
 <!ENTITY colt.options.header.label "Etiqueta del menú">
 <!ENTITY colt.options.header.format "Formato">
@@ -23,6 +23,12 @@
 <!ENTITY colt.options.button.movedown "Mover abajo">
 <!ENTITY colt.options.button.editformat "Editar...">
 <!ENTITY colt.options.button.removeformat "Quitar">
+<!ENTITY colt.options.button.new "Nuevo">
+<!ENTITY colt.options.button.exportimport "Exportar/Importar">
+<!ENTITY colt.options.menulabel.customformat "Formato personalizado…">
+<!ENTITY colt.options.menulabel.separator "Separador">
+<!ENTITY colt.options.menulabel.export "Exportar formatos personalizados…">
+<!ENTITY colt.options.menulabel.import "Importar formatos personalizados…">
 <!ENTITY colt.options.textvariablelabel "Usar para especificar el texto copiado">
 <!ENTITY colt.options.urlvariablelabel "Usar para especificar la URL copiada">
 <!ENTITY colt.options.linktitlevariablelabel "Usar para especificar el atributo Título del enlace">

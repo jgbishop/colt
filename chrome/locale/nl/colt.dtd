@@ -1,20 +1,20 @@
-<!ENTITY colt.copylinktext "Kopieer Koppelingstekst">
+<!ENTITY colt.copylinktext "Kopieer koppelingstekst">
 <!ENTITY colt.ak.copylinktext "k">
-<!ENTITY colt.copybothitem "Kopieer Koppelingstekst en -adres">
+<!ENTITY colt.copybothitem "Kopieer koppelingstekst en -adres">
 <!ENTITY colt.ak.copybothitem "o">
-<!ENTITY colt.copybothmenu "Kopieer Koppelingstekst en -adres als">
+<!ENTITY colt.copybothmenu "Kopieer koppelingstekst en -adres als">
 <!ENTITY colt.ak.copybothmenu "o">
-<!ENTITY colt.copypageitem "Kopieer Paginatitel en -adres">
+<!ENTITY colt.copypageitem "Kopieer paginatitel en -adres">
 <!ENTITY colt.ak.copypageitem "o">
-<!ENTITY colt.copypagemenu "Kopieer Paginatitel en -adres als">
+<!ENTITY colt.copypagemenu "Kopieer paginatitel en -adres als">
 <!ENTITY colt.ak.copypagemenu "o">
-<!ENTITY colt.options.title "CoLT Opties">
-<!ENTITY colt.options.group.toplevel "Top Niveau Menu-opties">
-<!ENTITY colt.options.displaycopytext "Toon het 'Kopieer Koppelingstekst' menu-regel">
-<!ENTITY colt.options.displaycopybothmenu "Toon het 'Kopieer Koppelingstekst en -adres' submenu">
-<!ENTITY colt.options.displaycopypagemenu "Toon het 'Kopieer Paginatitel en -adres' submenu">
-<!ENTITY colt.options.group.customformats "Aangepaste Menu Items">
-<!ENTITY colt.options.header.label "Menu Label">
+<!ENTITY colt.options.title "CoLT opties">
+<!ENTITY colt.options.group.toplevel "Top niveau menu">
+<!ENTITY colt.options.displaycopytext "Toon het 'Kopieer koppelingstekst' menu-keuze">
+<!ENTITY colt.options.displaycopybothmenu "Toon het 'Kopieer koppelingstekst en -adres' submenu">
+<!ENTITY colt.options.displaycopypagemenu "Toon het 'Kopieer paginatitel en -adres' submenu">
+<!ENTITY colt.options.group.customformats "Aangepast menu">
+<!ENTITY colt.options.header.label "Menu label">
 <!ENTITY colt.options.header.format "Formats">
 <!ENTITY colt.options.header.accesskey "Sleutel">
 <!ENTITY colt.options.label.accesskey "Toegangssleutel">
@@ -23,6 +23,12 @@
 <!ENTITY colt.options.button.movedown "Omlaag">
 <!ENTITY colt.options.button.editformat "Bewerk...">
 <!ENTITY colt.options.button.removeformat "Verwijder">
+<!ENTITY colt.options.button.new "Nieuw">
+<!ENTITY colt.options.button.exportimport "Exporteer/Importeer">
+<!ENTITY colt.options.menulabel.customformat "Eigen formaat...">
+<!ENTITY colt.options.menulabel.separator "Scheidingsteken">
+<!ENTITY colt.options.menulabel.export "Exporteer eigen formaten…">
+<!ENTITY colt.options.menulabel.import "Importeer eigen formaten...">
 <!ENTITY colt.options.textvariablelabel "Gebruikt om te gekopieerde tekst aan te geven">
 <!ENTITY colt.options.urlvariablelabel "Gebruikt om te gekopieerde URL aan te geven">
 <!ENTITY colt.options.linktitlevariablelabel "Gebruikt om titeleigenschap van de link te specificeren">
@@ -33,11 +39,11 @@
 <!ENTITY colt.options.header.linkcontext "Een link kopiëren">
 <!ENTITY colt.options.header.pagecontext "Een pagina kopiëren">
 <!ENTITY colt.link.customformatinfo "Leer meer over het aanpassen van instellingen...">
-<!ENTITY colt.variable.desc.linktext "Link tekst">
-<!ENTITY colt.variable.desc.pagetitle "Pagina titel">
+<!ENTITY colt.variable.desc.linktext "Link-tekst">
+<!ENTITY colt.variable.desc.pagetitle "Pagina-titel">
 <!ENTITY colt.variable.desc.linkurl "Link URL">
 <!ENTITY colt.variable.desc.pageurl "Pagina URL">
-<!ENTITY colt.variable.desc.linktitle "Link titeleigenschap">
+<!ENTITY colt.variable.desc.linktitle "Link-titeleigenschap">
 <!ENTITY colt.variable.desc.localtime "Lokale tijd">
 <!ENTITY colt.variable.desc.selection "Geselecteerde tekst">
 <!ENTITY colt.variable.desc.newline "Nieuwe regel">

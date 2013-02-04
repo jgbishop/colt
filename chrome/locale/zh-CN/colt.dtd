@@ -23,6 +23,12 @@
 <!ENTITY colt.options.button.movedown "下移">
 <!ENTITY colt.options.button.editformat "编辑...">
 <!ENTITY colt.options.button.removeformat "删除">
+<!ENTITY colt.options.button.new "新建">
+<!ENTITY colt.options.button.exportimport "导出/导入">
+<!ENTITY colt.options.menulabel.customformat "自定义格式...">
+<!ENTITY colt.options.menulabel.separator "分隔符">
+<!ENTITY colt.options.menulabel.export "导出自定义格式...">
+<!ENTITY colt.options.menulabel.import "导入自定义格式...">
 <!ENTITY colt.options.textvariablelabel "用来表示复制的文字">
 <!ENTITY colt.options.urlvariablelabel "用来表示复制的网址">
 <!ENTITY colt.options.linktitlevariablelabel "用来表示链接的标题属性">

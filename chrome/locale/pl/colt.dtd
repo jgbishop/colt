@@ -23,6 +23,12 @@
 <!ENTITY colt.options.button.movedown "Przenieś w dół">
 <!ENTITY colt.options.button.editformat "Edytuj...">
 <!ENTITY colt.options.button.removeformat "Usuń">
+<!ENTITY colt.options.button.new "Nowy">
+<!ENTITY colt.options.button.exportimport "Eksport / Import">
+<!ENTITY colt.options.menulabel.customformat "Własny format">
+<!ENTITY colt.options.menulabel.separator "Separator">
+<!ENTITY colt.options.menulabel.export "Eksportuj własne formaty...">
+<!ENTITY colt.options.menulabel.import "Importuj własne formaty...">
 <!ENTITY colt.options.textvariablelabel "Używane do określenia kopiowanego tekstu">
 <!ENTITY colt.options.urlvariablelabel "Używane do określenia kopiowanego adresu URL">
 <!ENTITY colt.options.linktitlevariablelabel "Używane do określenia atrybutu z tytułem odnośnika">

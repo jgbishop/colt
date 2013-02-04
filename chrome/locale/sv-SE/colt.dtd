@@ -23,6 +23,12 @@
 <!ENTITY colt.options.button.movedown "Flytta nedåt">
 <!ENTITY colt.options.button.editformat "Redigera…">
 <!ENTITY colt.options.button.removeformat "Ta bort">
+<!ENTITY colt.options.button.new "Nytt">
+<!ENTITY colt.options.button.exportimport "Exportera/Importera">
+<!ENTITY colt.options.menulabel.customformat "Anpassat format…">
+<!ENTITY colt.options.menulabel.separator "Avgränsare">
+<!ENTITY colt.options.menulabel.export "Exportera anpassade format…">
+<!ENTITY colt.options.menulabel.import "Importera anpassade format…">
 <!ENTITY colt.options.textvariablelabel "Används för att ange den kopierade texten">
 <!ENTITY colt.options.urlvariablelabel "Används för att ange den kopierade webbadressen">
 <!ENTITY colt.options.linktitlevariablelabel "Används för att ange länkens titelattribut">

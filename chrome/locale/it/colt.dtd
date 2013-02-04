@@ -13,7 +13,7 @@
 <!ENTITY colt.options.displaycopytext "Copia testo del link">
 <!ENTITY colt.options.displaycopybothmenu "Copia testo ed indirizzo del link">
 <!ENTITY colt.options.displaycopypagemenu "Copia titolo della pagina ed indirizzo del link">
-<!ENTITY colt.options.group.customformats "Sottomenu di &apos;Copia testo ed indirizzo del link&apos;">
+<!ENTITY colt.options.group.customformats "Sottomenu di 'Copia testo ed indirizzo del link'">
 <!ENTITY colt.options.header.label "Etichetta">
 <!ENTITY colt.options.header.format "Formato">
 <!ENTITY colt.options.header.accesskey "Key">
@@ -23,9 +23,15 @@
 <!ENTITY colt.options.button.movedown "Sposta giù">
 <!ENTITY colt.options.button.editformat "Modifica…">
 <!ENTITY colt.options.button.removeformat "Elimina">
+<!ENTITY colt.options.button.new "Aggiungi">
+<!ENTITY colt.options.button.exportimport "Esporta / Importa">
+<!ENTITY colt.options.menulabel.customformat "Formato personalizzato…">
+<!ENTITY colt.options.menulabel.separator "Separatore">
+<!ENTITY colt.options.menulabel.export "Esporta i formati personalizati">
+<!ENTITY colt.options.menulabel.import "Importa i formati personalizzati">
 <!ENTITY colt.options.textvariablelabel "Utilizzato per specificare il testo copiato">
-<!ENTITY colt.options.urlvariablelabel "Utilizzato per specificare l&apos;URL copiato">
-<!ENTITY colt.options.linktitlevariablelabel "Utilizzato per specificare l&apos;attributo del titolo">
+<!ENTITY colt.options.urlvariablelabel "Utilizzato per specificare l'URL copiato">
+<!ENTITY colt.options.linktitlevariablelabel "Utilizzato per specificare l'attributo del titolo">
 <!ENTITY colt.options.pagetitlevariablelabel "Utilizzato per specificare il titolo della pagina">
 <!ENTITY colt.options.newlinelabel "Utilizzato per specificare una nuova riga">
 <!ENTITY colt.options.variable.description "È possibile utilizzare le variabili qui sotto per il formato personalizzato">
