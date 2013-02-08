@@ -182,19 +182,20 @@ var objCoLTOptions = {
 			
 			// Write the data from the list box
 			var listBox = document.getElementById("CLT-Opt-Custom-Format-List");
+			var nl = objCoLT.GetNewLine();
 			for(var i=1; i <= listBox.getRowCount(); i++)
 			{
 				var listItem = listBox.getItemAtIndex(i - 1);
-				var string = "---ITEM---\n";
+				var string = "---ITEM---" + nl;
 				if(listItem.childNodes[0].tagName == "separator")
 				{
-					string += "s:separator\n";
+					string += "s:separator" + nl;
 				}
 				else
 				{
-					string += "f:" + listItem.childNodes[2].getAttribute("label") + "\n"; // Format
-					string += "l:" + listItem.childNodes[0].getAttribute("label") + "\n"; // Label
-					string += "a:" + listItem.childNodes[1].getAttribute("label") + "\n"; // Access Key
+					string += "f:" + listItem.childNodes[2].getAttribute("label") + nl; // Format
+					string += "l:" + listItem.childNodes[0].getAttribute("label") + nl; // Label
+					string += "a:" + listItem.childNodes[1].getAttribute("label") + nl; // Access Key
 				}
 				converter.writeString(string);
 			}
@@ -284,7 +285,7 @@ var objCoLTOptions = {
 			}
 			else
 			{
-				objCoLT.Log("ERROR: Failed to import file due to invalid nsIConverterInputStream");
+				alert("ERROR: Failed to import file due to invalid nsIConverterInputStream");
 				is.close();
 				fiStream.close();
 				return;
@@ -327,7 +328,6 @@ var objCoLTOptions = {
 		var listBox = document.getElementById("CLT-Opt-Custom-Format-List");
 		var selectedIndex = listBox.selectedIndex;
 	
-		var addButton = document.getElementById("CLT-Opt-Add-Format");
 		var editButton = document.getElementById("CLT-Opt-Edit-Format");
 		var removeButton = document.getElementById("CLT-Opt-Remove-Format");
 		var moveUpButton = document.getElementById("CLT-Opt-Move-Format-Up");
@@ -507,12 +507,10 @@ var objCoLTOptions = {
 		document.getElementById("CLT-Opt-Custom-Format-List").disabled = disabled;
 		document.getElementById("CLT-Opt-Move-Format-Up").disabled = disabled;
 		document.getElementById("CLT-Opt-Move-Format-Down").disabled = disabled;
-//  	document.getElementById("CLT-Opt-Add-Format").disabled = disabled;
 		document.getElementById("CLT-Opt-New-Button").disabled = disabled;
 		document.getElementById("CLT-Opt-Edit-Format").disabled = disabled;
 		document.getElementById("CLT-Opt-Remove-Format").disabled = disabled;
 		document.getElementById("CLT-Opt-Export-Import-Button").disabled = disabled;
-//  	document.getElementById("CLT-Opt-Add-Separator").disabled = disabled;
 	
 		this.OnListBoxSelected();
 	}

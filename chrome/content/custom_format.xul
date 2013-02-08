@@ -54,7 +54,7 @@
 	&colt.options.variable.description;
 	</description>
 	
-	<listbox id="CLT-Variable-List" rows="9">
+	<listbox id="CLT-Variable-List" rows="10">
 		<listhead>
 			<listheader label="&colt.options.header.variable;" />
 			<listheader label="&colt.options.header.linkcontext;" />
@@ -119,6 +119,12 @@
 			<listcell label="%B" />
 			<listcell label="&colt.variable.desc.tab;" />
 			<listcell label="&colt.variable.desc.tab;" />
+		</listitem>
+		
+		<listitem>
+			<listcell label="%?[]" />
+			<listcell label="&colt.variable.desc.conditional;" />
+			<listcell label="&colt.variable.desc.conditional;" />
 		</listitem>
 	</listbox>
 	

@@ -9,6 +9,15 @@ var objCoLT = {
 		CustomFormatCount: { name: "custom.count", value: 0, type: "int" },
 	},
 	
+	LinkData: {
+		linkURL: '',
+		linkText: '',
+		linkTitle: '',
+		pageTitle: '',
+		pageURL: '',
+		selection: ''
+	},
+	
 	// Miscellaneous variables
 	Initialized: false,
 
@@ -20,48 +29,51 @@ var objCoLT = {
 
 	CopyBoth: function(formatIndex, type)
 	{
-		var url;
-		var text;
-		var titleAttr;
-		var pageTitle;
-		var pageURL;
-		var selection;
-	
-		if(type == "page")
-		{
-			url = content.document.location.href;
-			text = content.document.title;
-			titleAttr = "";
-			pageTitle = "";
-			pageURL = "";
-			selection = document.commandDispatcher.focusedWindow.getSelection().toString();
-		}
-		else
-		{
-			var cMenu = document.getElementById("contentAreaContextMenu");
-
-			url = gContextMenu.linkURL;
-			text = gContextMenu.linkText();
-			if ("triggerNode" in cMenu)
-			{
-				// The triggerNode property was added in FF 4.0
-				titleAttr = cMenu.triggerNode.title;
-			}
-			else
-			{
-				// The popupNode property was deprecated in FF 4.0, but we still need it for legacy installs
-				titleAttr = document.popupNode.title;
-			}
-			pageTitle = content.document.title;
-			pageURL = content.document.location.href;
-			selection = "";
-		}
+		this.LoadLinkData(type);
+//  	Firebug.Console.log(this.LinkData);
+		
+//  	var url;
+//  	var text;
+//  	var titleAttr;
+//  	var pageTitle;
+//  	var pageURL;
+//  	var selection;
+//
+//  	if(type == "page")
+//  	{
+//  		url = content.document.location.href;
+//  		text = content.document.title;
+//  		titleAttr = "";
+//  		pageTitle = "";
+//  		pageURL = "";
+//  		selection = document.commandDispatcher.focusedWindow.getSelection().toString();
+//  	}
+//  	else
+//  	{
+//  		var cMenu = document.getElementById("contentAreaContextMenu");
+//
+//  		url = gContextMenu.linkURL;
+//  		text = gContextMenu.linkText();
+//  		if ("triggerNode" in cMenu)
+//  		{
+//  			// The triggerNode property was added in FF 4.0
+//  			titleAttr = cMenu.triggerNode.title;
+//  		}
+//  		else
+//  		{
+//  			// The popupNode property was deprecated in FF 4.0, but we still need it for legacy installs
+//  			titleAttr = document.popupNode.title;
+//  		}
+//  		pageTitle = content.document.title;
+//  		pageURL = content.document.location.href;
+//  		selection = "";
+//  	}
 		
 		var format = this.GetComplexPref("custom." + formatIndex + ".format");
 		
 		if(format == "{RT}")
 		{
-			var richText = "<a href=\"" + url + "\">" + text + "</a>";
+			var richText = "<a href=\"" + this.LinkData.linkURL + "\">" + this.LinkData.linkText + "</a>";
 			
 			var trans = Components.classes["@mozilla.org/widget/transferable;1"].
 				createInstance(Components.interfaces.nsITransferable);
@@ -87,8 +99,7 @@ var objCoLT = {
 		}
 		else
 		{
-			var myString = objCoLT.FormatString(format, text, url, titleAttr, pageTitle, pageURL, selection);
-
+			var myString = objCoLT.FormatString(format, type);
 			var result = objCoLT.PlaceOnClipboard(myString);
 			if(!result)
 				alert("ERROR: The link text and location were unable to be placed on the clipboard.");
@@ -109,9 +120,50 @@ var objCoLT = {
 			branch.clearUserPref(prefname); // Clean up the old preference
 		} catch(e) {}
 	},
-
-	FormatString: function(string, text, url, titleAttr, pageTitle, pageURL, selection)
+	
+	DoSubs: function(string)
 	{
+//  	Firebug.Console.log("DoSubs string = " + string.toUpperCase());
+//  	Firebug.Console.log(this.LinkData);
+		switch(string.toUpperCase())
+		{
+			case "%B": // Tab
+				return "\t";
+				break;
+			case "%I": // Link title attribute
+				return this.LinkData.linkTitle;
+				break;
+			case "%L": // Local time
+				var _ts = new Date();
+				return _ts.toLocaleString();
+				break;
+			case "%N": // New-line
+				return this.GetNewLine();
+				break;
+			case "%P": // Page title
+				return this.LinkData.pageTitle;
+				break;
+			case "%R": // Page URL
+				return this.LinkData.pageURL;
+				break;
+			case "%S": // Selected text
+				return this.LinkData.selection;
+				break;
+			case "%T": // Link text / Page Title
+				return this.LinkData.linkText;
+				break;
+			case "%U": // Link URL / Page URL
+				return this.LinkData.linkURL;
+				break;
+		}
+		return '';
+	},
+
+	FormatString: function(string, type)
+	{
+//  	Firebug.Console.log(" ===== Entered FormatString");
+//  	Firebug.Console.log(this.LinkData);
+		
 		var result = "";
 		var buffer = "";
 		
@@ -130,21 +182,57 @@ var objCoLT = {
 				{
 					buffer += string.charAt(i+1); // Pull in the next character
 					i++; // Bump 'i' so we skip the next character next time around the loop
-
-					if(/%[Tt]/.test(buffer)) result += text;
-					else if(/%[Uu]/.test(buffer)) result += url;
-					else if(/%[Nn]/.test(buffer)) result += this.GetNewLine();
-					else if(/%[Bb]/.test(buffer)) result += "\t";
-					else if(/%[Ii]/.test(buffer)) result += titleAttr;
-					else if(/%[Pp]/.test(buffer)) result += pageTitle;
-					else if(/%[Rr]/.test(buffer)) result += pageURL;
-					else if(/%[Ll]/.test(buffer))
+					
+					if(buffer == "%?") // Handle the conditional case
 					{
-						var _ts = new Date();
-						result += _ts.toLocaleString();
+//  					Firebug.Console.log(" ===== Parsing conditional...");
+						var conditional = "";
+						var j=i+1;
+						var obraces = 0;
+						for(j; j<string.length; j++) // Eat up everything in the conditional
+						{
+							conditional += string.charAt(j);
+							if(string.charAt(j) == '[')
+								obraces++;
+							
+							if(string.charAt(j) == ']')
+							{
+								obraces--;
+								if(obraces <= 0)
+									break;
+							}
+						}
+						conditional = conditional.replace(/^\[/, ''); // Replace leading [
+						conditional = conditional.replace(/\]$/, ''); // Replace trailing ]
+//  					Firebug.Console.log("Conditional = (" + conditional + ")");
+						var tests = conditional.split('|'); // Split on the pipe character for things to test
+//  					Firebug.Console.log(tests);
+//  					Firebug.Console.log(tests.length);
+						for(var x=0; x<tests.length; x++)
+						{
+//  						Firebug.Console.log("Test " + x + ": " + tests[x]);
+							var re = /{(.*)}/; // Capture any replacement text the user may have implemented
+							var matches = re.exec(tests[x]);
+							var tvar = tests[x].replace(re, ''); // Variable to test on
+//  						Firebug.Console.log("TVar = " + tvar);
+							var tval = (matches && matches.length > 0) ? matches[1] : ''; // Substitute value to use
+//  						Firebug.Console.log("Tval = " + tval);
+							var tbuff = this.DoSubs('%' + tvar); // Expand the test variable
+//  						Firebug.Console.log("Tbuff = " + tbuff);
+							if(tbuff.length > 0)
+							{
+								if(tval.length > 0)
+									result += this.FormatString(tval, type);
+								else
+									result += tbuff;
+								break;
+							}
+//  						Firebug.Console.log("Result = " + result);
+						}
+						i=j; // Skip over the conditional
 					}
-					else if(/%[Ss]/.test(buffer)) result += selection;
-					else result += buffer;
+					else
+						result += this.DoSubs(buffer);
 				}
 				
 				buffer = ""; // Clear the buffer
@@ -181,6 +269,39 @@ var objCoLT = {
 			return "\r";
 		else // *nix
 			return "\n";
+	},
+	
+	LoadLinkData: function(type)
+	{
+//  	this.Log("Loading Link Data with type = '" + type + "'");
+		if(type == "clear")
+		{
+			this.LinkData.linkURL = '';
+			this.LinkData.linkText = '';
+			this.LinkData.linkTitle = '';
+			this.LinkData.pageTitle = '';
+			this.LinkData.pageURL = '';
+			this.LinkData.selection = '';
+		}
+		else if(type == "page")
+		{
+			this.LinkData.linkURL = content.document.location.href;
+			this.LinkData.linkText = content.document.title;
+			this.LinkData.linkTitle = '';
+			this.LinkData.pageTitle = '';
+			this.LinkData.pageURL = '';
+			this.LinkData.selection = document.commandDispatcher.focusedWindow.getSelection().toString();
+		}
+		else
+		{
+			this.LinkData.linkURL = gContextMenu.linkURL;
+			this.LinkData.linkText = gContextMenu.linkText();
+			// The triggerNode attribute is only present in Firefox 4.0+
+			this.LinkData.linkTitle = document.getElementById("contentAreaContextMenu").triggerNode.title;
+			this.LinkData.pageTitle = content.document.title;
+			this.LinkData.pageURL = content.document.location.href;
+			this.LinkData.selection = '';
+		}
 	},
 	
 	LoadPrefs: function()
