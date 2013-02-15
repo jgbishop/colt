@@ -48,3 +48,4 @@
 <!ENTITY colt.variable.desc.selection "Geselecteerde tekst">
 <!ENTITY colt.variable.desc.newline "Nieuwe regel">
 <!ENTITY colt.variable.desc.tab "Tab">
+<!ENTITY colt.variable.desc.conditional "Voorwaardelijk">

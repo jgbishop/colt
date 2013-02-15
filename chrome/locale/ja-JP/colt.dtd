@@ -48,3 +48,4 @@
 <!ENTITY colt.variable.desc.selection "選択されたテキスト">
 <!ENTITY colt.variable.desc.newline "新しい線">
 <!ENTITY colt.variable.desc.tab "タブ">
+<!ENTITY colt.variable.desc.conditional "条件付き">

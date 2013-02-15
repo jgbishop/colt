@@ -48,3 +48,4 @@
 <!ENTITY colt.variable.desc.selection "Выделенный текст">
 <!ENTITY colt.variable.desc.newline "Новая строка">
 <!ENTITY colt.variable.desc.tab "Вкладка">
+<!ENTITY colt.variable.desc.conditional "Условие">

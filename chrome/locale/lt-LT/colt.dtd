@@ -23,6 +23,12 @@
 <!ENTITY colt.options.button.movedown "Žemyn">
 <!ENTITY colt.options.button.editformat "Taisyti...">
 <!ENTITY colt.options.button.removeformat "Pašalinti">
+<!ENTITY colt.options.button.new "Naujas">
+<!ENTITY colt.options.button.exportimport "Eksportuoti / Importuoti">
+<!ENTITY colt.options.menulabel.customformat "Individualusis formatas...">
+<!ENTITY colt.options.menulabel.separator "Skirtukas">
+<!ENTITY colt.options.menulabel.export "Eksportuoti individualiuosius formatus...">
+<!ENTITY colt.options.menulabel.import "Importuoti individualiuosius formatus...">
 <!ENTITY colt.options.textvariablelabel "Simbolizuoja kopijuojamą tekstą">
 <!ENTITY colt.options.urlvariablelabel "Simbolizuoja kopijuojamą adresą">
 <!ENTITY colt.options.linktitlevariablelabel "Simbolizuoja nuorodos antraštę">
@@ -42,3 +48,4 @@
 <!ENTITY colt.variable.desc.selection "Pažymėtas tekstas">
 <!ENTITY colt.variable.desc.newline "Nauja eilutė">
 <!ENTITY colt.variable.desc.tab "Kortelė">
+<!ENTITY colt.variable.desc.conditional "Sąlyginis">

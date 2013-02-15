@@ -48,3 +48,4 @@
 <!ENTITY colt.variable.desc.selection "Markerad text">
 <!ENTITY colt.variable.desc.newline "Ny rad">
 <!ENTITY colt.variable.desc.tab "Tabulator">
+<!ENTITY colt.variable.desc.conditional "Villkorlig">

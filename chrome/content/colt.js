@@ -30,47 +30,8 @@ var objCoLT = {
 	CopyBoth: function(formatIndex, type)
 	{
 		this.LoadLinkData(type);
-//  	Firebug.Console.log(this.LinkData);
-		
-//  	var url;
-//  	var text;
-//  	var titleAttr;
-//  	var pageTitle;
-//  	var pageURL;
-//  	var selection;
-//
-//  	if(type == "page")
-//  	{
-//  		url = content.document.location.href;
-//  		text = content.document.title;
-//  		titleAttr = "";
-//  		pageTitle = "";
-//  		pageURL = "";
-//  		selection = document.commandDispatcher.focusedWindow.getSelection().toString();
-//  	}
-//  	else
-//  	{
-//  		var cMenu = document.getElementById("contentAreaContextMenu");
-//
-//  		url = gContextMenu.linkURL;
-//  		text = gContextMenu.linkText();
-//  		if ("triggerNode" in cMenu)
-//  		{
-//  			// The triggerNode property was added in FF 4.0
-//  			titleAttr = cMenu.triggerNode.title;
-//  		}
-//  		else
-//  		{
-//  			// The popupNode property was deprecated in FF 4.0, but we still need it for legacy installs
-//  			titleAttr = document.popupNode.title;
-//  		}
-//  		pageTitle = content.document.title;
-//  		pageURL = content.document.location.href;
-//  		selection = "";
-//  	}
 		
 		var format = this.GetComplexPref("custom." + formatIndex + ".format");
-		
 		if(format == "{RT}")
 		{
 			var richText = "<a href=\"" + this.LinkData.linkURL + "\">" + this.LinkData.linkText + "</a>";
@@ -123,8 +84,6 @@ var objCoLT = {
 	
 	DoSubs: function(string)
 	{
-//  	Firebug.Console.log("DoSubs string = " + string.toUpperCase());
-//  	Firebug.Console.log(this.LinkData);
 		switch(string.toUpperCase())
 		{
 			case "%B": // Tab
@@ -161,9 +120,6 @@ var objCoLT = {
 
 	FormatString: function(string, type)
 	{
-//  	Firebug.Console.log(" ===== Entered FormatString");
-//  	Firebug.Console.log(this.LinkData);
-		
 		var result = "";
 		var buffer = "";
 		
@@ -185,7 +141,6 @@ var objCoLT = {
 					
 					if(buffer == "%?") // Handle the conditional case
 					{
-//  					Firebug.Console.log(" ===== Parsing conditional...");
 						var conditional = "";
 						var j=i+1;
 						var obraces = 0;
@@ -204,21 +159,14 @@ var objCoLT = {
 						}
 						conditional = conditional.replace(/^\[/, ''); // Replace leading [
 						conditional = conditional.replace(/\]$/, ''); // Replace trailing ]
-//  					Firebug.Console.log("Conditional = (" + conditional + ")");
 						var tests = conditional.split('|'); // Split on the pipe character for things to test
-//  					Firebug.Console.log(tests);
-//  					Firebug.Console.log(tests.length);
 						for(var x=0; x<tests.length; x++)
 						{
-//  						Firebug.Console.log("Test " + x + ": " + tests[x]);
 							var re = /{(.*)}/; // Capture any replacement text the user may have implemented
 							var matches = re.exec(tests[x]);
 							var tvar = tests[x].replace(re, ''); // Variable to test on
-//  						Firebug.Console.log("TVar = " + tvar);
 							var tval = (matches && matches.length > 0) ? matches[1] : ''; // Substitute value to use
-//  						Firebug.Console.log("Tval = " + tval);
 							var tbuff = this.DoSubs('%' + tvar); // Expand the test variable
-//  						Firebug.Console.log("Tbuff = " + tbuff);
 							if(tbuff.length > 0)
 							{
 								if(tval.length > 0)
@@ -227,7 +175,6 @@ var objCoLT = {
 									result += tbuff;
 								break;
 							}
-//  						Firebug.Console.log("Result = " + result);
 						}
 						i=j; // Skip over the conditional
 					}
@@ -273,14 +220,14 @@ var objCoLT = {
 	
 	LoadLinkData: function(type)
 	{
-//  	this.Log("Loading Link Data with type = '" + type + "'");
-		if(type == "clear")
+		if(type == "link")
 		{
-			this.LinkData.linkURL = '';
-			this.LinkData.linkText = '';
-			this.LinkData.linkTitle = '';
-			this.LinkData.pageTitle = '';
-			this.LinkData.pageURL = '';
+			this.LinkData.linkURL = gContextMenu.linkURL;
+			this.LinkData.linkText = gContextMenu.linkText();
+			// The triggerNode attribute is only present in Firefox 4.0+
+			this.LinkData.linkTitle = document.getElementById("contentAreaContextMenu").triggerNode.title;
+			this.LinkData.pageTitle = content.document.title;
+			this.LinkData.pageURL = content.document.location.href;
 			this.LinkData.selection = '';
 		}
 		else if(type == "page")
@@ -294,12 +241,11 @@ var objCoLT = {
 		}
 		else
 		{
-			this.LinkData.linkURL = gContextMenu.linkURL;
-			this.LinkData.linkText = gContextMenu.linkText();
-			// The triggerNode attribute is only present in Firefox 4.0+
-			this.LinkData.linkTitle = document.getElementById("contentAreaContextMenu").triggerNode.title;
-			this.LinkData.pageTitle = content.document.title;
-			this.LinkData.pageURL = content.document.location.href;
+			this.LinkData.linkURL = '';
+			this.LinkData.linkText = '';
+			this.LinkData.linkTitle = '';
+			this.LinkData.pageTitle = '';
+			this.LinkData.pageURL = '';
 			this.LinkData.selection = '';
 		}
 	},
@@ -593,3 +539,4 @@ var objCoLT = {
 
 window.addEventListener('load', objCoLT.Startup, false);
 window.addEventListener('unload', objCoLT.Shutdown, false);
+
