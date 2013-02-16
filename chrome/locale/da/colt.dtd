@@ -23,6 +23,12 @@
 <!ENTITY colt.options.button.movedown "Flyt ned">
 <!ENTITY colt.options.button.editformat "Rediger...">
 <!ENTITY colt.options.button.removeformat "Fjern">
+<!ENTITY colt.options.button.new "New">
+<!ENTITY colt.options.button.exportimport "Export / Import">
+<!ENTITY colt.options.menulabel.customformat "Custom Format...">
+<!ENTITY colt.options.menulabel.separator "Separator">
+<!ENTITY colt.options.menulabel.export "Export Custom Formats...">
+<!ENTITY colt.options.menulabel.import "Import Custom Formats...">
 <!ENTITY colt.options.textvariablelabel "Bruges til at angive kopieret tekst">
 <!ENTITY colt.options.urlvariablelabel "Bruges til at angive kopieret URL">
 <!ENTITY colt.options.linktitlevariablelabel "Bruges til at angive linkets titel-attribut">
@@ -42,3 +48,4 @@
 <!ENTITY colt.variable.desc.selection "Valgt tekst">
 <!ENTITY colt.variable.desc.newline "Ny linje">
 <!ENTITY colt.variable.desc.tab "Tab">
+<!ENTITY colt.variable.desc.conditional "Conditional">

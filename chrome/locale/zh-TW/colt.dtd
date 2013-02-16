@@ -23,6 +23,12 @@
 <!ENTITY colt.options.button.movedown "向下移">
 <!ENTITY colt.options.button.editformat "編輯">
 <!ENTITY colt.options.button.removeformat "移除">
+<!ENTITY colt.options.button.new "New">
+<!ENTITY colt.options.button.exportimport "Export / Import">
+<!ENTITY colt.options.menulabel.customformat "Custom Format...">
+<!ENTITY colt.options.menulabel.separator "Separator">
+<!ENTITY colt.options.menulabel.export "Export Custom Formats...">
+<!ENTITY colt.options.menulabel.import "Import Custom Formats...">
 <!ENTITY colt.options.textvariablelabel "是「所複製文字」的標註">
 <!ENTITY colt.options.urlvariablelabel "是「所複製網址」的標註">
 <!ENTITY colt.options.linktitlevariablelabel "Used to specify the link's title attribute">
@@ -42,3 +48,4 @@
 <!ENTITY colt.variable.desc.selection "Selected Text">
 <!ENTITY colt.variable.desc.newline "New Line">
 <!ENTITY colt.variable.desc.tab "Tab">
+<!ENTITY colt.variable.desc.conditional "Conditional">

@@ -23,6 +23,12 @@
 <!ENTITY colt.options.button.movedown "Posunout dolů">
 <!ENTITY colt.options.button.editformat "Upravit...">
 <!ENTITY colt.options.button.removeformat "Odstranit">
+<!ENTITY colt.options.button.new "New">
+<!ENTITY colt.options.button.exportimport "Export / Import">
+<!ENTITY colt.options.menulabel.customformat "Custom Format...">
+<!ENTITY colt.options.menulabel.separator "Separator">
+<!ENTITY colt.options.menulabel.export "Export Custom Formats...">
+<!ENTITY colt.options.menulabel.import "Import Custom Formats...">
 <!ENTITY colt.options.textvariablelabel "Zastupuje kopírovaný text">
 <!ENTITY colt.options.urlvariablelabel "Zastupuje kopírované URL">
 <!ENTITY colt.options.linktitlevariablelabel "Used to specify the link's title attribute">
@@ -42,3 +48,4 @@
 <!ENTITY colt.variable.desc.selection "Selected Text">
 <!ENTITY colt.variable.desc.newline "New Line">
 <!ENTITY colt.variable.desc.tab "Tab">
+<!ENTITY colt.variable.desc.conditional "Conditional">

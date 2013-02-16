@@ -23,6 +23,12 @@
 <!ENTITY colt.options.button.movedown "تحريك للاسفل">
 <!ENTITY colt.options.button.editformat "تحرير...">
 <!ENTITY colt.options.button.removeformat "حذف">
+<!ENTITY colt.options.button.new "New">
+<!ENTITY colt.options.button.exportimport "Export / Import">
+<!ENTITY colt.options.menulabel.customformat "Custom Format...">
+<!ENTITY colt.options.menulabel.separator "Separator">
+<!ENTITY colt.options.menulabel.export "Export Custom Formats...">
+<!ENTITY colt.options.menulabel.import "Import Custom Formats...">
 <!ENTITY colt.options.textvariablelabel "تستخدم لتحديد نسخ النص">
 <!ENTITY colt.options.urlvariablelabel "تستخدم لتحديد نسخ رابط">
 <!ENTITY colt.options.linktitlevariablelabel "تستخدم لتحديد رابط عنوان سمة">
@@ -42,3 +48,4 @@
 <!ENTITY colt.variable.desc.selection "النص المحدد">
 <!ENTITY colt.variable.desc.newline "سطر جديد">
 <!ENTITY colt.variable.desc.tab "Tab">
+<!ENTITY colt.variable.desc.conditional "Conditional">

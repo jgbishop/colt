@@ -48,3 +48,4 @@
 <!ENTITY colt.variable.desc.selection "Texto seleccionado">
 <!ENTITY colt.variable.desc.newline "Nueva línea">
 <!ENTITY colt.variable.desc.tab "Tabulación">
+<!ENTITY colt.variable.desc.conditional "Conditional">

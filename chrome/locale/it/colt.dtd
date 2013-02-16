@@ -48,3 +48,4 @@
 <!ENTITY colt.variable.desc.selection "Testo selezionato">
 <!ENTITY colt.variable.desc.newline "Nuova riga">
 <!ENTITY colt.variable.desc.tab "Tabulatore">
+<!ENTITY colt.variable.desc.conditional "Conditional">

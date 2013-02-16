@@ -23,6 +23,12 @@
 <!ENTITY colt.options.button.movedown "حرکت به پایین">
 <!ENTITY colt.options.button.editformat "ویرایش...">
 <!ENTITY colt.options.button.removeformat "پاک کردن...">
+<!ENTITY colt.options.button.new "New">
+<!ENTITY colt.options.button.exportimport "Export / Import">
+<!ENTITY colt.options.menulabel.customformat "Custom Format...">
+<!ENTITY colt.options.menulabel.separator "Separator">
+<!ENTITY colt.options.menulabel.export "Export Custom Formats...">
+<!ENTITY colt.options.menulabel.import "Import Custom Formats...">
 <!ENTITY colt.options.textvariablelabel "برای مشخص کردن متن کپی شده به کار می رود">
 <!ENTITY colt.options.urlvariablelabel "برای مشخص کردن نشانی کپی شده به کار می رود">
 <!ENTITY colt.options.linktitlevariablelabel "مورد استفاده برای مشخص کردن عنوان لینک">
@@ -42,3 +48,4 @@
 <!ENTITY colt.variable.desc.selection "Selected Text">
 <!ENTITY colt.variable.desc.newline "خط جدید">
 <!ENTITY colt.variable.desc.tab "Tab">
+<!ENTITY colt.variable.desc.conditional "Conditional">

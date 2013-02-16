@@ -1,7 +1,7 @@
 //***************
 //Version History
 //***************
-[2.5.10]
+[2.6.0]
 + Added support for conditional expressions using the %?[] variable
 + Added support for importing and exporting custom formats (useful for moving them between systems)
 + Improved the way custom format events are handled
