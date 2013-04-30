@@ -1,6 +1,11 @@
 //***************
 //Version History
 //***************
+[2.6.1]
++ Changed the minimum supported Firefox version to 17.0, since the 10.x line is no longer supported
++ Bumped the maxVersion to 30.*
++ Various locale updates
+
 [2.6.0]
 + Added support for conditional expressions using the %?[] variable
 + Added support for importing and exporting custom formats (useful for moving them between systems)
