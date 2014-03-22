@@ -13,6 +13,8 @@ var objCoLT = {
 		CustomFormatCount: { name: "custom.count", value: 0, type: "int" },
 	},
 	
+	CustomFormats: null,
+	
 	LinkData: {
 		linkURL: '',
 		linkText: '',
@@ -40,8 +42,7 @@ var objCoLT = {
 	{
 		this.LoadLinkData(type);
 		
-		var format = this.GetComplexPref("custom." + formatIndex + ".format");
-		if(format == "{RT}")
+		if(this.CustomFormats[formatIndex].format == "{RT}")
 		{
 			var richText = "<a href=\"" + this.LinkData.linkURL + "\">" + this.LinkData.linkText + "</a>";
 			
@@ -69,7 +70,7 @@ var objCoLT = {
 		}
 		else
 		{
-			var myString = objCoLT.FormatString(format, type);
+			var myString = objCoLT.FormatString(this.CustomFormats[formatIndex].format, type);
 			var result = objCoLT.PlaceOnClipboard(myString);
 			if(!result)
 				alert("ERROR: The link text and location were unable to be placed on the clipboard.");
@@ -442,7 +443,7 @@ var objCoLT = {
 		if(objCoLT.Initialized == false)
 		{
 			objCoLT.Initialized = true;
-			objCoLT.Log("We're starting up!");
+			objCoLT.Log("We're starting up!"); // TODO: Remove
 	
 			if(objCoLT.PrefBranch.prefHasUserValue("prefs_version") == false)
 			{
@@ -459,8 +460,7 @@ var objCoLT = {
 			}
 			
 			objCoLT.LoadPrefs();
-			
-			objCoLT.LoadFormats();
+			objCoLT.LoadCustomFormats();
 	
 			// Update our preferences if necessary
 			var pv = objCoLT.PrefBranch.getIntPref("prefs_version");
@@ -502,27 +502,23 @@ var objCoLT = {
 	{
 		this.PurgeContextSubMenu(node);
 	
-		for(var i=1; i <= this.Prefs.CustomFormatCount.value; i++)
+		for(var i=0; i < this.CustomFormats.length; i++)
 		{
-			var separatorPref = "custom." + i + ".separator";
-	
-			if(this.PrefBranch.prefHasUserValue(separatorPref))
+			if(this.CustomFormats[i].hasOwnProperty("isSep") && 
+			   this.CustomFormats[i].isSep == true)
 			{
 				var menuseparator = document.createElement("menuseparator");
 				node.appendChild(menuseparator);
 			}
 			else
 			{
-				var label = this.GetComplexPref("custom." + i + ".label");
-				var key = this.GetComplexPref("custom." + i + ".accesskey");
-				
 				// Skip any weird occurances that don't have a label (shouldn't happen, but you never know)
-				if(label && label != "")
+				if(this.CustomFormats[i].hasOwnProperty("label") && this.CustomFormats[i].label != "")
 				{
 					var menuitem = document.createElement("menuitem");
-					menuitem.setAttribute("label", label);
-					if(key && key != "")
-						menuitem.setAttribute("accesskey", key);
+					menuitem.setAttribute("label", this.CustomFormats[i].label);
+					if(this.CustomFormats[i].hasOwnProperty("key") && this.CustomFormats[i].key != "")
+						menuitem.setAttribute("accesskey", this.CustomFormats[i].key);
 					menuitem.setAttribute("formatindex", i);
 					node.appendChild(menuitem);
 				}
@@ -563,22 +559,31 @@ var objCoLT = {
 				}
 				formatArray.push(formatObj);
 			}
-			this.LogRaw(formatArray);
-			this.Log(JSON.stringify(formatArray));
+//  		this.LogRaw(formatArray); // TODO: Remove
+//  		this.Log(JSON.stringify(formatArray)); // TODO: Remove
 			var file = FileUtils.getFile("ProfD", [this.FormatsFile]);
 			var ostream = FileUtils.openSafeFileOutputStream(file);
 			var converter = Components.classes["@mozilla.org/intl/scriptableunicodeconverter"].
 							createInstance(Components.interfaces.nsIScriptableUnicodeConverter);
 			converter.charset = "UTF-8";
 			var istream = converter.convertToInputStream(JSON.stringify(formatArray));
-			NetUtil.asyncCopy(istream, ostream);
+			NetUtil.asyncCopy(istream, ostream, function(status) {
+				if(!Components.isSuccessCode(status))
+				{
+					// TODO: Handle error
+					return;
+				}
+				
+				FileUtils.closeSafeFileOutputStream(ostream);
+				istream.close();
+			});
 		}
 		
 		// Finally, update the stored preference version
-		//this.PrefBranch.setIntPref("prefs_version", this.PrefVersion);
+		//this.PrefBranch.setIntPref("prefs_version", this.PrefVersion); // TODO: Reenable
 	},
 	
-	LoadFormats: function()
+	LoadCustomFormats: function()
 	{
 		var file = FileUtils.getFile("ProfD", [this.FormatsFile]);
 		if(file.exists())
@@ -598,8 +603,11 @@ var objCoLT = {
 								createInstance(Components.interfaces.nsIScriptableUnicodeConverter);
 				converter.charset = "UTF-8";
 				var newData = converter.ConvertToUnicode(data);
-				objCoLT.Log("Loaded Data File!");
-				objCoLT.LogRaw(newData);
+				objCoLT.Log("Loaded Data File!"); // TODO: Remove
+				objCoLT.LogRaw(newData); // TODO: Remove
+				objCoLT.CustomFormats = JSON.parse(newData);
+				objCoLT.Log("Custom Formats Follow:");
+				objCoLT.LogRaw(objCoLT.CustomFormats); // TODO: Remove
 			});
 		}
 		else
