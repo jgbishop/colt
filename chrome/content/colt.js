@@ -1,6 +1,10 @@
+Components.utils.import('resource://gre/modules/devtools/Console.jsm');
+Components.utils.import('resource://gre/modules/FileUtils.jsm');
+Components.utils.import('resource://gre/modules/NetUtil.jsm');
+
 var objCoLT = {
 	PrefBranch: Components.classes["@mozilla.org/preferences-service;1"].getService(Components.interfaces.nsIPrefService).getBranch("extensions.colt."),
-	PrefVersion: 3,
+	PrefVersion: 4,
 	
 	Prefs: {
 		ShowCopyText: { name: "showcopytext", value: false },
@@ -19,12 +23,17 @@ var objCoLT = {
 	},
 	
 	// Miscellaneous variables
+	FormatsFile: "colt-formats.json",
 	Initialized: false,
 
 	Log: function(aMessage)
 	{
-		var consoleService = Components.classes['@mozilla.org/consoleservice;1'].getService(Components.interfaces.nsIConsoleService);
-		consoleService.logStringMessage('CoLT: ' + aMessage);
+		console.log('CoLT: ' + aMessage);
+	},
+	
+	LogRaw: function(data)
+	{
+		console.log(data);
 	},
 
 	CopyBoth: function(formatIndex, type)
@@ -433,6 +442,7 @@ var objCoLT = {
 		if(objCoLT.Initialized == false)
 		{
 			objCoLT.Initialized = true;
+			objCoLT.Log("We're starting up!");
 	
 			if(objCoLT.PrefBranch.prefHasUserValue("prefs_version") == false)
 			{
@@ -449,6 +459,8 @@ var objCoLT = {
 			}
 			
 			objCoLT.LoadPrefs();
+			
+			objCoLT.LoadFormats();
 	
 			// Update our preferences if necessary
 			var pv = objCoLT.PrefBranch.getIntPref("prefs_version");
@@ -532,8 +544,72 @@ var objCoLT = {
 			}
 		}
 		
+		if(currentVersion < 4)
+		{
+			// Migrate custom formats to an external JSON file
+			var formatArray = [];
+			for(var i=1; i <= this.Prefs.CustomFormatCount.value; i++)
+			{
+				var formatObj = {};
+				if(this.PrefBranch.prefHasUserValue("custom." + i + ".separator"))
+				{
+					formatObj.isSep = true;
+				}
+				else
+				{
+					formatObj.label = this.GetComplexPref("custom." + i + ".label");
+					formatObj.key = this.GetComplexPref("custom." + i + ".accesskey");
+					formatObj.format = this.GetComplexPref("custom." + i + ".format");
+				}
+				formatArray.push(formatObj);
+			}
+			this.LogRaw(formatArray);
+			this.Log(JSON.stringify(formatArray));
+			var file = FileUtils.getFile("ProfD", [this.FormatsFile]);
+			var ostream = FileUtils.openSafeFileOutputStream(file);
+			var converter = Components.classes["@mozilla.org/intl/scriptableunicodeconverter"].
+							createInstance(Components.interfaces.nsIScriptableUnicodeConverter);
+			converter.charset = "UTF-8";
+			var istream = converter.convertToInputStream(JSON.stringify(formatArray));
+			NetUtil.asyncCopy(istream, ostream);
+		}
+		
 		// Finally, update the stored preference version
-		this.PrefBranch.setIntPref("prefs_version", this.PrefVersion);
+		//this.PrefBranch.setIntPref("prefs_version", this.PrefVersion);
+	},
+	
+	LoadFormats: function()
+	{
+		var file = FileUtils.getFile("ProfD", [this.FormatsFile]);
+		if(file.exists())
+		{
+			var channel = NetUtil.newChannel(file);
+			channel.contentType = "application/json";
+			
+			NetUtil.asyncFetch(channel, function(inputStream, status) {
+				if(!Components.isSuccessCode(status))
+				{
+					// TODO: Handle error
+					return;
+				}
+				
+				var data = NetUtil.readInputStreamToString(inputStream, inputStream.available());
+				var converter = Components.classes["@mozilla.org/intl/scriptableunicodeconverter"].
+								createInstance(Components.interfaces.nsIScriptableUnicodeConverter);
+				converter.charset = "UTF-8";
+				var newData = converter.ConvertToUnicode(data);
+				objCoLT.Log("Loaded Data File!");
+				objCoLT.LogRaw(newData);
+			});
+		}
+		else
+		{
+			// TODO: Load defaults
+		}
+	},
+	
+	StoreCustomFormats: function()
+	{
 	}
 };
 

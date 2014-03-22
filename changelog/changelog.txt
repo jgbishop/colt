@@ -1,6 +1,10 @@
 //***************
 //Version History
 //***************
+[2.6.2]
++ Improved the way internal logging is handled
++ Bumped the minVersion to 24.0, and the maxVersion to 45.*
+
 [2.6.1]
 + Changed the minimum supported Firefox version to 17.0, since the 10.x line is no longer supported
 + Bumped the maxVersion to 30.*
