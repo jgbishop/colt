@@ -10,7 +10,7 @@ var objCoLT = {
 		ShowCopyText: { name: "showcopytext", value: false },
 		ShowCopyBoth: { name: "showcopyboth", value: false },
 		ShowCopyPage: { name: "showcopypage", value: false },
-		CustomFormatCount: { name: "custom.count", value: 0, type: "int" },
+//  	CustomFormatCount: { name: "custom.count", value: 0, type: "int" },
 	},
 	
 	CustomFormats: null,
@@ -228,49 +228,7 @@ var objCoLT = {
 			return "\n";
 	},
 	
-	LoadLinkData: function(type)
-	{
-		if(type == "link")
-		{
-			this.LinkData.linkURL = gContextMenu.linkURL;
-			this.LinkData.linkText = gContextMenu.linkText();
-			// The triggerNode attribute is only present in Firefox 4.0+
-			this.LinkData.linkTitle = document.getElementById("contentAreaContextMenu").triggerNode.title;
-			this.LinkData.pageTitle = content.document.title;
-			this.LinkData.pageURL = content.document.location.href;
-			this.LinkData.selection = '';
-		}
-		else if(type == "page")
-		{
-			this.LinkData.linkURL = content.document.location.href;
-			this.LinkData.linkText = content.document.title;
-			this.LinkData.linkTitle = '';
-			this.LinkData.pageTitle = '';
-			this.LinkData.pageURL = '';
-			this.LinkData.selection = document.commandDispatcher.focusedWindow.getSelection().toString();
-		}
-		else
-		{
-			this.LinkData.linkURL = '';
-			this.LinkData.linkText = '';
-			this.LinkData.linkTitle = '';
-			this.LinkData.pageTitle = '';
-			this.LinkData.pageURL = '';
-			this.LinkData.selection = '';
-		}
-	},
-	
-	LoadPrefs: function()
-	{
-		var b = this.PrefBranch;
-	
-		this.Prefs.ShowCopyText.value = b.getBoolPref(this.Prefs.ShowCopyText.name);
-		this.Prefs.ShowCopyBoth.value = b.getBoolPref(this.Prefs.ShowCopyBoth.name);
-		this.Prefs.ShowCopyPage.value = b.getBoolPref(this.Prefs.ShowCopyPage.name);
-		this.Prefs.CustomFormatCount.value = b.getIntPref(this.Prefs.CustomFormatCount.name);
-	},
-
-	MigratePrefs: function(oldBranch)
+	Legacy_MigratePrefs: function(oldBranch)
 	{
 		for(var pid in this.Prefs)
 		{
@@ -295,7 +253,7 @@ var objCoLT = {
 			}
 		}
 		
-		var customCount = this.PrefBranch.getIntPref(this.Prefs.CustomFormatCount.name);
+		var customCount = this.PrefBranch.getIntPref("custom.count");
 		for(var i=1; i <= customCount; i++)
 		{
 			var name = "custom." + i + ".separator";
@@ -335,11 +293,54 @@ var objCoLT = {
 			this.DeletePref(oldBranch, "version");
 	},
 	
+	LoadLinkData: function(type)
+	{
+		if(type == "link")
+		{
+			this.LinkData.linkURL = gContextMenu.linkURL;
+			this.LinkData.linkText = gContextMenu.linkText();
+			// The triggerNode attribute is only present in Firefox 4.0+
+			this.LinkData.linkTitle = document.getElementById("contentAreaContextMenu").triggerNode.title;
+			this.LinkData.pageTitle = content.document.title;
+			this.LinkData.pageURL = content.document.location.href;
+			this.LinkData.selection = '';
+		}
+		else if(type == "page")
+		{
+			this.LinkData.linkURL = content.document.location.href;
+			this.LinkData.linkText = content.document.title;
+			this.LinkData.linkTitle = '';
+			this.LinkData.pageTitle = '';
+			this.LinkData.pageURL = '';
+			this.LinkData.selection = document.commandDispatcher.focusedWindow.getSelection().toString();
+		}
+		else
+		{
+			this.LinkData.linkURL = '';
+			this.LinkData.linkText = '';
+			this.LinkData.linkTitle = '';
+			this.LinkData.pageTitle = '';
+			this.LinkData.pageURL = '';
+			this.LinkData.selection = '';
+		}
+	},
+	
+	LoadPrefs: function()
+	{
+		var b = this.PrefBranch;
+	
+		this.Prefs.ShowCopyText.value = b.getBoolPref(this.Prefs.ShowCopyText.name);
+		this.Prefs.ShowCopyBoth.value = b.getBoolPref(this.Prefs.ShowCopyBoth.name);
+		this.Prefs.ShowCopyPage.value = b.getBoolPref(this.Prefs.ShowCopyPage.name);
+//  	this.Prefs.CustomFormatCount.value = b.getIntPref(this.Prefs.CustomFormatCount.name);
+	},
+
 	NukePreviousPrefs: function()
 	{
-		if(this.PrefBranch.prefHasUserValue(objCoLT.Prefs.CustomFormatCount.name))
+		var countPrefName = "custom.count";
+		if(this.PrefBranch.prefHasUserValue(countPrefName))
 		{
-			var c = this.PrefBranch.getIntPref(this.Prefs.CustomFormatCount.name);
+			var c = this.PrefBranch.getIntPref(countPrefName);
 			for(var i=1; i<=c; i++)
 			{
 				var separatorPref = "custom." + i + ".separator";
@@ -361,7 +362,7 @@ var objCoLT = {
 				}
 			}
 			
-			this.DeletePref(this.PrefBranch, this.Prefs.CustomFormatCount.name);
+			this.DeletePref(this.PrefBranch, countPrefName);
 		}
 	},
 	
@@ -397,36 +398,18 @@ var objCoLT = {
 	{
 		var stringBundle = document.getElementById("CLT-String-Bundle");
 		
-		var defaults = {
-			HTML: {label: stringBundle.getString("CLT_DefaultLabelHTMLLink"), key: 'H', format: "<a href=\"%U\">%T</a>"},
-			PlainText: {label: stringBundle.getString("CLT_DefaultLabelPlainText"), key: 'P', format: "%T - %U"},
-			Sep1: {label: "---"},
-			BBCode: {label: "BB Code", key: 'B', format: "[url=%U]%T[/url]"},
-			Markdown: {label: "Markdown", key: 'M', format: "[%T](%U)"},
-			Wikipedia: {label: "Wikipedia", key: 'W', format: "[%U %T]"},
-			Sep2: {label: "---"},
-			RichText: {label: "Rich Text HTML", key: 'R', format: "{RT}"},
-		};
+		this.CustomFormats = [
+			{label: stringBundle.getString("CLT_DefaultLabelHTMLLink"), key: 'H', format: "<a href=\"%U\">%T</a>"},
+			{label: stringBundle.getString("CLT_DefaultLabelPlainText"), key: 'P', format: "%T - %U"},
+			{isSep: true},
+			{label: "BB Code", key: 'B', format: "[url=%U]%T[/url]"},
+			{label: "Markdown", key: 'M', format: "[%T](%U)"},
+			{label: "Wikipedia", key: 'W', format: "[%U %T]"},
+			{isSep: true},
+			{label: "Rich Text HTML", key: 'R', format: "{RT}"}
+		];
 		
-		var counter = 0;
-		for(var d in defaults)
-		{
-			counter++;
-			
-			var item = defaults[d];
-			if(item.label == "---")
-			{
-				this.PrefBranch.setBoolPref("custom." + counter + ".separator", true);
-			}
-			else
-			{
-				this.SetComplexPref("custom." + counter + ".label", item.label);
-				this.SetComplexPref("custom." + counter + ".accesskey", item.key);
-				this.SetComplexPref("custom." + counter + ".format", item.format);
-			}
-		}
-		
-		this.PrefBranch.setIntPref(this.Prefs.CustomFormatCount.name, counter);
+		// TODO: Write these values to our storage file
 	},
 
 	Shutdown: function()
@@ -443,13 +426,12 @@ var objCoLT = {
 		if(objCoLT.Initialized == false)
 		{
 			objCoLT.Initialized = true;
-			objCoLT.Log("We're starting up!"); // TODO: Remove
 	
 			if(objCoLT.PrefBranch.prefHasUserValue("prefs_version") == false)
 			{
 				var oldBranch = Components.classes["@mozilla.org/preferences-service;1"].getService(Components.interfaces.nsIPrefService).getBranch("colt.");
 				if(oldBranch.prefHasUserValue(objCoLT.Prefs.CustomFormatCount.name))
-					objCoLT.MigratePrefs(oldBranch); // Migrate old preferences
+					objCoLT.Legacy_MigratePrefs(oldBranch); // Migrate old preferences
 				else
 				{
 					objCoLT.NukePreviousPrefs();
@@ -458,14 +440,19 @@ var objCoLT = {
 				
 				objCoLT.PrefBranch.setIntPref("prefs_version", objCoLT.PrefVersion);
 			}
+			else
+			{
+				// Update our preferences if necessary
+				var pv = objCoLT.PrefBranch.getIntPref("prefs_version");
+				if(pv < objCoLT.PrefVersion)
+					objCoLT.UpdatePrefs(pv);
+			}
+			
+			// TODO: The order of all of this needs to change. The UpdatePrefs call needs to be before we
+			// actually load our custom formats. The entire update process ought to be mapped out.
 			
 			objCoLT.LoadPrefs();
 			objCoLT.LoadCustomFormats();
-	
-			// Update our preferences if necessary
-			var pv = objCoLT.PrefBranch.getIntPref("prefs_version");
-			if(pv < objCoLT.PrefVersion)
-				objCoLT.UpdatePrefs(pv);
 				
 			var menu = document.getElementById("contentAreaContextMenu");
 			menu.addEventListener('popupshowing', objCoLT.UpdateContextMenu, false);
@@ -528,15 +515,19 @@ var objCoLT = {
 	
 	UpdatePrefs: function(currentVersion)
 	{
-		for(var i=1; i <= this.Prefs.CustomFormatCount.value; i++)
+		if(currentVersion < 3)
 		{
-			var sepPref = "custom." + i + ".separator";
-			var isSep = this.PrefBranch.prefHasUserValue(sepPref);
-			
-			var keyPref = "custom." + i + ".accesskey";
-			if(isSep == false && this.PrefBranch.prefHasUserValue(keyPref) == false)
+			var customCount = this.PrefBranch.getIntPref("custom.count");
+			for(var i=1; i <= customCount; i++)
 			{
-				this.SetComplexPref(keyPref, ""); // Set them to blank if we're upgrading
+				var sepPref = "custom." + i + ".separator";
+				var isSep = this.PrefBranch.prefHasUserValue(sepPref);
+				
+				var keyPref = "custom." + i + ".accesskey";
+				if(isSep == false && this.PrefBranch.prefHasUserValue(keyPref) == false)
+				{
+					this.SetComplexPref(keyPref, ""); // Set them to blank if we're upgrading
+				}
 			}
 		}
 		
@@ -583,9 +574,14 @@ var objCoLT = {
 		//this.PrefBranch.setIntPref("prefs_version", this.PrefVersion); // TODO: Reenable
 	},
 	
-	LoadCustomFormats: function()
+	LoadCustomFormats: function(filePath)
 	{
-		var file = FileUtils.getFile("ProfD", [this.FormatsFile]);
+		var file = null;
+		if(typeof filePath === "undefined")
+			file = FileUtils.getFile("ProfD", [this.FormatsFile]);
+		else
+			file = new FileUtils.File(filePath);
+		
 		if(file.exists())
 		{
 			var channel = NetUtil.newChannel(file);
@@ -606,7 +602,7 @@ var objCoLT = {
 				objCoLT.Log("Loaded Data File!"); // TODO: Remove
 				objCoLT.LogRaw(newData); // TODO: Remove
 				objCoLT.CustomFormats = JSON.parse(newData);
-				objCoLT.Log("Custom Formats Follow:");
+				objCoLT.Log("Custom Formats Follow:"); // TODO: Remove
 				objCoLT.LogRaw(objCoLT.CustomFormats); // TODO: Remove
 			});
 		}
