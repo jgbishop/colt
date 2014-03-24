@@ -1,5 +1,6 @@
 content colt chrome/content/
 overlay chrome://browser/content/browser.xul	chrome://colt/content/colt.xul
+resource colt modules/
 
 locale	colt	en-US	chrome/locale/en-US/
 locale	colt	ar		chrome/locale/ar/

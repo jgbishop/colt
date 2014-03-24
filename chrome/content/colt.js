@@ -10,10 +10,9 @@ var objCoLT = {
 		ShowCopyText: { name: "showcopytext", value: false },
 		ShowCopyBoth: { name: "showcopyboth", value: false },
 		ShowCopyPage: { name: "showcopypage", value: false },
-//  	CustomFormatCount: { name: "custom.count", value: 0, type: "int" },
 	},
 	
-	CustomFormats: null,
+	CustomFormats: [],
 	
 	LinkData: {
 		linkURL: '',
@@ -211,11 +210,6 @@ var objCoLT = {
 		return result;
 	},
 	
-	GetComplexPref: function(name)
-	{
-		return this.PrefBranch.getComplexValue(name, Components.interfaces.nsISupportsString).data;
-	},
-
 	GetNewLine: function()
 	{
 		var platform = navigator.platform.toLowerCase();
@@ -228,6 +222,11 @@ var objCoLT = {
 			return "\n";
 	},
 	
+	Legacy_GetComplexPref: function(name)
+	{
+		return this.PrefBranch.getComplexValue(name, Components.interfaces.nsISupportsString).data;
+	},
+
 	Legacy_MigratePrefs: function(oldBranch)
 	{
 		for(var pid in this.Prefs)
@@ -274,13 +273,13 @@ var objCoLT = {
 				// Migrate the label
 				name = "custom." + i + ".label";
 				value = oldBranch.getCharPref(name);
-				this.SetComplexPref(name, value);
+				this.Legacy_SetComplexPref(name, value);
 				this.DeletePref(oldBranch, name);
 				
 				// Migrate the format
 				name = "custom." + i + ".format";
 				value = oldBranch.getCharPref(name);
-				this.SetComplexPref(name, value);
+				this.Legacy_SetComplexPref(name, value);
 				this.DeletePref(oldBranch, name);
 				
 				// Remove the extraneous separator
@@ -293,13 +292,21 @@ var objCoLT = {
 			this.DeletePref(oldBranch, "version");
 	},
 	
+	Legacy_SetComplexPref: function(name, value)
+	{
+		try {
+			var complex = Components.classes["@mozilla.org/supports-string;1"].createInstance(Components.interfaces.nsISupportsString);
+			complex.data = value;
+			this.PrefBranch.setComplexValue(name, Components.interfaces.nsISupportsString, complex);
+		} catch(e) { this.Log("ERROR: Caught exception trying to set complex preference (" + e.message + ")"); }
+	},
+	
 	LoadLinkData: function(type)
 	{
 		if(type == "link")
 		{
 			this.LinkData.linkURL = gContextMenu.linkURL;
 			this.LinkData.linkText = gContextMenu.linkText();
-			// The triggerNode attribute is only present in Firefox 4.0+
 			this.LinkData.linkTitle = document.getElementById("contentAreaContextMenu").triggerNode.title;
 			this.LinkData.pageTitle = content.document.title;
 			this.LinkData.pageURL = content.document.location.href;
@@ -332,7 +339,6 @@ var objCoLT = {
 		this.Prefs.ShowCopyText.value = b.getBoolPref(this.Prefs.ShowCopyText.name);
 		this.Prefs.ShowCopyBoth.value = b.getBoolPref(this.Prefs.ShowCopyBoth.name);
 		this.Prefs.ShowCopyPage.value = b.getBoolPref(this.Prefs.ShowCopyPage.name);
-//  	this.Prefs.CustomFormatCount.value = b.getIntPref(this.Prefs.CustomFormatCount.name);
 	},
 
 	NukePreviousPrefs: function()
@@ -369,6 +375,7 @@ var objCoLT = {
 	OptionsHaveUpdated: function()
 	{
 		this.LoadPrefs();
+		// TODO: Load custom formats
 	},
 
 	PlaceOnClipboard: function(string)
@@ -385,20 +392,14 @@ var objCoLT = {
 			node.removeChild(node.firstChild);
 	},
 	
-	SetComplexPref: function(name, value)
-	{
-		try {
-			var complex = Components.classes["@mozilla.org/supports-string;1"].createInstance(Components.interfaces.nsISupportsString);
-			complex.data = value;
-			this.PrefBranch.setComplexValue(name, Components.interfaces.nsISupportsString, complex);
-		} catch(e) { this.Log("ERROR: Caught exception trying to set complex preference (" + e.message + ")"); }
-	},
-	
 	SetupDefaults: function()
 	{
 		var stringBundle = document.getElementById("CLT-String-Bundle");
 		
-		this.CustomFormats = [
+		if(this.CustomFormats.length > 0)
+			this.CustomFormats.length = 0;
+		
+		this.CustomFormats.push(
 			{label: stringBundle.getString("CLT_DefaultLabelHTMLLink"), key: 'H', format: "<a href=\"%U\">%T</a>"},
 			{label: stringBundle.getString("CLT_DefaultLabelPlainText"), key: 'P', format: "%T - %U"},
 			{isSep: true},
@@ -407,9 +408,9 @@ var objCoLT = {
 			{label: "Wikipedia", key: 'W', format: "[%U %T]"},
 			{isSep: true},
 			{label: "Rich Text HTML", key: 'R', format: "{RT}"}
-		];
+		);
 		
-		// TODO: Write these values to our storage file
+		this.StoreCustomFormats();
 	},
 
 	Shutdown: function()
@@ -430,7 +431,7 @@ var objCoLT = {
 			if(objCoLT.PrefBranch.prefHasUserValue("prefs_version") == false)
 			{
 				var oldBranch = Components.classes["@mozilla.org/preferences-service;1"].getService(Components.interfaces.nsIPrefService).getBranch("colt.");
-				if(oldBranch.prefHasUserValue(objCoLT.Prefs.CustomFormatCount.name))
+				if(oldBranch.prefHasUserValue("custom.count"))
 					objCoLT.Legacy_MigratePrefs(oldBranch); // Migrate old preferences
 				else
 				{
@@ -447,9 +448,6 @@ var objCoLT = {
 				if(pv < objCoLT.PrefVersion)
 					objCoLT.UpdatePrefs(pv);
 			}
-			
-			// TODO: The order of all of this needs to change. The UpdatePrefs call needs to be before we
-			// actually load our custom formats. The entire update process ought to be mapped out.
 			
 			objCoLT.LoadPrefs();
 			objCoLT.LoadCustomFormats();
@@ -473,16 +471,16 @@ var objCoLT = {
 		var copyPageMenu = document.getElementById("CLT-Context-CopyPageMenu");
 	
 		copyText.hidden = (objCoLT.Prefs.ShowCopyText.value) ? hiddenFlag : true;
-		copyBothItem.hidden = (objCoLT.Prefs.ShowCopyBoth.value && (objCoLT.Prefs.CustomFormatCount.value == 1)) ? hiddenFlag : true;
-		copyBothMenu.hidden = (objCoLT.Prefs.ShowCopyBoth.value && (objCoLT.Prefs.CustomFormatCount.value > 1)) ? hiddenFlag : true;
+		copyBothItem.hidden = (objCoLT.Prefs.ShowCopyBoth.value && (objCoLT.CustomFormats.length == 1)) ? hiddenFlag : true;
+		copyBothMenu.hidden = (objCoLT.Prefs.ShowCopyBoth.value && (objCoLT.CustomFormats.length > 1)) ? hiddenFlag : true;
 	
 		// This time we default to false (we want to show the items more often than we want to hide them)
 		hiddenFlag = false;
 		if(gContextMenu && (gContextMenu.onLink || gContextMenu.onTextInput))
 			hiddenFlag = true;
 		
-		copyPageItem.hidden = (objCoLT.Prefs.ShowCopyPage.value && (objCoLT.Prefs.CustomFormatCount.value == 1)) ? hiddenFlag : true;
-		copyPageMenu.hidden = (objCoLT.Prefs.ShowCopyPage.value && (objCoLT.Prefs.CustomFormatCount.value > 1)) ? hiddenFlag : true;
+		copyPageItem.hidden = (objCoLT.Prefs.ShowCopyPage.value && (objCoLT.CustomFormats.length == 1)) ? hiddenFlag : true;
+		copyPageMenu.hidden = (objCoLT.Prefs.ShowCopyPage.value && (objCoLT.CustomFormats.length > 1)) ? hiddenFlag : true;
 	},
 
 	UpdateContextSubMenu: function(node, type)
@@ -526,7 +524,7 @@ var objCoLT = {
 				var keyPref = "custom." + i + ".accesskey";
 				if(isSep == false && this.PrefBranch.prefHasUserValue(keyPref) == false)
 				{
-					this.SetComplexPref(keyPref, ""); // Set them to blank if we're upgrading
+					this.Legacy_SetComplexPref(keyPref, ""); // Set them to blank if we're upgrading
 				}
 			}
 		}
@@ -534,8 +532,8 @@ var objCoLT = {
 		if(currentVersion < 4)
 		{
 			// Migrate custom formats to an external JSON file
-			var formatArray = [];
-			for(var i=1; i <= this.Prefs.CustomFormatCount.value; i++)
+			var customCount = this.PrefBranch.getIntPref("custom.count");
+			for(var i=1; i <= customCount; i++)
 			{
 				var formatObj = {};
 				if(this.PrefBranch.prefHasUserValue("custom." + i + ".separator"))
@@ -544,30 +542,17 @@ var objCoLT = {
 				}
 				else
 				{
-					formatObj.label = this.GetComplexPref("custom." + i + ".label");
-					formatObj.key = this.GetComplexPref("custom." + i + ".accesskey");
-					formatObj.format = this.GetComplexPref("custom." + i + ".format");
+					formatObj.label = this.Legacy_GetComplexPref("custom." + i + ".label");
+					formatObj.key = this.Legacy_GetComplexPref("custom." + i + ".accesskey");
+					formatObj.format = this.Legacy_GetComplexPref("custom." + i + ".format");
 				}
-				formatArray.push(formatObj);
+				this.CustomFormats.push(formatObj);
 			}
-//  		this.LogRaw(formatArray); // TODO: Remove
-//  		this.Log(JSON.stringify(formatArray)); // TODO: Remove
-			var file = FileUtils.getFile("ProfD", [this.FormatsFile]);
-			var ostream = FileUtils.openSafeFileOutputStream(file);
-			var converter = Components.classes["@mozilla.org/intl/scriptableunicodeconverter"].
-							createInstance(Components.interfaces.nsIScriptableUnicodeConverter);
-			converter.charset = "UTF-8";
-			var istream = converter.convertToInputStream(JSON.stringify(formatArray));
-			NetUtil.asyncCopy(istream, ostream, function(status) {
-				if(!Components.isSuccessCode(status))
-				{
-					// TODO: Handle error
-					return;
-				}
-				
-				FileUtils.closeSafeFileOutputStream(ostream);
-				istream.close();
-			});
+			
+			this.StoreCustomFormats();
+			
+			// TODO: Reenable
+			//this.NukePreviousPrefs(); // Clean up our old prefs
 		}
 		
 		// Finally, update the stored preference version
@@ -599,21 +584,43 @@ var objCoLT = {
 								createInstance(Components.interfaces.nsIScriptableUnicodeConverter);
 				converter.charset = "UTF-8";
 				var newData = converter.ConvertToUnicode(data);
-				objCoLT.Log("Loaded Data File!"); // TODO: Remove
-				objCoLT.LogRaw(newData); // TODO: Remove
 				objCoLT.CustomFormats = JSON.parse(newData);
-				objCoLT.Log("Custom Formats Follow:"); // TODO: Remove
-				objCoLT.LogRaw(objCoLT.CustomFormats); // TODO: Remove
 			});
 		}
 		else
 		{
-			// TODO: Load defaults
+			if(typeof filePath === "undefined")
+				objCoLT.SetupDefaults();
+			else
+			{
+				// TODO: Handle error case (user-specified file wasn't found)
+			}
 		}
 	},
 	
-	StoreCustomFormats: function()
+	StoreCustomFormats: function(filePath)
 	{
+		var file = null;
+		if(typeof filePath === "undefined")
+			file = FileUtils.getFile("ProfD", [this.FormatsFile]);
+		else
+			file = new FileUtils.File(filePath);
+		
+		var ostream = FileUtils.openSafeFileOutputStream(file);
+		var converter = Components.classes["@mozilla.org/intl/scriptableunicodeconverter"].
+						createInstance(Components.interfaces.nsIScriptableUnicodeConverter);
+		converter.charset = "UTF-8";
+		var istream = converter.convertToInputStream(JSON.stringify(this.CustomFormats));
+		NetUtil.asyncCopy(istream, ostream, function(status) {
+			if(!Components.isSuccessCode(status))
+			{
+				// TODO: Handle error
+				return;
+			}
+
+			FileUtils.closeSafeFileOutputStream(ostream);
+			istream.close();
+		});
 	}
 };
 

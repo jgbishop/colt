@@ -2,8 +2,11 @@
 //Version History
 //***************
 [2.6.2]
++ Custom formats are now stored in a JSON file in the user's Firefox profile, instead of as Firefox preferences
 + Improved the way internal logging is handled
-+ Bumped the minVersion to 24.0, and the maxVersion to 45.*
++ Bumped the minVersion to 24.0
++ Bumped the maxVersion to 45.*
++ Bug Fix: Fixed a few places where DOM elements were erroneously being created and never used
 
 [2.6.1]
 + Changed the minimum supported Firefox version to 17.0, since the 10.x line is no longer supported

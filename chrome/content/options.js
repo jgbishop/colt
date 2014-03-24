@@ -63,33 +63,22 @@ var objCoLTOptions = {
 	LoadOptions: function()
 	{
 		const branch = objCoLT.PrefBranch;
-	
+		
 		document.getElementById("CLT-Opt-DisplayCopyText").checked = branch.getBoolPref(objCoLT.Prefs.ShowCopyText.name);
 		document.getElementById("CLT-Opt-DisplayCopyBoth").checked	= branch.getBoolPref(objCoLT.Prefs.ShowCopyBoth.name);
 		document.getElementById("CLT-Opt-DisplayCopyPage").checked	= branch.getBoolPref(objCoLT.Prefs.ShowCopyPage.name);
-	
-		var count = branch.getIntPref(objCoLT.Prefs.CustomFormatCount.name);
-		for(var i=1; i <= count; i++)
+		
+		objCoLT.Log("Count: " + objCoLT.CustomFormats.length);
+		for(var i=0; i < objCoLT.CustomFormats.length; i++)
 		{
-			var labelPref = "custom." + i + ".label";
-			var accessKeyPref = "custom." + i + ".accesskey";
-			var formatPref = "custom." + i + ".format";
-			var separatorPref = "custom." + i + ".separator";
-			
 			var listItem = document.createElement("listitem");
-			var listBox = document.getElementById("CLT-Opt-Custom-Format-List");
 			
-			if(branch.prefHasUserValue(separatorPref))
-			{
+			if(objCoLT.CustomFormats[i].hasOwnProperty("isSep") && objCoLT.CustomFormats[i].isSep == true)
 				this.AppendSeparator(false);
-			}
 			else
 			{
-				var label = objCoLT.GetComplexPref(labelPref);
-				var key = objCoLT.GetComplexPref(accessKeyPref);
-				var format = objCoLT.GetComplexPref(formatPref);
-				
-				this.AppendFormat(label, key, format, false);
+				this.AppendFormat(objCoLT.CustomFormats[i].label, objCoLT.CustomFormats[i].accesskey,
+								  objCoLT.CustomFormats[i].format, false);
 			}
 		}
 		
@@ -400,7 +389,7 @@ var objCoLTOptions = {
 		var oldItem = listBox.removeItemAt(listBox.selectedIndex);
 		var newItem = listBox.insertBefore(oldItem, listBox.getItemAtIndex(newIndex));
 
-		this._selectItem(newItem);
+		this._selectItem(newItem); // TODO: Replace private _selectItem call with something cleaner
 	},
 	
 	OnRemoveCustomFormat: function()
