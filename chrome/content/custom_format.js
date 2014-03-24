@@ -1,12 +1,14 @@
+Components.utils.import('resource://colt/common.js');
+
 var objCoLTCustomFormat = {
 	CustomFormatBuffer : null,
 	
 	ClearCustomFormat: function()
 	{
-		window.opener.objCoLTOptions.CustomFormatLabel = null;
-		window.opener.objCoLTOptions.CustomFormatAccessKey = null;
-		window.opener.objCoLTOptions.CustomFormatFormat = null;
-		window.opener.objCoLTOptions.CustomFormatRichText = null;
+		CoLTCommon.Data.TempCustomFormat.label = null;
+		CoLTCommon.Data.TempCustomFormat.key = null;
+		CoLTCommon.Data.TempCustomFormat.format = null;
+		CoLTCommon.Data.TempCustomFormat.isRichText = false;
 	},
 
 	InitCustomFormat: function()
@@ -23,7 +25,7 @@ var objCoLTCustomFormat = {
 			document.getElementById("CLT-Custom-Format-AccessKey").value = window.arguments[2];
 			document.getElementById("CLT-Custom-Format-Format").value = window.arguments[3];
 	
-			if(window.arguments[3] == objCoLTOptions.RichTextFormatLabel)
+			if(window.arguments[3] == CoLTCommon.Data.RichTextFormatLabel)
 				document.getElementById("CLT-Custom-Format-RichText").checked = true;
 		}
 	
@@ -62,9 +64,9 @@ var objCoLTCustomFormat = {
 	{
 		var stringBundle = document.getElementById("CLT-String-Bundle");
 		
-		var label = objCoLTOptions.Trim(document.getElementById("CLT-Custom-Format-Label").value);
+		var label = CoLTCommon.Func.Trim(document.getElementById("CLT-Custom-Format-Label").value);
 		var key = document.getElementById("CLT-Custom-Format-AccessKey").value;
-		var format = objCoLTOptions.Trim(document.getElementById("CLT-Custom-Format-Format").value);
+		var format = CoLTCommon.Func.Trim(document.getElementById("CLT-Custom-Format-Format").value);
 		var richText = document.getElementById("CLT-Custom-Format-RichText").checked;
 		var errors = "";
 	
@@ -81,10 +83,10 @@ var objCoLTCustomFormat = {
 		}
 		else
 		{
-			window.opener.objCoLTOptions.CustomFormatLabel = label;
-			window.opener.objCoLTOptions.CustomFormatAccessKey = key;
-			window.opener.objCoLTOptions.CustomFormatFormat = format;
-			window.opener.objCoLTOptions.CustomFormatRichText = richText;
+			CoLTCommon.Data.TempCustomFormat.label = label;
+			CoLTCommon.Data.TempCustomFormat.key = key;
+			CoLTCommon.Data.TempCustomFormat.format = format;
+			CoLTCommon.Data.TempCustomFormat.isRichText = richText;
 			return true;
 		}
 	},
@@ -97,13 +99,13 @@ var objCoLTCustomFormat = {
 		if(document.getElementById("CLT-Custom-Format-RichText").checked)
 		{
 			document.getElementById("CLT-Custom-Format-Format").disabled = true;
-			document.getElementById("CLT-Custom-Format-Format").value = objCoLTOptions.RichTextFormatLabel;
+			document.getElementById("CLT-Custom-Format-Format").value = CoLTCommon.Data.RichTextFormatLabel;
 		}
 		else
 		{
 			document.getElementById("CLT-Custom-Format-Format").disabled = false;
 	
-			if(this.CustomFormatBuffer == objCoLTOptions.RichTextFormatLabel)
+			if(this.CustomFormatBuffer == CoLTCommon.Data.RichTextFormatLabel)
 				document.getElementById("CLT-Custom-Format-Format").value = "";
 			else
 				document.getElementById("CLT-Custom-Format-Format").value = this.CustomFormatBuffer;

@@ -1,19 +1,6 @@
-Components.utils.import('resource://gre/modules/devtools/Console.jsm');
-Components.utils.import('resource://gre/modules/FileUtils.jsm');
-Components.utils.import('resource://gre/modules/NetUtil.jsm');
+Components.utils.import('resource://colt/common.js');
 
 var objCoLT = {
-	PrefBranch: Components.classes["@mozilla.org/preferences-service;1"].getService(Components.interfaces.nsIPrefService).getBranch("extensions.colt."),
-	PrefVersion: 4,
-	
-	Prefs: {
-		ShowCopyText: { name: "showcopytext", value: false },
-		ShowCopyBoth: { name: "showcopyboth", value: false },
-		ShowCopyPage: { name: "showcopypage", value: false },
-	},
-	
-	CustomFormats: [],
-	
 	LinkData: {
 		linkURL: '',
 		linkText: '',
@@ -23,25 +10,13 @@ var objCoLT = {
 		selection: ''
 	},
 	
-	// Miscellaneous variables
-	FormatsFile: "colt-formats.json",
 	Initialized: false,
-
-	Log: function(aMessage)
-	{
-		console.log('CoLT: ' + aMessage);
-	},
-	
-	LogRaw: function(data)
-	{
-		console.log(data);
-	},
 
 	CopyBoth: function(formatIndex, type)
 	{
 		this.LoadLinkData(type);
 		
-		if(this.CustomFormats[formatIndex].format == "{RT}")
+		if(CoLTCommon.Data.CustomFormats[formatIndex].format == "{RT}")
 		{
 			var richText = "<a href=\"" + this.LinkData.linkURL + "\">" + this.LinkData.linkText + "</a>";
 			
@@ -69,7 +44,7 @@ var objCoLT = {
 		}
 		else
 		{
-			var myString = objCoLT.FormatString(this.CustomFormats[formatIndex].format, type);
+			var myString = objCoLT.FormatString(CoLTCommon.Data.CustomFormats[formatIndex].format, type);
 			var result = objCoLT.PlaceOnClipboard(myString);
 			if(!result)
 				alert("ERROR: The link text and location were unable to be placed on the clipboard.");
@@ -224,14 +199,14 @@ var objCoLT = {
 	
 	Legacy_GetComplexPref: function(name)
 	{
-		return this.PrefBranch.getComplexValue(name, Components.interfaces.nsISupportsString).data;
+		return CoLTCommon.Data.PrefBranch.getComplexValue(name, Components.interfaces.nsISupportsString).data;
 	},
 
 	Legacy_MigratePrefs: function(oldBranch)
 	{
-		for(var pid in this.Prefs)
+		for(var pid in CoLTCommon.Data.Prefs)
 		{
-			var p = this.Prefs[pid];
+			var p = CoLTCommon.Data.Prefs[pid];
 			if(oldBranch.prefHasUserValue(p.name))
 			{
 				if(p.hasOwnProperty("type"))
@@ -239,20 +214,20 @@ var objCoLT = {
 					if(p.type == "int")
 					{
 						var temp = oldBranch.getIntPref(p.name);
-						this.PrefBranch.setIntPref(p.name, temp);
+						CoLTCommon.Data.PrefBranch.setIntPref(p.name, temp);
 						this.DeletePref(oldBranch, p.name); // Clean up the old preference
 					}
 				}
 				else
 				{
 					var temp = oldBranch.getBoolPref(p.name); // Get the old preference
-					this.PrefBranch.setBoolPref(p.name, temp); // Move it to the new location
+					CoLTCommon.Data.PrefBranch.setBoolPref(p.name, temp); // Move it to the new location
 					this.DeletePref(oldBranch, p.name); // Clean up the old preference
 				}
 			}
 		}
 		
-		var customCount = this.PrefBranch.getIntPref("custom.count");
+		var customCount = CoLTCommon.Data.PrefBranch.getIntPref("custom.count");
 		for(var i=1; i <= customCount; i++)
 		{
 			var name = "custom." + i + ".separator";
@@ -265,7 +240,7 @@ var objCoLT = {
 			// Is this pref a separator?
 			if(value)
 			{
-				this.PrefBranch.setBoolPref(name, value); // Move the separator pref
+				CoLTCommon.Data.PrefBranch.setBoolPref(name, value); // Move the separator pref
 				this.DeletePref(oldBranch, name);
 			}
 			else
@@ -297,8 +272,8 @@ var objCoLT = {
 		try {
 			var complex = Components.classes["@mozilla.org/supports-string;1"].createInstance(Components.interfaces.nsISupportsString);
 			complex.data = value;
-			this.PrefBranch.setComplexValue(name, Components.interfaces.nsISupportsString, complex);
-		} catch(e) { this.Log("ERROR: Caught exception trying to set complex preference (" + e.message + ")"); }
+			CoLTCommon.Data.PrefBranch.setComplexValue(name, Components.interfaces.nsISupportsString, complex);
+		} catch(e) { CoLTCommon.Func.Log("ERROR: Caught exception trying to set complex preference (" + e.message + ")"); }
 	},
 	
 	LoadLinkData: function(type)
@@ -334,48 +309,48 @@ var objCoLT = {
 	
 	LoadPrefs: function()
 	{
-		var b = this.PrefBranch;
+		var b = CoLTCommon.Data.PrefBranch;
+		var p = CoLTCommon.Data.Prefs;
 	
-		this.Prefs.ShowCopyText.value = b.getBoolPref(this.Prefs.ShowCopyText.name);
-		this.Prefs.ShowCopyBoth.value = b.getBoolPref(this.Prefs.ShowCopyBoth.name);
-		this.Prefs.ShowCopyPage.value = b.getBoolPref(this.Prefs.ShowCopyPage.name);
+		p.ShowCopyText.value = b.getBoolPref(p.ShowCopyText.name);
+		p.ShowCopyBoth.value = b.getBoolPref(p.ShowCopyBoth.name);
+		p.ShowCopyPage.value = b.getBoolPref(p.ShowCopyPage.name);
 	},
 
 	NukePreviousPrefs: function()
 	{
 		var countPrefName = "custom.count";
-		if(this.PrefBranch.prefHasUserValue(countPrefName))
+		if(CoLTCommon.Data.PrefBranch.prefHasUserValue(countPrefName))
 		{
-			var c = this.PrefBranch.getIntPref(countPrefName);
+			var c = CoLTCommon.Data.PrefBranch.getIntPref(countPrefName);
 			for(var i=1; i<=c; i++)
 			{
 				var separatorPref = "custom." + i + ".separator";
 
-				if(this.PrefBranch.prefHasUserValue(separatorPref))
+				if(CoLTCommon.Data.PrefBranch.prefHasUserValue(separatorPref))
 				{
-					this.DeletePref(this.PrefBranch, separatorPref);
+					this.DeletePref(CoLTCommon.Data.PrefBranch, separatorPref);
 				}
 				else
 				{
-					if(this.PrefBranch.prefHasUserValue("custom." + i + ".label"))
-						this.DeletePref(this.PrefBranch, "custom." + i + ".label");
+					if(CoLTCommon.Data.PrefBranch.prefHasUserValue("custom." + i + ".label"))
+						this.DeletePref(CoLTCommon.Data.PrefBranch, "custom." + i + ".label");
 					
-					if(this.PrefBranch.prefHasUserValue("custom." + i + ".format"))
-						this.DeletePref(this.PrefBranch, "custom." + i + ".format");
+					if(CoLTCommon.Data.PrefBranch.prefHasUserValue("custom." + i + ".format"))
+						this.DeletePref(CoLTCommon.Data.PrefBranch, "custom." + i + ".format");
 
-					if(this.PrefBranch.prefHasUserValue("custom." + i + ".accesskey"))
-						this.DeletePref(this.PrefBranch, "custom." + i + ".accesskey");
+					if(CoLTCommon.Data.PrefBranch.prefHasUserValue("custom." + i + ".accesskey"))
+						this.DeletePref(CoLTCommon.Data.PrefBranch, "custom." + i + ".accesskey");
 				}
 			}
 			
-			this.DeletePref(this.PrefBranch, countPrefName);
+			this.DeletePref(CoLTCommon.Data.PrefBranch, countPrefName);
 		}
 	},
 	
 	OptionsHaveUpdated: function()
 	{
 		this.LoadPrefs();
-		// TODO: Load custom formats
 	},
 
 	PlaceOnClipboard: function(string)
@@ -392,27 +367,6 @@ var objCoLT = {
 			node.removeChild(node.firstChild);
 	},
 	
-	SetupDefaults: function()
-	{
-		var stringBundle = document.getElementById("CLT-String-Bundle");
-		
-		if(this.CustomFormats.length > 0)
-			this.CustomFormats.length = 0;
-		
-		this.CustomFormats.push(
-			{label: stringBundle.getString("CLT_DefaultLabelHTMLLink"), key: 'H', format: "<a href=\"%U\">%T</a>"},
-			{label: stringBundle.getString("CLT_DefaultLabelPlainText"), key: 'P', format: "%T - %U"},
-			{isSep: true},
-			{label: "BB Code", key: 'B', format: "[url=%U]%T[/url]"},
-			{label: "Markdown", key: 'M', format: "[%T](%U)"},
-			{label: "Wikipedia", key: 'W', format: "[%U %T]"},
-			{isSep: true},
-			{label: "Rich Text HTML", key: 'R', format: "{RT}"}
-		);
-		
-		this.StoreCustomFormats();
-	},
-
 	Shutdown: function()
 	{
 		var contextMenu = document.getElementById("contentAreaContextMenu");
@@ -428,7 +382,7 @@ var objCoLT = {
 		{
 			objCoLT.Initialized = true;
 	
-			if(objCoLT.PrefBranch.prefHasUserValue("prefs_version") == false)
+			if(CoLTCommon.Data.PrefBranch.prefHasUserValue("prefs_version") == false)
 			{
 				var oldBranch = Components.classes["@mozilla.org/preferences-service;1"].getService(Components.interfaces.nsIPrefService).getBranch("colt.");
 				if(oldBranch.prefHasUserValue("custom.count"))
@@ -436,21 +390,21 @@ var objCoLT = {
 				else
 				{
 					objCoLT.NukePreviousPrefs();
-					objCoLT.SetupDefaults(); // Create the defaults (new install)
+					CoLTCommon.Func.SetupDefaults(); // Create the defaults (new install)
 				}
 				
-				objCoLT.PrefBranch.setIntPref("prefs_version", objCoLT.PrefVersion);
+				CoLTCommon.Data.PrefBranch.setIntPref("prefs_version", CoLTCommon.Data.PrefVersion);
 			}
 			else
 			{
 				// Update our preferences if necessary
-				var pv = objCoLT.PrefBranch.getIntPref("prefs_version");
-				if(pv < objCoLT.PrefVersion)
+				var pv = CoLTCommon.Data.PrefBranch.getIntPref("prefs_version");
+				if(pv < CoLTCommon.Data.PrefVersion)
 					objCoLT.UpdatePrefs(pv);
 			}
 			
 			objCoLT.LoadPrefs();
-			objCoLT.LoadCustomFormats();
+			CoLTCommon.Func.LoadCustomFormats();
 				
 			var menu = document.getElementById("contentAreaContextMenu");
 			menu.addEventListener('popupshowing', objCoLT.UpdateContextMenu, false);
@@ -470,27 +424,27 @@ var objCoLT = {
 		var copyPageItem = document.getElementById("CLT-Context-CopyPage");
 		var copyPageMenu = document.getElementById("CLT-Context-CopyPageMenu");
 	
-		copyText.hidden = (objCoLT.Prefs.ShowCopyText.value) ? hiddenFlag : true;
-		copyBothItem.hidden = (objCoLT.Prefs.ShowCopyBoth.value && (objCoLT.CustomFormats.length == 1)) ? hiddenFlag : true;
-		copyBothMenu.hidden = (objCoLT.Prefs.ShowCopyBoth.value && (objCoLT.CustomFormats.length > 1)) ? hiddenFlag : true;
+		copyText.hidden = (CoLTCommon.Data.Prefs.ShowCopyText.value) ? hiddenFlag : true;
+		copyBothItem.hidden = (CoLTCommon.Data.Prefs.ShowCopyBoth.value && (CoLTCommon.Data.CustomFormats.length == 1)) ? hiddenFlag : true;
+		copyBothMenu.hidden = (CoLTCommon.Data.Prefs.ShowCopyBoth.value && (CoLTCommon.Data.CustomFormats.length > 1)) ? hiddenFlag : true;
 	
 		// This time we default to false (we want to show the items more often than we want to hide them)
 		hiddenFlag = false;
 		if(gContextMenu && (gContextMenu.onLink || gContextMenu.onTextInput))
 			hiddenFlag = true;
 		
-		copyPageItem.hidden = (objCoLT.Prefs.ShowCopyPage.value && (objCoLT.CustomFormats.length == 1)) ? hiddenFlag : true;
-		copyPageMenu.hidden = (objCoLT.Prefs.ShowCopyPage.value && (objCoLT.CustomFormats.length > 1)) ? hiddenFlag : true;
+		copyPageItem.hidden = (CoLTCommon.Data.Prefs.ShowCopyPage.value && (CoLTCommon.Data.CustomFormats.length == 1)) ? hiddenFlag : true;
+		copyPageMenu.hidden = (CoLTCommon.Data.Prefs.ShowCopyPage.value && (CoLTCommon.Data.CustomFormats.length > 1)) ? hiddenFlag : true;
 	},
 
 	UpdateContextSubMenu: function(node, type)
 	{
 		this.PurgeContextSubMenu(node);
 	
-		for(var i=0; i < this.CustomFormats.length; i++)
+		for(var i=0; i < CoLTCommon.Data.CustomFormats.length; i++)
 		{
-			if(this.CustomFormats[i].hasOwnProperty("isSep") && 
-			   this.CustomFormats[i].isSep == true)
+			if(CoLTCommon.Data.CustomFormats[i].hasOwnProperty("isSep") && 
+			   CoLTCommon.Data.CustomFormats[i].isSep == true)
 			{
 				var menuseparator = document.createElement("menuseparator");
 				node.appendChild(menuseparator);
@@ -498,12 +452,14 @@ var objCoLT = {
 			else
 			{
 				// Skip any weird occurances that don't have a label (shouldn't happen, but you never know)
-				if(this.CustomFormats[i].hasOwnProperty("label") && this.CustomFormats[i].label != "")
+				if(CoLTCommon.Data.CustomFormats[i].hasOwnProperty("label") && 
+				   CoLTCommon.Data.CustomFormats[i].label != "")
 				{
 					var menuitem = document.createElement("menuitem");
-					menuitem.setAttribute("label", this.CustomFormats[i].label);
-					if(this.CustomFormats[i].hasOwnProperty("key") && this.CustomFormats[i].key != "")
-						menuitem.setAttribute("accesskey", this.CustomFormats[i].key);
+					menuitem.setAttribute("label", CoLTCommon.Data.CustomFormats[i].label);
+					if(CoLTCommon.Data.CustomFormats[i].hasOwnProperty("key") && 
+					   CoLTCommon.Data.CustomFormats[i].key != "")
+						menuitem.setAttribute("accesskey", CoLTCommon.Data.CustomFormats[i].key);
 					menuitem.setAttribute("formatindex", i);
 					node.appendChild(menuitem);
 				}
@@ -515,14 +471,14 @@ var objCoLT = {
 	{
 		if(currentVersion < 3)
 		{
-			var customCount = this.PrefBranch.getIntPref("custom.count");
+			var customCount = CoLTCommon.Data.PrefBranch.getIntPref("custom.count");
 			for(var i=1; i <= customCount; i++)
 			{
 				var sepPref = "custom." + i + ".separator";
-				var isSep = this.PrefBranch.prefHasUserValue(sepPref);
+				var isSep = CoLTCommon.Data.PrefBranch.prefHasUserValue(sepPref);
 				
 				var keyPref = "custom." + i + ".accesskey";
-				if(isSep == false && this.PrefBranch.prefHasUserValue(keyPref) == false)
+				if(isSep == false && CoLTCommon.Data.PrefBranch.prefHasUserValue(keyPref) == false)
 				{
 					this.Legacy_SetComplexPref(keyPref, ""); // Set them to blank if we're upgrading
 				}
@@ -532,11 +488,11 @@ var objCoLT = {
 		if(currentVersion < 4)
 		{
 			// Migrate custom formats to an external JSON file
-			var customCount = this.PrefBranch.getIntPref("custom.count");
+			var customCount = CoLTCommon.Data.PrefBranch.getIntPref("custom.count");
 			for(var i=1; i <= customCount; i++)
 			{
 				var formatObj = {};
-				if(this.PrefBranch.prefHasUserValue("custom." + i + ".separator"))
+				if(CoLTCommon.Data.PrefBranch.prefHasUserValue("custom." + i + ".separator"))
 				{
 					formatObj.isSep = true;
 				}
@@ -546,81 +502,17 @@ var objCoLT = {
 					formatObj.key = this.Legacy_GetComplexPref("custom." + i + ".accesskey");
 					formatObj.format = this.Legacy_GetComplexPref("custom." + i + ".format");
 				}
-				this.CustomFormats.push(formatObj);
+				CoLTCommon.Data.CustomFormats.push(formatObj);
 			}
 			
-			this.StoreCustomFormats();
+			CoLTCommon.Func.StoreCustomFormats();
 			
 			// TODO: Reenable
 			//this.NukePreviousPrefs(); // Clean up our old prefs
 		}
 		
 		// Finally, update the stored preference version
-		//this.PrefBranch.setIntPref("prefs_version", this.PrefVersion); // TODO: Reenable
-	},
-	
-	LoadCustomFormats: function(filePath)
-	{
-		var file = null;
-		if(typeof filePath === "undefined")
-			file = FileUtils.getFile("ProfD", [this.FormatsFile]);
-		else
-			file = new FileUtils.File(filePath);
-		
-		if(file.exists())
-		{
-			var channel = NetUtil.newChannel(file);
-			channel.contentType = "application/json";
-			
-			NetUtil.asyncFetch(channel, function(inputStream, status) {
-				if(!Components.isSuccessCode(status))
-				{
-					// TODO: Handle error
-					return;
-				}
-				
-				var data = NetUtil.readInputStreamToString(inputStream, inputStream.available());
-				var converter = Components.classes["@mozilla.org/intl/scriptableunicodeconverter"].
-								createInstance(Components.interfaces.nsIScriptableUnicodeConverter);
-				converter.charset = "UTF-8";
-				var newData = converter.ConvertToUnicode(data);
-				objCoLT.CustomFormats = JSON.parse(newData);
-			});
-		}
-		else
-		{
-			if(typeof filePath === "undefined")
-				objCoLT.SetupDefaults();
-			else
-			{
-				// TODO: Handle error case (user-specified file wasn't found)
-			}
-		}
-	},
-	
-	StoreCustomFormats: function(filePath)
-	{
-		var file = null;
-		if(typeof filePath === "undefined")
-			file = FileUtils.getFile("ProfD", [this.FormatsFile]);
-		else
-			file = new FileUtils.File(filePath);
-		
-		var ostream = FileUtils.openSafeFileOutputStream(file);
-		var converter = Components.classes["@mozilla.org/intl/scriptableunicodeconverter"].
-						createInstance(Components.interfaces.nsIScriptableUnicodeConverter);
-		converter.charset = "UTF-8";
-		var istream = converter.convertToInputStream(JSON.stringify(this.CustomFormats));
-		NetUtil.asyncCopy(istream, ostream, function(status) {
-			if(!Components.isSuccessCode(status))
-			{
-				// TODO: Handle error
-				return;
-			}
-
-			FileUtils.closeSafeFileOutputStream(ostream);
-			istream.close();
-		});
+		//CoLTCommon.Data.PrefBranch.setIntPref("prefs_version", CoLTCommon.Data.PrefVersion); // TODO: Reenable
 	}
 };
 

@@ -1,11 +1,6 @@
+Components.utils.import('resource://colt/common.js');
+
 var objCoLTOptions = {
-	CustomFormatLabel: null,
-	CustomFormatAccessKey: null,
-	CustomFormatFormat: null,
-	CustomFormatRichText: null,
-	
-	RichTextFormatLabel: "{RT}",
-	
 	_selectItem: function(item)
 	{
 		var listBox = document.getElementById("CLT-Opt-Custom-Format-List");
@@ -62,23 +57,25 @@ var objCoLTOptions = {
 
 	LoadOptions: function()
 	{
-		const branch = objCoLT.PrefBranch;
+		const branch = CoLTCommon.Data.PrefBranch;
 		
-		document.getElementById("CLT-Opt-DisplayCopyText").checked = branch.getBoolPref(objCoLT.Prefs.ShowCopyText.name);
-		document.getElementById("CLT-Opt-DisplayCopyBoth").checked	= branch.getBoolPref(objCoLT.Prefs.ShowCopyBoth.name);
-		document.getElementById("CLT-Opt-DisplayCopyPage").checked	= branch.getBoolPref(objCoLT.Prefs.ShowCopyPage.name);
+		document.getElementById("CLT-Opt-DisplayCopyText").checked = branch.getBoolPref(CoLTCommon.Data.Prefs.ShowCopyText.name);
+		document.getElementById("CLT-Opt-DisplayCopyBoth").checked = branch.getBoolPref(CoLTCommon.Data.Prefs.ShowCopyBoth.name);
+		document.getElementById("CLT-Opt-DisplayCopyPage").checked = branch.getBoolPref(CoLTCommon.Data.Prefs.ShowCopyPage.name);
 		
-		objCoLT.Log("Count: " + objCoLT.CustomFormats.length);
-		for(var i=0; i < objCoLT.CustomFormats.length; i++)
+		CoLTCommon.Func.Log("Custom format count (on load) = " + CoLTCommon.Data.CustomFormats.length);
+		
+		for(var i=0; i < CoLTCommon.Data.CustomFormats.length; i++)
 		{
 			var listItem = document.createElement("listitem");
 			
-			if(objCoLT.CustomFormats[i].hasOwnProperty("isSep") && objCoLT.CustomFormats[i].isSep == true)
+			if(CoLTCommon.Data.CustomFormats[i].hasOwnProperty("isSep") && CoLTCommon.Data.CustomFormats[i].isSep == true)
 				this.AppendSeparator(false);
 			else
 			{
-				this.AppendFormat(objCoLT.CustomFormats[i].label, objCoLT.CustomFormats[i].accesskey,
-								  objCoLT.CustomFormats[i].format, false);
+				this.AppendFormat(CoLTCommon.Data.CustomFormats[i].label,
+								  CoLTCommon.Data.CustomFormats[i].key,
+								  CoLTCommon.Data.CustomFormats[i].format, false);
 			}
 		}
 		
@@ -89,10 +86,14 @@ var objCoLTOptions = {
 	{
 		window.openDialog("chrome://colt/content/custom_format.xul", "colt-custom-format-dialog", "centerscreen,chrome,modal", "add");
 	
-		if(this.CustomFormatLabel && (this.CustomFormatFormat || this.CustomFormatRichText))
+		if(CoLTCommon.Data.TempCustomFormat.label && 
+		   (CoLTCommon.Data.TempCustomFormat.format || CoLTCommon.Data.TempCustomFormat.isRichText))
 		{
-			this.AppendFormat(this.CustomFormatLabel, this.CustomFormatAccessKey, 
-							  (this.CustomFormatRichText ? this.RichTextFormatLabel : this.CustomFormatFormat), true);
+			this.AppendFormat(CoLTCommon.Data.TempCustomFormat.label,
+							  CoLTCommon.Data.TempCustomFormat.key, 
+							  (CoLTCommon.Data.TempCustomFormat.isRichText ?
+							   CoLTCommon.Data.RichTextFormatLabel : CoLTCommon.Data.TempCustomFormat.format),
+							  true);
 		}
 	},
 
@@ -116,7 +117,7 @@ var objCoLTOptions = {
 								  selectedItem.childNodes[1].getAttribute("label"),
 								  selectedItem.childNodes[2].getAttribute("label"));
 	
-				if(this.CustomFormatLabel && this.CustomFormatFormat)
+				if(CoLTCommon.Data.TempCustomFormat.label && CoLTCommon.Data.TempCustomFormat.format)
 				{
 					var childElements = selectedItem.childNodes;
 					while(childElements.length > 0)
@@ -126,15 +127,15 @@ var objCoLTOptions = {
 					
 					var listCell = document.createElement("listcell");
 	
-					listCell.setAttribute("label", this.CustomFormatLabel);
+					listCell.setAttribute("label", CoLTCommon.Data.TempCustomFormat.label);
 					selectedItem.appendChild(listCell);
 					
 					listCell = document.createElement("listcell");
-					listCell.setAttribute("label", this.CustomFormatAccessKey);
+					listCell.setAttribute("label", CoLTCommon.Data.TempCustomFormat.key);
 					selectedItem.appendChild(listCell);
 	
 					listCell = document.createElement("listcell");
-					listCell.setAttribute("label", this.CustomFormatFormat);
+					listCell.setAttribute("label", CoLTCommon.Data.TempCustomFormat.format);
 					selectedItem.appendChild(listCell);
 
 					this._selectItem(selectedItem);
@@ -167,11 +168,10 @@ var objCoLTOptions = {
 			var converter = Components.classes["@mozilla.org/intl/converter-output-stream;1"].
 				createInstance(Components.interfaces.nsIConverterOutputStream);
 			converter.init(foStream, "UTF-8", 0, 0);
-//  		converter.writeString("\xEF\xBB\xBF"); // Write the BOM
 			
 			// Write the data from the list box
 			var listBox = document.getElementById("CLT-Opt-Custom-Format-List");
-			var nl = objCoLT.GetNewLine();
+			var nl = CoLTCommon.Func.GetNewLine();
 			for(var i=1; i <= listBox.getRowCount(); i++)
 			{
 				var listItem = listBox.getItemAtIndex(i - 1);
@@ -389,7 +389,7 @@ var objCoLTOptions = {
 		var oldItem = listBox.removeItemAt(listBox.selectedIndex);
 		var newItem = listBox.insertBefore(oldItem, listBox.getItemAtIndex(newIndex));
 
-		this._selectItem(newItem); // TODO: Replace private _selectItem call with something cleaner
+		this._selectItem(newItem);
 	},
 	
 	OnRemoveCustomFormat: function()
@@ -413,51 +413,37 @@ var objCoLTOptions = {
 
 	SaveOptions: function()
 	{
-		const branch = objCoLT.PrefBranch;
+		const branch = CoLTCommon.Data.PrefBranch;
 
-		branch.setBoolPref(objCoLT.Prefs.ShowCopyText.name, document.getElementById("CLT-Opt-DisplayCopyText").checked);
-		branch.setBoolPref(objCoLT.Prefs.ShowCopyBoth.name, document.getElementById("CLT-Opt-DisplayCopyBoth").checked);
-		branch.setBoolPref(objCoLT.Prefs.ShowCopyPage.name, document.getElementById("CLT-Opt-DisplayCopyPage").checked);
+		branch.setBoolPref(CoLTCommon.Data.Prefs.ShowCopyText.name, document.getElementById("CLT-Opt-DisplayCopyText").checked);
+		branch.setBoolPref(CoLTCommon.Data.Prefs.ShowCopyBoth.name, document.getElementById("CLT-Opt-DisplayCopyBoth").checked);
+		branch.setBoolPref(CoLTCommon.Data.Prefs.ShowCopyPage.name, document.getElementById("CLT-Opt-DisplayCopyPage").checked);
 	
-		// Clean up all the existing custom formats
-		var count = branch.getIntPref(objCoLT.Prefs.CustomFormatCount.name);
-		
-		for(var i=1; i <= count; i++)
-		{
-			var labelPref = "custom." + i + ".label";
-			var keyPref = "custom." + i + ".accesskey";
-			var formatPref = "custom." + i + ".format";
-			var separatorPref = "custom." + i + ".separator";
-	
-			if(branch.prefHasUserValue(separatorPref))
-				branch.clearUserPref(separatorPref);
-			else
-			{
-				branch.clearUserPref(labelPref);
-				branch.clearUserPref(keyPref);
-				branch.clearUserPref(formatPref);
-			}
-		}
-	
+		CoLTCommon.Data.CustomFormats.length = 0; // Clean up all the existing custom formats
+
 		// Now store all the current formats
 		var listBox = document.getElementById("CLT-Opt-Custom-Format-List");
 		for(var i=1; i <= listBox.getRowCount(); i++)
 		{
 			var listItem = listBox.getItemAtIndex(i - 1);
-	
+			var myObj = {};
+
 			if(listItem.childNodes[0].tagName == "separator")
 			{
-				branch.setBoolPref("custom." + i + ".separator", true);
+				myObj.isSep = true;
 			}
 			else
 			{
-				objCoLT.SetComplexPref("custom." + i + ".label", listItem.childNodes[0].getAttribute("label"));
-				objCoLT.SetComplexPref("custom." + i + ".accesskey", listItem.childNodes[1].getAttribute("label"));
-				objCoLT.SetComplexPref("custom." + i + ".format", listItem.childNodes[2].getAttribute("label"));
+				myObj.label = listItem.childNodes[0].getAttribute("label");
+				myObj.key = listItem.childNodes[1].getAttribute("label");
+				myObj.format = listItem.childNodes[2].getAttribute("label");
 			}
+			
+			CoLTCommon.Data.CustomFormats.push(myObj);
 		}
-	
-		branch.setIntPref(objCoLT.Prefs.CustomFormatCount.name, listBox.getRowCount());
+
+		CoLTCommon.Func.Log("Custom format count (on save) = " + CoLTCommon.Data.CustomFormats.length);
+		CoLTCommon.Func.StoreCustomFormats();
 		
 		try
 		{
@@ -470,19 +456,9 @@ var objCoLTOptions = {
 				win = e.getNext();
 				win.objCoLT.OptionsHaveUpdated();
 			}
-		} catch (e) { objCoLT.Log("Exception caught while propagating options."); }
+		} catch (e) { CoLTCommon.Func.Log("ERROR: Exception caught while propagating options."); }
 	},
-	
-	Trim: function(text)
-	{
-		if(text == "")
-			return "";
-	
-		text = text.replace(/^\s+/, '');
-		text = text.replace(/\s+$/, '');
-		return text;
-	},
-	
+		
 	UpdateSubmenuControls: function()
 	{
 		var disabled = true;
