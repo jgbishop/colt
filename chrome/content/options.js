@@ -54,6 +54,41 @@ var objCoLTOptions = {
 		if(autoSelect)
 			this._selectItem(oref);
 	},
+	
+	CustomFormatsLoaded: function(formats)
+	{
+		var stringBundle = document.getElementById("CLT-String-Bundle");
+		
+		// Prompt the user to see if they want to append to the current list or overwrite it
+		var ps = Components.classes["@mozilla.org/embedcomp/prompt-service;1"].getService(Components.interfaces.nsIPromptService);
+		var rv = ps.confirmEx(window, stringBundle.getString("CLT_OverwriteTitle"),
+							  stringBundle.getString("CLT_OverwritePrompt"),
+							  ps.BUTTON_TITLE_IS_STRING * ps.BUTTON_POS_0 +
+							  ps.BUTTON_TITLE_IS_STRING * ps.BUTTON_POS_1,
+							  stringBundle.getString("CLT_OverwriteButton"),
+							  stringBundle.getString("CLT_AppendButton"), null, null, {});
+
+		var listBox = document.getElementById("CLT-Opt-Custom-Format-List");
+
+		// If the user chose to overwrite their items, blow away everything in the current list
+		if(rv == 0)
+		{
+			// Overwrite current items
+			while(listBox.hasChildNodes() && listBox.lastChild.nodeName == "listitem")
+			{
+				listBox.removeChild(listBox.lastChild);
+			}
+		}
+
+		// Now append all the incoming items
+		for(var i=0; i<formats.length; i++)
+		{
+			if(formats[i].hasOwnProperty('isSep') && formats[i].isSep == true)
+				objCoLTOptions.AppendSeparator(false);
+			else
+				objCoLTOptions.AppendFormat(formats[i].label, formats[i].key, formats[i].format, false);
+		}
+	},
 
 	LoadOptions: function()
 	{
@@ -62,8 +97,6 @@ var objCoLTOptions = {
 		document.getElementById("CLT-Opt-DisplayCopyText").checked = branch.getBoolPref(CoLTCommon.Data.Prefs.ShowCopyText.name);
 		document.getElementById("CLT-Opt-DisplayCopyBoth").checked = branch.getBoolPref(CoLTCommon.Data.Prefs.ShowCopyBoth.name);
 		document.getElementById("CLT-Opt-DisplayCopyPage").checked = branch.getBoolPref(CoLTCommon.Data.Prefs.ShowCopyPage.name);
-		
-		CoLTCommon.Func.Log("Custom format count (on load) = " + CoLTCommon.Data.CustomFormats.length);
 		
 		for(var i=0; i < CoLTCommon.Data.CustomFormats.length; i++)
 		{
@@ -150,46 +183,14 @@ var objCoLTOptions = {
 		
 		var fp = Components.classes["@mozilla.org/filepicker;1"].createInstance(nsIFilePicker);
 		fp.init(window, "Export Custom Formats", nsIFilePicker.modeSave);
-		fp.appendFilters(nsIFilePicker.filterText);
+		fp.appendFilter("JSON Files", "*.json");
 		fp.appendFilters(nsIFilePicker.filterAll);
-		fp.defaultExtension = "txt";
+		fp.defaultExtension = "json";
 		
 		var retval = fp.show();
 		if(retval == nsIFilePicker.returnOK || retval == nsIFilePicker.returnReplace)
 		{
-			var file = fp.file;
-			var path = fp.file.path;
-			
-			var foStream = Components.classes["@mozilla.org/network/file-output-stream;1"].
-				createInstance(Components.interfaces.nsIFileOutputStream);
-			// Open the file for writing (0x02), create if necessary (0x08), and truncate if it exists (0x20)
-			foStream.init(fp.file, 0x02 | 0x08 | 0x20, -1, 0);
-			
-			var converter = Components.classes["@mozilla.org/intl/converter-output-stream;1"].
-				createInstance(Components.interfaces.nsIConverterOutputStream);
-			converter.init(foStream, "UTF-8", 0, 0);
-			
-			// Write the data from the list box
-			var listBox = document.getElementById("CLT-Opt-Custom-Format-List");
-			var nl = CoLTCommon.Func.GetNewLine();
-			for(var i=1; i <= listBox.getRowCount(); i++)
-			{
-				var listItem = listBox.getItemAtIndex(i - 1);
-				var string = "---ITEM---" + nl;
-				if(listItem.childNodes[0].tagName == "separator")
-				{
-					string += "s:separator" + nl;
-				}
-				else
-				{
-					string += "f:" + listItem.childNodes[2].getAttribute("label") + nl; // Format
-					string += "l:" + listItem.childNodes[0].getAttribute("label") + nl; // Label
-					string += "a:" + listItem.childNodes[1].getAttribute("label") + nl; // Access Key
-				}
-				converter.writeString(string);
-			}
-			
-			converter.close(); // Closes foStream
+			CoLTCommon.Func.StoreCustomFormats(fp.file.path);
 		}
 	},
 	
@@ -200,114 +201,90 @@ var objCoLTOptions = {
 		
 		var fp = Components.classes["@mozilla.org/filepicker;1"].createInstance(nsIFilePicker);
 		fp.init(window, stringBundle.getString("CLT_ImportTitle"), nsIFilePicker.modeOpen);
+		fp.appendFilter("JSON Files", "*.json");
 		fp.appendFilters(nsIFilePicker.filterText);
 		fp.appendFilters(nsIFilePicker.filterAll);
-		fp.defaultExtension = "txt";
+		fp.defaultExtension = "json";
 		
+		var importData = [];
 		var retval = fp.show();
 		if(retval == nsIFilePicker.returnOK)
 		{
-			var file = fp.file;
-			var path = fp.file.path;
-			
-			var fiStream = Components.classes["@mozilla.org/network/file-input-stream;1"].
-				createInstance(Components.interfaces.nsIFileInputStream);
-			fiStream.init(fp.file, 0x01, -1, 0); // Open the file for reading (0x01)
-			
-			var is = Components.classes["@mozilla.org/intl/converter-input-stream;1"].
-				createInstance(Components.interfaces.nsIConverterInputStream);
-			is.init(fiStream, "UTF-8", 0, 0);
-			is.QueryInterface(Components.interfaces.nsIUnicharLineInputStream);
-			
-			var importData = new Array();
-			
-			if(is instanceof Components.interfaces.nsIUnicharLineInputStream)
+			if(/\.txt$/.test(fp.file.path)) // Do a legacy import if we have a txt file
 			{
-				var line = {};
-				var c;
-				var num = 0;
-				var buf = {};
-				do {
-					c = is.readLine(line);
-					var str = line.value;
-					str.trim();
-					
-					if(str == "---ITEM---")
-					{
-						if(num > 0)
-						{
-							importData.push(buf);
-							buf = {};
-						}
+				var fiStream = Components.classes["@mozilla.org/network/file-input-stream;1"].
+					createInstance(Components.interfaces.nsIFileInputStream);
+				fiStream.init(fp.file, 0x01, -1, 0); // Open the file for reading (0x01)
+
+				var is = Components.classes["@mozilla.org/intl/converter-input-stream;1"].
+					createInstance(Components.interfaces.nsIConverterInputStream);
+				is.init(fiStream, "UTF-8", 0, 0);
+				is.QueryInterface(Components.interfaces.nsIUnicharLineInputStream);
+
+				if(is instanceof Components.interfaces.nsIUnicharLineInputStream)
+				{
+					var line = {};
+					var c;
+					var num = 0;
+					var buf = {};
+					do {
+						c = is.readLine(line);
+						var str = line.value;
+						str.trim();
 						
-						num++;
-						continue;
-					}
-					
-					var prefix = str.substr(0, 2);
-					var data = str.slice(2);
-					if(prefix.charAt(1) == ':')
-					{
-						switch(prefix.charAt(0))
+						if(str == "---ITEM---")
 						{
-						case 'a':
-							buf['access'] = data;
-							break;
-						case 'f':
-							buf['format'] = data;
-							break;
-						case 'l':
-							buf['label'] = data;
-							break;
-						case 's':
-							buf['separator'] = true;
-							break;
-						default:
-							break;
+							if(num > 0)
+							{
+								importData.push(buf);
+								buf = {};
+							}
+
+							num++;
+							continue;
 						}
-					}
-				} while(c);
-				
-				importData.push(buf); // Push the last object onto the array
-				is.close();
-				fiStream.close();
+
+						var prefix = str.substr(0, 2);
+						var data = str.slice(2);
+						if(prefix.charAt(1) == ':')
+						{
+							switch(prefix.charAt(0))
+							{
+							case 'a':
+								buf.key = data;
+								break;
+							case 'f':
+								buf.format = data;
+								break;
+							case 'l':
+								buf.label = data;
+								break;
+							case 's':
+								buf.isSep = true;
+								break;
+							default:
+								break;
+							}
+						}
+					} while(c);
+
+					importData.push(buf); // Push the last object onto the array
+					is.close();
+					fiStream.close();
+					
+					objCoLTOptions.CustomFormatsLoaded(importData);
+				}
+				else
+				{
+					alert("ERROR: Failed to import file due to invalid nsIConverterInputStream");
+					is.close();
+					fiStream.close();
+					return;
+				}
 			}
 			else
 			{
-				alert("ERROR: Failed to import file due to invalid nsIConverterInputStream");
-				is.close();
-				fiStream.close();
-				return;
-			}
-			
-			// Prompt the user to see if they want to append to the current list or overwrite it
-			var ps = Components.classes["@mozilla.org/embedcomp/prompt-service;1"].getService(Components.interfaces.nsIPromptService);
-			var rv = ps.confirmEx(window, stringBundle.getString("CLT_OverwriteTitle"),
-								  stringBundle.getString("CLT_OverwritePrompt"),
-								  ps.BUTTON_TITLE_IS_STRING * ps.BUTTON_POS_0 +
-								  ps.BUTTON_TITLE_IS_STRING * ps.BUTTON_POS_1,
-								  stringBundle.getString("CLT_OverwriteButton"),
-								  stringBundle.getString("CLT_AppendButton"), null, null, {});
-			
-			var listBox = document.getElementById("CLT-Opt-Custom-Format-List");
-			
-			// If the user chose to overwrite their items, blow away everything in the current list
-			if(rv == 0)
-			{
-				// Overwrite current items
-				while(listBox.hasChildNodes() && listBox.lastChild.nodeName == "listitem")
-				{
-					listBox.removeChild(listBox.lastChild);
-				}
-			}
-			
-			// Now append all the incoming items
-			for(var i=0; i<importData.length; i++)
-			{
-				if(importData[i].hasOwnProperty('separator'))
-					this.AppendSeparator(false);
-				else
-					this.AppendFormat(importData[i]['label'], importData[i]['access'], importData[i]['format'], false);
+				CoLTCommon.Func.LoadCustomFormats(fp.file.path, objCoLTOptions.CustomFormatsLoaded);
 			}
 		}
 	},
@@ -442,7 +419,6 @@ var objCoLTOptions = {
 			CoLTCommon.Data.CustomFormats.push(myObj);
 		}
 
-		CoLTCommon.Func.Log("Custom format count (on save) = " + CoLTCommon.Data.CustomFormats.length);
 		CoLTCommon.Func.StoreCustomFormats();
 		
 		try

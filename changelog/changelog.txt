@@ -3,9 +3,11 @@
 //***************
 [2.6.2]
 + Custom formats are now stored in a JSON file in the user's Firefox profile, instead of as Firefox preferences
++ Rewrote the export and import routines to support the new JSON file format
 + Improved the way internal logging is handled
 + Bumped the minVersion to 24.0
 + Bumped the maxVersion to 45.*
++ Bug Fix: Redesigned the way data is passed between the browser and CoLT's options dialog, fixing several errors that would appear in the browser console
 + Bug Fix: Fixed a few places where DOM elements were erroneously being created and never used
 
 [2.6.1]
