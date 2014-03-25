@@ -36,23 +36,16 @@ CoLTCommon.Func = {
 		console.log(data);
 	},
 	
-	LoadCustomFormats: function(filePath)
+	LoadCustomFormats: function(filePath, isLoadedCallback)
 	{
 		var file = null;
-		if(typeof filePath === "undefined")
-		{
-			CoLTCommon.Func.Log("Loading formats file: " + CoLTCommon.Data.FormatsFile);
+		if(typeof filePath === "undefined" || filePath === null)
 			file = FileUtils.getFile("ProfD", [CoLTCommon.Data.FormatsFile]);
-		}
 		else
-		{
-			CoLTCommon.Func.Log("Loading formats file: " + filePath);
 			file = new FileUtils.File(filePath);
-		}
 		
 		if(file.exists())
 		{
-			CoLTCommon.Func.Log(" - File exists!");
 			var channel = NetUtil.newChannel(file);
 			channel.contentType = "application/json";
 			
@@ -60,30 +53,28 @@ CoLTCommon.Func = {
 				if(!Components.isSuccessCode(status))
 				{
 					CoLTCommon.Func.Log("ERROR: Failed to open input stream on custom formats file (return code was " + status + ")!");
-					return;
+					return null;
 				}
 				
 				var data = NetUtil.readInputStreamToString(inputStream, inputStream.available());
 				var converter = Components.classes["@mozilla.org/intl/scriptableunicodeconverter"].
 								createInstance(Components.interfaces.nsIScriptableUnicodeConverter);
 				converter.charset = "UTF-8";
-				var newData = converter.ConvertToUnicode(data);
-				if(CoLTCommon.Data.CustomFormats.length > 0)
-					CoLTCommon.Data.CustomFormats.length = 0;
-				CoLTCommon.Data.CustomFormats = JSON.parse(newData);
-				CoLTCommon.Func.Log(" - Count (after file load call): " + CoLTCommon.Data.CustomFormats.length);
+				var convertedData = converter.ConvertToUnicode(data);
+				var formats = JSON.parse(convertedData);
+				
+				if(typeof isLoadedCallback === 'function')
+					isLoadedCallback(formats);
+				else
+					return formats;
 			});
 		}
 		else
 		{
-			CoLTCommon.Func.Log(" - File does not exist!");
-			if(typeof filePath === "undefined")
-				CoLTCommon.Func.SetupDefaults();
+			if(typeof isLoadedCallback === 'function')
+				isLoadedCallback(null);
 			else
-			{
-				// This case should probably never happen, but just in case
-				CoLTCommon.Func.Log("ERROR: Failed to open user-specified file (file wasn't found)!");
-			}
+				return null;
 		}
 	},
 	
@@ -126,7 +117,7 @@ CoLTCommon.Func = {
 			if(!Components.isSuccessCode(status))
 			{
 				CoLTCommon.Func.Log("ERROR: Failed to perform async copy operation (return code was " + status + ")!");
-				return;
+				return null;
 			}
 		});
 	},

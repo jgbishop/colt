@@ -101,7 +101,7 @@ var objCoLT = {
 		}
 		return '';
 	},
-
+	
 	FormatString: function(string, type)
 	{
 		var result = "";
@@ -362,7 +362,6 @@ var objCoLT = {
 
 	PurgeContextSubMenu: function(node)
 	{
-		// Remove all the menu items from the sub menu (since we will recreate them)
 		while(node.firstChild)
 			node.removeChild(node.firstChild);
 	},
@@ -403,11 +402,26 @@ var objCoLT = {
 					objCoLT.UpdatePrefs(pv);
 			}
 			
-			objCoLT.LoadPrefs();
-			CoLTCommon.Func.LoadCustomFormats();
-				
 			var menu = document.getElementById("contentAreaContextMenu");
 			menu.addEventListener('popupshowing', objCoLT.UpdateContextMenu, false);
+			
+			objCoLT.LoadPrefs();
+			CoLTCommon.Func.LoadCustomFormats(null, objCoLT.StartupFormatsLoaded); // This is an async call!
+
+			// NOTE: No code that relies on custom formats should be placed below the LoadCustomFormats() call
+			// above, due to that function being asynchronous. Place such code in FormatsLoaded() instead.
+		}
+	},
+
+	StartupFormatsLoaded: function(formats)
+	{
+		if(formats === null)
+			CoLTCommon.Func.SetupDefaults();
+		else
+		{
+			if(CoLTCommon.Data.CustomFormats.length > 0)
+				CoLTCommon.Data.CustomFormats.length = 0;
+			CoLTCommon.Data.CustomFormats = formats;
 		}
 	},
 
@@ -507,12 +521,11 @@ var objCoLT = {
 			
 			CoLTCommon.Func.StoreCustomFormats();
 			
-			// TODO: Reenable
-			//this.NukePreviousPrefs(); // Clean up our old prefs
+			this.NukePreviousPrefs(); // Clean up our old prefs
 		}
 		
 		// Finally, update the stored preference version
-		//CoLTCommon.Data.PrefBranch.setIntPref("prefs_version", CoLTCommon.Data.PrefVersion); // TODO: Reenable
+		CoLTCommon.Data.PrefBranch.setIntPref("prefs_version", CoLTCommon.Data.PrefVersion);
 	}
 };
 
