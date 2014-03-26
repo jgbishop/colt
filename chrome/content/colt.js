@@ -187,14 +187,9 @@ var objCoLT = {
 	
 	GetNewLine: function()
 	{
-		var platform = navigator.platform.toLowerCase();
-	
-		if(platform.indexOf('win') != -1) // Windows
-			return "\r\n";
-		else if(platform.indexOf('mac') != -1) // Mac
-			return "\r";
-		else // *nix
-			return "\n";
+		var OS = Components.classes["@mozilla.org/xre/app-info;1"].getService(Components.interfaces.nsIXULRuntime).OS;
+		
+		return /winnt|os2/i.test(OS) ? "\r\n" : /mac/i.test(OS) ? "\r" : "\n";
 	},
 	
 	Legacy_GetComplexPref: function(name)
