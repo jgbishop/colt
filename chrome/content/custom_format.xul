@@ -14,8 +14,6 @@
 		ondialogcancel="objCoLTCustomFormat.ClearCustomFormat()"
 		onload="objCoLTCustomFormat.InitCustomFormat()">
 
-	<!-- <script type="application/x-javascript" src="chrome://colt/content/colt.js" /> -->
-	<!-- <script type="application/x-javascript" src="chrome://colt/content/options.js" /> -->
 	<script type="application/x-javascript" src="chrome://colt/content/custom_format.js" />
 	
 	<stringbundleset id="stringbundleset">

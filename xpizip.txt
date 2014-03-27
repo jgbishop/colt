@@ -3,3 +3,4 @@ install.rdf
 LICENSE.txt
 chrome
 defaults/preferences/colt.js
+modules

@@ -10,7 +10,6 @@
 		buttons="accept, cancel" orient="vertical" ondialogaccept="objCoLTOptions.SaveOptions()"
 		onload="objCoLTOptions.LoadOptions()" title="&colt.options.title;">
 
-	<!-- <script type="application/x-javascript" src="chrome://colt/content/colt.js" /> -->
 	<script type="application/x-javascript" src="chrome://colt/content/options.js" />
 
 	<stringbundleset id="stringbundleset">

@@ -61,12 +61,19 @@ CoLTCommon.Func = {
 								createInstance(Components.interfaces.nsIScriptableUnicodeConverter);
 				converter.charset = "UTF-8";
 				var convertedData = converter.ConvertToUnicode(data);
-				var formats = JSON.parse(convertedData);
-				
-				if(typeof isLoadedCallback === 'function')
-					isLoadedCallback(formats);
-				else
-					return formats;
+				try
+				{
+					var formats = JSON.parse(convertedData);
+					
+					if(typeof isLoadedCallback === 'function')
+						isLoadedCallback(formats);
+					else
+						return formats;
+				}
+				catch(e)
+				{
+					CoLTCommon.Func.Log("ERROR: Failed to parse JSON file. Exception: " + e.message);
+				}
 			});
 		}
 		else
