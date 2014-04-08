@@ -1,6 +1,9 @@
 //***************
 //Version History
 //***************
+[2.6.3]
++ Bug Fix: Removed an invalid reference to the document object in CoLT's common module, which prevented new installs from being set up properly
+
 [2.6.2]
 + Custom formats are now stored in a JSON file in the user's Firefox profile, instead of as Firefox preferences
 + Rewrote the export and import routines to support the new JSON file format

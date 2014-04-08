@@ -3,6 +3,7 @@ var EXPORTED_SYMBOLS = ["CoLTCommon"];
 Components.utils.import('resource://gre/modules/devtools/Console.jsm');
 Components.utils.import('resource://gre/modules/FileUtils.jsm');
 Components.utils.import('resource://gre/modules/NetUtil.jsm');
+Components.utils.import('resource://gre/modules/Services.jsm');
 
 if (typeof(CoLTCommon) === "undefined")
 {
@@ -87,14 +88,14 @@ CoLTCommon.Func = {
 	
 	SetupDefaults: function()
 	{
-		var stringBundle = document.getElementById("CLT-String-Bundle");
+		var bundle = Services.strings.createBundle("chrome://colt/locale/colt.properties");
 		
 		if(CoLTCommon.Data.CustomFormats.length > 0)
 			CoLTCommon.Data.CustomFormats.length = 0;
 		
 		CoLTCommon.Data.CustomFormats.push(
-			{label: stringBundle.getString("CLT_DefaultLabelHTMLLink"), key: 'H', format: "<a href=\"%U\">%T</a>"},
-			{label: stringBundle.getString("CLT_DefaultLabelPlainText"), key: 'P', format: "%T - %U"},
+			{label: bundle.GetStringFromName("CLT_DefaultLabelHTMLLink"), key: 'H', format: "<a href=\"%U\">%T</a>"},
+			{label: bundle.GetStringFromName("CLT_DefaultLabelPlainText"), key: 'P', format: "%T - %U"},
 			{isSep: true},
 			{label: "BB Code", key: 'B', format: "[url=%U]%T[/url]"},
 			{label: "Markdown", key: 'M', format: "[%T](%U)"},
