@@ -11,22 +11,22 @@
 
 <popup id="contentAreaContextMenu">
 	<menu id="CLT-Context-CopyPageMenu" label="&colt.copypagemenu;" accesskey="&colt.ak.copypagemenu;" insertafter="context-copy">
-		<menupopup id="CLT-Context-CopyPageMenuPopup" onpopupshowing="objCoLT.UpdateContextSubMenu(this, 'page')"
+		<menupopup id="CLT-Context-CopyPageMenuPopup" onpopupshowing="objCoLT.UpdateContextSubMenu(this)"
 			oncommand="objCoLT.CopyBoth(event.target.getAttribute('formatindex'), 'page'); event.stopPropagation();">
 		</menupopup>
 	</menu>
 
 	<menuitem id="CLT-Context-CopyPage" label="&colt.copypageitem;" accesskey="&colt.ak.copypageitem;" insertafter="context-copy"
-			  oncommand="objCoLT.CopyBoth('1', 'page');" />
+			  oncommand="objCoLT.CopyBoth('0', 'page');" />
 
 	<menu id="CLT-Context-CopyBothMenu" label="&colt.copybothmenu;" accesskey="&colt.ak.copybothmenu;" insertafter="context-copylink">
-		<menupopup id="CLT-Context-CopyBothMenuPopup" onpopupshowing="objCoLT.UpdateContextSubMenu(this, 'link')"
+		<menupopup id="CLT-Context-CopyBothMenuPopup" onpopupshowing="objCoLT.UpdateContextSubMenu(this)"
 			oncommand="objCoLT.CopyBoth(event.target.getAttribute('formatindex'), 'link'); event.stopPropagation();">
 		</menupopup>
 	</menu>
 	
 	<menuitem id="CLT-Context-CopyBoth" label="&colt.copybothitem;" accesskey="&colt.ak.copybothitem;" insertafter="context-copylink"
-			  oncommand="objCoLT.CopyBoth('1', 'link');" />
+			  oncommand="objCoLT.CopyBoth('0', 'link');" />
 	
 	<menuitem id="CLT-Context-CopyLinkText" label="&colt.copylinktext;" accesskey="&colt.ak.copylinktext;"
 			  insertafter="context-copylink" oncommand="objCoLT.CopyLinkText()" />

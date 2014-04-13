@@ -154,7 +154,7 @@ var objCoLT = {
 							if(tbuff.length > 0)
 							{
 								if(tval.length > 0)
-									result += this.FormatString(tval, type);
+									result += this.FormatString(tval);
 								else
 									result += tbuff;
 								break;
@@ -197,6 +197,7 @@ var objCoLT = {
 		return CoLTCommon.Data.PrefBranch.getComplexValue(name, Components.interfaces.nsISupportsString).data;
 	},
 
+	// This function migrates prefs from the old branch (colt.*) to the new branch (extensions.colt.*)
 	Legacy_MigratePrefs: function(oldBranch)
 	{
 		for(var pid in CoLTCommon.Data.Prefs)
@@ -312,7 +313,7 @@ var objCoLT = {
 		p.ShowCopyPage.value = b.getBoolPref(p.ShowCopyPage.name);
 	},
 
-	NukePreviousPrefs: function()
+	NukePreviousFormats: function()
 	{
 		var countPrefName = "custom.count";
 		if(CoLTCommon.Data.PrefBranch.prefHasUserValue(countPrefName))
@@ -380,22 +381,22 @@ var objCoLT = {
 			{
 				var oldBranch = Components.classes["@mozilla.org/preferences-service;1"].getService(Components.interfaces.nsIPrefService).getBranch("colt.");
 				if(oldBranch.prefHasUserValue("custom.count"))
+				{
 					objCoLT.Legacy_MigratePrefs(oldBranch); // Migrate old preferences
+					CoLTCommon.Data.PrefBranch.setIntPref("prefs_version", 2); // Version 2 is the descendant of this state
+				}
 				else
 				{
-					objCoLT.NukePreviousPrefs();
+					objCoLT.NukePreviousFormats();
 					CoLTCommon.Func.SetupDefaults(); // Create the defaults (new install)
+					CoLTCommon.Data.PrefBranch.setIntPref("prefs_version", CoLTCommon.Data.PrefVersion);
 				}
-				
-				CoLTCommon.Data.PrefBranch.setIntPref("prefs_version", CoLTCommon.Data.PrefVersion);
 			}
-			else
-			{
-				// Update our preferences if necessary
-				var pv = CoLTCommon.Data.PrefBranch.getIntPref("prefs_version");
-				if(pv < CoLTCommon.Data.PrefVersion)
-					objCoLT.UpdatePrefs(pv);
-			}
+			
+			// Update our preferences if necessary
+			var pv = CoLTCommon.Data.PrefBranch.getIntPref("prefs_version");
+			if(pv < CoLTCommon.Data.PrefVersion)
+				objCoLT.UpdatePrefs(pv);
 			
 			var menu = document.getElementById("contentAreaContextMenu");
 			menu.addEventListener('popupshowing', objCoLT.UpdateContextMenu, false);
@@ -404,7 +405,7 @@ var objCoLT = {
 			CoLTCommon.Func.LoadCustomFormats(null, objCoLT.StartupFormatsLoaded); // This is an async call!
 
 			// NOTE: No code that relies on custom formats should be placed below the LoadCustomFormats() call
-			// above, due to that function being asynchronous. Place such code in FormatsLoaded() instead.
+			// above, due to that function being asynchronous. Place such code in StartupFormatsLoaded() instead.
 		}
 	},
 
@@ -446,7 +447,7 @@ var objCoLT = {
 		copyPageMenu.hidden = (CoLTCommon.Data.Prefs.ShowCopyPage.value && (CoLTCommon.Data.CustomFormats.length > 1)) ? hiddenFlag : true;
 	},
 
-	UpdateContextSubMenu: function(node, type)
+	UpdateContextSubMenu: function(node)
 	{
 		this.PurgeContextSubMenu(node);
 	
@@ -516,7 +517,7 @@ var objCoLT = {
 			
 			CoLTCommon.Func.StoreCustomFormats();
 			
-			this.NukePreviousPrefs(); // Clean up our old prefs
+			this.NukePreviousFormats(); // Clean up our old custom formats
 		}
 		
 		// Finally, update the stored preference version
