@@ -1,6 +1,11 @@
 //***************
 //Version History
 //***************
+[2.6.4]
++ Removed a few deprecated parameters from various internal functions
++ Bug Fix: CoLT's menu items were not working properly when only one format was present in the custom formats list
++ Bug Fix: Improved the way migrating from ancient versions of CoLT works (prefs weren't being fully migrated)
+
 [2.6.3]
 + Removed the following translations, all of which were mostly incomplete: cs-CZ, ko-KR, tr, zh-TW
 + Bug Fix: Removed an invalid reference to the document object in CoLT's common module, which prevented new installs from being set up properly
