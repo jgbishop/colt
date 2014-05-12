@@ -24,16 +24,10 @@
 <!ENTITY colt.options.button.editformat "Edita...">
 <!ENTITY colt.options.button.removeformat "Suprimeix">
 <!ENTITY colt.options.button.new "New">
-<!ENTITY colt.options.button.exportimport "Export / Import">
 <!ENTITY colt.options.menulabel.customformat "Custom Format...">
 <!ENTITY colt.options.menulabel.separator "Separator">
 <!ENTITY colt.options.menulabel.export "Export Custom Formats...">
 <!ENTITY colt.options.menulabel.import "Import Custom Formats...">
-<!ENTITY colt.options.textvariablelabel "S'usa per especificar el text copia">
-<!ENTITY colt.options.urlvariablelabel "S'usa per especificar l'URL copiat">
-<!ENTITY colt.options.linktitlevariablelabel "S'usa per especificar l'atribut del títol de l'enllaç">
-<!ENTITY colt.options.pagetitlevariablelabel "S'usa per especificar el títol de la pàgina">
-<!ENTITY colt.options.newlinelabel "S'usa per especificar un final de línia">
 <!ENTITY colt.options.variable.description "Podeu usar les següents variables als formats personalitzats:">
 <!ENTITY colt.options.header.variable "Variable">
 <!ENTITY colt.options.header.linkcontext "Còpia d'un enllaç">

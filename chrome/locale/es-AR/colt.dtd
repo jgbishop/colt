@@ -24,16 +24,10 @@
 <!ENTITY colt.options.button.editformat "Editar...">
 <!ENTITY colt.options.button.removeformat "Remover">
 <!ENTITY colt.options.button.new "Nuevo">
-<!ENTITY colt.options.button.exportimport "Exportar e Importar">
 <!ENTITY colt.options.menulabel.customformat "Formato personalizado…">
 <!ENTITY colt.options.menulabel.separator "Separador">
 <!ENTITY colt.options.menulabel.export "Exportar formatos personalizados…">
 <!ENTITY colt.options.menulabel.import "Importar formatos personalizados…">
-<!ENTITY colt.options.textvariablelabel "Usado para definir el texto copiado">
-<!ENTITY colt.options.urlvariablelabel "Usado para definir la URL copiada">
-<!ENTITY colt.options.linktitlevariablelabel "Usado para definir el atributo Título del enlace">
-<!ENTITY colt.options.pagetitlevariablelabel "Usado para definir el Título de página">
-<!ENTITY colt.options.newlinelabel "Usado para definir una nueva línea">
 <!ENTITY colt.options.variable.description "Puede usar las siguientes variables en sus formatos personalizados:">
 <!ENTITY colt.options.header.variable "Variable">
 <!ENTITY colt.options.header.linkcontext "Copiando un enlace">

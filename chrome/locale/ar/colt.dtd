@@ -24,16 +24,10 @@
 <!ENTITY colt.options.button.editformat "تحرير...">
 <!ENTITY colt.options.button.removeformat "حذف">
 <!ENTITY colt.options.button.new "New">
-<!ENTITY colt.options.button.exportimport "Export / Import">
 <!ENTITY colt.options.menulabel.customformat "Custom Format...">
 <!ENTITY colt.options.menulabel.separator "Separator">
 <!ENTITY colt.options.menulabel.export "Export Custom Formats...">
 <!ENTITY colt.options.menulabel.import "Import Custom Formats...">
-<!ENTITY colt.options.textvariablelabel "تستخدم لتحديد نسخ النص">
-<!ENTITY colt.options.urlvariablelabel "تستخدم لتحديد نسخ رابط">
-<!ENTITY colt.options.linktitlevariablelabel "تستخدم لتحديد رابط عنوان سمة">
-<!ENTITY colt.options.pagetitlevariablelabel "تستخدم لتحديد عنوان الصفحة">
-<!ENTITY colt.options.newlinelabel "تستخدم لتحديد سطر جديد">
 <!ENTITY colt.options.variable.description "المتغيرات التالية يمكن أن تستخدم في تخصيص الصيغ :">
 <!ENTITY colt.options.header.variable "المتغير">
 <!ENTITY colt.options.header.linkcontext "نسخ رابط">

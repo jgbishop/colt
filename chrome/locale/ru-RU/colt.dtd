@@ -24,16 +24,10 @@
 <!ENTITY colt.options.button.editformat "Изменить">
 <!ENTITY colt.options.button.removeformat "Удалить">
 <!ENTITY colt.options.button.new "Новый">
-<!ENTITY colt.options.button.exportimport "Экспорт / Импорт">
 <!ENTITY colt.options.menulabel.customformat "Свой формат…">
 <!ENTITY colt.options.menulabel.separator "Разделитель">
 <!ENTITY colt.options.menulabel.export "Экспортировать свои форматы…">
 <!ENTITY colt.options.menulabel.import "Импортировать свои форматы…">
-<!ENTITY colt.options.textvariablelabel "Используйте для определения копируемого текста">
-<!ENTITY colt.options.urlvariablelabel "Используйте для определения копируемого URL">
-<!ENTITY colt.options.linktitlevariablelabel "Используйте для определения заголовка ссылки">
-<!ENTITY colt.options.pagetitlevariablelabel "Используйте для определения заголовка страницы">
-<!ENTITY colt.options.newlinelabel "Используйте для определения перехода на новую строку">
 <!ENTITY colt.options.variable.description "Указанные переменные можно использовать в своём произвольном формате:">
 <!ENTITY colt.options.header.variable "Переменные">
 <!ENTITY colt.options.header.linkcontext "Копирование ссылки">

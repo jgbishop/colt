@@ -24,16 +24,10 @@
 <!ENTITY colt.options.button.editformat "Rediger...">
 <!ENTITY colt.options.button.removeformat "Fjern">
 <!ENTITY colt.options.button.new "New">
-<!ENTITY colt.options.button.exportimport "Export / Import">
 <!ENTITY colt.options.menulabel.customformat "Custom Format...">
 <!ENTITY colt.options.menulabel.separator "Separator">
 <!ENTITY colt.options.menulabel.export "Export Custom Formats...">
 <!ENTITY colt.options.menulabel.import "Import Custom Formats...">
-<!ENTITY colt.options.textvariablelabel "Bruges til at angive kopieret tekst">
-<!ENTITY colt.options.urlvariablelabel "Bruges til at angive kopieret URL">
-<!ENTITY colt.options.linktitlevariablelabel "Bruges til at angive linkets titel-attribut">
-<!ENTITY colt.options.pagetitlevariablelabel "Bruges til at angive sidens titel">
-<!ENTITY colt.options.newlinelabel "Bruges til at angive en ny linje">
 <!ENTITY colt.options.variable.description "De følgende variabler kan bruges i dine brugerdefinerede formater:">
 <!ENTITY colt.options.header.variable "Variabel">
 <!ENTITY colt.options.header.linkcontext "Kopiering af et link">

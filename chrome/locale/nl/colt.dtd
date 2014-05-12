@@ -24,16 +24,10 @@
 <!ENTITY colt.options.button.editformat "Bewerk...">
 <!ENTITY colt.options.button.removeformat "Verwijder">
 <!ENTITY colt.options.button.new "Nieuw">
-<!ENTITY colt.options.button.exportimport "Exporteer/Importeer">
 <!ENTITY colt.options.menulabel.customformat "Eigen formaat...">
 <!ENTITY colt.options.menulabel.separator "Scheidingsteken">
 <!ENTITY colt.options.menulabel.export "Exporteer eigen formaten…">
 <!ENTITY colt.options.menulabel.import "Importeer eigen formaten...">
-<!ENTITY colt.options.textvariablelabel "Gebruikt om te gekopieerde tekst aan te geven">
-<!ENTITY colt.options.urlvariablelabel "Gebruikt om te gekopieerde URL aan te geven">
-<!ENTITY colt.options.linktitlevariablelabel "Gebruikt om titeleigenschap van de link te specificeren">
-<!ENTITY colt.options.pagetitlevariablelabel "Gebruikt om de titel van de pagina te specificeren">
-<!ENTITY colt.options.newlinelabel "Gebruikt om een nieuwe regel aan te geven">
 <!ENTITY colt.options.variable.description "De volgende variabelen mogen in uw instellingsaanpassingen gebruikt worden">
 <!ENTITY colt.options.header.variable "Variabele">
 <!ENTITY colt.options.header.linkcontext "Een link kopiëren">

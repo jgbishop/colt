@@ -29,11 +29,7 @@
 <!ENTITY colt.options.menulabel.separator "Separator">
 <!ENTITY colt.options.menulabel.export "Export Custom Formats...">
 <!ENTITY colt.options.menulabel.import "Import Custom Formats...">
-<!ENTITY colt.options.textvariablelabel "Used to specify the copied text">
-<!ENTITY colt.options.urlvariablelabel "Used to specify the copied URL">
-<!ENTITY colt.options.linktitlevariablelabel "Used to specify the link&apos;s title attribute">
-<!ENTITY colt.options.pagetitlevariablelabel "Used to specify the page title">
-<!ENTITY colt.options.newlinelabel "Used to specify a new line">
+<!ENTITY colt.options.menulabel.restoredefaults "Restore Defaults">
 <!ENTITY colt.options.variable.description "The following variables may be used in your custom formats:">
 <!ENTITY colt.options.header.variable "Variable">
 <!ENTITY colt.options.header.linkcontext "Copying a Link">
