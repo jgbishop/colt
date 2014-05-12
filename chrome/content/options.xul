@@ -53,10 +53,12 @@
 			<button id="CLT-Opt-Edit-Format" label="&colt.options.button.editformat;" oncommand="objCoLTOptions.OnEditCustomFormat()" />
 			<button id="CLT-Opt-Remove-Format" label="&colt.options.button.removeformat;" oncommand="objCoLTOptions.OnRemoveCustomFormat()" />
 			<separator flex="1" />
-			<button id="CLT-Opt-Export-Import-Button" type="menu" label="&colt.options.button.exportimport;">
+			<button id="CLT-Opt-Export-Import-Button" type="menu" label="&colt.options.button.customformats;">
 				<menupopup>
 					<menuitem label="&colt.options.menulabel.export;" oncommand="objCoLTOptions.OnExportCustom()" />
 					<menuitem label="&colt.options.menulabel.import;" oncommand="objCoLTOptions.OnImportCustom()" />
+					<menuseparator />
+					<menuitem label="&colt.options.menulabel.restoredefaults;" oncommand="objCoLTOptions.OnRestoreDefaults()" />
 				</menupopup>
 			</button>
 		</hbox>

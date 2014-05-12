@@ -387,6 +387,38 @@ var objCoLTOptions = {
 			this._selectItem(newItem);
 		}
 	},
+	
+	OnRestoreDefaults: function()
+	{
+		var stringBundle = document.getElementById("CLT-String-Bundle");
+		var prompts = Components.classes["@mozilla.org/embedcomp/prompt-service;1"].getService(Components.interfaces.nsIPromptService);
+
+		var check = {value: false};
+		var flags = prompts.BUTTON_POS_0 * prompts.BUTTON_TITLE_YES +
+					prompts.BUTTON_POS_1 * prompts.BUTTON_TITLE_NO;
+		
+		var retVal = prompts.confirmEx(window, stringBundle.getString("CLT_RestoreDefaultsTitle"),
+									   stringBundle.getString("CLT_RestoreDefaultsPrompt"), flags, null, null, null, null, check);
+		if(retVal == 0) // Button 0 is the "Yes" option here
+		{
+			// Remove current items
+			var listBox = document.getElementById("CLT-Opt-Custom-Format-List");
+			while(listBox.hasChildNodes() && listBox.lastChild.nodeName == "listitem")
+			{
+				listBox.removeChild(listBox.lastChild);
+			}
+			
+			var a = CoLTCommon.Func.GetDefaultFormats();
+			
+			for(var i=0; i < a.length; i++)
+			{
+				if(a[i].hasOwnProperty('isSep') && a[i].isSep == true)
+					objCoLTOptions.AppendSeparator(false);
+				else
+					objCoLTOptions.AppendFormat(a[i].label, a[i].key, a[i].format, false);
+			}
+		}
+	},
 
 	SaveOptions: function()
 	{

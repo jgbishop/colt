@@ -24,11 +24,11 @@
 <!ENTITY colt.options.button.editformat "Edit...">
 <!ENTITY colt.options.button.removeformat "Remove">
 <!ENTITY colt.options.button.new "New">
-<!ENTITY colt.options.button.exportimport "Export / Import">
+<!ENTITY colt.options.button.customformats "Custom Formats">
 <!ENTITY colt.options.menulabel.customformat "Custom Format...">
 <!ENTITY colt.options.menulabel.separator "Separator">
-<!ENTITY colt.options.menulabel.export "Export Custom Formats...">
-<!ENTITY colt.options.menulabel.import "Import Custom Formats...">
+<!ENTITY colt.options.menulabel.export "Export...">
+<!ENTITY colt.options.menulabel.import "Import...">
 <!ENTITY colt.options.menulabel.restoredefaults "Restore Defaults">
 <!ENTITY colt.options.variable.description "The following variables may be used in your custom formats:">
 <!ENTITY colt.options.header.variable "Variable">

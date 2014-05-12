@@ -13,7 +13,6 @@ if (typeof(CoLTCommon) === "undefined")
 CoLTCommon.Data = {
 	PrefBranch: Components.classes["@mozilla.org/preferences-service;1"].getService(Components.interfaces.nsIPrefService).getBranch("extensions.colt."),
 	PrefVersion: 4,
-	
 	Prefs: {
 		ShowCopyText: { name: "showcopytext", value: false },
 		ShowCopyBoth: { name: "showcopyboth", value: false },
@@ -35,6 +34,24 @@ CoLTCommon.Func = {
 	LogRaw: function(data)
 	{
 		console.log(data);
+	},
+	
+	GetDefaultFormats: function()
+	{
+		var bundle = Services.strings.createBundle("chrome://colt/locale/colt.properties");
+		
+		var retArray = [
+			{label: bundle.GetStringFromName("CLT_DefaultLabelHTMLLink"), key: 'H', format: "<a href=\"%U\">%T</a>"},
+			{label: bundle.GetStringFromName("CLT_DefaultLabelPlainText"), key: 'P', format: "%T - %U"},
+			{isSep: true},
+			{label: "BB Code", key: 'B', format: "[url=%U]%T[/url]"},
+			{label: "Markdown", key: 'M', format: "[%T](%U)"},
+			{label: "Wikipedia", key: 'W', format: "[%U %T]"},
+			{isSep: true},
+			{label: bundle.GetStringFromName("CLT_DefaultLabelRichTextHTML"), key: 'R', format: "{RT}"}
+		];
+		
+		return retArray;
 	},
 	
 	LoadCustomFormats: function(filePath, isLoadedCallback)
@@ -88,22 +105,10 @@ CoLTCommon.Func = {
 	
 	SetupDefaults: function()
 	{
-		var bundle = Services.strings.createBundle("chrome://colt/locale/colt.properties");
-		
 		if(CoLTCommon.Data.CustomFormats.length > 0)
 			CoLTCommon.Data.CustomFormats.length = 0;
 		
-		CoLTCommon.Data.CustomFormats.push(
-			{label: bundle.GetStringFromName("CLT_DefaultLabelHTMLLink"), key: 'H', format: "<a href=\"%U\">%T</a>"},
-			{label: bundle.GetStringFromName("CLT_DefaultLabelPlainText"), key: 'P', format: "%T - %U"},
-			{isSep: true},
-			{label: "BB Code", key: 'B', format: "[url=%U]%T[/url]"},
-			{label: "Markdown", key: 'M', format: "[%T](%U)"},
-			{label: "Wikipedia", key: 'W', format: "[%U %T]"},
-			{isSep: true},
-			{label: "Rich Text HTML", key: 'R', format: "{RT}"}
-		);
-		
+		CoLTCommon.Data.CustomFormats = CoLTCommon.Func.GetDefaultFormats();
 		CoLTCommon.Func.StoreCustomFormats();
 	},
 
