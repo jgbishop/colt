@@ -1,4 +1,4 @@
-Components.utils.import('resource://colt/common.js');
+Components.utils.import('resource://colt/colt-common.js');
 
 var objCoLT = {
 	LinkData: {
@@ -45,18 +45,14 @@ var objCoLT = {
 		else
 		{
 			var myString = objCoLT.FormatString(CoLTCommon.Data.CustomFormats[formatIndex].format, type);
-			var result = objCoLT.PlaceOnClipboard(myString);
-			if(!result)
-				alert("ERROR: The link text and location were unable to be placed on the clipboard.");
+			objCoLT.PlaceOnClipboard(myString);
 		}
 	},
 	
 	CopyLinkText: function()
 	{
 		var linkText = gContextMenu.linkText();
-		var result = this.PlaceOnClipboard(linkText);
-		if(!result)
-			alert("ERROR: The link text was unable to be placed on the clipboard.");
+		this.PlaceOnClipboard(linkText);
 	},
 	
 	DeletePref: function(branch, prefname)
@@ -269,7 +265,7 @@ var objCoLT = {
 			var complex = Components.classes["@mozilla.org/supports-string;1"].createInstance(Components.interfaces.nsISupportsString);
 			complex.data = value;
 			CoLTCommon.Data.PrefBranch.setComplexValue(name, Components.interfaces.nsISupportsString, complex);
-		} catch(e) { CoLTCommon.Func.Log("ERROR: Caught exception trying to set complex preference (" + e.message + ")"); }
+		} catch(e) { Components.utils.reportError("ERROR: Caught exception trying to set complex preference (" + e.message + ")"); }
 	},
 	
 	LoadLinkData: function(type)
@@ -347,13 +343,14 @@ var objCoLT = {
 	OptionsHaveUpdated: function()
 	{
 		this.LoadPrefs();
+		this.UpdateContextSubMenu(document.getElementById("CLT-Context-CopyPageMenuPopup"));
+		this.UpdateContextSubMenu(document.getElementById("CLT-Context-CopyBothMenuPopup"));
 	},
 
 	PlaceOnClipboard: function(string)
 	{
 		var clipboard = Components.classes["@mozilla.org/widget/clipboardhelper;1"].getService(Components.interfaces.nsIClipboardHelper);
 		clipboard.copyString(string);
-		return true;
 	},
 
 	PurgeContextSubMenu: function(node)
@@ -383,7 +380,7 @@ var objCoLT = {
 				if(oldBranch.prefHasUserValue("custom.count"))
 				{
 					objCoLT.Legacy_MigratePrefs(oldBranch); // Migrate old preferences
-					CoLTCommon.Data.PrefBranch.setIntPref("prefs_version", 2); // Version 2 is the descendant of this state
+					CoLTCommon.Data.PrefBranch.setIntPref("prefs_version", 2); // Version 2 is the predecessor of this state
 				}
 				else
 				{
@@ -419,6 +416,9 @@ var objCoLT = {
 				CoLTCommon.Data.CustomFormats.length = 0;
 			CoLTCommon.Data.CustomFormats = formats;
 		}
+		
+		objCoLT.UpdateContextSubMenu(document.getElementById("CLT-Context-CopyPageMenuPopup"));
+		objCoLT.UpdateContextSubMenu(document.getElementById("CLT-Context-CopyBothMenuPopup"));
 	},
 
 	UpdateContextMenu: function()

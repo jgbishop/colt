@@ -1,4 +1,4 @@
-Components.utils.import('resource://colt/common.js');
+Components.utils.import('resource://colt/colt-common.js');
 
 var objCoLTOptions = {
 	_selectItem: function(item)

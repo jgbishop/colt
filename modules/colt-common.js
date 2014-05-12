@@ -70,7 +70,7 @@ CoLTCommon.Func = {
 			NetUtil.asyncFetch(channel, function(inputStream, status) {
 				if(!Components.isSuccessCode(status))
 				{
-					CoLTCommon.Func.Log("ERROR: Failed to open input stream on custom formats file (return code was " + status + ")!");
+					Components.utils.reportError("ERROR: Failed to open input stream on custom formats file (return code was " + status + ")!");
 					return null;
 				}
 				
@@ -79,19 +79,21 @@ CoLTCommon.Func = {
 								createInstance(Components.interfaces.nsIScriptableUnicodeConverter);
 				converter.charset = "UTF-8";
 				var convertedData = converter.ConvertToUnicode(data);
+				var formats;
 				try
 				{
-					var formats = JSON.parse(convertedData);
-					
-					if(typeof isLoadedCallback === 'function')
-						isLoadedCallback(formats);
-					else
-						return formats;
+					formats = JSON.parse(convertedData);
 				}
 				catch(e)
 				{
-					CoLTCommon.Func.Log("ERROR: Failed to parse JSON file. Exception: " + e.message);
+					Components.utils.reportError("ERROR: Failed to parse JSON file. Exception: " + e.message);
+					return null;
 				}
+				
+				if(typeof isLoadedCallback === 'function')
+					isLoadedCallback(formats);
+				else
+					return formats;
 			});
 		}
 		else
@@ -129,7 +131,7 @@ CoLTCommon.Func = {
 			// Note that both streams are automatically closed when the copy operation is completed
 			if(!Components.isSuccessCode(status))
 			{
-				CoLTCommon.Func.Log("ERROR: Failed to perform async copy operation (return code was " + status + ")!");
+				Components.utils.reportError("ERROR: Failed to perform async copy operation (return code was " + status + ")!");
 				return null;
 			}
 		});

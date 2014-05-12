@@ -1,4 +1,4 @@
-Components.utils.import('resource://colt/common.js');
+Components.utils.import('resource://colt/colt-common.js');
 
 var objCoLTCustomFormat = {
 	CustomFormatBuffer : null,

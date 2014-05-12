@@ -1,6 +1,11 @@
 //***************
 //Version History
 //***************
+[2.6.5]
++ Added capability to the options dialog to restore the default custom formats
++ Displaying the CoLT context sub-menus is now slightly more efficient (they are no longer built on the fly)
++ Error handler routines have been updated to use the reportError() call
+
 [2.6.4]
 + Removed a few deprecated parameters from various internal functions
 + Bug Fix: CoLT's menu items were not working properly when only one format was present in the custom formats list
