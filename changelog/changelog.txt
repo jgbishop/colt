@@ -5,6 +5,7 @@
 + Added capability to the options dialog to restore the default custom formats
 + Displaying the CoLT context sub-menus is now slightly more efficient (they are no longer built on the fly)
 + Error handler routines have been updated to use the reportError() call
++ Bug Fix: Removed an erroneous instance in the options dialog where DOM elements were being created and never used
 
 [2.6.4]
 + Removed a few deprecated parameters from various internal functions

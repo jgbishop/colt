@@ -100,8 +100,6 @@ var objCoLTOptions = {
 		
 		for(var i=0; i < CoLTCommon.Data.CustomFormats.length; i++)
 		{
-			var listItem = document.createElement("listitem");
-			
 			if(CoLTCommon.Data.CustomFormats[i].hasOwnProperty("isSep") && CoLTCommon.Data.CustomFormats[i].isSep == true)
 				this.AppendSeparator(false);
 			else
