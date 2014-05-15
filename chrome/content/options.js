@@ -1,12 +1,17 @@
 Components.utils.import('resource://colt/colt-common.js');
 
 var objCoLTOptions = {
-	_selectItem: function(item)
+	_selectItem: function(listItem)
 	{
 		var listBox = document.getElementById("CLT-Opt-Custom-Format-List");
 		listBox.clearSelection(); // Clear all selected elements
-		listBox.ensureElementIsVisible(item); // Make sure it's visible (first!)
-		listBox.selectItem(item); // Select the incoming item
+		listBox.ensureElementIsVisible(listItem); // Make sure it's visible (first!)
+		
+		// Clear the "current" state on this listitem (to avoid leaving artifacts)
+		// The selectItem() call below will properly restore this
+		listItem.removeAttribute("current");
+		
+		listBox.selectItem(listItem); // Select the incoming item
 	},
 	
 	AppendFormat: function(label, accesskey, format, autoSelect)
@@ -300,17 +305,17 @@ var objCoLTOptions = {
 		if(listBox.selectedItem)
 		{
 			removeButton.disabled = false;
-	
+			
 			if(listBox.selectedItem.childNodes[0].tagName != "separator")
 				editButton.disabled = false;
 			else
 				editButton.disabled = true;
-	
+
 			if(selectedIndex == 0)
 				moveUpButton.disabled = true;
 			else
 				moveUpButton.disabled = false;
-	
+
 			if(selectedIndex == listBox.getRowCount() - 1)
 				moveDownButton.disabled = true;
 			else
@@ -331,16 +336,13 @@ var objCoLTOptions = {
 	OnMoveDown: function()
 	{
 		var listBox = document.getElementById("CLT-Opt-Custom-Format-List");
-
-		// Return if the selected item is null for some reason, or we're at the end of the list
-		if (!listBox.selectedItem || listBox.selectedIndex == listBox.getRowCount() - 1)
-			return;
-
-		// Figure out where the item is headed
-		var newIndex = listBox.selectedIndex + 1;
+		var sIndex = listBox.selectedIndex;
 		
-		// Remove the item
-		var oldItem = listBox.removeItemAt(listBox.selectedIndex);
+		if(sIndex == (listBox.getRowCount() - 1) || sIndex == -1)
+			return;
+		
+		var oldItem = listBox.removeItemAt(sIndex);
+		var newIndex = sIndex + 1;
 		var newItem;
 
 		// If we're at the end of the list, append the item
@@ -355,15 +357,15 @@ var objCoLTOptions = {
 	OnMoveUp: function()
 	{
 		var listBox = document.getElementById("CLT-Opt-Custom-Format-List");
-
-		if (!listBox.selectedItem || listBox.selectedIndex == 0)
+		var sIndex = listBox.selectedIndex;
+		
+		if(sIndex <= 0)
 			return;
-
-		var newIndex = listBox.selectedIndex - 1;
-
-		var oldItem = listBox.removeItemAt(listBox.selectedIndex);
+		
+		var oldItem = listBox.removeItemAt(sIndex);
+		var newIndex = sIndex - 1;
 		var newItem = listBox.insertBefore(oldItem, listBox.getItemAtIndex(newIndex));
-
+		
 		this._selectItem(newItem);
 	},
 	

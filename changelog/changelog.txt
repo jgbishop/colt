@@ -2,10 +2,12 @@
 //Version History
 //***************
 [2.6.5]
-+ Added capability to the options dialog to restore the default custom formats
++ Default formats can now be restored via the options dialog
++ Reorganized the options dialog
 + Displaying the CoLT context sub-menus is now slightly more efficient (they are no longer built on the fly)
 + Error handler routines have been updated to use the reportError() call
 + Bug Fix: Removed an erroneous instance in the options dialog where DOM elements were being created and never used
++ Bug Fix: Selected item artifacts should no longer be left around when moving custom formats in the list
 
 [2.6.4]
 + Removed a few deprecated parameters from various internal functions

@@ -25,7 +25,7 @@
 
 	<groupbox>
 		<caption label="&colt.options.group.customformats;" />
-		<hbox align="top">
+		<hbox>
 			<listbox id="CLT-Opt-Custom-Format-List" flex="1" rows="10" onselect="objCoLTOptions.OnListBoxSelected()">
 				<listhead>
 					<listheader label="&colt.options.header.label;" />
@@ -38,21 +38,23 @@
 					<listcol flex="2"/>
 				</listcols>
 			</listbox>
-			<vbox>
-				<button id="CLT-Opt-Move-Format-Up" label="&colt.options.button.moveup;" oncommand="objCoLTOptions.OnMoveUp()" />
-				<button id="CLT-Opt-Move-Format-Down" label="&colt.options.button.movedown;" oncommand="objCoLTOptions.OnMoveDown()" />
-			</vbox>
+			<hbox>
+				<vbox flex="1">
+					<button id="CLT-Opt-New-Button" type="menu" label="&colt.options.button.new;">
+						<menupopup>
+							<menuitem label="&colt.options.menulabel.customformat;" oncommand="objCoLTOptions.OnAddCustomFormat()" />
+							<menuitem label="&colt.options.menulabel.separator;" oncommand="objCoLTOptions.OnAddSeparator()" />
+						</menupopup>
+					</button>
+					<button id="CLT-Opt-Edit-Format" label="&colt.options.button.editformat;" oncommand="objCoLTOptions.OnEditCustomFormat()" />
+					<button id="CLT-Opt-Remove-Format" label="&colt.options.button.removeformat;" oncommand="objCoLTOptions.OnRemoveCustomFormat()" />
+					<spacer flex="1" />
+					<button id="CLT-Opt-Move-Format-Up" label="&colt.options.button.moveup;" oncommand="objCoLTOptions.OnMoveUp()" />
+					<button id="CLT-Opt-Move-Format-Down" label="&colt.options.button.movedown;" oncommand="objCoLTOptions.OnMoveDown()" />
+				</vbox>
+			</hbox>
 		</hbox>
 		<hbox>
-			<button id="CLT-Opt-New-Button" type="menu" label="&colt.options.button.new;">
-				<menupopup>
-					<menuitem label="&colt.options.menulabel.customformat;" oncommand="objCoLTOptions.OnAddCustomFormat()" />
-					<menuitem label="&colt.options.menulabel.separator;" oncommand="objCoLTOptions.OnAddSeparator()" />
-				</menupopup>
-			</button>
-			<button id="CLT-Opt-Edit-Format" label="&colt.options.button.editformat;" oncommand="objCoLTOptions.OnEditCustomFormat()" />
-			<button id="CLT-Opt-Remove-Format" label="&colt.options.button.removeformat;" oncommand="objCoLTOptions.OnRemoveCustomFormat()" />
-			<separator flex="1" />
 			<button id="CLT-Opt-Export-Import-Button" type="menu" label="&colt.options.button.customformats;">
 				<menupopup>
 					<menuitem label="&colt.options.menulabel.export;" oncommand="objCoLTOptions.OnExportCustom()" />
