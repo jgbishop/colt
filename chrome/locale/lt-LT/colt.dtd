@@ -24,10 +24,12 @@
 <!ENTITY colt.options.button.editformat "Taisyti...">
 <!ENTITY colt.options.button.removeformat "Pašalinti">
 <!ENTITY colt.options.button.new "Naujas">
+<!ENTITY colt.options.button.customformats "Individualieji formatai">
 <!ENTITY colt.options.menulabel.customformat "Individualusis formatas...">
 <!ENTITY colt.options.menulabel.separator "Skirtukas">
 <!ENTITY colt.options.menulabel.export "Eksportuoti individualiuosius formatus...">
 <!ENTITY colt.options.menulabel.import "Importuoti individualiuosius formatus...">
+<!ENTITY colt.options.menulabel.restoredefaults "Atstatyti pradinius nustatymus">
 <!ENTITY colt.options.variable.description "Individualiajam formatui galima naudoti šiuos kintamuosius:">
 <!ENTITY colt.options.header.variable "Kintamasis">
 <!ENTITY colt.options.header.linkcontext "Kopijuojant saitą">

@@ -1,0 +1,62 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+	<title>CoLT Tests</title>
+	<script type="text/javascript" src="t_formatString.js"></script>
+	
+	<style type="text/css">
+	textarea {  width: 99%; }
+	</style>
+	
+	<script type="text/javascript">
+	var testData = [
+//		['http://www.borngeek.com/firefox/googlebarlite/', 'Googlebar Lite', '', 'Born Geek', 'http://www.borngeek.com/', ''],
+//		['http://www.borngeek.com/firefox/googlebarlite/', 'Googlebar Lite', 'A title', 'Born Geek', 'http://www.borngeek.com/', 'Some selected text'],
+		['http://www.example.com/myFile.php?one=apple&two=orange&three=grape', 'Download a File', '', 'Example Site', 'http://www.example.com/', ''],
+		['http://www.example.com/myFile.php?one=apple&two=orange&three=grape', 'Download a File', '', 'Example Site', 'http://www.example.com/', 'Some selected text'],
+	];
+	
+	var testFormats = [
+//		'%?[S|T] - %U',
+//		'%?[S|T] - %U%?[I{ -- %I}]',
+		'%T - %U - %A[two]',
+//		'%?[A[four]|A[three]]'
+	];
+	
+	var testTypes = [
+		'link',
+//		'page'
+	];
+	
+	function runTests()
+	{
+		testCore.clearOutput();
+		
+		testCore.append("Running FormatString() tests ========================================\n");
+		
+		for(var h=0; h < testTypes.length; h++)
+		{
+			for(var i=0; i < testFormats.length; i++)
+			{
+				testCore.append("Parsing format: " + testFormats[i]);
+				for(var j=0; j < testData.length; j++)
+				{
+					testCore.append(" - Processing data entry " + j);
+					testCore.LoadTestData(testData[j]);
+					var result = testCore.FormatString(testFormats[i], testTypes[h]);
+					testCore.append("   " + result + "\n");
+				}
+				testCore.append("");
+			}
+		}
+	}
+	</script>
+</head>
+
+<body>
+<p><input type="button" value="Run Tests" onclick="runTests();" /></p>
+<textarea id="output" rows="30"></textarea>
+</body>
+</html>
