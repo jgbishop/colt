@@ -41,14 +41,14 @@ CoLTCommon.Func = {
 		var bundle = Services.strings.createBundle("chrome://colt/locale/colt.properties");
 		
 		var retArray = [
-			{label: bundle.GetStringFromName("CLT_DefaultLabelHTMLLink"), key: 'H', format: "<a href=\"%U\">%T</a>"},
-			{label: bundle.GetStringFromName("CLT_DefaultLabelPlainText"), key: 'P', format: "%T - %U"},
+			{label: bundle.GetStringFromName("CLT_DefaultLabelHTMLLink"), key: bundle.GetStringFromName("CLT_DefaultAccessKeyHTMLLink"), format: "<a href=\"%U\">%T</a>"},
+			{label: bundle.GetStringFromName("CLT_DefaultLabelPlainText"), key: bundle.GetStringFromName("CLT_DefaultAccessKeyPlainText"), format: "%T - %U"},
 			{isSep: true},
 			{label: "BB Code", key: 'B', format: "[url=%U]%T[/url]"},
 			{label: "Markdown", key: 'M', format: "[%T](%U)"},
 			{label: "Wikipedia", key: 'W', format: "[%U %T]"},
 			{isSep: true},
-			{label: bundle.GetStringFromName("CLT_DefaultLabelRichTextHTML"), key: 'R', format: "{RT}"}
+			{label: bundle.GetStringFromName("CLT_DefaultLabelRichTextHTML"), key: bundle.GetStringFromName("CLT_DefaultAccessKeyRichTextHTML"), format: "{RT}"}
 		];
 		
 		return retArray;
