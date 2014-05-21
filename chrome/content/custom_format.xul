@@ -97,7 +97,7 @@
 		
 		<listitem>
 			<listcell label="%S" />
-			<listcell label="&colt.variable.desc.selection;" />
+			<listcell label="---" />
 			<listcell label="&colt.variable.desc.selection;" />
 		</listitem>
 		
