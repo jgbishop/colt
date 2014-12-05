@@ -24,10 +24,12 @@
 <!ENTITY colt.options.button.editformat "ویرایش...">
 <!ENTITY colt.options.button.removeformat "پاک کردن...">
 <!ENTITY colt.options.button.new "New">
+<!ENTITY colt.options.button.customformats "Custom Formats">
 <!ENTITY colt.options.menulabel.customformat "Custom Format...">
 <!ENTITY colt.options.menulabel.separator "Separator">
 <!ENTITY colt.options.menulabel.export "Export Custom Formats...">
 <!ENTITY colt.options.menulabel.import "Import Custom Formats...">
+<!ENTITY colt.options.menulabel.restoredefaults "Restore Defaults">
 <!ENTITY colt.options.variable.description "متغیرهای قابل استفاده در فرمت سفارشی:">
 <!ENTITY colt.options.header.variable "متغیر">
 <!ENTITY colt.options.header.linkcontext "رونوشت لینک">

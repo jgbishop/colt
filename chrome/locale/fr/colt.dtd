@@ -1,13 +1,13 @@
 <!ENTITY colt.copylinktext "Copier le texte du lien">
 <!ENTITY colt.ak.copylinktext "x">
 <!ENTITY colt.copybothitem "Copier le texte et l'adresse du lien">
-<!ENTITY colt.ak.copybothitem "e">
+<!ENTITY colt.ak.copybothitem "o">
 <!ENTITY colt.copybothmenu "Copier le texte et l'adresse du lien comme">
 <!ENTITY colt.ak.copybothmenu "o">
 <!ENTITY colt.copypageitem "Copier le titre et l'adresse de la page">
-<!ENTITY colt.ak.copypageitem "p">
+<!ENTITY colt.ak.copypageitem "o">
 <!ENTITY colt.copypagemenu "Copier le titre et l'adresse de la page comme">
-<!ENTITY colt.ak.copypagemenu "g">
+<!ENTITY colt.ak.copypagemenu "o">
 <!ENTITY colt.options.title "Options de CoLT">
 <!ENTITY colt.options.group.toplevel "Éléments principaux du menu contextuel">
 <!ENTITY colt.options.displaycopytext "Afficher l'élément « Copier le texte du lien »">

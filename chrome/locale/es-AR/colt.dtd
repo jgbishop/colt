@@ -24,10 +24,12 @@
 <!ENTITY colt.options.button.editformat "Editar...">
 <!ENTITY colt.options.button.removeformat "Remover">
 <!ENTITY colt.options.button.new "Nuevo">
+<!ENTITY colt.options.button.customformats "Formatos personalizados">
 <!ENTITY colt.options.menulabel.customformat "Formato personalizado…">
 <!ENTITY colt.options.menulabel.separator "Separador">
 <!ENTITY colt.options.menulabel.export "Exportar formatos personalizados…">
 <!ENTITY colt.options.menulabel.import "Importar formatos personalizados…">
+<!ENTITY colt.options.menulabel.restoredefaults "Restaurar predeterminados">
 <!ENTITY colt.options.variable.description "Puede usar las siguientes variables en sus formatos personalizados:">
 <!ENTITY colt.options.header.variable "Variable">
 <!ENTITY colt.options.header.linkcontext "Copiando un enlace">

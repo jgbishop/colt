@@ -12,7 +12,7 @@
 <!ENTITY colt.options.group.toplevel "Nivel de elementos en el menú contextual">
 <!ENTITY colt.options.displaycopytext "Mostrar el elemento de menú 'Copiar texto del enlace'">
 <!ENTITY colt.options.displaycopybothmenu "Mostrar el sub-menú 'Copiar texto y dirección del enlace'">
-<!ENTITY colt.options.displaycopypagemenu "Mostrar el sub-menú 'Copiar título y dirección de la página'">
+<!ENTITY colt.options.displaycopypagemenu "Mostrar el sub-menú &apos;Copiar título y dirección de la Página&apos;">
 <!ENTITY colt.options.group.customformats "Elementos de menú con formato personalizado">
 <!ENTITY colt.options.header.label "Etiqueta del menú">
 <!ENTITY colt.options.header.format "Formato">
@@ -24,10 +24,12 @@
 <!ENTITY colt.options.button.editformat "Editar...">
 <!ENTITY colt.options.button.removeformat "Quitar">
 <!ENTITY colt.options.button.new "Nuevo">
+<!ENTITY colt.options.button.customformats "Formatos personalizados">
 <!ENTITY colt.options.menulabel.customformat "Formato personalizado…">
 <!ENTITY colt.options.menulabel.separator "Separador">
 <!ENTITY colt.options.menulabel.export "Exportar formatos personalizados…">
 <!ENTITY colt.options.menulabel.import "Importar formatos personalizados…">
+<!ENTITY colt.options.menulabel.restoredefaults "Restaurar predeterminados">
 <!ENTITY colt.options.variable.description "Puede usar las variables siguientes en sus formatos personalizados:">
 <!ENTITY colt.options.header.variable "Variable">
 <!ENTITY colt.options.header.linkcontext "Copiando un enlace">

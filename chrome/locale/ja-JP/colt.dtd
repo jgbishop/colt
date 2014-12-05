@@ -24,10 +24,12 @@
 <!ENTITY colt.options.button.editformat "編集">
 <!ENTITY colt.options.button.removeformat "削除">
 <!ENTITY colt.options.button.new "新規作成">
+<!ENTITY colt.options.button.customformats "カスタム書式">
 <!ENTITY colt.options.menulabel.customformat "カスタム書式">
 <!ENTITY colt.options.menulabel.separator "区切り">
 <!ENTITY colt.options.menulabel.export "カスタム書式をエクスポート">
 <!ENTITY colt.options.menulabel.import "カスタム書式をインポート">
+<!ENTITY colt.options.menulabel.restoredefaults "初期設定に戻す">
 <!ENTITY colt.options.variable.description "以下の変数をカスタム書式に使用することができます:">
 <!ENTITY colt.options.header.variable "変数">
 <!ENTITY colt.options.header.linkcontext "リンクをコピー">

@@ -24,10 +24,12 @@
 <!ENTITY colt.options.button.editformat "Bewerk...">
 <!ENTITY colt.options.button.removeformat "Verwijder">
 <!ENTITY colt.options.button.new "Nieuw">
+<!ENTITY colt.options.button.customformats "Aangepaste formaten">
 <!ENTITY colt.options.menulabel.customformat "Eigen formaat...">
 <!ENTITY colt.options.menulabel.separator "Scheidingsteken">
 <!ENTITY colt.options.menulabel.export "Exporteer eigen formaten…">
 <!ENTITY colt.options.menulabel.import "Importeer eigen formaten...">
+<!ENTITY colt.options.menulabel.restoredefaults "Herstel standaard insteliingen">
 <!ENTITY colt.options.variable.description "De volgende variabelen mogen in uw instellingsaanpassingen gebruikt worden">
 <!ENTITY colt.options.header.variable "Variabele">
 <!ENTITY colt.options.header.linkcontext "Een link kopiëren">

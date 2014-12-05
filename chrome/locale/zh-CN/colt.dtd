@@ -24,10 +24,12 @@
 <!ENTITY colt.options.button.editformat "编辑...">
 <!ENTITY colt.options.button.removeformat "删除">
 <!ENTITY colt.options.button.new "新建">
+<!ENTITY colt.options.button.customformats "Custom Formats">
 <!ENTITY colt.options.menulabel.customformat "自定义格式...">
 <!ENTITY colt.options.menulabel.separator "分隔符">
 <!ENTITY colt.options.menulabel.export "导出自定义格式...">
 <!ENTITY colt.options.menulabel.import "导入自定义格式...">
+<!ENTITY colt.options.menulabel.restoredefaults "Restore Defaults">
 <!ENTITY colt.options.variable.description "以下变量可以用于自定义格式:">
 <!ENTITY colt.options.header.variable "变量">
 <!ENTITY colt.options.header.linkcontext "链接信息可用">

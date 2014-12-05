@@ -9,15 +9,13 @@
 	<em:contributor>Philip Durbin</em:contributor>
 	<em:contributor>(ar) Zaher Kadour</em:contributor>
 	<em:contributor>(ca) Joan Montane</em:contributor>
-	<em:contributor>(cs-CZ) FunTomas</em:contributor>
 	<em:contributor>(da) AlleyKat</em:contributor>
 	<em:contributor>(de) Florian Kaase</em:contributor>
 	<em:contributor>(es-AR, es-ES) ZuGro</em:contributor>
 	<em:contributor>(fa-IR) Pedram Veisi</em:contributor>
 	<em:contributor>(fr) Jojaba</em:contributor>
-	<em:contributor>(it-IT) Luana Di Muzio</em:contributor>
+	<em:contributor>(it) Luana Di Muzio</em:contributor>
 	<em:contributor>(ja-JP) Haebaru</em:contributor>
-	<em:contributor>(ko-KR) Netaras</em:contributor>
 	<em:contributor>(lt-LT) Minj</em:contributor>
 	<em:contributor>(nl) Stadt</em:contributor>
 	<em:contributor>(pl) Gronostaj</em:contributor>
@@ -26,9 +24,7 @@
 	<em:contributor>(ru-RU) Modex</em:contributor>
 	<em:contributor>(sk-SK) Wladow</em:contributor>
 	<em:contributor>(sv-SE) Lakrits</em:contributor>
-	<em:contributor>(tr) Randomhero</em:contributor>
 	<em:contributor>(zh-CN) WangKing</em:contributor>
-	<em:contributor>(zh-TW) Unicorn2</em:contributor>
 	
 	<em:creator>Jonah Bishop</em:creator>
 	<em:homepageURL>http://www.borngeek.com/firefox/colt/</em:homepageURL>
@@ -37,7 +33,7 @@
 	<em:name>CoLT</em:name>
 	<em:optionsURL>chrome://colt/content/options.xul</em:optionsURL>
 	<em:type>2</em:type>
-	<em:version>2.6.4</em:version>
+	<em:version>2.6.5</em:version>
 	
 	<em:updateURL>http://www.borngeek.com/downloads/update.rdf</em:updateURL>
 
@@ -50,7 +46,7 @@
 		<Description>
 			<em:id>{ec8030f7-c20a-464f-9b0e-13a3a9e97384}</em:id>
 			<em:minVersion>24.0</em:minVersion>
-			<em:maxVersion>45.*</em:maxVersion>
+			<em:maxVersion>50.*</em:maxVersion>
 		</Description>
 	</em:targetApplication>
 	
