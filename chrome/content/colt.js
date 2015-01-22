@@ -14,39 +14,72 @@ var objCoLT = {
 
 	CopyBoth: function(formatIndex, type)
 	{
-		this.LoadLinkData(type);
-		
-		if(CoLTCommon.Data.CustomFormats[formatIndex].format == "{RT}")
+		// Reset our holding area
+		for(var prop in this.LinkData)
 		{
-			var richText = "<a href=\"" + this.LinkData.linkURL + "\">" + this.LinkData.linkText + "</a>";
-			
-			var trans = Components.classes["@mozilla.org/widget/transferable;1"].
-				createInstance(Components.interfaces.nsITransferable);
-			
-			// The init() function was added to FF 16 for upcoming changes to private browsing mode
-			// See https://bugzilla.mozilla.org/show_bug.cgi?id=722872 for more information
-			if('init' in trans)
-			{
-				var privacyContext = document.commandDispatcher.focusedWindow.
-					QueryInterface(Components.interfaces.nsIInterfaceRequestor).
-					getInterface(Components.interfaces.nsIWebNavigation).
-					QueryInterface(Components.interfaces.nsILoadContext);
-				trans.init(privacyContext);
-			}
-			trans.addDataFlavor("text/html");
-			
-			var htmlString = Components.classes["@mozilla.org/supports-string;1"].createInstance(Components.interfaces.nsISupportsString);
-			htmlString.data = richText;
-			trans.setTransferData("text/html", htmlString, richText.length * 2);
+			this.LinkData[prop] = '';
+		}
 
-			var clipboard = Components.classes["@mozilla.org/widget/clipboard;1"].getService(Components.interfaces.nsIClipboard);
-			clipboard.setData(trans, null, Components.interfaces.nsIClipboard.kGlobalClipboard);
-		}
-		else
+		CoLTCommon.Func.Log("Entered CopyBoth (" + formatIndex + ", " + type + ")");
+		
+		if(type == "link")
 		{
-			var myString = objCoLT.FormatString(CoLTCommon.Data.CustomFormats[formatIndex].format, type);
-			objCoLT.PlaceOnClipboard(myString);
+			this.LinkData.linkURL = gContextMenu.linkURL;
+			this.LinkData.linkText = gContextMenu.linkText();
+			// this.LinkData.linkTitle = (gContextMenu.target.hasOwnProperty('title') ? gContextMenu.target.title : '');
 		}
+		// else if(type == "page")
+		// {
+		// 	this.LinkData.selection = document.commandDispatcher.focusedWindow.getSelection().toString();
+		// 	CoLTCommon.Func.LogRaw(document.commandDispatcher.focusedWindow.getSelection());
+		// }
+
+		// gBrowser.selectedBrowser.messageManager.addMessageListener("{e6c4c3ef-3d4d-42d6-8283-8da73c53a283}:page-info-loaded", objCoLT.OnInfoLoaded);
+		var json = {
+			dataType: type,
+			fmtIndex: formatIndex
+		};
+
+		let browserMM = gBrowser.selectedBrowser.messageManager;
+		browserMM.loadFrameScript("chrome://colt/content/frame-script.js", false);
+		browserMM.sendAsyncMessage("{e6c4c3ef-3d4d-42d6-8283-8da73c53a283}:get-page-info", json);
+
+//		browserMM.sendAsyncMessage("{e6c4c3ef-3d4d-42d6-8283-8da73c53a283}:get-page-info", {
+//			dataType: type,
+//			fmtIndex: formatIndex
+//		});
+		
+//		if(CoLTCommon.Data.CustomFormats[formatIndex].format == "{RT}")
+//		{
+//			var richText = "<a href=\"" + this.LinkData.linkURL + "\">" + this.LinkData.linkText + "</a>";
+//
+//			var trans = Components.classes["@mozilla.org/widget/transferable;1"].
+//				createInstance(Components.interfaces.nsITransferable);
+//
+//			// The init() function was added to FF 16 for upcoming changes to private browsing mode
+//			// See https://bugzilla.mozilla.org/show_bug.cgi?id=722872 for more information
+//			if('init' in trans)
+//			{
+//				var privacyContext = document.commandDispatcher.focusedWindow.
+//					QueryInterface(Components.interfaces.nsIInterfaceRequestor).
+//					getInterface(Components.interfaces.nsIWebNavigation).
+//					QueryInterface(Components.interfaces.nsILoadContext);
+//				trans.init(privacyContext);
+//			}
+//			trans.addDataFlavor("text/html");
+//
+//			var htmlString = Components.classes["@mozilla.org/supports-string;1"].createInstance(Components.interfaces.nsISupportsString);
+//			htmlString.data = richText;
+//			trans.setTransferData("text/html", htmlString, richText.length * 2);
+//
+//			var clipboard = Components.classes["@mozilla.org/widget/clipboard;1"].getService(Components.interfaces.nsIClipboard);
+//			clipboard.setData(trans, null, Components.interfaces.nsIClipboard.kGlobalClipboard);
+//		}
+//		else
+//		{
+//			var myString = objCoLT.FormatString(CoLTCommon.Data.CustomFormats[formatIndex].format, type);
+//			objCoLT.PlaceOnClipboard(myString);
+//		}
 	},
 	
 	CopyLinkText: function()
@@ -62,8 +95,9 @@ var objCoLT = {
 		} catch(e) {}
 	},
 	
-	DoSubs: function(string)
+	DoSubs: function(string, type)
 	{
+		// CoLTCommon.Func.Log("Entered DoSubs (" + string + ", " + type + ")");
 		switch(string.toUpperCase())
 		{
 			case "%B": // Tab
@@ -88,11 +122,11 @@ var objCoLT = {
 			case "%S": // Selected text
 				return this.LinkData.selection;
 				break;
-			case "%T": // Link text / Page Title
-				return this.LinkData.linkText;
+			case "%T": // Link text / Page title
+				return (type == "link" ? this.LinkData.linkText : this.LinkData.pageTitle);
 				break;
 			case "%U": // Link URL / Page URL
-				return this.LinkData.linkURL;
+				return (type == "link" ? this.LinkData.linkURL : this.LinkData.pageURL);
 				break;
 		}
 		return '';
@@ -146,11 +180,11 @@ var objCoLT = {
 							var matches = re.exec(tests[x]);
 							var tvar = tests[x].replace(re, ''); // Variable to test on
 							var tval = (matches && matches.length > 0) ? matches[1] : ''; // Substitute value to use
-							var tbuff = this.DoSubs('%' + tvar); // Expand the test variable
+							var tbuff = objCoLT.DoSubs('%' + tvar, type); // Expand the test variable
 							if(tbuff.length > 0)
 							{
 								if(tval.length > 0)
-									result += this.FormatString(tval);
+									result += objCoLT.FormatString(tval);
 								else
 									result += tbuff;
 								break;
@@ -159,7 +193,7 @@ var objCoLT = {
 						i=j; // Skip over the conditional
 					}
 					else
-						result += this.DoSubs(buffer);
+						result += objCoLT.DoSubs(buffer, type);
 				}
 				
 				buffer = ""; // Clear the buffer
@@ -270,33 +304,39 @@ var objCoLT = {
 	
 	LoadLinkData: function(type)
 	{
-		if(type == "link")
-		{
-			this.LinkData.linkURL = gContextMenu.linkURL;
-			this.LinkData.linkText = gContextMenu.linkText();
-			this.LinkData.linkTitle = document.getElementById("contentAreaContextMenu").triggerNode.title;
-			this.LinkData.pageTitle = content.document.title;
-			this.LinkData.pageURL = content.document.location.href;
-			this.LinkData.selection = '';
-		}
-		else if(type == "page")
-		{
-			this.LinkData.linkURL = content.document.location.href;
-			this.LinkData.linkText = content.document.title;
-			this.LinkData.linkTitle = '';
-			this.LinkData.pageTitle = '';
-			this.LinkData.pageURL = '';
-			this.LinkData.selection = document.commandDispatcher.focusedWindow.getSelection().toString();
-		}
-		else
-		{
-			this.LinkData.linkURL = '';
-			this.LinkData.linkText = '';
-			this.LinkData.linkTitle = '';
-			this.LinkData.pageTitle = '';
-			this.LinkData.pageURL = '';
-			this.LinkData.selection = '';
-		}
+//		let browserMM = gBrowser.selectedBrowser.messageManager;
+//		browserMM.loadFrameScript("chrome://colt/content/frame-script.js", true);
+//		browserMM.sendAsyncMessage("{e6c4c3ef-3d4d-42d6-8283-8da73c53a283}:get-page-info", {
+//			dataType: type,
+//		});
+		
+//		if(type == "link")
+//		{
+//			this.LinkData.linkURL = gContextMenu.linkURL;
+//			this.LinkData.linkText = gContextMenu.linkText();
+//			this.LinkData.linkTitle = document.getElementById("contentAreaContextMenu").triggerNode.title;
+//			this.LinkData.pageTitle = content.document.title;
+//			this.LinkData.pageURL = content.document.location.href;
+//			this.LinkData.selection = '';
+//		}
+//		else if(type == "page")
+//		{
+//			this.LinkData.linkURL = content.document.location.href;
+//			this.LinkData.linkText = content.document.title;
+//			this.LinkData.linkTitle = '';
+//			this.LinkData.pageTitle = '';
+//			this.LinkData.pageURL = '';
+//			this.LinkData.selection = document.commandDispatcher.focusedWindow.getSelection().toString();
+//		}
+//		else
+//		{
+//			this.LinkData.linkURL = '';
+//			this.LinkData.linkText = '';
+//			this.LinkData.linkTitle = '';
+//			this.LinkData.pageTitle = '';
+//			this.LinkData.pageURL = '';
+//			this.LinkData.selection = '';
+//		}
 	},
 	
 	LoadPrefs: function()
@@ -338,6 +378,54 @@ var objCoLT = {
 			
 			this.DeletePref(CoLTCommon.Data.PrefBranch, countPrefName);
 		}
+	},
+
+	OnInfoLoaded: function(message)
+	{
+		CoLTCommon.Func.Log("Entered OnInfoLoaded");
+		CoLTCommon.Func.LogRaw(message);
+
+		objCoLT.LinkData.pageTitle = message.data.pageTitle;
+		objCoLT.LinkData.pageURL = message.data.pageURL;
+		objCoLT.LinkData.selection = message.data.selection;
+		
+		if(CoLTCommon.Data.CustomFormats[message.data.fmtIndex].format == "{RT}")
+		{
+			var richText;
+			if(message.data.dataType == "link")
+				richText = "<a href=\"" + objCoLT.LinkData.linkURL + "\">" + objCoLT.LinkData.linkText + "</a>";
+			else
+				richText = "<a href=\"" + objCoLT.LinkData.pageURL + "\">" + objCoLT.LinkData.pageTitle + "</a>";
+			
+			var trans = Components.classes["@mozilla.org/widget/transferable;1"].
+				createInstance(Components.interfaces.nsITransferable);
+			
+			// The init() function was added to FF 16 for upcoming changes to private browsing mode
+			// See https://bugzilla.mozilla.org/show_bug.cgi?id=722872 for more information
+			if('init' in trans)
+			{
+				var privacyContext = document.commandDispatcher.focusedWindow.
+					QueryInterface(Components.interfaces.nsIInterfaceRequestor).
+					getInterface(Components.interfaces.nsIWebNavigation).
+					QueryInterface(Components.interfaces.nsILoadContext);
+				trans.init(privacyContext);
+			}
+			trans.addDataFlavor("text/html");
+			
+			var htmlString = Components.classes["@mozilla.org/supports-string;1"].createInstance(Components.interfaces.nsISupportsString);
+			htmlString.data = richText;
+			trans.setTransferData("text/html", htmlString, richText.length * 2);
+
+			var clipboard = Components.classes["@mozilla.org/widget/clipboard;1"].getService(Components.interfaces.nsIClipboard);
+			clipboard.setData(trans, null, Components.interfaces.nsIClipboard.kGlobalClipboard);
+		}
+		else
+		{
+			var myString = objCoLT.FormatString(CoLTCommon.Data.CustomFormats[message.data.fmtIndex].format, message.data.dataType);
+			objCoLT.PlaceOnClipboard(myString);
+		}
+
+		// gBrowser.selectedBrowser.messageManager.removeMessageListener("{e6c4c3ef-3d4d-42d6-8283-8da73c53a283}:page-info-loaded", objCoLT.OnInfoLoaded);
 	},
 	
 	OptionsHaveUpdated: function()
@@ -397,10 +485,11 @@ var objCoLT = {
 			
 			var menu = document.getElementById("contentAreaContextMenu");
 			menu.addEventListener('popupshowing', objCoLT.UpdateContextMenu, false);
+
+			messageManager.addMessageListener("{e6c4c3ef-3d4d-42d6-8283-8da73c53a283}:page-info-loaded", objCoLT.OnInfoLoaded);
 			
 			objCoLT.LoadPrefs();
 			CoLTCommon.Func.LoadCustomFormats(null, objCoLT.StartupFormatsLoaded); // This is an async call!
-
 			// NOTE: No code that relies on custom formats should be placed below the LoadCustomFormats() call
 			// above, due to that function being asynchronous. Place such code in StartupFormatsLoaded() instead.
 		}

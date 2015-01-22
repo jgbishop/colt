@@ -30,6 +30,7 @@
 	<em:homepageURL>http://www.borngeek.com/firefox/colt/</em:homepageURL>
 	<em:iconURL>chrome://colt/content/logo.png</em:iconURL>
 	<em:id>{e6c4c3ef-3d4d-42d6-8283-8da73c53a283}</em:id>
+	<em:multiprocessCompatible>true</em:multiprocessCompatible>
 	<em:name>CoLT</em:name>
 	<em:optionsURL>chrome://colt/content/options.xul</em:optionsURL>
 	<em:type>2</em:type>
