@@ -20,66 +20,18 @@ var objCoLT = {
 			this.LinkData[prop] = '';
 		}
 
-		CoLTCommon.Func.Log("Entered CopyBoth (" + formatIndex + ", " + type + ")");
+		CoLTCommon.Func.Log("(cs) Entered CopyBoth (" + formatIndex + ", " + type + ")");
 		
 		if(type == "link")
 		{
 			this.LinkData.linkURL = gContextMenu.linkURL;
 			this.LinkData.linkText = gContextMenu.linkText();
-			// this.LinkData.linkTitle = (gContextMenu.target.hasOwnProperty('title') ? gContextMenu.target.title : '');
 		}
-		// else if(type == "page")
-		// {
-		// 	this.LinkData.selection = document.commandDispatcher.focusedWindow.getSelection().toString();
-		// 	CoLTCommon.Func.LogRaw(document.commandDispatcher.focusedWindow.getSelection());
-		// }
 
-		// gBrowser.selectedBrowser.messageManager.addMessageListener("{e6c4c3ef-3d4d-42d6-8283-8da73c53a283}:page-info-loaded", objCoLT.OnInfoLoaded);
-		var json = {
+		gBrowser.selectedBrowser.messageManager.sendAsyncMessage("{e6c4c3ef-3d4d-42d6-8283-8da73c53a283}:get-page-info", {
 			dataType: type,
 			fmtIndex: formatIndex
-		};
-
-		let browserMM = gBrowser.selectedBrowser.messageManager;
-		browserMM.loadFrameScript("chrome://colt/content/frame-script.js", false);
-		browserMM.sendAsyncMessage("{e6c4c3ef-3d4d-42d6-8283-8da73c53a283}:get-page-info", json);
-
-//		browserMM.sendAsyncMessage("{e6c4c3ef-3d4d-42d6-8283-8da73c53a283}:get-page-info", {
-//			dataType: type,
-//			fmtIndex: formatIndex
-//		});
-		
-//		if(CoLTCommon.Data.CustomFormats[formatIndex].format == "{RT}")
-//		{
-//			var richText = "<a href=\"" + this.LinkData.linkURL + "\">" + this.LinkData.linkText + "</a>";
-//
-//			var trans = Components.classes["@mozilla.org/widget/transferable;1"].
-//				createInstance(Components.interfaces.nsITransferable);
-//
-//			// The init() function was added to FF 16 for upcoming changes to private browsing mode
-//			// See https://bugzilla.mozilla.org/show_bug.cgi?id=722872 for more information
-//			if('init' in trans)
-//			{
-//				var privacyContext = document.commandDispatcher.focusedWindow.
-//					QueryInterface(Components.interfaces.nsIInterfaceRequestor).
-//					getInterface(Components.interfaces.nsIWebNavigation).
-//					QueryInterface(Components.interfaces.nsILoadContext);
-//				trans.init(privacyContext);
-//			}
-//			trans.addDataFlavor("text/html");
-//
-//			var htmlString = Components.classes["@mozilla.org/supports-string;1"].createInstance(Components.interfaces.nsISupportsString);
-//			htmlString.data = richText;
-//			trans.setTransferData("text/html", htmlString, richText.length * 2);
-//
-//			var clipboard = Components.classes["@mozilla.org/widget/clipboard;1"].getService(Components.interfaces.nsIClipboard);
-//			clipboard.setData(trans, null, Components.interfaces.nsIClipboard.kGlobalClipboard);
-//		}
-//		else
-//		{
-//			var myString = objCoLT.FormatString(CoLTCommon.Data.CustomFormats[formatIndex].format, type);
-//			objCoLT.PlaceOnClipboard(myString);
-//		}
+		});
 	},
 	
 	CopyLinkText: function()
@@ -120,6 +72,7 @@ var objCoLT = {
 				return this.LinkData.pageURL;
 				break;
 			case "%S": // Selected text
+			// TODO: Handle this case properly in the link case
 				return this.LinkData.selection;
 				break;
 			case "%T": // Link text / Page title
@@ -302,43 +255,6 @@ var objCoLT = {
 		} catch(e) { Components.utils.reportError("ERROR: Caught exception trying to set complex preference (" + e.message + ")"); }
 	},
 	
-	LoadLinkData: function(type)
-	{
-//		let browserMM = gBrowser.selectedBrowser.messageManager;
-//		browserMM.loadFrameScript("chrome://colt/content/frame-script.js", true);
-//		browserMM.sendAsyncMessage("{e6c4c3ef-3d4d-42d6-8283-8da73c53a283}:get-page-info", {
-//			dataType: type,
-//		});
-		
-//		if(type == "link")
-//		{
-//			this.LinkData.linkURL = gContextMenu.linkURL;
-//			this.LinkData.linkText = gContextMenu.linkText();
-//			this.LinkData.linkTitle = document.getElementById("contentAreaContextMenu").triggerNode.title;
-//			this.LinkData.pageTitle = content.document.title;
-//			this.LinkData.pageURL = content.document.location.href;
-//			this.LinkData.selection = '';
-//		}
-//		else if(type == "page")
-//		{
-//			this.LinkData.linkURL = content.document.location.href;
-//			this.LinkData.linkText = content.document.title;
-//			this.LinkData.linkTitle = '';
-//			this.LinkData.pageTitle = '';
-//			this.LinkData.pageURL = '';
-//			this.LinkData.selection = document.commandDispatcher.focusedWindow.getSelection().toString();
-//		}
-//		else
-//		{
-//			this.LinkData.linkURL = '';
-//			this.LinkData.linkText = '';
-//			this.LinkData.linkTitle = '';
-//			this.LinkData.pageTitle = '';
-//			this.LinkData.pageURL = '';
-//			this.LinkData.selection = '';
-//		}
-	},
-	
 	LoadPrefs: function()
 	{
 		var b = CoLTCommon.Data.PrefBranch;
@@ -382,7 +298,7 @@ var objCoLT = {
 
 	OnInfoLoaded: function(message)
 	{
-		CoLTCommon.Func.Log("Entered OnInfoLoaded");
+		CoLTCommon.Func.Log("(cs) Entered OnInfoLoaded");
 		CoLTCommon.Func.LogRaw(message);
 
 		objCoLT.LinkData.pageTitle = message.data.pageTitle;
@@ -424,8 +340,6 @@ var objCoLT = {
 			var myString = objCoLT.FormatString(CoLTCommon.Data.CustomFormats[message.data.fmtIndex].format, message.data.dataType);
 			objCoLT.PlaceOnClipboard(myString);
 		}
-
-		// gBrowser.selectedBrowser.messageManager.removeMessageListener("{e6c4c3ef-3d4d-42d6-8283-8da73c53a283}:page-info-loaded", objCoLT.OnInfoLoaded);
 	},
 	
 	OptionsHaveUpdated: function()
@@ -449,6 +363,9 @@ var objCoLT = {
 	
 	Shutdown: function()
 	{
+		window.messageManager.removeDelayedFrameScript("chrome://colt/content/frame-script.js");
+		window.messageManager.removeMessageListener("{e6c4c3ef-3d4d-42d6-8283-8da73c53a283}:page-info-loaded", objCoLT.OnInfoLoaded);
+
 		var contextMenu = document.getElementById("contentAreaContextMenu");
 		contextMenu.removeEventListener('popupshowing', objCoLT.UpdateContextMenu, false);
 		
@@ -486,8 +403,10 @@ var objCoLT = {
 			var menu = document.getElementById("contentAreaContextMenu");
 			menu.addEventListener('popupshowing', objCoLT.UpdateContextMenu, false);
 
-			messageManager.addMessageListener("{e6c4c3ef-3d4d-42d6-8283-8da73c53a283}:page-info-loaded", objCoLT.OnInfoLoaded);
-			
+			// Add the frame script and message listener
+			window.messageManager.loadFrameScript("chrome://colt/content/frame-script.js", true);
+			window.messageManager.addMessageListener("{e6c4c3ef-3d4d-42d6-8283-8da73c53a283}:page-info-loaded", objCoLT.OnInfoLoaded);
+
 			objCoLT.LoadPrefs();
 			CoLTCommon.Func.LoadCustomFormats(null, objCoLT.StartupFormatsLoaded); // This is an async call!
 			// NOTE: No code that relies on custom formats should be placed below the LoadCustomFormats() call
@@ -616,4 +535,3 @@ var objCoLT = {
 
 window.addEventListener('load', objCoLT.Startup, false);
 window.addEventListener('unload', objCoLT.Shutdown, false);
-
