@@ -126,7 +126,7 @@ CoLTCommon.Func = {
 		var converter = Components.classes["@mozilla.org/intl/scriptableunicodeconverter"].
 						createInstance(Components.interfaces.nsIScriptableUnicodeConverter);
 		converter.charset = "UTF-8";
-		var istream = converter.convertToInputStream(JSON.stringify(CoLTCommon.Data.CustomFormats));
+		var istream = converter.convertToInputStream(JSON.stringify(CoLTCommon.Data.CustomFormats, null, 4));
 		NetUtil.asyncCopy(istream, ostream, function(status) {
 			// Note that both streams are automatically closed when the copy operation is completed
 			if(!Components.isSuccessCode(status))
