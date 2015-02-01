@@ -22,3 +22,6 @@ Rich Text  | [this link to my site](http://www.borngeek.com/)
 CoLT places up a few menu items in the browser’s context menu. To reduce clutter, each menu item is
 only visible when the context menu is opened by right-clicking a hyperlink. These menu items can
 also be hidden if you so desire.
+
+Visit [the official CoLT site](http://www.borngeek.com/firefox/colt/) for more information on this
+extension, including screenshots and detailed documentation.
