@@ -108,6 +108,12 @@
 		</listitem>
 		
 		<listitem>
+			<listcell label="%D" />
+			<listcell label="&colt.variable.desc.localdate;" />
+			<listcell label="&colt.variable.desc.localdate;" />
+		</listitem>
+
+		<listitem>
 			<listcell label="%N" />
 			<listcell label="&colt.variable.desc.newline;" />
 			<listcell label="&colt.variable.desc.newline;" />

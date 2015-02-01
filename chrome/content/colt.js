@@ -69,10 +69,14 @@ var objCoLT = {
 			case "%B": // Tab
 				return "\t";
 				break;
+			case "%D": // Local date stamp
+				var _ts = new Date();
+				return _ts.toLocaleDateString();
+				break;
 			case "%I": // Link title attribute
 				return this.LinkData.linkTitle;
 				break;
-			case "%L": // Local time
+			case "%L": // Local date & time stamp
 				var _ts = new Date();
 				return _ts.toLocaleString();
 				break;
