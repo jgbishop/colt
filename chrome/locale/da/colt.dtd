@@ -41,6 +41,7 @@
 <!ENTITY colt.variable.desc.pageurl "Side URL">
 <!ENTITY colt.variable.desc.linktitle "Link titel-attribut">
 <!ENTITY colt.variable.desc.localtime "Lokal tid">
+<!ENTITY colt.variable.desc.localdate "Local Date">
 <!ENTITY colt.variable.desc.selection "Valgt tekst">
 <!ENTITY colt.variable.desc.newline "Ny linje">
 <!ENTITY colt.variable.desc.tab "Tab">

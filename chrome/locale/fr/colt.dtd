@@ -30,7 +30,7 @@
 <!ENTITY colt.options.menulabel.export "Exporter les formats personnalisés…">
 <!ENTITY colt.options.menulabel.import "Importer des formats personnalisés…">
 <!ENTITY colt.options.menulabel.restoredefaults "Rétablir les formats par défaut">
-<!ENTITY colt.options.variable.description "Les variables suivantes pourront être utilisés dans vos formats personnalisés :">
+<!ENTITY colt.options.variable.description "Les variables suivantes pourront être utilisées dans vos formats personnalisés :">
 <!ENTITY colt.options.header.variable "↓ Variable">
 <!ENTITY colt.options.header.linkcontext "↓ Copie d'un lien">
 <!ENTITY colt.options.header.pagecontext "↓ Copie d'une page">
@@ -41,6 +41,7 @@
 <!ENTITY colt.variable.desc.pageurl "URL de la page">
 <!ENTITY colt.variable.desc.linktitle "Attribut « title » du lien">
 <!ENTITY colt.variable.desc.localtime "Horaire local">
+<!ENTITY colt.variable.desc.localdate "Date locale">
 <!ENTITY colt.variable.desc.selection "Texte sélectionné">
 <!ENTITY colt.variable.desc.newline "Retour à la ligne">
 <!ENTITY colt.variable.desc.tab "Tabulation">

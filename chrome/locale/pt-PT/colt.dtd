@@ -41,6 +41,7 @@
 <!ENTITY colt.variable.desc.pageurl "URL da Página">
 <!ENTITY colt.variable.desc.linktitle "Título da Ligação">
 <!ENTITY colt.variable.desc.localtime "Hora Local">
+<!ENTITY colt.variable.desc.localdate "Local Date">
 <!ENTITY colt.variable.desc.selection "Texto Seleccionado">
 <!ENTITY colt.variable.desc.newline "Nova Linha">
 <!ENTITY colt.variable.desc.tab "Separador">

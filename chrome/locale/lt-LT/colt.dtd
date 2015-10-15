@@ -41,6 +41,7 @@
 <!ENTITY colt.variable.desc.pageurl "Puslapio adresas">
 <!ENTITY colt.variable.desc.linktitle "Nuorodos antraštė">
 <!ENTITY colt.variable.desc.localtime "Laikas">
+<!ENTITY colt.variable.desc.localdate "Vietos data">
 <!ENTITY colt.variable.desc.selection "Pažymėtas tekstas">
 <!ENTITY colt.variable.desc.newline "Nauja eilutė">
 <!ENTITY colt.variable.desc.tab "Kortelė">

@@ -41,6 +41,7 @@
 <!ENTITY colt.variable.desc.pageurl "URL stránky">
 <!ENTITY colt.variable.desc.linktitle "Atribút title odkazu">
 <!ENTITY colt.variable.desc.localtime "Miestny čas">
+<!ENTITY colt.variable.desc.localdate "Local Date">
 <!ENTITY colt.variable.desc.selection "Označený text">
 <!ENTITY colt.variable.desc.newline "Nový riadok">
 <!ENTITY colt.variable.desc.tab "Tab">

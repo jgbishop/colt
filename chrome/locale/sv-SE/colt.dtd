@@ -41,6 +41,7 @@
 <!ENTITY colt.variable.desc.pageurl "Sidans URL">
 <!ENTITY colt.variable.desc.linktitle "Länkens titelattribut">
 <!ENTITY colt.variable.desc.localtime "Lokal tid">
+<!ENTITY colt.variable.desc.localdate "Local Date">
 <!ENTITY colt.variable.desc.selection "Markerad text">
 <!ENTITY colt.variable.desc.newline "Ny rad">
 <!ENTITY colt.variable.desc.tab "Tabulator">

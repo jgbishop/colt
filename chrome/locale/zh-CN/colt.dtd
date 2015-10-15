@@ -41,6 +41,7 @@
 <!ENTITY colt.variable.desc.pageurl "页面网址">
 <!ENTITY colt.variable.desc.linktitle "链接的标题属性">
 <!ENTITY colt.variable.desc.localtime "本机时间">
+<!ENTITY colt.variable.desc.localdate "Local Date">
 <!ENTITY colt.variable.desc.selection "所选文字">
 <!ENTITY colt.variable.desc.newline "换行">
 <!ENTITY colt.variable.desc.tab "标签">
