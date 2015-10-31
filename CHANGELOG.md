@@ -1,5 +1,10 @@
 ## CoLT Revision History
 
+### 2.6.7
+* A new variable (%D) is now available for custom formats, allowing the user to insert a local date stamp
+* JSON output is now beautified when exporting custom formats
+* A README file has been added to the tree for use at GitHub
+
 ### 2.6.6
 * Removed the _updateURL_ from builds offered at my personal website. CoLT will now be hosted only at AMO.
 * Converted the changelog to Markdown format
