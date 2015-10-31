@@ -41,7 +41,7 @@
 <!ENTITY colt.variable.desc.pageurl "Адрес страницы">
 <!ENTITY colt.variable.desc.linktitle "Заголовок ссылки">
 <!ENTITY colt.variable.desc.localtime "Местное время">
-<!ENTITY colt.variable.desc.localdate "Local Date">
+<!ENTITY colt.variable.desc.localdate "Текущая дата">
 <!ENTITY colt.variable.desc.selection "Выделенный текст">
 <!ENTITY colt.variable.desc.newline "Новая строка">
 <!ENTITY colt.variable.desc.tab "Вкладка">
